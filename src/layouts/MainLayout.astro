@@ -1,0 +1,95 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import SeoHead from "../components/SeoHead.astro";
+import {
+  SITE_URL,
+  BRAND_NAME,
+  DEFAULT_TITLE,
+  DEFAULT_DESCRIPTION,
+  CONTACT_EMAIL,
+  CONTACT_PHONE,
+  BUSINESS_ADDRESS,
+  CTA_PRIMARY_LABEL,
+  CTA_PRIMARY_HREF,
+  isTodo,
+} from "../config/site";
+
+const {
+  title = DEFAULT_TITLE,
+  description = DEFAULT_DESCRIPTION,
+  canonical,
+  ogType,
+  ogImageAlt,
+  structuredData = [],
+} = Astro.props;
+
+const currentPath = Astro.url.pathname;
+const canonicalUrl = canonical?.startsWith("http")
+  ? canonical
+  : new URL(canonical ?? currentPath, SITE_URL).toString();
+
+const orgJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  name: BRAND_NAME,
+  url: SITE_URL,
+  email: CONTACT_EMAIL,
+  telephone: CONTACT_PHONE,
+  address: isTodo(BUSINESS_ADDRESS) ? undefined : BUSINESS_ADDRESS,
+  areaServed: "PL",
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: BRAND_NAME,
+  url: SITE_URL,
+  inLanguage: "pl-PL",
+};
+
+const jsonLd = [orgJsonLd, websiteJsonLd, ...structuredData].filter(Boolean);
+---
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#0052CC" />
+
+    <SeoHead
+      title={title}
+      description={description}
+      canonical={canonicalUrl}
+      ogType={ogType}
+      ogImageAlt={ogImageAlt}
+    />
+
+    <link rel="icon" href="/favicon.svg" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <a
+      href="#content"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-6 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-primary focus:shadow-soft"
+    >
+      Przejdź do treści
+    </a>
+
+    <Header currentPath={currentPath} />
+    <main id="content" class="flex-1 pb-24 md:pb-0">
+      <slot />
+    </main>
+    <Footer />
+
+    <div class="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 backdrop-blur md:hidden">
+      <div class="container-site py-3">
+        <a class="btn btn-primary w-full" href={CTA_PRIMARY_HREF} aria-label={CTA_PRIMARY_LABEL}>
+          {CTA_PRIMARY_LABEL}
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

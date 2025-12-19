@@ -1,0 +1,41 @@
+---
+import { SITE_URL, OG_IMAGE, BRAND_NAME } from "../config/site";
+
+const {
+  title,
+  description,
+  canonical,
+  robots = "index,follow",
+  ogType = "website",
+  ogImage = OG_IMAGE,
+  ogImageAlt,
+} = Astro.props;
+
+const canonicalUrl = canonical?.startsWith("http")
+  ? canonical
+  : new URL(canonical ?? Astro.url.pathname, SITE_URL).toString();
+
+const resolvedImage = ogImage && ogImage !== "[TODO]"
+  ? (ogImage.startsWith("http") ? ogImage : new URL(ogImage, SITE_URL).toString())
+  : null;
+
+const twitterCard = resolvedImage ? "summary_large_image" : "summary";
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+<meta name="robots" content={robots} />
+
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:type" content={ogType} />
+<meta property="og:locale" content="pl_PL" />
+<meta property="og:site_name" content={BRAND_NAME} />
+{resolvedImage && <meta property="og:image" content={resolvedImage} />}
+{resolvedImage && ogImageAlt && <meta property="og:image:alt" content={ogImageAlt} />}
+
+<meta name="twitter:card" content={twitterCard} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{resolvedImage && <meta name="twitter:image" content={resolvedImage} />}

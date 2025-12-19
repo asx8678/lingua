@@ -1,15 +1,11 @@
 import { defineConfig } from "astro/config";
-import cloudflare from "@astrojs/cloudflare";
 import tailwind from "@astrojs/tailwind";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  output: "server",
+  site: "https://angielskizdalnie.pl",
+  output: "static",
   trailingSlash: "never",
-  integrations: [tailwind({ applyBaseStyles: false })],
-  adapter: cloudflare({
-    // Enables local Cloudflare runtime emulation when using `astro dev`.
-    // If you don't need Cloudflare bindings locally, you can remove this.
-    platformProxy: { enabled: true },
-  }),
+  integrations: [tailwind({ applyBaseStyles: false }), sitemap()],
 });
