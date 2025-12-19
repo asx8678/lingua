@@ -1,0 +1,39 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import { getCollection } from "astro:content";
+import { BRAND_NAME } from "../../config/site";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts
+    .filter((post) => !post.data.draft)
+    .map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const title = `${post.data.title} | ${BRAND_NAME}`;
+const description = post.data.description;
+
+const formattedDate = new Intl.DateTimeFormat("pl-PL", { dateStyle: "medium" }).format(post.data.pubDate);
+---
+
+<MainLayout title={title} description={description} ogType="article">
+  <article class="section">
+    <div class="container-site">
+      <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Blog · {formattedDate}</div>
+      <div class="prose prose-slate mt-6 max-w-none">
+        <Content />
+      </div>
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a class="btn btn-secondary" href="/blog">Wróć do bloga</a>
+        <a class="btn btn-primary" href="/kontakt">Umów lekcję próbną</a>
+      </div>
+      <p class="mt-4 text-sm text-slate-500">
+        Sprawdź także
+        <a class="font-bold text-primary no-underline hover:underline" href="/cennik">cennik</a>.
+      </p>
+    </div>
+  </article>
+</MainLayout>

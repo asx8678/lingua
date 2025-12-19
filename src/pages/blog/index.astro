@@ -1,0 +1,66 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import CTASection from "../../components/CTASection.astro";
+import { getCollection } from "astro:content";
+import { BRAND_NAME } from "../../config/site";
+
+const title = `Blog – angielski online | ${BRAND_NAME}`;
+const description =
+  "Poradniki i wskazówki o nauce angielskiego online: plan nauki, konwersacje, motywacja i wybór lektora.";
+
+const posts = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const formatDate = (date) =>
+  new Intl.DateTimeFormat("pl-PL", { dateStyle: "medium" }).format(date);
+---
+
+<MainLayout title={title} description={description}>
+  <section class="hero-bg">
+    <div class="container-site py-16 sm:py-20">
+      <span class="kicker">Blog</span>
+      <h1 class="mt-6">Blog o angielskim online</h1>
+      <p class="mt-6 max-w-3xl text-lg">
+        Znajdziesz tu praktyczne wskazówki: jak uczyć się regularnie, jak poprawić mówienie i jak wybrać odpowiedni
+        kurs angielskiego online.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a class="btn btn-primary" href="/kurs-angielskiego-online">Zobacz kurs online</a>
+        <a class="btn btn-secondary" href="/kontakt">Umów konsultację</a>
+      </div>
+      <p class="mt-4 text-sm text-slate-500">
+        Zanim zaczniesz, sprawdź
+        <a class="font-bold text-primary no-underline hover:underline" href="/cennik">cennik</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-site">
+      <h2>Najnowsze wpisy</h2>
+      <div class="mt-8 grid gap-6">
+        {posts.map((post) => (
+          <a class="card p-6 no-underline transition hover:-translate-y-0.5" href={`/blog/${post.slug}`}>
+            <div class="flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-widest text-slate-500">
+              <span>{formatDate(post.data.pubDate)}</span>
+              {post.data.tags?.length > 0 && (
+                <span class="rounded-full bg-slate-100 px-3 py-1 text-[10px] text-slate-600">
+                  {post.data.tags.join(" · ")}
+                </span>
+              )}
+            </div>
+            <h3 class="mt-4 text-xl font-extrabold text-slate-900">{post.data.title}</h3>
+            <p class="mt-2 text-sm text-slate-600">{post.data.description}</p>
+            <span class="mt-4 inline-flex text-sm font-bold text-primary">Czytaj dalej →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title="Chcesz przyspieszyć naukę?"
+    description="Sprawdź kurs angielskiego online lub umów lekcję próbną i zacznij mówić po angielsku."
+  />
+</MainLayout>
