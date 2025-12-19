@@ -1,0 +1,74 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import { BRAND_NAME, CONTACT_EMAIL, CONTACT_PHONE, BUSINESS_ADDRESS } from "../config/site";
+
+const title = `Polityka prywatności | ${BRAND_NAME}`;
+const description =
+  "Polityka prywatności serwisu angielskiego online. Informacje o przetwarzaniu danych osobowych.";
+---
+
+<MainLayout title={title} description={description}>
+  <section class="hero-bg relative overflow-hidden">
+    <div class="container-site py-16">
+      <span class="kicker">Dokument</span>
+      <h1 class="mt-6">Polityka prywatności</h1>
+
+      <p class="mt-6 max-w-4xl text-lg">
+        Ten dokument wymaga dostosowania do faktycznych procesów, narzędzi i danych zbieranych w serwisie.
+        Uzupełnij go przed publikacją.
+      </p>
+
+      <div class="card mt-8 p-6">
+        <div class="prose prose-slate max-w-none">
+          <h2>Administrator danych</h2>
+          <p>{BRAND_NAME}</p>
+          <p>
+            Adres: {BUSINESS_ADDRESS}<br />
+            E-mail: {CONTACT_EMAIL}<br />
+            Telefon: {CONTACT_PHONE}
+          </p>
+
+          <h2>Zakres przetwarzania danych</h2>
+          <ul>
+            <li>dane kontaktowe podane w formularzu lub wiadomości e-mail</li>
+            <li>treść zapytań dotyczących kursów i lekcji</li>
+          </ul>
+
+          <h2>Cel przetwarzania</h2>
+          <ul>
+            <li>kontakt w sprawie oferty i zapisów na zajęcia</li>
+            <li>udzielenie odpowiedzi na pytania klientów</li>
+          </ul>
+
+          <h2>Podstawa prawna</h2>
+          <p>
+            Art. 6 ust. 1 lit. a i b RODO — zgoda oraz działania zmierzające do zawarcia umowy.
+          </p>
+
+          <h2>Prawa użytkownika</h2>
+          <p>
+            Masz prawo do dostępu do danych, sprostowania, usunięcia, ograniczenia przetwarzania oraz wniesienia skargi
+            do organu nadzorczego.
+          </p>
+
+          <h2>Okres przechowywania</h2>
+          <p>
+            Dane przechowujemy tylko tak długo, jak jest to konieczne do realizacji celu kontaktu.
+          </p>
+
+          <h2>Pliki cookies</h2>
+          <p>
+            Jeśli korzystasz z analityki lub narzędzi marketingowych, opisz tutaj zakres i cel ich użycia.
+          </p>
+
+          <p class="text-sm text-slate-600">Ostatnia aktualizacja: [TODO]</p>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a class="btn btn-secondary" href="/cennik">Zobacz cennik</a>
+        <a class="btn btn-primary" href="/kontakt">Kontakt</a>
+      </div>
+    </div>
+  </section>
+</MainLayout>

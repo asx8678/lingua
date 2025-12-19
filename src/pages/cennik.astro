@@ -1,129 +1,120 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import PricingTable from "../components/PricingTable.astro";
-import PriceCalculator from "../components/PriceCalculator.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+import CTASection from "../components/CTASection.astro";
+import { BRAND_NAME } from "../config/site";
 
-export const prerender = true;
+const title = `Cennik – angielski online | ${BRAND_NAME}`;
+const description =
+  "Sprawdź ceny lekcji angielskiego online: 1:1 i grupowe. Wybierz pakiet i umów termin.";
 
-// Cennik wg przesłanego PDF 2025/2026.
-const courseColumns = ["Cena kursu", "Spotkania", "Czas", "Grupa"];
-// Pokazujemy najpierw niższe kwoty, a droższy wariant chowamy w sekcji rozwijanej.
-const courseRowsMain = [
-  ["2 700 zł", "30", "90 min", "od 3 osób"],
-  ["2 800 zł", "56", "60 min", "od 4 osób"],
+const pricing = [
+  {
+    title: "Lekcje 1:1",
+    price: "[TODO] zł",
+    note: "Cena za spotkanie lub pakiet — dopasowujemy długość i rytm nauki.",
+    features: [
+      "Pełna personalizacja planu",
+      "Stały feedback po każdej lekcji",
+      "Elastyczne terminy",
+    ],
+  },
+  {
+    title: "Mini-grupa 2–4 osoby",
+    price: "[TODO] zł",
+    note: "Niższy koszt na osobę i więcej rozmów niż w dużej grupie.",
+    features: [
+      "Więcej interakcji i motywacji",
+      "Wspólny cel i poziom",
+      "Materiały po zajęciach",
+    ],
+  },
+  {
+    title: "Kurs online (program)",
+    price: "[TODO] zł",
+    note: "Kurs z jasnym planem i materiałami — idealny dla osób, które chcą struktury.",
+    features: [
+      "Plan na 4–12 tygodni",
+      "Konwersacje + gramatyka",
+      "Regularne podsumowania",
+    ],
+  },
 ];
-const courseRowsMore = [["4 200 zł", "56", "90 min", "od 4 osób"]];
 
-const indivColumns = ["Cena", "Spotkania", "Czas", "Ilość osób"];
-const indivRows = [
-  ["1 300 zł", "10", "60 min", "1"],
-  ["800 zł", "10", "60 min", "2"],
-  ["650 zł", "10", "60 min", "3"],
-  ["1 000 zł", "10", "45 min", "1"],
-  ["600 zł", "10", "45 min", "2"],
-  ["500 zł", "10", "45 min", "3"],
-];
-
-// Szybki skrót (za spotkanie) – wyliczenie z pakietów 10 spotkań.
-const perSessionBadges = [
-  { duration: "60 min", price: "130 zł" },
-  { duration: "45 min", price: "100 zł" },
+const steps = [
+  "Podaj poziom i cel nauki",
+  "Wybierz preferowany format (1:1 / mini-grupa)",
+  "Dostaniesz propozycję planu i cenę",
 ];
 ---
 
-<BaseLayout title="Cennik 2025/2026 — Lingua Legionowo">
+<MainLayout title={title} description={description}>
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
         <div>
-          <span class="kicker">Cennik 2025/2026</span>
-          <h1 class="mt-6">Ceny kursów i zajęć</h1>
+          <span class="kicker">Cennik</span>
+          <h1 class="mt-6">Cennik lekcji angielskiego online</h1>
           <p class="mt-6 max-w-2xl text-lg">
-            Poniżej znajdziesz aktualny cennik oraz kalkulator, który policzy koszt dla wybranego wariantu.
+            Cena zależy od formatu zajęć, długości spotkań i częstotliwości. Poniżej znajdziesz orientacyjne warianty,
+            a szczegóły ustalamy po krótkiej rozmowie.
           </p>
-
-          <div class="mt-8 flex flex-wrap gap-3" aria-label="Szybki skrót cen za spotkanie">
-            {perSessionBadges.map((r) => (
-              <span class="badge">
-                <span class="text-slate-500">{r.duration}</span>
-                <span aria-hidden="true">·</span>
-                <span class="text-slate-900">{r.price}</span>
-              </span>
-            ))}
-          </div>
-          <p class="mt-3 text-xs text-slate-500">
-            Ceny za spotkanie wyliczone na podstawie pakietów 10 spotkań (cennik 2025/2026).
-          </p>
-
           <div class="mt-8 flex flex-wrap gap-3">
-            <a class="btn btn-primary" href="/cennik-lingua.pdf" download>POBIERZ CENNIK (PDF)</a>
-            <a class="btn btn-secondary" href="/kontakt">Kontakt</a>
-            <a class="btn btn-ghost" href="#kalkulator">Kalkulator</a>
+            <a class="btn btn-primary" href="/kontakt">Poproś o wycenę</a>
+            <a class="btn btn-secondary" href="/angielski-online">Poznaj angielski online</a>
           </div>
-
-          <p class="mt-4 text-xs text-slate-500">Źródło cen: cennik zajęć 2025/2026 (PDF).</p>
         </div>
 
-        <div class="relative">
-          <img
-            src="/images/pricing.svg"
-            alt="Ilustracja: cennik i kalkulator"
-            loading="eager"
-            class="w-full rounded-3xl border border-slate-200 shadow-soft"
-          />
+        <div class="card p-6">
+          <h2 class="text-2xl font-extrabold tracking-tight">Jak uzyskać dokładną wycenę</h2>
+          <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
+            {steps.map((step) => (
+              <li>{step}</li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a class="btn btn-secondary" href="/kontakt">Umów konsultację</a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="kalkulator">
+  <section class="section">
     <div class="container-site">
-      <h2>Kalkulator ceny</h2>
+      <h2>Najczęściej wybierane pakiety</h2>
       <p class="mt-4 max-w-3xl">
-        Wybierz typ zajęć, liczbę osób i liczbę spotkań. Kalkulator pokaże cenę za spotkanie, łączny koszt na osobę
-        oraz (opcjonalnie) koszt całej grupy.
+        Wybierz format zajęć i tempo nauki. Możemy dopasować liczbę spotkań i długość lekcji do Twojego kalendarza.
       </p>
-      <div class="mt-6">
-        <PriceCalculator />
+
+      <div class="mt-8 grid gap-6 lg:grid-cols-3">
+        {pricing.map((item) => (
+          <div class="card p-6">
+            <div class="text-xs font-bold uppercase tracking-widest text-slate-500">{item.title}</div>
+            <div class="mt-3 text-3xl font-extrabold text-slate-900">{item.price}</div>
+            <p class="mt-3 text-sm text-slate-600">{item.note}</p>
+            <ul class="mt-4 space-y-2 text-sm text-slate-600">
+              {item.features.map((feature) => (
+                <li class="flex items-center gap-2">
+                  <span class="h-2 w-2 rounded-full bg-primary" aria-hidden="true"></span>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+            <div class="mt-6">
+              <a class="btn btn-secondary w-full" href="/kontakt">Zapytaj o szczegóły</a>
+            </div>
+          </div>
+        ))}
       </div>
-    </div>
-  </section>
-
-  <section class="section section-muted">
-    <div class="container-site">
-      <h2>Pełny cennik</h2>
-      <p class="mt-4 max-w-3xl">Najważniejsze pozycje z cennika 2025/2026.</p>
-
-      <div class="mt-8 grid gap-6 lg:grid-cols-2">
-        <PricingTable
-          title="Kursy (grupy)"
-          subtitle="Ceny kursów, liczba spotkań i minimalna liczba osób w grupie."
-          columns={courseColumns}
-          rows={courseRowsMain}
-        />
-        <PricingTable
-          title="Zajęcia indywidualne / w duecie / w trójce"
-          subtitle="Pakiety 10 spotkań (45 lub 60 min)."
-          columns={indivColumns}
-          rows={indivRows}
-        />
-      </div>
-
-      <details class="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
-        <summary class="cursor-pointer select-none text-sm font-extrabold text-slate-900">Pozostałe warianty kursów</summary>
-        <div class="mt-4">
-          <PricingTable
-            title="Kurs — dodatkowy wariant"
-            subtitle="Opcja widoczna w cenniku PDF."
-            columns={courseColumns}
-            rows={courseRowsMore}
-          />
-        </div>
-      </details>
 
       <div class="mt-8">
-        <a class="btn btn-secondary" href="/kontakt">Masz pytania? Skontaktuj się</a>
+        <a class="btn btn-ghost" href="/lekcje-angielskiego-online">Zobacz, jak wyglądają lekcje online</a>
       </div>
     </div>
   </section>
-</BaseLayout>
+
+  <CTASection
+    title="Chcesz dokładny plan i cenę dla siebie?"
+    description="Napisz, jaki masz poziom, cel i preferowane godziny — przygotujemy propozycję pakietu."
+  />
+</MainLayout>

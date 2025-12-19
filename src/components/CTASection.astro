@@ -1,0 +1,35 @@
+---
+import {
+  CTA_PRIMARY_LABEL,
+  CTA_PRIMARY_HREF,
+  CTA_SECONDARY_LABEL,
+  CTA_SECONDARY_HREF,
+} from "../config/site";
+
+const {
+  title,
+  description,
+  primaryLabel = CTA_PRIMARY_LABEL,
+  primaryHref = CTA_PRIMARY_HREF,
+  secondaryLabel = CTA_SECONDARY_LABEL,
+  secondaryHref = CTA_SECONDARY_HREF,
+  note,
+} = Astro.props;
+---
+<section class="section">
+  <div class="container-site">
+    <div class="cta-panel">
+      <h2>{title}</h2>
+      <p class="mt-4 max-w-3xl">{description}</p>
+
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a class="btn btn-primary" href={primaryHref}>{primaryLabel}</a>
+        {secondaryLabel && secondaryHref && (
+          <a class="btn btn-secondary" href={secondaryHref}>{secondaryLabel}</a>
+        )}
+      </div>
+
+      {note && <p class="mt-4 text-xs text-slate-500">{note}</p>}
+    </div>
+  </div>
+</section>

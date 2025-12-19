@@ -1,55 +1,120 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import LanguageGrid from "../components/LanguageGrid.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+import CTASection from "../components/CTASection.astro";
+import { BRAND_NAME } from "../config/site";
 
-export const prerender = true;
+const title = `O nas – angielski online | ${BRAND_NAME}`;
+const description =
+  "Poznaj zespół i podejście do nauki angielskiego online. Uczymy praktycznie, z naciskiem na mówienie.";
 
-const about =
-  "Lingua Legionowo to kameralna szkoła językowa z pasją do nauczania. Prowadzimy zajęcia indywidualne i w małych grupach, w przyjaznej atmosferze i w tempie dopasowanym do ucznia.";
+const values = [
+  {
+    title: "Praktyka zamiast teorii",
+    text: "Zależy nam, abyś mówił swobodnie. Gramatyka jest ważna, ale tylko wtedy, gdy pomaga w komunikacji.",
+  },
+  {
+    title: "Realne sytuacje językowe",
+    text: "Ćwiczymy dialogi i słownictwo, które przydadzą się w pracy, podróży i codziennych rozmowach.",
+  },
+  {
+    title: "Stały feedback",
+    text: "Po każdej lekcji wiesz, co poprawić i nad czym pracować dalej.",
+  },
+];
+
+const process = [
+  "Diagnoza poziomu i celów",
+  "Plan nauki i harmonogram",
+  "Lekcje online + materiały",
+  "Regularne podsumowania",
+];
 ---
 
-<BaseLayout title="O nas — Lingua Legionowo">
+<MainLayout title={title} description={description}>
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">
-      <span class="kicker">O nas</span>
-      <h1 class="mt-6">Lingua w Legionowie</h1>
-      <p class="mt-6 max-w-3xl text-lg">{about}</p>
-
-      <div class="mt-8 grid gap-6 lg:grid-cols-2">
-        <div class="card p-6">
-          <h2 class="text-2xl font-extrabold tracking-tight sm:text-3xl">Jak uczymy</h2>
-          <ul class="mt-4 list-disc space-y-2 pl-5 text-slate-600">
-            <li>Komunikacja i mówienie — od pierwszych zajęć.</li>
-            <li>Materiały dopasowane do wieku, poziomu i celu (szkoła, praca, wyjazdy).</li>
-            <li>Regularność i powtórki, żeby wiedza zostawała na dłużej.</li>
-            <li>Przyjazna atmosfera — bez stresu, z jasnym planem.</li>
-          </ul>
-        </div>
-
-        <div class="card p-6">
-          <h2 class="text-2xl font-extrabold tracking-tight sm:text-3xl">Dla kogo</h2>
-          <ul class="mt-4 list-disc space-y-2 pl-5 text-slate-600">
-            <li>Dzieci, młodzież i dorośli.</li>
-            <li>Od podstaw do poziomów zaawansowanych.</li>
-            <li>Indywidualnie lub w małej grupie.</li>
-          </ul>
-
-          <p class="mt-6 text-sm text-slate-600">
-            Jeśli chcesz dobrać poziom i formę zajęć — napisz do nas lub zadzwoń.
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+        <div>
+          <span class="kicker">O nas</span>
+          <h1 class="mt-6">Uczymy angielskiego online w praktyczny sposób</h1>
+          <p class="mt-6 max-w-2xl text-lg">
+            {BRAND_NAME} to miejsce, w którym najważniejsze jest mówienie. Pomagamy kursantom przejść od pasywnego
+            rozumienia do swobodnej komunikacji w pracy i życiu codziennym.
           </p>
-          <p class="mt-3 text-sm">
-            <a class="font-extrabold text-primary no-underline hover:underline" href="/kontakt">Przejdź do kontaktu</a>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a class="btn btn-primary" href="/kontakt">Porozmawiaj z nami</a>
+            <a class="btn btn-secondary" href="/opinie">Zobacz opinie</a>
+          </div>
+          <p class="mt-4 text-sm text-slate-500">
+            Interesuje Cię oferta? Sprawdź
+            <a class="font-bold text-primary no-underline hover:underline" href="/cennik">cennik</a>.
           </p>
         </div>
+
+        <div class="card p-6">
+          <h2 class="text-2xl font-extrabold tracking-tight">Jak pracujemy</h2>
+          <ol class="mt-4 space-y-3 text-sm text-slate-600">
+            {process.map((step, index) => (
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
+                  {index + 1}
+                </span>
+                <span>{step}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-site">
+      <h2>Dlaczego kursanci zostają na dłużej</h2>
+      <p class="mt-4 max-w-3xl">
+        Dobrze zaplanowana nauka daje spokój i przewidywalne efekty. Stawiamy na jasny plan i realne postępy.
+      </p>
+
+      <div class="mt-8 grid gap-6 lg:grid-cols-3">
+        {values.map((value) => (
+          <div class="card p-6">
+            <h3 class="text-lg font-extrabold text-slate-900">{value.title}</h3>
+            <p class="mt-3 text-sm text-slate-600">{value.text}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-8">
+        <a class="btn btn-secondary" href="/angielski-online">Sprawdź angielski online</a>
       </div>
     </div>
   </section>
 
   <section class="section section-muted">
     <div class="container-site">
-      <h2>Języki</h2>
-      <p class="mt-4 max-w-3xl">Prowadzimy kursy dla dzieci, młodzieży i dorosłych.</p>
-      <LanguageGrid />
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+        <div>
+          <h2>Nasza specjalizacja</h2>
+          <p class="mt-4">
+            Skupiamy się na angielskim online, bo daje największą elastyczność. Dzięki temu możemy pracować
+            z kursantami z całej Polski i dopasować się do różnych harmonogramów.
+          </p>
+        </div>
+        <div class="card p-6">
+          <h3 class="text-lg font-extrabold text-slate-900">Najczęstsze cele kursantów</h3>
+          <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
+            <li>Swobodna komunikacja w pracy.</li>
+            <li>Lepsza płynność w rozmowach.</li>
+            <li>Rozumienie ze słuchu bez napięcia.</li>
+            <li>Odświeżenie gramatyki i słownictwa.</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
-</BaseLayout>
+
+  <CTASection
+    title="Chcesz sprawdzić, czy to podejście jest dla Ciebie?"
+    description="Umów krótką konsultację i zobacz, jak wygląda plan nauki online."
+  />
+</MainLayout>

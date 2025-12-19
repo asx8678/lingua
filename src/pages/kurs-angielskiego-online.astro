@@ -1,0 +1,159 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import CTASection from "../components/CTASection.astro";
+import FaqSection from "../components/FaqSection.astro";
+import { BRAND_NAME } from "../config/site";
+
+const title = `Kurs angielskiego online – plan nauki i efekty | ${BRAND_NAME}`;
+const description =
+  "Kurs angielskiego online od podstaw i dla zaawansowanych. Regularne lekcje + materiały. Zapisz się.";
+
+const modules = [
+  {
+    title: "Diagnoza i cel",
+    text: "Określamy poziom, potrzeby i sytuacje, w których używasz angielskiego.",
+  },
+  {
+    title: "Komunikacja w praktyce",
+    text: "Ćwiczymy mówienie na scenariuszach z pracy, podróży i codziennych rozmów.",
+  },
+  {
+    title: "Gramatyka bez stresu",
+    text: "Wyjaśniamy zasady na przykładach i od razu wykorzystujemy je w dialogach.",
+  },
+  {
+    title: "Słownictwo tematyczne",
+    text: "Budujemy aktywne słownictwo i uczymy się, jak używać go w zdaniach.",
+  },
+];
+
+const outcomes = [
+  "Jasny plan na kolejne tygodnie, bez przypadkowych tematów.",
+  "Regularne podsumowania i wskazówki, co poprawić.",
+  "Materiały do powtórek między spotkaniami.",
+  "Wzrost pewności w mówieniu i rozumieniu ze słuchu.",
+];
+
+const faqs = [
+  {
+    question: "Czy kurs jest dla osób od podstaw?",
+    answer:
+      "Tak. Program dobieramy do poziomu, więc możesz zacząć nawet bez wcześniejszej nauki.",
+  },
+  {
+    question: "Ile trwa kurs angielskiego online?",
+    answer:
+      "Długość zależy od celu i tempa nauki. Ustalamy ją po diagnozie i rozmowie.",
+  },
+  {
+    question: "Czy w kursie są zadania domowe?",
+    answer:
+      "Tak, ale krótkie i praktyczne. Mają utrwalać materiał z lekcji.",
+  },
+  {
+    question: "Czy mogę zmienić termin zajęć?",
+    answer:
+      "Tak, w miarę dostępności terminów. Ustalamy zasady na początku współpracy.",
+  },
+  {
+    question: "Czy kurs obejmuje konwersacje?",
+    answer:
+      "Tak. Konwersacje są stałym elementem, bo celem jest swobodne mówienie.",
+  },
+  {
+    question: "Czy otrzymam podsumowanie postępów?",
+    answer:
+      "Tak, regularnie podsumowujemy postępy i wskazujemy, nad czym warto popracować.",
+  },
+  {
+    question: "Czy kurs można realizować 1:1 lub w grupie?",
+    answer:
+      "Tak. Dobieramy formę do Twoich preferencji i celu.",
+  },
+];
+---
+
+<MainLayout title={title} description={description}>
+  <section class="hero-bg">
+    <div class="container-site py-16 sm:py-20">
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div>
+          <span class="kicker">Kurs angielskiego online</span>
+          <h1 class="mt-6">Kurs angielskiego online z jasnym planem i wsparciem</h1>
+          <p class="mt-6 max-w-2xl text-lg">
+            Jeśli chcesz uczyć się regularnie i z konkretnym planem, kurs online to najlepsza opcja. Dostajesz
+            strukturę, materiały i wsparcie lektora na każdym etapie.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a class="btn btn-primary" href="/kontakt">Zapisz się na kurs</a>
+            <a class="btn btn-secondary" href="/cennik">Cennik kursu</a>
+          </div>
+          <p class="mt-4 text-sm text-slate-500">
+            Wolisz pojedyncze spotkania? Zobacz
+            <a class="font-bold text-primary no-underline hover:underline" href="/lekcje-angielskiego-online">lekcje angielskiego online</a>.
+          </p>
+        </div>
+
+        <div class="grid gap-4">
+          {modules.map((module) => (
+            <div class="card p-6">
+              <h3 class="text-lg font-extrabold text-slate-900">{module.title}</h3>
+              <p class="mt-2 text-sm text-slate-600">{module.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-site">
+      <h2>Co wyróżnia nasz kurs online</h2>
+      <p class="mt-4 max-w-3xl">
+        Kurs online jest bardziej uporządkowany niż pojedyncze lekcje. Otrzymujesz jasny rytm pracy i regularne
+        podsumowania postępów.
+      </p>
+      <ul class="mt-6 grid gap-3 text-sm text-slate-600 sm:grid-cols-2">
+        {outcomes.map((item) => (
+          <li class="card p-4">{item}</li>
+        ))}
+      </ul>
+      <div class="mt-8">
+        <a class="btn btn-secondary" href="/angielski-online">Sprawdź angielski online</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container-site">
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+        <div>
+          <h2>Dla kogo jest kurs angielskiego online?</h2>
+          <p class="mt-4">
+            Dla osób, które chcą uczyć się systematycznie i widzieć postęp co tydzień. To dobry wybór, jeśli
+            zależy Ci na uporządkowanej nauce i stałym kontakcie z lektorem.
+          </p>
+          <div class="mt-6">
+            <a class="btn btn-primary" href="/kontakt">Umów konsultację</a>
+          </div>
+        </div>
+        <div class="card p-6">
+          <h3 class="text-lg font-extrabold text-slate-900">Przykładowe cele kursu</h3>
+          <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
+            <li>Swobodne rozmowy w pracy i na spotkaniach.</li>
+            <li>Przygotowanie do wyjazdu lub relokacji.</li>
+            <li>Odświeżenie gramatyki i uporządkowanie wiedzy.</li>
+            <li>Budowanie pewności w mówieniu po dłuższej przerwie.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FaqSection title="Kurs angielskiego online — FAQ" items={faqs} />
+
+  <CTASection
+    title="Chcesz zacząć kurs angielskiego online?"
+    description="Wyślij krótką wiadomość o swoim celu, a zaproponujemy plan i terminy."
+  />
+</MainLayout>

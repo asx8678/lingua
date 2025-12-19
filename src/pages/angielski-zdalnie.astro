@@ -1,0 +1,149 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import CTASection from "../components/CTASection.astro";
+import FaqSection from "../components/FaqSection.astro";
+import { BRAND_NAME } from "../config/site";
+
+const title = `Angielski zdalnie – ucz się z domu | ${BRAND_NAME}`;
+const description =
+  "Lekcje angielskiego zdalnie dopasowane do poziomu. Elastyczne godziny. Zapisz się na lekcję próbną.";
+
+const reasons = [
+  {
+    title: "Zero dojazdów",
+    text: "Uczysz się z domu, biura lub w podróży. Oszczędzasz czas i łatwiej trzymasz regularność.",
+  },
+  {
+    title: "Elastyczny grafik",
+    text: "Łatwiej znaleźć stały termin lub dostosować go do zmian w pracy i życiu.",
+  },
+  {
+    title: "Sprawdzony rytm",
+    text: "Spotkania online są krótsze, konkretne i skupione na mówieniu.",
+  },
+];
+
+const routine = [
+  "Szybka rozgrzewka konwersacyjna na start.",
+  "Ćwiczenie słownictwa w praktycznych kontekstach.",
+  "Poprawa wymowy i intonacji w trakcie rozmowy.",
+  "Notatka po lekcji z priorytetami na kolejne spotkanie.",
+];
+
+const faqs = [
+  {
+    question: "Czy muszę mieć kamerę włączoną?",
+    answer:
+      "Zachęcamy do korzystania z kamery, bo ułatwia komunikację, ale zawsze dostosowujemy się do komfortu.",
+  },
+  {
+    question: "Jak utrzymać motywację w nauce zdalnej?",
+    answer:
+      "Pomagają krótkie cele tygodniowe, regularne spotkania i szybki feedback po lekcji.",
+  },
+  {
+    question: "Czy zdalnie poprawiacie wymowę?",
+    answer:
+      "Tak. Pracujemy na krótkich fragmentach i od razu korygujemy brzmienie.",
+  },
+  {
+    question: "Czy dostanę plan nauki?",
+    answer:
+      "Tak. Plan zależy od celu — inaczej wygląda przygotowanie do rozmów, inaczej do egzaminu.",
+  },
+  {
+    question: "Co jeśli potrzebuję niestandardowych godzin?",
+    answer:
+      "Daj znać, kiedy możesz się uczyć. Sprawdzimy dostępne terminy i zaproponujemy rozwiązanie.",
+  },
+  {
+    question: "Czy angielski zdalnie sprawdzi się w mini-grupie?",
+    answer:
+      "Tak. Mini-grupa daje więcej konwersacji i interakcji, a tempo nadal jest dopasowane.",
+  },
+];
+---
+
+<MainLayout title={title} description={description}>
+  <section class="hero-bg">
+    <div class="container-site py-16 sm:py-20">
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div>
+          <span class="kicker">Angielski zdalnie</span>
+          <h1 class="mt-6">Angielski zdalnie – ucz się z domu i mów swobodniej</h1>
+          <p class="mt-6 max-w-2xl text-lg">
+            Zdalna nauka to wygoda i większa regularność. Zamiast dojeżdżać, spotykasz się z lektorem online
+            i pracujesz nad realnymi sytuacjami językowymi.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a class="btn btn-primary" href="/kontakt">Lekcja próbna</a>
+            <a class="btn btn-secondary" href="/cennik">Zobacz cennik</a>
+          </div>
+          <p class="mt-4 text-sm text-slate-500">
+            Jeśli wolisz klasyczny kurs, sprawdź
+            <a class="font-bold text-primary no-underline hover:underline" href="/kurs-angielskiego-online">kurs angielskiego online</a>.
+          </p>
+        </div>
+
+        <div class="grid gap-4">
+          {reasons.map((item) => (
+            <div class="card p-6">
+              <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
+              <p class="mt-2 text-sm text-slate-600">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-site">
+      <h2>Jak wygląda lekcja zdalna</h2>
+      <p class="mt-4 max-w-3xl">
+        Każde spotkanie ma jasny cel. Rozmawiamy, ćwiczymy słownictwo w kontekście i od razu poprawiamy błędy.
+      </p>
+      <ul class="mt-6 grid gap-3 text-sm text-slate-600 sm:grid-cols-2">
+        {routine.map((item) => (
+          <li class="card p-4">{item}</li>
+        ))}
+      </ul>
+      <div class="mt-8">
+        <a class="btn btn-secondary" href="/lekcje-angielskiego-online">Poznaj lekcje online</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container-site">
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+        <div>
+          <h2>Dla kogo jest angielski zdalnie?</h2>
+          <p class="mt-4">
+            Dla osób, które chcą uczyć się regularnie i bez zbędnych dojazdów. To świetna opcja dla zapracowanych,
+            rodziców, studentów i osób pracujących zdalnie.
+          </p>
+          <div class="mt-6">
+            <a class="btn btn-primary" href="/kontakt">Umów konsultację</a>
+          </div>
+        </div>
+        <div class="card p-6">
+          <h3 class="text-lg font-extrabold text-slate-900">Z czym najczęściej przychodzą kursanci</h3>
+          <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
+            <li>Chcę swobodnie rozmawiać po angielsku w pracy.</li>
+            <li>Potrzebuję rozruszać mówienie po długiej przerwie.</li>
+            <li>Chcę poprawić wymowę i płynność.</li>
+            <li>Planuję wyjazd i potrzebuję praktycznych dialogów.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FaqSection title="Angielski zdalnie — pytania i odpowiedzi" items={faqs} />
+
+  <CTASection
+    title="Chcesz uczyć się zdalnie bez stresu?"
+    description="Opowiedz o swoich celach, a zaproponujemy plan i terminy zajęć."
+  />
+</MainLayout>

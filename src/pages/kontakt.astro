@@ -1,33 +1,142 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+import { BRAND_NAME, CONTACT_EMAIL, CONTACT_PHONE, isTodo } from "../config/site";
 
-export const prerender = true;
+const title = `Kontakt – umów lekcję próbną | ${BRAND_NAME}`;
+const description =
+  "Skontaktuj się i umów lekcję próbną angielskiego online. Odpowiadamy szybko.";
+
+const hasEmail = !isTodo(CONTACT_EMAIL);
+const hasPhone = !isTodo(CONTACT_PHONE);
+const formAction = hasEmail ? `mailto:${CONTACT_EMAIL}` : "#";
 ---
 
-<BaseLayout title="Kontakt — Lingua Legionowo">
+<MainLayout title={title} description={description}>
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">
-      <span class="kicker">Kontakt</span>
-      <h1 class="mt-6">Skontaktuj się z nami</h1>
-      <p class="mt-6 max-w-3xl text-lg">
-        Najszybciej odpowiadamy mailowo. Możesz też zadzwonić — jeśli nie odbierzemy, oddzwonimy.
-      </p>
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+        <div>
+          <span class="kicker">Kontakt</span>
+          <h1 class="mt-6">Umów lekcję próbną angielskiego online</h1>
+          <p class="mt-6 max-w-2xl text-lg">
+            Napisz kilka słów o swoim poziomie i celu. Wrócimy z propozycją planu i możliwych terminów.
+          </p>
 
-      <div class="mt-10 grid gap-4 sm:grid-cols-2">
-        <a class="card p-6 no-underline" href="mailto:lingualegionowo@gmail.com">
-          <div class="text-xs font-bold uppercase tracking-widest text-slate-500">E-mail</div>
-          <div class="mt-3 text-base font-extrabold text-primary">lingualegionowo@gmail.com</div>
-          <p class="mt-2 text-sm">Napisz: język, poziom (jeśli znasz), cel i preferowane dni/godziny.</p>
-        </a>
+          <div class="mt-10 grid gap-4 sm:grid-cols-2">
+            <div class="card p-6">
+              <div class="text-xs font-bold uppercase tracking-widest text-slate-500">E-mail</div>
+              <div class="mt-3 text-base font-extrabold text-primary">
+                {hasEmail ? (
+                  <a class="no-underline" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+                ) : (
+                  <span>{CONTACT_EMAIL}</span>
+                )}
+              </div>
+              <p class="mt-2 text-sm">Odpowiadamy najszybciej mailowo.</p>
+            </div>
 
-        <a class="card p-6 no-underline" href="tel:+48453209560">
-          <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Telefon</div>
-          <div class="mt-3 text-base font-extrabold text-primary">+48 453 209 560</div>
-          <p class="mt-2 text-sm">Jeśli nie odbierzemy — oddzwonimy.</p>
-        </a>
+            <div class="card p-6">
+              <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Telefon</div>
+              <div class="mt-3 text-base font-extrabold text-primary">
+                {hasPhone ? (
+                  <a class="no-underline" href={`tel:${CONTACT_PHONE}`}>{CONTACT_PHONE}</a>
+                ) : (
+                  <span>{CONTACT_PHONE}</span>
+                )}
+              </div>
+              <p class="mt-2 text-sm">Jeśli nie odbierzemy, oddzwonimy.</p>
+            </div>
+          </div>
+
+          <p class="mt-6 text-sm text-slate-500">Lekcje prowadzimy zdalnie na terenie całej Polski.</p>
+          <p class="mt-2 text-sm text-slate-500">
+            Zobacz też
+            <a class="font-bold text-primary no-underline hover:underline" href="/angielski-online">angielski online</a>
+            i
+            <a class="font-bold text-primary no-underline hover:underline" href="/cennik">cennik</a>.
+          </p>
+        </div>
+
+        <div class="card p-6">
+          <h2 class="text-lg font-extrabold text-slate-900">Formularz kontaktowy</h2>
+          <p class="mt-2 text-sm text-slate-600">Pola oznaczone * są wymagane.</p>
+
+          <form
+            method="post"
+            action={formAction}
+            enctype="text/plain"
+            class="mt-6 space-y-4"
+            aria-label="Formularz kontaktowy"
+          >
+            <div>
+              <label for="name" class="text-sm font-bold text-slate-900">Imię i nazwisko *</label>
+              <input
+                id="name"
+                name="name"
+                autocomplete="name"
+                required
+                class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+              />
+            </div>
+
+            <div>
+              <label for="email" class="text-sm font-bold text-slate-900">E-mail *</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+                class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+              />
+            </div>
+
+            <div>
+              <label for="phone" class="text-sm font-bold text-slate-900">Telefon (opcjonalnie)</label>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                autocomplete="tel"
+                class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+              />
+            </div>
+
+            <div>
+              <label for="message" class="text-sm font-bold text-slate-900">Wiadomość *</label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                class="mt-1 min-h-[120px] w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+                placeholder="Np. poziom, cel, preferowane dni/godziny…"
+              ></textarea>
+            </div>
+
+            <div class="flex items-start gap-3 text-sm text-slate-600">
+              <input
+                id="consent"
+                name="consent"
+                type="checkbox"
+                required
+                class="mt-1 h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary"
+              />
+              <label for="consent">
+                Wyrażam zgodę na kontakt w sprawie kursu zgodnie z
+                <a class="font-bold text-primary no-underline hover:underline" href="/privacy">polityką prywatności</a>.
+              </label>
+            </div>
+
+            <button class="btn btn-primary w-full" type="submit">Wyślij wiadomość</button>
+
+            {!hasEmail && (
+              <p class="text-xs text-amber-600">
+                Uzupełnij CONTACT_EMAIL w konfiguracji, aby formularz działał. Na razie użyj danych kontaktowych powyżej.
+              </p>
+            )}
+          </form>
+        </div>
       </div>
-
-      <p class="mt-6 text-sm text-slate-500">Działamy w Legionowie.</p>
     </div>
   </section>
-</BaseLayout>
+</MainLayout>

@@ -1,51 +1,89 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import LanguageGrid from "../components/LanguageGrid.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+import CTASection from "../components/CTASection.astro";
+import { BRAND_NAME } from "../config/site";
 
-const heroText =
-  "Lingua to kameralna szkoła językowa w Legionowie. Zajęcia indywidualne i w małych grupach — przyjazna atmosfera i dużo mówienia.";
+const title = `Angielski online z lektorem – lekcja próbna | ${BRAND_NAME}`;
+const description =
+  "Angielski online z lektorem: 1:1 i mini-grupy, nacisk na mówienie, elastyczny grafik. Umów lekcję próbną i zacznij mówić po angielsku.";
 
-// Ceny "za spotkanie" (wyliczenie z pakietów 10 spotkań z cennika 2025/2026).
-const rateBadges = [
-  { duration: "60 min", price: "130 zł" },
-  { duration: "45 min", price: "100 zł" },
+const offerCards = [
+  {
+    title: "Angielski online",
+    text: "Zajęcia na żywo z lektorem, skupione na mówieniu i realnych sytuacjach.",
+    href: "/angielski-online",
+  },
+  {
+    title: "Angielski zdalnie",
+    text: "Nauka z domu lub z podróży, bez dojazdów i z elastycznym grafikiem.",
+    href: "/angielski-zdalnie",
+  },
+  {
+    title: "Lekcje online",
+    text: "Lekcje 1:1 lub w mini-grupie, dopasowane do poziomu i celu.",
+    href: "/lekcje-angielskiego-online",
+  },
+  {
+    title: "Kurs online",
+    text: "Program krok po kroku: diagnoza, plan, materiały i regularny feedback.",
+    href: "/kurs-angielskiego-online",
+  },
 ];
 
-const rateNote =
-  "Ceny za spotkanie wyliczone na podstawie pakietów 10 spotkań (cennik 2025/2026).";
+const steps = [
+  {
+    title: "Rozmowa i diagnoza",
+    text: "Poznajemy Twój cel, poziom i preferowany rytm zajęć. Ustalamy priorytety.",
+  },
+  {
+    title: "Plan nauki i materiały",
+    text: "Dostajesz plan na 4–12 tygodni z konkretnymi tematami, słownictwem i ćwiczeniami.",
+  },
+  {
+    title: "Lekcje + feedback",
+    text: "Na zajęciach mówisz od pierwszych minut. Po lekcji dostajesz wskazówki i zadania.",
+  },
+];
+
+const highlights = [
+  "Lekcje na żywo, bez nagrań",
+  "Poziomy od A1 do C1",
+  "Konwersacje + gramatyka w praktyce",
+  "Regularny feedback i cele tygodniowe",
+];
 ---
 
-<BaseLayout>
-  <!-- Hero -->
+<MainLayout title={title} description={description}>
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
         <div>
-          <span class="kicker">Szkoła Języków Obcych · Legionowo</span>
-          <h1 class="mt-6">Kursy i lekcje językowe</h1>
-          <p class="mt-6 max-w-2xl text-lg">{heroText}</p>
-
-          <div class="mt-8 flex flex-wrap gap-3" aria-label="Ceny za spotkanie">
-            {rateBadges.map((r) => (
-              <span class="badge">
-                <span class="text-slate-500">{r.duration}</span>
-                <span aria-hidden="true">·</span>
-                <span class="text-slate-900">{r.price}</span>
-              </span>
-            ))}
-          </div>
-          <p class="mt-3 text-xs text-slate-500">{rateNote}</p>
+          <span class="kicker">Angielski online</span>
+          <h1 class="mt-6">Mów po angielsku pewnie – ucz się z lektorem online</h1>
+          <p class="mt-6 max-w-2xl text-lg">
+            Lekcje 1:1 i mini-grupy, elastyczne godziny i realne sytuacje językowe. Skupiamy się na mówieniu,
+            a nie na wypełnianiu ćwiczeń bez końca.
+          </p>
 
           <div class="mt-8 flex flex-wrap gap-3">
-            <a class="btn btn-primary" href="/zapisy-2025-2026">ZAPISY 2025/2026</a>
-            <a class="btn btn-secondary" href="/cennik">CENNIK 2025/2026</a>
+            <a class="btn btn-primary" href="/kontakt">Lekcja próbna</a>
+            <a class="btn btn-secondary" href="/kontakt">Zapisz się</a>
+          </div>
+
+          <div class="mt-8 grid gap-3 text-sm text-slate-600 sm:grid-cols-2">
+            {highlights.map((item) => (
+              <div class="flex items-center gap-2">
+                <span class="h-2.5 w-2.5 rounded-full bg-primary" aria-hidden="true"></span>
+                <span>{item}</span>
+              </div>
+            ))}
           </div>
         </div>
 
         <div class="relative">
           <img
             src="/images/hero.svg"
-            alt="Nauczycielka przy biurku"
+            alt="Lekcja angielskiego online"
             loading="eager"
             class="w-full rounded-3xl border border-slate-200 shadow-soft"
           />
@@ -54,66 +92,90 @@ const rateNote =
     </div>
   </section>
 
-  <!-- Languages -->
-  <section class="section section-muted">
+  <section class="section">
     <div class="container-site">
-      <h2>Języki</h2>
+      <h2>Jak wygląda nauka online?</h2>
       <p class="mt-4 max-w-3xl">
-        Uczymy: hiszpańskiego, angielskiego, włoskiego, francuskiego, niemieckiego, szwedzkiego i rosyjskiego.
+        Uczysz się w rytmie dopasowanym do pracy i życia. Zamiast przypadkowych tematów masz jasny plan
+        i zajęcia skoncentrowane na Twoim celu.
       </p>
-      <LanguageGrid />
+
+      <div class="mt-8 grid gap-6 lg:grid-cols-3">
+        {steps.map((step) => (
+          <div class="card p-6">
+            <h3 class="text-lg font-extrabold text-slate-900">{step.title}</h3>
+            <p class="mt-3 text-sm">{step.text}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-8">
+        <a class="btn btn-secondary" href="/kontakt">Porozmawiaj o planie nauki</a>
+      </div>
     </div>
   </section>
 
-  <!-- About (krótko) -->
+  <section class="section section-muted">
+    <div class="container-site">
+      <h2>Wybierz ścieżkę dopasowaną do Ciebie</h2>
+      <p class="mt-4 max-w-3xl">
+        Każda strona oferty odpowiada innemu celowi: szybkie konwersacje, regularny kurs lub lekcje 1:1.
+      </p>
+
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        {offerCards.map((card) => (
+          <a class="card p-6 no-underline transition hover:-translate-y-0.5" href={card.href}>
+            <h3 class="text-lg font-extrabold text-slate-900">{card.title}</h3>
+            <p class="mt-3 text-sm text-slate-600">{card.text}</p>
+            <span class="mt-4 inline-flex text-sm font-bold text-primary">Poznaj szczegóły →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container-site">
-      <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
-        <div>
-          <h2>O nas</h2>
-          <p class="mt-4 max-w-3xl">
-            Lingua Legionowo to kameralna szkoła językowa z pasją do nauczania. Zajęcia prowadzimy w przyjaznej atmosferze,
-            w małych grupach i indywidualnie.
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+        <div class="card p-6">
+          <h2 class="text-2xl font-extrabold tracking-tight">Najczęściej wybierane formaty</h2>
+          <p class="mt-4 text-sm">
+            Zamiast jednego sztywnego programu dobierasz format do celu i czasu. W razie potrzeby
+            możesz zmienić tryb w trakcie współpracy.
           </p>
+          <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
+            <li>1:1 — szybki postęp i pełna personalizacja.</li>
+            <li>Mini-grupa 2–4 osoby — więcej mówienia, niższa cena.</li>
+            <li>Intensywny kurs 8–12 tygodni — widoczne efekty w krótszym czasie.</li>
+          </ul>
           <div class="mt-6">
-            <a class="btn btn-secondary" href="/o-nas">Poznaj Lingua</a>
+            <a class="btn btn-secondary" href="/cennik">Zobacz cennik</a>
           </div>
         </div>
 
-        <div class="relative">
-          <img
-            src="/images/about.svg"
-            alt="Uczniowie z książkami"
-            loading="lazy"
-            class="w-full rounded-3xl border border-slate-200 shadow-soft"
-          />
+        <div class="card p-6">
+          <h2 class="text-2xl font-extrabold tracking-tight">Co warto umówić na start</h2>
+          <p class="mt-4 text-sm">
+            Pierwsza lekcja to szybka diagnoza i plan na kolejne spotkania. Od razu dostajesz konkretne
+            wskazówki, nad czym pracować.
+          </p>
+          <div class="mt-6">
+            <a class="btn btn-primary" href="/kontakt">Umów lekcję próbną</a>
+          </div>
+          <p class="mt-4 text-xs text-slate-500">
+            Chcesz dowiedzieć się więcej o kursie? Sprawdź także
+            <a class="font-bold text-primary no-underline hover:underline" href="/kurs-angielskiego-online">
+              kurs angielskiego online
+            </a>.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section class="section">
-    <div class="container-site">
-      <div class="card p-8">
-        <h2>Kontakt</h2>
-        <p class="mt-4 max-w-3xl">
-          Najszybciej odpowiadamy mailowo. W wiadomości podaj: język, poziom (jeśli znasz), cel i preferowane dni/godziny.
-        </p>
-
-        <div class="mt-6 grid gap-4 sm:grid-cols-2">
-          <a class="card p-5 no-underline" href="mailto:lingualegionowo@gmail.com">
-            <div class="text-xs font-bold uppercase tracking-widest text-slate-500">E-mail</div>
-            <div class="mt-2 text-sm font-extrabold text-primary">lingualegionowo@gmail.com</div>
-          </a>
-          <a class="card p-5 no-underline" href="tel:+48453209560">
-            <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Telefon</div>
-            <div class="mt-2 text-sm font-extrabold text-primary">+48 453 209 560</div>
-          </a>
-        </div>
-
-        <p class="mt-6 text-sm text-slate-500">Działamy w Legionowie.</p>
-      </div>
-    </div>
-  </section>
-</BaseLayout>
+  <CTASection
+    title="Gotowy na angielski online dopasowany do Ciebie?"
+    description="Napisz kilka słów o swoim celu, a zaproponujemy plan nauki, formę zajęć i możliwe terminy."
+    note="Odpowiadamy szybko w dni robocze."
+  />
+</MainLayout>

@@ -1,0 +1,105 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import CTASection from "../components/CTASection.astro";
+import { BRAND_NAME } from "../config/site";
+
+const title = `Opinie o angielskim online | ${BRAND_NAME}`;
+const description =
+  "Sprawdź opinie o lekcjach angielskiego online. Zobacz, co kursanci mówią o nauce z lektorem.";
+
+const testimonials = [
+  {
+    name: "[TODO]",
+    context: "Lekcje 1:1",
+    quote: "[TODO — uzupełnij opinię klienta po uzyskaniu zgody na publikację]",
+  },
+  {
+    name: "[TODO]",
+    context: "Mini-grupa 2 osoby",
+    quote: "[TODO — uzupełnij opinię klienta po uzyskaniu zgody na publikację]",
+  },
+  {
+    name: "[TODO]",
+    context: "Kurs angielskiego online",
+    quote: "[TODO — uzupełnij opinię klienta po uzyskaniu zgody na publikację]",
+  },
+  {
+    name: "[TODO]",
+    context: "Konwersacje online",
+    quote: "[TODO — uzupełnij opinię klienta po uzyskaniu zgody na publikację]",
+  },
+  {
+    name: "[TODO]",
+    context: "Powrót do nauki po przerwie",
+    quote: "[TODO — uzupełnij opinię klienta po uzyskaniu zgody na publikację]",
+  },
+  {
+    name: "[TODO]",
+    context: "Angielski do pracy",
+    quote: "[TODO — uzupełnij opinię klienta po uzyskaniu zgody na publikację]",
+  },
+];
+
+const highlights = [
+  "Szybkie przejście od teorii do mówienia.",
+  "Regularne podsumowania i jasny plan nauki.",
+  "Elastyczne terminy bez dojazdów.",
+  "Wsparcie lektora między spotkaniami.",
+];
+---
+
+<MainLayout title={title} description={description}>
+  <section class="hero-bg">
+    <div class="container-site py-16 sm:py-20">
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+        <div>
+          <span class="kicker">Opinie</span>
+          <h1 class="mt-6">Opinie o lekcjach angielskiego online</h1>
+          <p class="mt-6 max-w-2xl text-lg">
+            Poniżej znajdziesz miejsce na opinie kursantów. Uzupełnij je po zebraniu zgód na publikację.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a class="btn btn-primary" href="/kontakt">Chcę zostawić opinię</a>
+            <a class="btn btn-secondary" href="/angielski-online">Poznaj ofertę</a>
+          </div>
+        </div>
+
+        <div class="card p-6">
+          <h2 class="text-2xl font-extrabold tracking-tight">Co najczęściej doceniają kursanci</h2>
+          <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
+            {highlights.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a class="btn btn-ghost" href="/cennik">Sprawdź cennik</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-site">
+      <h2>Opinie do uzupełnienia</h2>
+      <p class="mt-4 max-w-3xl">
+        Wpisz realne opinie klientów, gdy tylko je zbierzesz. To ważny sygnał zaufania dla nowych kursantów.
+      </p>
+
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        {testimonials.map((item) => (
+          <div class="card p-6">
+            <div class="text-xs font-bold uppercase tracking-widest text-slate-500">{item.context}</div>
+            <p class="mt-3 text-sm text-slate-700">“{item.quote}”</p>
+            <div class="mt-4 text-sm font-extrabold text-slate-900">{item.name}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title="Chcesz spróbować angielskiego online?"
+    description="Umów lekcję próbną i przekonaj się, jak wyglądają zajęcia na żywo."
+  />
+</MainLayout>
