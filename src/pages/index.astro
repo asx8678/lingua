@@ -1,0 +1,119 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LanguageGrid from "../components/LanguageGrid.astro";
+
+const heroText =
+  "Lingua to kameralna szkoła językowa w Legionowie. Zajęcia indywidualne i w małych grupach — przyjazna atmosfera i dużo mówienia.";
+
+// Ceny "za spotkanie" (wyliczenie z pakietów 10 spotkań z cennika 2025/2026).
+const rateBadges = [
+  { duration: "60 min", price: "130 zł" },
+  { duration: "45 min", price: "100 zł" },
+];
+
+const rateNote =
+  "Ceny za spotkanie wyliczone na podstawie pakietów 10 spotkań (cennik 2025/2026).";
+---
+
+<BaseLayout>
+  <!-- Hero -->
+  <section class="hero-bg">
+    <div class="container-site py-16 sm:py-20">
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div>
+          <span class="kicker">Szkoła Języków Obcych · Legionowo</span>
+          <h1 class="mt-6">Kursy i lekcje językowe</h1>
+          <p class="mt-6 max-w-2xl text-lg">{heroText}</p>
+
+          <div class="mt-8 flex flex-wrap gap-3" aria-label="Ceny za spotkanie">
+            {rateBadges.map((r) => (
+              <span class="badge">
+                <span class="text-slate-500">{r.duration}</span>
+                <span aria-hidden="true">·</span>
+                <span class="text-slate-900">{r.price}</span>
+              </span>
+            ))}
+          </div>
+          <p class="mt-3 text-xs text-slate-500">{rateNote}</p>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a class="btn btn-primary" href="/zapisy-2025-2026">ZAPISY 2025/2026</a>
+            <a class="btn btn-secondary" href="/cennik">CENNIK 2025/2026</a>
+          </div>
+        </div>
+
+        <div class="relative">
+          <img
+            src="/images/hero.svg"
+            alt="Nauczycielka przy biurku"
+            loading="eager"
+            class="w-full rounded-3xl border border-slate-200 shadow-soft"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Languages -->
+  <section class="section section-muted">
+    <div class="container-site">
+      <h2>Języki</h2>
+      <p class="mt-4 max-w-3xl">
+        Uczymy: hiszpańskiego, angielskiego, włoskiego, francuskiego, niemieckiego, szwedzkiego i rosyjskiego.
+      </p>
+      <LanguageGrid />
+    </div>
+  </section>
+
+  <!-- About (krótko) -->
+  <section class="section">
+    <div class="container-site">
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div>
+          <h2>O nas</h2>
+          <p class="mt-4 max-w-3xl">
+            Lingua Legionowo to kameralna szkoła językowa z pasją do nauczania. Zajęcia prowadzimy w przyjaznej atmosferze,
+            w małych grupach i indywidualnie.
+          </p>
+          <div class="mt-6">
+            <a class="btn btn-secondary" href="/o-nas">Poznaj Lingua</a>
+          </div>
+        </div>
+
+        <div class="relative">
+          <img
+            src="/images/about.svg"
+            alt="Uczniowie z książkami"
+            loading="lazy"
+            class="w-full rounded-3xl border border-slate-200 shadow-soft"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section">
+    <div class="container-site">
+      <div class="card p-8">
+        <h2>Kontakt</h2>
+        <p class="mt-4 max-w-3xl">
+          Najszybciej odpowiadamy mailowo. W wiadomości podaj: język, poziom (jeśli znasz), cel i preferowane dni/godziny.
+        </p>
+
+        <div class="mt-6 grid gap-4 sm:grid-cols-2">
+          <a class="card p-5 no-underline" href="mailto:lingualegionowo@gmail.com">
+            <div class="text-xs font-bold uppercase tracking-widest text-slate-500">E-mail</div>
+            <div class="mt-2 text-sm font-extrabold text-primary">lingualegionowo@gmail.com</div>
+          </a>
+          <a class="card p-5 no-underline" href="tel:+48453209560">
+            <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Telefon</div>
+            <div class="mt-2 text-sm font-extrabold text-primary">+48 453 209 560</div>
+          </a>
+        </div>
+
+        <p class="mt-6 text-sm text-slate-500">Działamy w Legionowie.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

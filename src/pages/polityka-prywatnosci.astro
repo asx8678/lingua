@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+export const prerender = true;
+---
+<BaseLayout title="Polityka prywatności — Lingua Legionowo">
+  <section class="hero-bg relative overflow-hidden">
+    <div class="container-site py-16">
+      <span class="kicker">Dokument</span>
+      <h1 class="mt-6">Polityka prywatności</h1>
+
+      <p class="mt-6 max-w-4xl text-lg">
+        Ten dokument jest przykładową treścią do uzupełnienia. W wersji produkcyjnej dopasuj go do tego,
+        jakie dane zbierasz (np. formularze, analityka, pliki cookie) i z jakich usług korzystasz.
+      </p>
+
+      <div class="card mt-8 p-6">
+        <div class="prose prose-slate max-w-none">
+          <h2>Administrator danych</h2>
+          <p>Lingua — Szkoła Języków Obcych (Legionowo).</p>
+
+          <h2>Kontakt</h2>
+          <p>
+            E-mail:
+            <a href="mailto:lingualegionowo@gmail.com" class="font-extrabold text-primary no-underline">lingualegionowo@gmail.com</a><br />
+            Telefon:
+            <a href="tel:+48453209560" class="font-extrabold text-primary no-underline">+48 453 209 560</a>
+          </p>
+
+          <h2>Zakres i cel przetwarzania</h2>
+          <ul>
+            <li>kontakt w sprawie kursów i zapisów</li>
+            <li>obsługa zapytań wysłanych e-mailem lub przez formularz</li>
+          </ul>
+
+          <h2>Prawa użytkownika</h2>
+          <p>
+            Masz prawo do dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania oraz wniesienia skargi
+            do organu nadzorczego.
+          </p>
+
+          <p class="text-sm text-slate-600">Ostatnia aktualizacja: 2025-12-19</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

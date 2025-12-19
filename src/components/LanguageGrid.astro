@@ -1,0 +1,21 @@
+---
+const languages = [
+  { flag: "🇪🇸", name: "hiszpański" },
+  { flag: "🇬🇧", name: "angielski" },
+  { flag: "🇮🇹", name: "włoski" },
+  { flag: "🇫🇷", name: "francuski" },
+  { flag: "🇩🇪", name: "niemiecki" },
+  { flag: "🇸🇪", name: "szwedzki" },
+  { flag: "🇷🇺", name: "rosyjski" },
+];
+---
+<div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+  {languages.map((l) => (
+    <div class="card p-4">
+      <div class="flex items-center gap-3">
+        <span class="text-2xl" aria-hidden="true">{l.flag}</span>
+        <span class="text-sm font-extrabold text-slate-900">{l.name}</span>
+      </div>
+    </div>
+  ))}
+</div>

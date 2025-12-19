@@ -1,0 +1,284 @@
+---
+// Kalkulator opiera się na liczbach z cennika 2025/2026.
+// Uwaga: Jeżeli rozliczenie w Twoim przypadku wygląda inaczej (np. niestandardowa liczba spotkań),
+// wynik traktuj jako orientacyjny i skontaktuj się ze szkołą.
+
+const DATA = {
+  packages: [
+    {
+      id: "pakiet-60",
+      label: "Pakiet — 60 min (zajęcia indywidualne / duet / trójka)",
+      minutes: 60,
+      baseSessions: 10,
+      // ceny z cennika (pakiet 10 spotkań) — kwota / osoba
+      pricePerPerson: { 1: 1300, 2: 800, 3: 650 },
+    },
+    {
+      id: "pakiet-45",
+      label: "Pakiet — 45 min (zajęcia indywidualne / duet / trójka)",
+      minutes: 45,
+      baseSessions: 10,
+      // ceny z cennika (pakiet 10 spotkań) — kwota / osoba
+      pricePerPerson: { 1: 1000, 2: 600, 3: 500 },
+    },
+  ],
+  courses: [
+    {
+      id: "kurs-2700",
+      label: "Kurs — 30 spotkań × 90 min",
+      price: 2700,
+      sessions: 30,
+      minutes: 90,
+      minPersons: 3,
+    },
+    {
+      id: "kurs-2800",
+      label: "Kurs — 56 spotkań × 60 min",
+      price: 2800,
+      sessions: 56,
+      minutes: 60,
+      minPersons: 4,
+    },
+  ],
+};
+---
+
+<div class="card p-6">
+  <form id="price-calc" class="grid gap-4" aria-label="Kalkulator ceny">
+    <div>
+      <label for="plan" class="text-sm font-bold text-slate-900">Typ</label>
+      <select
+        id="plan"
+        name="plan"
+        class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+      >
+        <optgroup label="Pakiety (10 spotkań)">
+          {DATA.packages.map((p) => (
+            <option value={p.id} selected={p.id === "pakiet-45"}>{p.label}</option>
+          ))}
+        </optgroup>
+        <optgroup label="Kursy (grupy)">
+          {DATA.courses.map((c) => (
+            <option value={c.id}>{c.label}</option>
+          ))}
+        </optgroup>
+      </select>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div>
+        <label for="persons" class="text-sm font-bold text-slate-900">Liczba osób</label>
+        <input
+          id="persons"
+          name="persons"
+          type="number"
+          inputmode="numeric"
+          min="1"
+          max="10"
+          value="1"
+          class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+        />
+        <p id="persons-hint" class="mt-1 text-xs text-slate-500"></p>
+      </div>
+
+      <div>
+        <label for="sessions" class="text-sm font-bold text-slate-900">Liczba spotkań</label>
+        <input
+          id="sessions"
+          name="sessions"
+          type="number"
+          inputmode="numeric"
+          min="1"
+          max="200"
+          value="10"
+          class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+        />
+        <p id="sessions-hint" class="mt-1 text-xs text-slate-500"></p>
+      </div>
+    </div>
+  </form>
+
+  <div class="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+    <div class="grid gap-4 sm:grid-cols-3 sm:items-end">
+      <div>
+        <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Za spotkanie / osoba</div>
+        <div id="out-per-session" class="mt-2 text-3xl font-extrabold text-slate-900">—</div>
+        <div id="out-per-session-sub" class="mt-1 text-xs text-slate-500"></div>
+      </div>
+
+      <div>
+        <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Łącznie / osoba</div>
+        <div id="out-per-total" class="mt-2 text-3xl font-extrabold text-slate-900">—</div>
+        <div id="out-per-total-sub" class="mt-1 text-xs text-slate-500"></div>
+      </div>
+
+      <div id="total-block" class="hidden">
+        <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Łącznie (grupa)</div>
+        <div id="out-total" class="mt-2 text-3xl font-extrabold text-slate-900">—</div>
+        <div id="out-total-sub" class="mt-1 text-xs text-slate-500"></div>
+      </div>
+    </div>
+
+    <div class="mt-4 flex items-center gap-2 text-xs text-slate-600">
+      <input
+        id="show-total"
+        type="checkbox"
+        class="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary"
+      />
+      <label for="show-total" class="select-none">Pokaż koszt dla całej grupy</label>
+    </div>
+
+    <div id="out-note" class="mt-4 text-xs text-slate-600"></div>
+  </div>
+
+  <p class="mt-4 text-xs text-slate-500">
+    Kalkulator bazuje na cenniku 2025/2026. W przypadku kursów liczba spotkań jest stała.
+  </p>
+
+  <script type="application/json" id="price-data" set:html={JSON.stringify(DATA)}></script>
+  <script is:inline>
+    const DATA = /** @type {const} */ (JSON.parse(document.getElementById('price-data').textContent));
+
+    const form = document.getElementById("price-calc");
+    const planEl = document.getElementById("plan");
+    const personsEl = document.getElementById("persons");
+    const sessionsEl = document.getElementById("sessions");
+    const showTotalEl = document.getElementById("show-total");
+
+    const personsHintEl = document.getElementById("persons-hint");
+    const sessionsHintEl = document.getElementById("sessions-hint");
+
+    const outPerSessionEl = document.getElementById("out-per-session");
+    const outPerSessionSubEl = document.getElementById("out-per-session-sub");
+
+    const outPerTotalEl = document.getElementById("out-per-total");
+    const outPerTotalSubEl = document.getElementById("out-per-total-sub");
+
+    const totalBlockEl = document.getElementById("total-block");
+    const outTotalEl = document.getElementById("out-total");
+    const outTotalSubEl = document.getElementById("out-total-sub");
+
+    const outNoteEl = document.getElementById("out-note");
+
+    const fmt = new Intl.NumberFormat("pl-PL", { maximumFractionDigits: 0 });
+    const pln = (v) => `${fmt.format(Math.round(v))} zł`;
+
+    const getPlan = (id) => {
+      const p = DATA.packages.find((x) => x.id === id);
+      if (p) return { kind: "package", ...p };
+      const c = DATA.courses.find((x) => x.id === id);
+      if (c) return { kind: "course", ...c };
+      return null;
+    };
+
+    function setText(el, txt) {
+      if (!el) return;
+      el.textContent = txt;
+    }
+
+    function update() {
+      const plan = getPlan(planEl.value);
+      if (!plan) return;
+
+      const persons = Math.max(1, Math.min(10, Number(personsEl.value || 1)));
+      personsEl.value = String(persons);
+
+      const showTotal = Boolean(showTotalEl?.checked);
+      totalBlockEl?.classList.toggle("hidden", !showTotal);
+
+      // reset
+      setText(personsHintEl, "");
+      setText(sessionsHintEl, "");
+      setText(outPerSessionEl, "—");
+      setText(outPerSessionSubEl, "");
+      setText(outPerTotalEl, "—");
+      setText(outPerTotalSubEl, "");
+      setText(outTotalEl, "—");
+      setText(outTotalSubEl, "");
+      setText(outNoteEl, "");
+
+      if (plan.kind === "course") {
+        sessionsEl.value = String(plan.sessions);
+        sessionsEl.setAttribute("disabled", "disabled");
+        sessionsEl.classList.add("bg-slate-100");
+
+        const perPersonTotal = plan.price;
+        const perSession = plan.price / plan.sessions;
+        const groupTotal = perPersonTotal * persons;
+
+        setText(outPerSessionEl, pln(perSession));
+        setText(outPerSessionSubEl, `${plan.minutes} min`);
+
+        setText(outPerTotalEl, pln(perPersonTotal));
+        setText(outPerTotalSubEl, `cena z cennika`);
+
+        if (showTotal) {
+          setText(outTotalEl, pln(groupTotal));
+          setText(outTotalSubEl, `${persons} os.`);
+        }
+
+        const warn = persons < plan.minPersons;
+        setText(
+          outNoteEl,
+          warn
+            ? `Ten kurs jest w cenniku „od ${plan.minPersons} osób”. Wybrałeś(aś) ${persons} — wynik traktuj orientacyjnie.`
+            : `Kurs: ${plan.sessions} spotkań × ${plan.minutes} min. Wymagana grupa: od ${plan.minPersons} osób.`
+        );
+
+        setText(personsHintEl, `Kurs: od ${plan.minPersons} osób`);
+        return;
+      }
+
+      // Package
+      sessionsEl.removeAttribute("disabled");
+      sessionsEl.classList.remove("bg-slate-100");
+
+      const sessions = Math.max(1, Math.min(200, Number(sessionsEl.value || plan.baseSessions)));
+      sessionsEl.value = String(sessions);
+
+      // pakiety w cenniku są dla 1–3 osób
+      if (persons > 3) {
+        setText(personsHintEl, "Pakiety: 1–3 osoby");
+        setText(
+          outNoteEl,
+          "Pakiety w cenniku są podane dla 1–3 osób. Dla większej grupy wybierz kurs lub skontaktuj się z nami."
+        );
+        return;
+      }
+
+      const price10 = plan.pricePerPerson[String(persons)];
+      const perSession = price10 / plan.baseSessions;
+      const perPersonTotal = perSession * sessions;
+      const groupTotal = perPersonTotal * persons;
+
+      const isMultiple = sessions % plan.baseSessions === 0;
+      if (!isMultiple) {
+        setText(sessionsHintEl, "Wyliczenie orientacyjne (proporcjonalnie do pakietu 10 spotkań).");
+      } else {
+        setText(sessionsHintEl, `Pakiet: ${sessions / plan.baseSessions} × ${plan.baseSessions} spotkań`);
+      }
+
+      setText(outPerSessionEl, pln(perSession));
+      setText(outPerSessionSubEl, `${plan.minutes} min`);
+
+      setText(outPerTotalEl, pln(perPersonTotal));
+      setText(outPerTotalSubEl, `${sessions} spotkań`);
+
+      if (showTotal) {
+        setText(outTotalEl, pln(groupTotal));
+        setText(outTotalSubEl, `${persons} os.`);
+      }
+
+      setText(
+        outNoteEl,
+        `Pakiet ${plan.baseSessions} spotkań × ${plan.minutes} min: ${pln(price10)} / osoba (wg cennika).`
+      );
+      setText(personsHintEl, "Pakiety: 1–3 osoby");
+    }
+
+    form?.addEventListener("input", update);
+    planEl?.addEventListener("change", update);
+    showTotalEl?.addEventListener("change", update);
+    update();
+  </script>
+</div>

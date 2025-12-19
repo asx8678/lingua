@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LanguageGrid from "../components/LanguageGrid.astro";
+
+export const prerender = true;
+
+const about =
+  "Lingua Legionowo to kameralna szkoła językowa z pasją do nauczania. Prowadzimy zajęcia indywidualne i w małych grupach, w przyjaznej atmosferze i w tempie dopasowanym do ucznia.";
+---
+
+<BaseLayout title="O nas — Lingua Legionowo">
+  <section class="hero-bg">
+    <div class="container-site py-16 sm:py-20">
+      <span class="kicker">O nas</span>
+      <h1 class="mt-6">Lingua w Legionowie</h1>
+      <p class="mt-6 max-w-3xl text-lg">{about}</p>
+
+      <div class="mt-8 grid gap-6 lg:grid-cols-2">
+        <div class="card p-6">
+          <h2 class="text-2xl font-extrabold tracking-tight sm:text-3xl">Jak uczymy</h2>
+          <ul class="mt-4 list-disc space-y-2 pl-5 text-slate-600">
+            <li>Komunikacja i mówienie — od pierwszych zajęć.</li>
+            <li>Materiały dopasowane do wieku, poziomu i celu (szkoła, praca, wyjazdy).</li>
+            <li>Regularność i powtórki, żeby wiedza zostawała na dłużej.</li>
+            <li>Przyjazna atmosfera — bez stresu, z jasnym planem.</li>
+          </ul>
+        </div>
+
+        <div class="card p-6">
+          <h2 class="text-2xl font-extrabold tracking-tight sm:text-3xl">Dla kogo</h2>
+          <ul class="mt-4 list-disc space-y-2 pl-5 text-slate-600">
+            <li>Dzieci, młodzież i dorośli.</li>
+            <li>Od podstaw do poziomów zaawansowanych.</li>
+            <li>Indywidualnie lub w małej grupie.</li>
+          </ul>
+
+          <p class="mt-6 text-sm text-slate-600">
+            Jeśli chcesz dobrać poziom i formę zajęć — napisz do nas lub zadzwoń.
+          </p>
+          <p class="mt-3 text-sm">
+            <a class="font-extrabold text-primary no-underline hover:underline" href="/kontakt">Przejdź do kontaktu</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container-site">
+      <h2>Języki</h2>
+      <p class="mt-4 max-w-3xl">Prowadzimy kursy dla dzieci, młodzieży i dorosłych.</p>
+      <LanguageGrid />
+    </div>
+  </section>
+</BaseLayout>

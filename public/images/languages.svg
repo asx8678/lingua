@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="Ilustracja: języki i rozmowa">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E6F0FF"/>
+      <stop offset="1" stop-color="#FFFFFF"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#bg)"/>
+
+  <!-- Accents -->
+  <circle cx="170" cy="230" r="120" fill="#0052CC" opacity="0.06"/>
+  <circle cx="1030" cy="180" r="150" fill="#0052CC" opacity="0.05"/>
+
+  <!-- Speech bubble 1 -->
+  <rect x="200" y="230" width="520" height="260" rx="30" fill="#ffffff" stroke="#0052CC" stroke-opacity="0.16"/>
+  <path d="M330 490l-40 50c70-20 110-30 140-36" fill="#ffffff" stroke="#0052CC" stroke-opacity="0.16" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Bubble content -->
+  <rect x="240" y="270" width="320" height="18" rx="9" fill="#0052CC" opacity="0.22"/>
+  <rect x="240" y="305" width="260" height="18" rx="9" fill="#0052CC" opacity="0.16"/>
+  <rect x="240" y="340" width="300" height="18" rx="9" fill="#0052CC" opacity="0.12"/>
+
+  <!-- Flags (simple blocks) -->
+  <g transform="translate(240 380)">
+    <!-- UK-ish -->
+    <rect x="0" y="0" width="90" height="60" rx="10" fill="#0A2A66" opacity="0.9"/>
+    <path d="M0 10h90v10H0z" fill="#ffffff" opacity="0.9"/>
+    <path d="M40 0h10v60H40z" fill="#ffffff" opacity="0.9"/>
+    <path d="M0 25h90v10H0z" fill="#D11F2A" opacity="0.9"/>
+    <path d="M42 0h6v60h-6z" fill="#D11F2A" opacity="0.9"/>
+
+    <!-- Spain-ish -->
+    <rect x="110" y="0" width="90" height="60" rx="10" fill="#F5C542"/>
+    <path d="M110 0h90v14h-90z" fill="#D11F2A"/>
+    <path d="M110 46h90v14h-90z" fill="#D11F2A"/>
+
+    <!-- Germany-ish -->
+    <rect x="220" y="0" width="90" height="60" rx="10" fill="#111827"/>
+    <path d="M220 20h90v20h-90z" fill="#D11F2A"/>
+    <path d="M220 40h90v20h-90z" fill="#F5C542"/>
+  </g>
+
+  <!-- Speech bubble 2 -->
+  <rect x="760" y="300" width="240" height="160" rx="28" fill="#ffffff" stroke="#0052CC" stroke-opacity="0.16"/>
+  <path d="M860 460l30 54c-46-14-74-22-98-30" fill="#ffffff" stroke="#0052CC" stroke-opacity="0.16" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="790" y="340" width="180" height="16" rx="8" fill="#0052CC" opacity="0.18"/>
+  <rect x="790" y="370" width="140" height="16" rx="8" fill="#0052CC" opacity="0.12"/>
+  <rect x="790" y="400" width="160" height="16" rx="8" fill="#0052CC" opacity="0.10"/>
+
+  <!-- Small book icon -->
+  <rect x="710" y="540" width="320" height="120" rx="26" fill="#ffffff" stroke="#0052CC" stroke-opacity="0.16"/>
+  <path d="M780 560h180" stroke="#0052CC" stroke-opacity="0.22" stroke-width="10" stroke-linecap="round"/>
+  <path d="M780 595h140" stroke="#0052CC" stroke-opacity="0.16" stroke-width="10" stroke-linecap="round"/>
+  <path d="M780 630h160" stroke="#0052CC" stroke-opacity="0.12" stroke-width="10" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import InstructorCard from "../components/InstructorCard.astro";
+
+export const prerender = true;
+
+const instructors = [
+  {
+    name: "OLA",
+    role: "Lektorka języka angielskiego i hiszpańskiego",
+    languages: ["angielski", "hiszpański"],
+    bio: "Stawia na swobodną komunikację i budowanie pewności siebie w mówieniu.",
+  },
+  {
+    name: "NATALIA",
+    role: "Lektorka języka hiszpańskiego",
+    languages: ["hiszpański"],
+    bio: "Dużo praktyki, autentyczne materiały i nauka słownictwa w kontekście.",
+  },
+  {
+    name: "MAŁGORZATA",
+    role: "Lektorka języka niemieckiego i szwedzkiego",
+    languages: ["niemiecki", "szwedzki"],
+    bio: "Porządna gramatyka, ale zawsze połączona z mówieniem i przykładami z życia.",
+  },
+  {
+    name: "MARCIN",
+    role: "Lektor języka angielskiego i francuskiego",
+    languages: ["angielski", "francuski"],
+    bio: "Zajęcia prowadzi dynamicznie, z naciskiem na słuchanie i konwersacje.",
+  },
+  {
+    name: "JANINA",
+    role: "Lektorka języka rosyjskiego",
+    languages: ["rosyjski"],
+    bio: "Uczy krok po kroku — od podstaw, w tempie dopasowanym do kursanta.",
+  },
+];
+---
+<BaseLayout title="Nasi lektorzy — Lingua Legionowo">
+  <section class="hero-bg">
+    <div class="container-site py-16">
+      <span class="kicker">Nasi lektorzy</span>
+      <h1 class="mt-6">Zespół Lingua</h1>
+      <p class="mt-6 max-w-3xl text-lg">
+        Poznaj osoby, które prowadzą zajęcia. Każdy lektor ma swój styl, ale łączy nas jedno: przyjazna atmosfera i skuteczna nauka.
+      </p>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-2">
+        {instructors.map((t) => (
+          <InstructorCard name={t.name} role={t.role} languages={t.languages} bio={t.bio} />
+        ))}
+      </div>
+
+      <div class="mt-10">
+        <a class="btn btn-secondary" href="/kontakt">Kontakt</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

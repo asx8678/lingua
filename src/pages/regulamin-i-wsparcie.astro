@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+export const prerender = true;
+---
+<BaseLayout title="Regulamin i wsparcie — Lingua Legionowo">
+  <section class="hero-bg relative overflow-hidden">
+    <div class="container-site py-16">
+      <span class="kicker">Dokument</span>
+      <h1 class="mt-6">Regulamin i wsparcie</h1>
+
+      <p class="mt-6 max-w-4xl text-lg">
+        Ten dokument jest przykładową treścią do uzupełnienia. W wersji produkcyjnej doprecyzuj zasady płatności, odwoływania zajęć,
+        zakres oferty oraz sposób kontaktu.
+      </p>
+
+      <div class="card mt-8 p-6">
+        <div class="prose prose-slate max-w-none">
+          <h2>1. Zajęcia</h2>
+          <ul>
+            <li>Zajęcia indywidualne: 45 lub 60 minut.</li>
+            <li>Zajęcia w grupie: w małych grupach (szczegóły w cenniku).</li>
+            <li>Poziom i program ustalane są na podstawie rozmowy i/lub krótkiej diagnozy.</li>
+          </ul>
+
+          <h2>2. Płatności</h2>
+          <p>Warunki płatności i rozliczeń ustalane są indywidualnie.</p>
+
+          <h2>3. Odwoływanie zajęć</h2>
+          <p>Wpisz tu zasady dotyczące odwoływania i przekładania terminów.</p>
+
+          <h2>4. Kontakt i wsparcie</h2>
+          <p>
+            E-mail:
+            <a href="mailto:lingualegionowo@gmail.com" class="font-extrabold text-primary no-underline">lingualegionowo@gmail.com</a><br />
+            Telefon:
+            <a href="tel:+48453209560" class="font-extrabold text-primary no-underline">+48 453 209 560</a>
+          </p>
+
+          <p class="text-sm text-slate-600">Ostatnia aktualizacja: 2025-12-19</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

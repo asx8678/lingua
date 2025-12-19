@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+export const prerender = true;
+---
+
+<BaseLayout title="Kontakt — Lingua Legionowo">
+  <section class="hero-bg">
+    <div class="container-site py-16 sm:py-20">
+      <span class="kicker">Kontakt</span>
+      <h1 class="mt-6">Skontaktuj się z nami</h1>
+      <p class="mt-6 max-w-3xl text-lg">
+        Najszybciej odpowiadamy mailowo. Możesz też zadzwonić — jeśli nie odbierzemy, oddzwonimy.
+      </p>
+
+      <div class="mt-10 grid gap-4 sm:grid-cols-2">
+        <a class="card p-6 no-underline" href="mailto:lingualegionowo@gmail.com">
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500">E-mail</div>
+          <div class="mt-3 text-base font-extrabold text-primary">lingualegionowo@gmail.com</div>
+          <p class="mt-2 text-sm">Napisz: język, poziom (jeśli znasz), cel i preferowane dni/godziny.</p>
+        </a>
+
+        <a class="card p-6 no-underline" href="tel:+48453209560">
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Telefon</div>
+          <div class="mt-3 text-base font-extrabold text-primary">+48 453 209 560</div>
+          <p class="mt-2 text-sm">Jeśli nie odbierzemy — oddzwonimy.</p>
+        </a>
+      </div>
+
+      <p class="mt-6 text-sm text-slate-500">Działamy w Legionowie.</p>
+    </div>
+  </section>
+</BaseLayout>

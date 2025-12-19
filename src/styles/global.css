@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply min-h-screen bg-white text-slate-900 antialiased;
+  }
+
+  ::selection {
+    background: rgba(0, 82, 204, 0.18);
+  }
+
+  p {
+    @apply text-slate-600;
+  }
+
+  a {
+    @apply underline-offset-4;
+  }
+
+  h1 {
+    @apply text-4xl font-extrabold tracking-tight sm:text-5xl;
+  }
+
+  h2 {
+    @apply text-3xl font-extrabold tracking-tight sm:text-4xl;
+  }
+
+  h3 {
+    @apply text-xl font-extrabold tracking-tight;
+  }
+
+  code {
+    @apply rounded bg-slate-100 px-1 py-0.5 text-[0.85em] text-slate-700;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-6xl px-6;
+  }
+
+  .section {
+    @apply py-16;
+  }
+
+  .section-muted {
+    @apply bg-surface;
+  }
+
+  .hero-bg {
+    background: linear-gradient(to bottom, #F7F9FC, #FFFFFF 55%);
+  }
+
+  .kicker {
+    @apply inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-bold transition;
+    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white shadow-sm;
+    @apply hover:bg-primary-700;
+  }
+
+  .btn-secondary {
+    @apply border border-primary/25 bg-white text-primary shadow-sm hover:bg-primary/5;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent text-slate-700 hover:bg-slate-100;
+  }
+
+  .card {
+    @apply rounded-2xl border border-slate-200 bg-white transition;
+  }
+
+  .card-muted {
+    @apply rounded-2xl border border-slate-200 bg-white;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-sm font-bold text-slate-700;
+  }
+
+  .notice {
+    @apply rounded-2xl border border-primary/25 bg-primary/5 p-4 text-slate-600;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-bold text-slate-700;
+  }
+
+  .stat-card {
+    @apply rounded-2xl border border-slate-200 bg-white/80 p-4;
+    @apply shadow-sm backdrop-blur;
+  }
+
+  .cta-panel {
+    @apply rounded-3xl border border-primary/15 bg-gradient-to-br from-primary/10 via-white to-white p-8;
+    @apply shadow-soft;
+  }
+
+  .link-muted {
+    @apply text-slate-600 hover:text-slate-900;
+  }
+}

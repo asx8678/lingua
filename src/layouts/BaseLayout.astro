@@ -1,0 +1,45 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const {
+  title = "Lingua — Szkoła Języków Obcych w Legionowie",
+  description = "Lingua Legionowo to kameralna szkoła językowa z pasją do nauczania. Kursy w małych grupach i indywidualnie, w przyjaznej atmosferze.",
+} = Astro.props;
+
+const currentPath = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0052CC" />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:site_name" content="Lingua" />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="icon" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <a
+      href="#content"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-6 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-primary focus:shadow-soft"
+    >
+      Przejdź do treści
+    </a>
+
+    <Header currentPath={currentPath} />
+    <main id="content" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

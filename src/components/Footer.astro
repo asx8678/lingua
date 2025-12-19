@@ -1,0 +1,55 @@
+---
+import Logo from "./Logo.astro";
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-slate-200 bg-slate-50">
+  <div class="container-site py-12">
+    <div class="grid gap-10 md:grid-cols-3">
+      <div>
+        <Logo />
+        <p class="mt-4 text-sm text-slate-600">
+          Szkoła Języków Obcych w Legionowie. Kursy w małych grupach i indywidualnie – w przyjaznej atmosferze.
+        </p>
+      </div>
+
+      <div aria-label="Linki">
+        <div class="text-sm font-extrabold text-slate-900">Strony</div>
+        <div class="mt-4 space-y-2 text-sm">
+          <a class="link-muted no-underline" href="/o-nas">O nas</a>
+          <a class="link-muted no-underline" href="/nasi-lektorzy">Lektorzy</a>
+          <a class="link-muted no-underline" href="/kontakt">Kontakt</a>
+
+          <details class="mt-4 rounded-xl border border-slate-200 bg-white p-3">
+            <summary class="cursor-pointer select-none text-sm font-extrabold text-slate-900">Cennik i zapisy</summary>
+            <div class="mt-3 space-y-2 text-sm">
+              <a class="link-muted no-underline" href="/cennik">Cennik 2025/2026</a>
+              <a class="link-muted no-underline" href="/cennik-lingua.pdf" download>Pobierz cennik (PDF)</a>
+              <a class="link-muted no-underline" href="/zapisy-2025-2026">Zapisy 2025/2026</a>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div aria-label="Kontakt i dokumenty">
+        <div class="text-sm font-extrabold text-slate-900">Kontakt</div>
+        <div class="mt-4 space-y-2 text-sm">
+          <a class="link-muted no-underline" href="mailto:lingualegionowo@gmail.com">lingualegionowo@gmail.com</a>
+          <a class="link-muted no-underline" href="tel:+48453209560">+48 453 209 560</a>
+        </div>
+
+        <div class="mt-6 border-t border-slate-200 pt-6">
+          <div class="text-sm font-extrabold text-slate-900">Dokumenty</div>
+          <div class="mt-4 space-y-2 text-sm">
+            <a class="link-muted no-underline" href="/regulamin-i-wsparcie">Regulamin i wsparcie</a>
+            <a class="link-muted no-underline" href="/polityka-prywatnosci">Polityka prywatności</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 border-t border-slate-200 pt-6 text-sm text-slate-500">
+      © {year} Lingua — Szkoła Języków Obcych. Wszelkie prawa zastrzeżone.
+    </div>
+  </div>
+</footer>

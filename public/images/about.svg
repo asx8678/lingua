@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="Trójka uczniów z książkami">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E6F0FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+
+  <!-- Ground -->
+  <path d="M0 640c200-80 360-40 520 0s320 40 680-40v200H0z" fill="#0052CC" opacity="0.06"/>
+
+  <!-- Student 1 -->
+  <circle cx="350" cy="330" r="58" fill="#F7D7C4"/>
+  <path d="M280 540c10-80 55-120 140-120s130 40 140 120" fill="#93C5FD"/>
+  <rect x="300" y="520" width="120" height="70" rx="12" fill="#ffffff" stroke="#0052CC" stroke-opacity="0.18"/>
+  <path d="M320 545h80" stroke="#0052CC" stroke-opacity="0.25" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Student 2 -->
+  <circle cx="600" cy="300" r="60" fill="#F2C9A0"/>
+  <path d="M520 540c10-90 60-140 160-140s150 50 160 140" fill="#A7F3D0"/>
+  <rect x="560" y="500" width="120" height="90" rx="12" fill="#ffffff" stroke="#0052CC" stroke-opacity="0.18"/>
+  <path d="M580 530h80" stroke="#0052CC" stroke-opacity="0.25" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Student 3 -->
+  <circle cx="850" cy="340" r="56" fill="#F7D7C4"/>
+  <path d="M780 540c10-80 55-120 140-120s130 40 140 120" fill="#FDE68A"/>
+  <rect x="810" y="520" width="120" height="70" rx="12" fill="#ffffff" stroke="#0052CC" stroke-opacity="0.18"/>
+  <path d="M830 545h80" stroke="#0052CC" stroke-opacity="0.25" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Accent -->
+  <circle cx="160" cy="200" r="90" fill="#0052CC" opacity="0.06"/>
+  <circle cx="1040" cy="220" r="110" fill="#0052CC" opacity="0.05"/>
+</svg>
