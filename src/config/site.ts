@@ -1,4 +1,4 @@
-export const SITE_URL = "https://angielskizdalnie.pl";
+export const SITE_URL = "https://lingualegionowo.pl";
 
 export const BRAND_NAME = "[TODO]";
 export const BRAND_TAGLINE = "Angielski online bez dojazdów";

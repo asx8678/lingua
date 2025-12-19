@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://angielskizdalnie.pl/sitemap-index.xml
+Sitemap: https://lingualegionowo.pl/sitemap-index.xml

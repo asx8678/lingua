@@ -4,7 +4,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://angielskizdalnie.pl",
+  site: "https://lingualegionowo.pl",
   output: "static",
   trailingSlash: "never",
   integrations: [tailwind({ applyBaseStyles: false }), sitemap()],
