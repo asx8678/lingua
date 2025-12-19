@@ -1,0 +1,200 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import CTASection from "../../components/CTASection.astro";
+import FaqSection from "../../components/FaqSection.astro";
+import { BRAND_NAME } from "../../config/site";
+
+const title = `Angielski Legionowo – kursy i lekcje języka angielskiego | ${BRAND_NAME}`;
+const description =
+  "Szukasz kursów angielskiego w Legionowie? Lingua oferuje profesjonalne lekcje stacjonarne i online. Zajęcia indywidualne i grupowe dla dorosłych i młodzieży. Umów lekcję próbną.";
+
+const benefits = [
+  {
+    title: "Lokalna szkoła w Legionowie",
+    text: "Znajdziesz nas w centrum Legionowa. Łatwy dojazd, dostępny parking. Bez dojazdów do Warszawy.",
+  },
+  {
+    title: "Doświadczeni lektorzy",
+    text: "Nasi nauczyciele to pasjonaci języka z wieloletnim doświadczeniem w nauczaniu.",
+  },
+  {
+    title: "Elastyczne godziny",
+    text: "Dopasowujemy terminy zajęć do Twojego grafiku — rano, po południu lub wieczorem.",
+  },
+  {
+    title: "Wszystkie poziomy",
+    text: "Od początkującego (A1) do zaawansowanego (C1). Każdy znajdzie odpowiedni kurs.",
+  },
+];
+
+const offers = [
+  {
+    title: "Lekcje stacjonarne",
+    text: "Zajęcia twarzą w twarz w naszej szkole w Legionowie. Indywidualne i grupowe.",
+    href: "/angielski-stacjonarnie",
+  },
+  {
+    title: "Lekcje online",
+    text: "Dla osób, które preferują naukę z domu lub nie mogą dojeżdżać.",
+    href: "/angielski-online",
+  },
+  {
+    title: "Kursy grupowe",
+    text: "Regularne zajęcia w małych grupach 2-6 osób na podobnym poziomie.",
+    href: "/angielski-stacjonarnie",
+  },
+  {
+    title: "Przygotowanie do egzaminów",
+    text: "Matura, FCE, CAE, IELTS — przygotujemy Cię do egzaminu.",
+    href: "/kontakt",
+  },
+];
+
+const faqs = [
+  {
+    question: "Gdzie mieści się szkoła Lingua w Legionowie?",
+    answer:
+      "Nasza szkoła znajduje się w centrum Legionowa, z łatwym dojazdem komunikacją miejską i dostępnym parkingiem. Dokładny adres podamy przy zapisie.",
+  },
+  {
+    question: "Jakie poziomy są dostępne?",
+    answer:
+      "Prowadzimy zajęcia na wszystkich poziomach: A1 (początkujący), A2, B1, B2 oraz C1 (zaawansowany).",
+  },
+  {
+    question: "Czy prowadzicie kursy dla firm w Legionowie?",
+    answer:
+      "Tak, oferujemy kursy Business English dla firm z Legionowa i okolic. Możemy prowadzić zajęcia w siedzibie firmy lub w naszej szkole.",
+  },
+  {
+    question: "Ile kosztują lekcje angielskiego w Legionowie?",
+    answer:
+      "Ceny zależą od formy zajęć. Lekcje grupowe od 40 zł/60min, mini-grupy od 60 zł/60min, zajęcia indywidualne od 100 zł/60min.",
+  },
+  {
+    question: "Czy mogę spróbować za darmo?",
+    answer:
+      "Tak, oferujemy bezpłatną lekcję próbną. To okazja, żeby poznać naszą metodę nauczania i ustalić plan nauki.",
+  },
+];
+---
+
+<MainLayout title={title} description={description}>
+  <section class="hero-bg">
+    <div class="container-site py-16 sm:py-20">
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div>
+          <span class="kicker">Angielski Legionowo</span>
+          <h1 class="mt-6">Kursy angielskiego w Legionowie — lokalna szkoła językowa</h1>
+          <p class="mt-6 max-w-2xl text-lg">
+            Lingua Legionowo to szkoła języka angielskiego dla mieszkańców Legionowa i okolic.
+            Oferujemy profesjonalne kursy stacjonarne i online dla wszystkich poziomów zaawansowania.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a class="btn btn-primary" href="/kontakt">Umów lekcję próbną</a>
+            <a class="btn btn-secondary" href="/cennik">Zobacz cennik</a>
+          </div>
+        </div>
+
+        <div class="relative">
+          <img
+            src="/images/hero.svg"
+            alt="Kursy angielskiego w Legionowie - Lingua"
+            loading="eager"
+            class="w-full rounded-3xl border border-slate-200 shadow-soft"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-site">
+      <h2>Dlaczego Lingua Legionowo?</h2>
+      <p class="mt-4 max-w-3xl">
+        Jesteśmy lokalną szkołą językową, która rozumie potrzeby mieszkańców Legionowa.
+        Bez dojazdów do Warszawy — ucz się blisko domu.
+      </p>
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        {benefits.map((item) => (
+          <div class="card p-6">
+            <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
+            <p class="mt-2 text-sm text-slate-600">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container-site">
+      <h2>Nasza oferta kursów angielskiego</h2>
+      <p class="mt-4 max-w-3xl">
+        Wybierz formę nauki dopasowaną do swoich potrzeb i możliwości czasowych.
+      </p>
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        {offers.map((item) => (
+          <a class="card p-6 no-underline transition hover:-translate-y-0.5" href={item.href}>
+            <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
+            <p class="mt-2 text-sm text-slate-600">{item.text}</p>
+            <span class="mt-4 inline-flex text-sm font-bold text-primary">Dowiedz się więcej →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-site">
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+        <div>
+          <h2>Dla kogo są nasze kursy?</h2>
+          <p class="mt-4">
+            Prowadzimy zajęcia dla różnych grup wiekowych i na różnych poziomach zaawansowania.
+          </p>
+          <ul class="mt-6 space-y-3">
+            <li class="flex items-start gap-3 text-sm text-slate-600">
+              <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary" aria-hidden="true"></span>
+              <span><strong>Dorośli</strong> — rozwijaj kompetencje językowe potrzebne w pracy</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-slate-600">
+              <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary" aria-hidden="true"></span>
+              <span><strong>Młodzież</strong> — przygotowanie do matury i egzaminów Cambridge</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-slate-600">
+              <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary" aria-hidden="true"></span>
+              <span><strong>Seniorzy</strong> — spokojne tempo, przyjazna atmosfera</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-slate-600">
+              <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary" aria-hidden="true"></span>
+              <span><strong>Firmy</strong> — kursy Business English dla zespołów</span>
+            </li>
+          </ul>
+        </div>
+        <div class="card p-6">
+          <h3 class="text-lg font-extrabold text-slate-900">Lokalizacja w Legionowie</h3>
+          <p class="mt-4 text-sm text-slate-600">
+            Nasza szkoła znajduje się w centrum Legionowa. Oferujemy:
+          </p>
+          <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
+            <li>Łatwy dojazd komunikacją miejską</li>
+            <li>Dostępny parking dla samochodów</li>
+            <li>Nowoczesne, klimatyzowane sale</li>
+            <li>Komfortowe warunki do nauki</li>
+          </ul>
+          <div class="mt-6">
+            <a class="btn btn-primary" href="/kontakt">Skontaktuj się z nami</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FaqSection title="Angielski w Legionowie — pytania i odpowiedzi" items={faqs} />
+
+  <CTASection
+    title="Zacznij naukę angielskiego w Legionowie"
+    description="Umów się na bezpłatną lekcję próbną i poznaj naszą szkołę. Znajdziesz nas w centrum Legionowa."
+    note="Odpowiadamy szybko — zwykle w ciągu 24h w dni robocze."
+  />
+</MainLayout>

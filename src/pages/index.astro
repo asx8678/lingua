@@ -3,37 +3,41 @@ import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
 import { BRAND_NAME } from "../config/site";
 
-const title = `Angielski online z lektorem – lekcja próbna | ${BRAND_NAME}`;
+const title = `Szkoła języka angielskiego w Legionowie – lekcje stacjonarne i online | ${BRAND_NAME}`;
 const description =
-  "Angielski online z lektorem: 1:1 i mini-grupy, nacisk na mówienie, elastyczny grafik. Umów lekcję próbną i zacznij mówić po angielsku.";
+  "Lingua Legionowo — szkoła języka angielskiego. Kursy stacjonarne z lektorem twarzą w twarz oraz zajęcia online. Lekcje indywidualne i grupowe dla wszystkich poziomów. Umów lekcję próbną.";
 
 const offerCards = [
   {
+    title: "Angielski stacjonarnie",
+    text: "Zajęcia twarzą w twarz z lektorem w Legionowie. Pełna koncentracja i bezpośredni kontakt.",
+    href: "/angielski-stacjonarnie",
+    featured: true,
+  },
+  {
+    title: "Kursy grupowe",
+    text: "Regularne zajęcia w małych grupach. Nauka z osobami na podobnym poziomie.",
+    href: "/angielski-stacjonarnie",
+    featured: false,
+  },
+  {
     title: "Angielski online",
-    text: "Zajęcia na żywo z lektorem, skupione na mówieniu i realnych sytuacjach.",
+    text: "Zajęcia zdalne dla osób, które nie mogą dojeżdżać. Elastyczne godziny.",
     href: "/angielski-online",
+    featured: false,
   },
   {
-    title: "Angielski zdalnie",
-    text: "Nauka z domu lub z podróży, bez dojazdów i z elastycznym grafikiem.",
-    href: "/angielski-zdalnie",
-  },
-  {
-    title: "Lekcje online",
-    text: "Lekcje 1:1 lub w mini-grupie, dopasowane do poziomu i celu.",
-    href: "/lekcje-angielskiego-online",
-  },
-  {
-    title: "Kurs online",
-    text: "Program krok po kroku: diagnoza, plan, materiały i regularny feedback.",
+    title: "Kurs intensywny",
+    text: "Szybkie rezultaty dzięki intensywnemu programowi nauki.",
     href: "/kurs-angielskiego-online",
+    featured: false,
   },
 ];
 
 const steps = [
   {
     title: "Rozmowa i diagnoza",
-    text: "Poznajemy Twój cel, poziom i preferowany rytm zajęć. Ustalamy priorytety.",
+    text: "Poznajemy Twój cel, poziom i preferowany tryb zajęć. Ustalamy priorytety.",
   },
   {
     title: "Plan nauki i materiały",
@@ -46,10 +50,25 @@ const steps = [
 ];
 
 const highlights = [
-  "Lekcje na żywo, bez nagrań",
+  "Zajęcia stacjonarne w Legionowie",
+  "Lekcje online dla osób z daleka",
   "Poziomy od A1 do C1",
-  "Konwersacje + gramatyka w praktyce",
-  "Regularny feedback i cele tygodniowe",
+  "Indywidualne podejście do każdego ucznia",
+];
+
+const whyStationary = [
+  {
+    title: "Bezpośredni kontakt",
+    text: "Lektor widzi Twoje reakcje i natychmiast reaguje na potrzeby.",
+  },
+  {
+    title: "Lepsza koncentracja",
+    text: "Dedykowana przestrzeń do nauki bez domowych rozpraszaczy.",
+  },
+  {
+    title: "Skuteczniejsza wymowa",
+    text: "Bezpośrednia korekta akcentu i intonacji.",
+  },
 ];
 ---
 
@@ -58,16 +77,16 @@ const highlights = [
     <div class="container-site py-16 sm:py-20">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
         <div>
-          <span class="kicker">Angielski online</span>
-          <h1 class="mt-6">Mów po angielsku pewnie – ucz się z lektorem online</h1>
+          <span class="kicker">Szkoła języka angielskiego</span>
+          <h1 class="mt-6">Kursy angielskiego w Legionowie — stacjonarnie i online</h1>
           <p class="mt-6 max-w-2xl text-lg">
-            Lekcje 1:1 i mini-grupy, elastyczne godziny i realne sytuacje językowe. Skupiamy się na mówieniu,
-            a nie na wypełnianiu ćwiczeń bez końca.
+            Ucz się angielskiego z doświadczonymi lektorami. Oferujemy zajęcia stacjonarne twarzą w twarz
+            oraz lekcje online dla osób z daleka. Indywidualne podejście i nacisk na praktyczne użycie języka.
           </p>
 
           <div class="mt-8 flex flex-wrap gap-3">
-            <a class="btn btn-primary" href="/kontakt">Lekcja próbna</a>
-            <a class="btn btn-secondary" href="/kontakt">Zapisz się</a>
+            <a class="btn btn-primary" href="/kontakt">Umów lekcję próbną</a>
+            <a class="btn btn-secondary" href="/angielski-stacjonarnie">Zajęcia stacjonarne</a>
           </div>
 
           <div class="mt-8 grid gap-3 text-sm text-slate-600 sm:grid-cols-2">
@@ -83,7 +102,7 @@ const highlights = [
         <div class="relative">
           <img
             src="/images/hero.svg"
-            alt="Lekcja angielskiego online"
+            alt="Szkoła języka angielskiego Lingua Legionowo"
             loading="eager"
             class="w-full rounded-3xl border border-slate-200 shadow-soft"
           />
@@ -94,10 +113,32 @@ const highlights = [
 
   <section class="section">
     <div class="container-site">
-      <h2>Jak wygląda nauka online?</h2>
+      <h2>Dlaczego warto uczyć się stacjonarnie?</h2>
       <p class="mt-4 max-w-3xl">
-        Uczysz się w rytmie dopasowanym do pracy i życia. Zamiast przypadkowych tematów masz jasny plan
-        i zajęcia skoncentrowane na Twoim celu.
+        Zajęcia twarzą w twarz z lektorem to sprawdzony sposób na efektywną naukę języka.
+        Bezpośredni kontakt zwiększa zaangażowanie i przyspiesza postępy.
+      </p>
+
+      <div class="mt-8 grid gap-6 lg:grid-cols-3">
+        {whyStationary.map((item) => (
+          <div class="card p-6">
+            <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
+            <p class="mt-3 text-sm">{item.text}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-8">
+        <a class="btn btn-secondary" href="/angielski-stacjonarnie">Poznaj zajęcia stacjonarne</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container-site">
+      <h2>Jak wygląda nauka w Lingua?</h2>
+      <p class="mt-4 max-w-3xl">
+        Niezależnie od wybranego trybu, otrzymujesz jasny plan nauki i wsparcie na każdym etapie.
       </p>
 
       <div class="mt-8 grid gap-6 lg:grid-cols-3">
@@ -115,16 +156,17 @@ const highlights = [
     </div>
   </section>
 
-  <section class="section section-muted">
+  <section class="section">
     <div class="container-site">
-      <h2>Wybierz ścieżkę dopasowaną do Ciebie</h2>
+      <h2>Wybierz formę nauki dopasowaną do Ciebie</h2>
       <p class="mt-4 max-w-3xl">
-        Każda strona oferty odpowiada innemu celowi: szybkie konwersacje, regularny kurs lub lekcje 1:1.
+        Oferujemy różne formaty zajęć — od intensywnych kursów stacjonarnych po elastyczne lekcje online.
       </p>
 
       <div class="mt-8 grid gap-6 md:grid-cols-2">
         {offerCards.map((card) => (
-          <a class="card p-6 no-underline transition hover:-translate-y-0.5" href={card.href}>
+          <a class={`card p-6 no-underline transition hover:-translate-y-0.5 ${card.featured ? 'ring-2 ring-primary' : ''}`} href={card.href}>
+            {card.featured && <span class="badge mb-3 bg-primary text-white">Polecane</span>}
             <h3 class="text-lg font-extrabold text-slate-900">{card.title}</h3>
             <p class="mt-3 text-sm text-slate-600">{card.text}</p>
             <span class="mt-4 inline-flex text-sm font-bold text-primary">Poznaj szczegóły →</span>
@@ -134,7 +176,7 @@ const highlights = [
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section-muted">
     <div class="container-site">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
         <div class="card p-6">
@@ -144,9 +186,9 @@ const highlights = [
             możesz zmienić tryb w trakcie współpracy.
           </p>
           <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
-            <li>1:1 — szybki postęp i pełna personalizacja.</li>
-            <li>Mini-grupa 2–4 osoby — więcej mówienia, niższa cena.</li>
-            <li>Intensywny kurs 8–12 tygodni — widoczne efekty w krótszym czasie.</li>
+            <li><strong>Zajęcia stacjonarne 1:1</strong> — pełna personalizacja i bezpośredni kontakt.</li>
+            <li><strong>Mini-grupa 2–4 osoby</strong> — więcej interakcji, niższa cena.</li>
+            <li><strong>Lekcje online</strong> — dla osób, które nie mogą dojeżdżać.</li>
           </ul>
           <div class="mt-6">
             <a class="btn btn-secondary" href="/cennik">Zobacz cennik</a>
@@ -154,18 +196,18 @@ const highlights = [
         </div>
 
         <div class="card p-6">
-          <h2 class="text-2xl font-extrabold tracking-tight">Co warto umówić na start</h2>
+          <h2 class="text-2xl font-extrabold tracking-tight">Zacznij od lekcji próbnej</h2>
           <p class="mt-4 text-sm">
-            Pierwsza lekcja to szybka diagnoza i plan na kolejne spotkania. Od razu dostajesz konkretne
-            wskazówki, nad czym pracować.
+            Pierwsza lekcja to szybka diagnoza poziomu i rozmowa o Twoich celach. Od razu dostajesz konkretne
+            wskazówki i plan nauki.
           </p>
           <div class="mt-6">
             <a class="btn btn-primary" href="/kontakt">Umów lekcję próbną</a>
           </div>
           <p class="mt-4 text-xs text-slate-500">
-            Chcesz dowiedzieć się więcej o kursie? Sprawdź także
-            <a class="font-bold text-primary no-underline hover:underline" href="/kurs-angielskiego-online">
-              kurs angielskiego online
+            Preferujesz naukę online? Sprawdź nasze
+            <a class="font-bold text-primary no-underline hover:underline" href="/angielski-online">
+              zajęcia zdalne
             </a>.
           </p>
         </div>
@@ -174,8 +216,8 @@ const highlights = [
   </section>
 
   <CTASection
-    title="Gotowy na angielski online dopasowany do Ciebie?"
-    description="Napisz kilka słów o swoim celu, a zaproponujemy plan nauki, formę zajęć i możliwe terminy."
-    note="Odpowiadamy szybko w dni robocze."
+    title="Gotowy na naukę angielskiego w Legionowie?"
+    description="Napisz do nas i umów się na bezpłatną lekcję próbną. Stacjonarnie lub online — dopasujemy formę do Twoich potrzeb."
+    note="Odpowiadamy szybko — zwykle w ciągu 24h w dni robocze."
   />
 </MainLayout>

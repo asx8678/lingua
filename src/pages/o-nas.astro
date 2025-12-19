@@ -3,9 +3,9 @@ import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
 import { BRAND_NAME } from "../config/site";
 
-const title = `O nas – angielski online | ${BRAND_NAME}`;
+const title = `O nas – szkoła języka angielskiego Legionowo | ${BRAND_NAME}`;
 const description =
-  "Poznaj zespół i podejście do nauki angielskiego online. Uczymy praktycznie, z naciskiem na mówienie.";
+  "Poznaj szkołę Lingua Legionowo. Kursy angielskiego stacjonarnie i online. Uczymy praktycznie, z naciskiem na mówienie i konwersacje.";
 
 const values = [
   {
@@ -25,7 +25,7 @@ const values = [
 const process = [
   "Diagnoza poziomu i celów",
   "Plan nauki i harmonogram",
-  "Lekcje online + materiały",
+  "Lekcje stacjonarne lub online",
   "Regularne podsumowania",
 ];
 ---
@@ -36,10 +36,11 @@ const process = [
       <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
         <div>
           <span class="kicker">O nas</span>
-          <h1 class="mt-6">Uczymy angielskiego online w praktyczny sposób</h1>
+          <h1 class="mt-6">Szkoła języka angielskiego w Legionowie</h1>
           <p class="mt-6 max-w-2xl text-lg">
-            {BRAND_NAME} to miejsce, w którym najważniejsze jest mówienie. Pomagamy kursantom przejść od pasywnego
-            rozumienia do swobodnej komunikacji w pracy i życiu codziennym.
+            {BRAND_NAME} to lokalna szkoła językowa, w której najważniejsze jest praktyczne użycie języka.
+            Oferujemy zajęcia stacjonarne w Legionowie oraz lekcje online dla osób z daleka.
+            Pomagamy kursantom przejść od pasywnego rozumienia do swobodnej komunikacji.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
             <a class="btn btn-primary" href="/kontakt">Porozmawiaj z nami</a>
@@ -85,7 +86,7 @@ const process = [
       </div>
 
       <div class="mt-8">
-        <a class="btn btn-secondary" href="/angielski-online">Sprawdź angielski online</a>
+        <a class="btn btn-secondary" href="/angielski-stacjonarnie">Zajęcia stacjonarne</a>
       </div>
     </div>
   </section>
@@ -94,10 +95,10 @@ const process = [
     <div class="container-site">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
         <div>
-          <h2>Nasza specjalizacja</h2>
+          <h2>Nasza oferta</h2>
           <p class="mt-4">
-            Skupiamy się na angielskim online, bo daje największą elastyczność. Dzięki temu możemy pracować
-            z kursantami z całej Polski i dopasować się do różnych harmonogramów.
+            Prowadzimy zajęcia stacjonarne w naszej szkole w Legionowie oraz lekcje online dla osób,
+            które preferują naukę zdalną. Dopasowujemy formę zajęć do Twoich potrzeb i możliwości.
           </p>
         </div>
         <div class="card p-6">
@@ -115,6 +116,6 @@ const process = [
 
   <CTASection
     title="Chcesz sprawdzić, czy to podejście jest dla Ciebie?"
-    description="Umów krótką konsultację i zobacz, jak wygląda plan nauki online."
+    description="Umów bezpłatną lekcję próbną w naszej szkole w Legionowie lub online."
   />
 </MainLayout>
