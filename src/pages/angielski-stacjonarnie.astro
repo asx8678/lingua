@@ -1,0 +1,225 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import CTASection from "../components/CTASection.astro";
+import FaqSection from "../components/FaqSection.astro";
+import { BRAND_NAME } from "../config/site";
+
+const title = `Angielski stacjonarnie w Legionowie – lekcje z lektorem | ${BRAND_NAME}`;
+const description =
+  "Kursy angielskiego stacjonarnie w Legionowie. Zajęcia indywidualne i grupowe z doświadczonymi lektorami. Nacisk na konwersacje i praktyczne użycie języka. Umów lekcję próbną.";
+
+const benefits = [
+  {
+    title: "Bezpośredni kontakt z lektorem",
+    text: "Lekcje twarzą w twarz pozwalają na pełniejszą komunikację, lepsze zrozumienie i szybsze reagowanie na Twoje potrzeby.",
+  },
+  {
+    title: "Profesjonalne warunki nauki",
+    text: "Nowoczesna sala wyposażona w materiały dydaktyczne, tablicę interaktywną i komfortowe miejsce do nauki.",
+  },
+  {
+    title: "Skuteczniejsza nauka wymowy",
+    text: "Bezpośredni kontakt pozwala lektorowi precyzyjnie korygować wymowę, intonację i akcent.",
+  },
+  {
+    title: "Większe zaangażowanie",
+    text: "Zajęcia stacjonarne sprzyjają koncentracji i budowaniu nawyku regularnej nauki.",
+  },
+];
+
+const formats = [
+  {
+    title: "Lekcje indywidualne 1:1",
+    text: "Pełna personalizacja programu. Tempo i tematy dopasowane wyłącznie do Ciebie.",
+    price: "od 100 zł / 60 min",
+  },
+  {
+    title: "Mini-grupy 2-4 osoby",
+    text: "Więcej interakcji i praktyki konwersacyjnej. Nauka z osobami na podobnym poziomie.",
+    price: "od 60 zł / 60 min",
+  },
+  {
+    title: "Kursy grupowe",
+    text: "Regularne zajęcia w ustalonej grupie. Struktura kursu i systematyczny postęp.",
+    price: "od 40 zł / 60 min",
+  },
+];
+
+const forWhom = [
+  "Osoby preferujące bezpośredni kontakt z nauczycielem",
+  "Uczniowie i studenci przygotowujący się do egzaminów",
+  "Dorośli chcący rozwinąć umiejętności konwersacyjne",
+  "Profesjonaliści potrzebujący Business English",
+  "Osoby rozpoczynające naukę od podstaw",
+  "Wszyscy, którzy cenią regularność i strukturę zajęć",
+];
+
+const faqs = [
+  {
+    question: "Gdzie odbywają się zajęcia stacjonarne?",
+    answer:
+      "Zajęcia odbywają się w naszej szkole w Legionowie. Dokładny adres i wskazówki dojazdu podajemy przy zapisie.",
+  },
+  {
+    question: "Jak wygląda pierwsza lekcja?",
+    answer:
+      "Pierwsza lekcja to diagnoza poziomu i rozmowa o Twoich celach. Na jej podstawie tworzymy indywidualny plan nauki.",
+  },
+  {
+    question: "Czy mogę zmienić tryb zajęć na online?",
+    answer:
+      "Tak. Oferujemy elastyczność — możesz w razie potrzeby przejść na zajęcia online lub łączyć oba tryby.",
+  },
+  {
+    question: "Jakie poziomy są dostępne?",
+    answer:
+      "Prowadzimy zajęcia na wszystkich poziomach: od A1 (początkujący) do C1 (zaawansowany).",
+  },
+  {
+    question: "Czy są dostępne zajęcia dla dzieci?",
+    answer:
+      "Tak, prowadzimy zajęcia dla różnych grup wiekowych, w tym dla dzieci i młodzieży.",
+  },
+  {
+    question: "Jak często odbywają się zajęcia?",
+    answer:
+      "Częstotliwość ustalamy indywidualnie. Najczęściej to 1-2 spotkania tygodniowo po 60 lub 90 minut.",
+  },
+  {
+    question: "Czy otrzymam materiały do nauki?",
+    answer:
+      "Tak. Zapewniamy materiały dydaktyczne, a po zajęciach wysyłamy podsumowanie i zadania domowe.",
+  },
+];
+---
+
+<MainLayout title={title} description={description}>
+  <section class="hero-bg">
+    <div class="container-site py-16 sm:py-20">
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div>
+          <span class="kicker">Angielski stacjonarnie</span>
+          <h1 class="mt-6">Kursy angielskiego w Legionowie — ucz się twarzą w twarz z lektorem</h1>
+          <p class="mt-6 max-w-2xl text-lg">
+            Bezpośredni kontakt z doświadczonym lektorem, profesjonalne warunki nauki i pełna koncentracja na Twoich celach.
+            Zajęcia indywidualne i grupowe dla wszystkich poziomów zaawansowania.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a class="btn btn-primary" href="/kontakt">Umów lekcję próbną</a>
+            <a class="btn btn-secondary" href="/cennik">Zobacz cennik</a>
+          </div>
+          <p class="mt-4 text-sm text-slate-500">
+            Nie możesz dojeżdżać? Sprawdź nasze
+            <a class="font-bold text-primary no-underline hover:underline" href="/angielski-online">lekcje online</a>.
+          </p>
+        </div>
+
+        <div class="relative">
+          <img
+            src="/images/hero.svg"
+            alt="Lekcja angielskiego stacjonarnie w Legionowie"
+            loading="eager"
+            class="w-full rounded-3xl border border-slate-200 shadow-soft"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-site">
+      <h2>Dlaczego warto uczyć się stacjonarnie?</h2>
+      <p class="mt-4 max-w-3xl">
+        Zajęcia twarzą w twarz to sprawdzony sposób nauki języka. Bezpośredni kontakt z lektorem
+        zwiększa efektywność i motywację do regularnej pracy.
+      </p>
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        {benefits.map((item) => (
+          <div class="card p-6">
+            <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
+            <p class="mt-2 text-sm text-slate-600">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container-site">
+      <h2>Formy zajęć stacjonarnych</h2>
+      <p class="mt-4 max-w-3xl">
+        Wybierz format nauki dopasowany do Twoich potrzeb, czasu i budżetu.
+      </p>
+      <div class="mt-8 grid gap-6 lg:grid-cols-3">
+        {formats.map((item) => (
+          <div class="card p-6">
+            <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
+            <p class="mt-2 text-sm text-slate-600">{item.text}</p>
+            <p class="mt-4 text-sm font-bold text-primary">{item.price}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 text-center">
+        <a class="btn btn-primary" href="/kontakt">Zapisz się na kurs</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-site">
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+        <div>
+          <h2>Dla kogo są zajęcia stacjonarne?</h2>
+          <p class="mt-4">
+            Nasze kursy stacjonarne są idealne dla osób, które cenią bezpośredni kontakt
+            z nauczycielem i strukturę tradycyjnych zajęć.
+          </p>
+          <ul class="mt-6 space-y-3">
+            {forWhom.map((item) => (
+              <li class="flex items-start gap-3 text-sm text-slate-600">
+                <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary" aria-hidden="true"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="card p-6">
+          <h3 class="text-lg font-extrabold text-slate-900">Jak wygląda typowa lekcja?</h3>
+          <ol class="mt-4 list-decimal space-y-3 pl-5 text-sm text-slate-600">
+            <li><strong>Rozgrzewka konwersacyjna</strong> — krótka rozmowa na rozluźnienie</li>
+            <li><strong>Wprowadzenie tematu</strong> — nowe słownictwo i struktury</li>
+            <li><strong>Praktyka</strong> — ćwiczenia, dialogi, scenki</li>
+            <li><strong>Feedback</strong> — omówienie błędów i wskazówki</li>
+            <li><strong>Podsumowanie</strong> — zadanie domowe i plan na kolejne zajęcia</li>
+          </ol>
+          <div class="mt-6">
+            <a class="btn btn-secondary" href="/kontakt">Umów się na lekcję próbną</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container-site">
+      <div class="card p-8 text-center">
+        <h2 class="text-2xl font-extrabold">Nasza lokalizacja</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-slate-600">
+          Szkoła Lingua znajduje się w centrum Legionowa, z łatwym dojazdem komunikacją miejską i dostępnym parkingiem.
+          Dokładny adres i wskazówki dojazdu przekażemy przy zapisie.
+        </p>
+        <div class="mt-6">
+          <a class="btn btn-primary" href="/kontakt">Skontaktuj się z nami</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FaqSection title="Angielski stacjonarnie — pytania i odpowiedzi" items={faqs} />
+
+  <CTASection
+    title="Gotowy na naukę angielskiego w Legionowie?"
+    description="Umów się na bezpłatną lekcję próbną. Poznasz naszą metodę nauczania i ustalisz indywidualny plan nauki."
+    note="Odpowiadamy szybko — zwykle w ciągu 24h w dni robocze."
+  />
+</MainLayout>

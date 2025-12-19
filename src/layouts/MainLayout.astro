@@ -33,12 +33,45 @@ const canonicalUrl = canonical?.startsWith("http")
 const orgJsonLd = {
   "@context": "https://schema.org",
   "@type": "EducationalOrganization",
+  "@id": `${SITE_URL}/#organization`,
   name: BRAND_NAME,
+  alternateName: ["Lingua Legionowo", "Angielski Legionowo"],
   url: SITE_URL,
-  email: CONTACT_EMAIL,
-  telephone: CONTACT_PHONE,
-  address: isTodo(BUSINESS_ADDRESS) ? undefined : BUSINESS_ADDRESS,
-  areaServed: "PL",
+  email: isTodo(CONTACT_EMAIL) ? undefined : CONTACT_EMAIL,
+  telephone: isTodo(CONTACT_PHONE) ? undefined : CONTACT_PHONE,
+  address: isTodo(BUSINESS_ADDRESS) ? undefined : {
+    "@type": "PostalAddress",
+    addressLocality: "Legionowo",
+    addressCountry: "PL",
+  },
+  areaServed: {
+    "@type": "City",
+    name: "Legionowo",
+  },
+  description: "Szkoła języka angielskiego w Legionowie. Kursy stacjonarne i online dla wszystkich poziomów.",
+  priceRange: "$$",
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Kursy angielskiego",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Course",
+          name: "Angielski stacjonarnie",
+          description: "Zajęcia twarzą w twarz z lektorem w Legionowie",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Course",
+          name: "Angielski online",
+          description: "Lekcje zdalne przez internet",
+        },
+      },
+    ],
+  },
 };
 
 const websiteJsonLd = {
