@@ -2,7 +2,7 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
 import FaqSection from "../components/FaqSection.astro";
-import { BRAND_NAME } from "../config/site";
+import { BRAND_NAME, BUSINESS_ADDRESS } from "../config/site";
 
 const title = `Angielski stacjonarnie w Legionowie – lekcje z lektorem | ${BRAND_NAME}`;
 const description =
@@ -58,7 +58,7 @@ const faqs = [
   {
     question: "Gdzie odbywają się zajęcia stacjonarne?",
     answer:
-      "Zajęcia odbywają się w naszej szkole w Legionowie. Dokładny adres i wskazówki dojazdu podajemy przy zapisie.",
+      "Zajęcia odbywają się w naszej szkole w Legionowie pod adresem: Mikołaja Kopernika 9/lok. 5, 05-120 Legionowo. Łatwy dojazd komunikacją miejską, parking dostępny w okolicy.",
   },
   {
     question: "Jak wygląda pierwsza lekcja?",
@@ -205,11 +205,21 @@ const faqs = [
       <div class="card p-8 text-center">
         <h2 class="text-2xl font-extrabold">Nasza lokalizacja</h2>
         <p class="mx-auto mt-4 max-w-2xl text-slate-600">
-          Szkoła Lingua znajduje się w centrum Legionowa, z łatwym dojazdem komunikacją miejską i dostępnym parkingiem.
-          Dokładny adres i wskazówki dojazdu przekażemy przy zapisie.
+          Szkoła Lingua znajduje się w centrum Legionowa, z łatwym dojazdem komunikacją miejską i dostępnym parkingiem w okolicy.
         </p>
-        <div class="mt-6">
+        <p class="mx-auto mt-2 text-lg font-bold text-slate-900">
+          {BUSINESS_ADDRESS}
+        </p>
+        <div class="mt-6 flex flex-wrap justify-center gap-3">
           <a class="btn btn-primary" href="/kontakt">Skontaktuj się z nami</a>
+          <a
+            class="btn btn-secondary"
+            href="https://www.google.com/maps/search/?api=1&query=Miko%C5%82aja+Kopernika+9%2C+05-120+Legionowo"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Zobacz na mapie
+          </a>
         </div>
       </div>
     </div>

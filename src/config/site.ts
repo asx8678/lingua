@@ -3,9 +3,9 @@ export const SITE_URL = "https://lingualegionowo.pl";
 export const BRAND_NAME = "Lingua Legionowo";
 export const BRAND_TAGLINE = "Szkoła języka angielskiego w Legionowie";
 
-export const CONTACT_EMAIL = "[TODO]";
-export const CONTACT_PHONE = "[TODO]";
-export const BUSINESS_ADDRESS = "Legionowo";
+export const CONTACT_EMAIL = "lingualegionowo@gmail.com";
+export const CONTACT_PHONE = "+48 453 209 560";
+export const BUSINESS_ADDRESS = "Mikołaja Kopernika 9/lok. 5, 05-120 Legionowo";
 
 export const OG_IMAGE = "/images/og-lingua.jpg";
 
