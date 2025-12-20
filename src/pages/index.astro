@@ -1,10 +1,8 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
-import TeacherCard from "../components/TeacherCard.astro";
-import { teachers } from "../data/teachers";
-import { subjects, taughtLanguages } from "../data/subjects";
-import { BRAND_NAME } from "../config/site";
+import { taughtLanguages } from "../data/subjects";
+import { BRAND_NAME, CTA_PRIMARY_HREF } from "../config/site";
 
 const languagesList = new Intl.ListFormat("pl", {
   style: "long",
@@ -16,31 +14,17 @@ const description =
   `Lingua Legionowo — szkoła języków obcych i matematyki. Uczymy ${languagesList} i prowadzimy zajęcia ` +
   "z matematyki stacjonarnie w Legionowie oraz online.";
 
-const previewTeachers = teachers.slice(0, 4);
-
 const offerCards = [
   {
-    title: "Zajęcia stacjonarne",
-    text: "Zajęcia twarzą w twarz z lektorem w Legionowie. Pełna koncentracja i bezpośredni kontakt.",
+    title: "Angielski stacjonarnie",
+    text: "Zajęcia twarzą w twarz w Legionowie. Bezpośredni kontakt i pełna koncentracja.",
     href: "/angielski-stacjonarnie",
     featured: true,
   },
   {
-    title: "Kursy grupowe",
-    text: "Regularne zajęcia w małych grupach. Nauka z osobami na podobnym poziomie.",
-    href: "/angielski-stacjonarnie",
-    featured: false,
-  },
-  {
-    title: "Zajęcia online",
-    text: "Zajęcia zdalne dla osób, które nie mogą dojeżdżać. Elastyczne godziny.",
+    title: "Angielski online",
+    text: "Lekcje zdalne z lektorem na żywo. Elastyczne godziny i nacisk na mówienie.",
     href: "/angielski-online",
-    featured: false,
-  },
-  {
-    title: "Kurs intensywny",
-    text: "Szybkie rezultaty dzięki intensywnemu programowi nauki.",
-    href: "/kurs-angielskiego-online",
     featured: false,
   },
 ];
@@ -62,25 +46,11 @@ const steps = [
 
 const highlights = [
   "Zajęcia stacjonarne w Legionowie",
-  "Lekcje online dla osób z daleka",
+  "Lekcje online dopasowane do grafiku",
   "Poziomy od A1 do C1",
-  "Indywidualne podejście do każdego ucznia",
 ];
 
-const whyStationary = [
-  {
-    title: "Bezpośredni kontakt",
-    text: "Lektor widzi Twoje reakcje i natychmiast reaguje na potrzeby.",
-  },
-  {
-    title: "Lepsza koncentracja",
-    text: "Dedykowana przestrzeń do nauki bez domowych rozpraszaczy.",
-  },
-  {
-    title: "Skuteczniejsza wymowa",
-    text: "Bezpośrednia korekta akcentu i intonacji.",
-  },
-];
+const subjectChips = ["Angielski", "Inne języki", "Matematyka"];
 ---
 
 <MainLayout title={title} description={description}>
@@ -96,8 +66,7 @@ const whyStationary = [
           </p>
 
           <div class="mt-8 flex flex-wrap gap-3">
-            <a class="btn btn-primary" href="/kontakt">Umów lekcję próbną</a>
-            <a class="btn btn-secondary" href="/angielski-stacjonarnie">Zajęcia stacjonarne</a>
+            <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>Umów lekcję próbną</a>
           </div>
 
           <div class="mt-8 grid gap-3 text-sm text-slate-600 sm:grid-cols-2">
@@ -127,68 +96,26 @@ const whyStationary = [
       <span class="kicker">Czego uczymy</span>
       <h2 class="mt-6">Języki obce i matematyka w jednym miejscu</h2>
       <p class="mt-4 max-w-3xl">
-        Uczymy w małych grupach i indywidualnie, stacjonarnie w Legionowie lub online. Poniżej znajdziesz
-        aktualną listę przedmiotów prowadzonych przez naszych lektorów.
+        Uczymy w małych grupach i indywidualnie, stacjonarnie w Legionowie lub online. Najczęściej wybierane
+        ścieżki znajdziesz poniżej, a pełną ofertę w osobnej zakładce.
       </p>
 
       <div class="mt-6 flex flex-wrap gap-2">
-        {subjects.map((subject) => (
+        {subjectChips.map((subject) => (
           <span class="chip text-sm">{subject}</span>
         ))}
       </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container-site">
-      <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-        <div>
-          <span class="kicker">Nasi lektorzy</span>
-          <h2 class="mt-6">Poznaj zespół, który prowadzi zajęcia</h2>
-          <p class="mt-4 max-w-3xl">
-            Doświadczeni lektorzy języków obcych i matematyki prowadzą zajęcia dopasowane do Twojego poziomu
-            i celu. Zobacz wybrane osoby z naszego zespołu.
-          </p>
-        </div>
-        <div class="mt-6 lg:mt-0">
-          <a class="btn btn-secondary" href="/nasi-lektorzy">Zobacz wszystkich</a>
-        </div>
-      </div>
-
-      <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {previewTeachers.map((teacher, index) => (
-          <TeacherCard teacher={teacher} loading={index === 0 ? "eager" : "lazy"} />
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container-site">
-      <h2>Dlaczego warto uczyć się stacjonarnie?</h2>
-      <p class="mt-4 max-w-3xl">
-        Zajęcia twarzą w twarz z lektorem to sprawdzony sposób na efektywną naukę języka.
-        Bezpośredni kontakt zwiększa zaangażowanie i przyspiesza postępy.
-      </p>
-
-      <div class="mt-8 grid gap-6 lg:grid-cols-3">
-        {whyStationary.map((item) => (
-          <div class="card p-6">
-            <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
-            <p class="mt-3 text-sm">{item.text}</p>
-          </div>
-        ))}
-      </div>
-
-      <div class="mt-8">
-        <a class="btn btn-secondary" href="/angielski-stacjonarnie">Poznaj zajęcia stacjonarne</a>
+      <div class="mt-6">
+        <a class="text-sm font-bold text-primary no-underline hover:underline" href="/oferta">
+          Zobacz pełną ofertę →
+        </a>
       </div>
     </div>
   </section>
 
   <section class="section section-muted">
     <div class="container-site">
-      <h2>Jak wygląda nauka w Lingua?</h2>
+      <h2>Jak pracujemy</h2>
       <p class="mt-4 max-w-3xl">
         Niezależnie od wybranego trybu, otrzymujesz jasny plan nauki i wsparcie na każdym etapie.
       </p>
@@ -203,7 +130,7 @@ const whyStationary = [
       </div>
 
       <div class="mt-8">
-        <a class="btn btn-secondary" href="/kontakt">Porozmawiaj o planie nauki</a>
+        <a class="btn btn-secondary" href="/kontakt#formularz">Porozmawiaj o planie nauki</a>
       </div>
     </div>
   </section>
@@ -212,7 +139,8 @@ const whyStationary = [
     <div class="container-site">
       <h2>Wybierz formę nauki dopasowaną do Ciebie</h2>
       <p class="mt-4 max-w-3xl">
-        Oferujemy różne formaty zajęć — od intensywnych kursów stacjonarnych po elastyczne lekcje online.
+        Dwie główne ścieżki to zajęcia stacjonarne w Legionowie i lekcje online. Pozostałe języki i matematyka
+        są opisane w ofercie.
       </p>
 
       <div class="mt-8 grid gap-6 md:grid-cols-2">
@@ -225,44 +153,8 @@ const whyStationary = [
           </a>
         ))}
       </div>
-    </div>
-  </section>
-
-  <section class="section section-muted">
-    <div class="container-site">
-      <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
-        <div class="card p-6">
-          <h2 class="text-2xl font-extrabold tracking-tight">Najczęściej wybierane formaty</h2>
-          <p class="mt-4 text-sm">
-            Zamiast jednego sztywnego programu dobierasz format do celu i czasu. W razie potrzeby
-            możesz zmienić tryb w trakcie współpracy.
-          </p>
-          <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
-            <li><strong>Zajęcia stacjonarne 1:1</strong> — pełna personalizacja i bezpośredni kontakt.</li>
-            <li><strong>Mini-grupa 2–4 osoby</strong> — więcej interakcji, niższa cena.</li>
-            <li><strong>Lekcje online</strong> — dla osób, które nie mogą dojeżdżać.</li>
-          </ul>
-          <div class="mt-6">
-            <a class="btn btn-secondary" href="/cennik">Zobacz cennik</a>
-          </div>
-        </div>
-
-        <div class="card p-6">
-          <h2 class="text-2xl font-extrabold tracking-tight">Zacznij od lekcji próbnej</h2>
-          <p class="mt-4 text-sm">
-            Pierwsza lekcja to szybka diagnoza poziomu i rozmowa o Twoich celach. Od razu dostajesz konkretne
-            wskazówki i plan nauki.
-          </p>
-          <div class="mt-6">
-            <a class="btn btn-primary" href="/kontakt">Umów lekcję próbną</a>
-          </div>
-          <p class="mt-4 text-xs text-slate-500">
-            Preferujesz naukę online? Sprawdź nasze
-            <a class="font-bold text-primary no-underline hover:underline" href="/angielski-online">
-              zajęcia zdalne
-            </a>.
-          </p>
-        </div>
+      <div class="mt-8">
+        <a class="btn btn-secondary" href="/oferta">Zobacz pełną ofertę</a>
       </div>
     </div>
   </section>
@@ -271,5 +163,6 @@ const whyStationary = [
     title="Gotowy na naukę języków obcych lub matematyki w Legionowie?"
     description="Napisz do nas i umów się na bezpłatną lekcję próbną. Stacjonarnie lub online — dopasujemy program do Twoich potrzeb."
     note="Odpowiadamy szybko — zwykle w ciągu 24h w dni robocze."
+    secondaryLabel={null}
   />
 </MainLayout>

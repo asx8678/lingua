@@ -15,7 +15,7 @@ const canonicalUrl = canonical?.startsWith("http")
   ? canonical
   : new URL(canonical ?? Astro.url.pathname, SITE_URL).toString();
 
-const resolvedImage = ogImage && ogImage !== "[TODO]"
+const resolvedImage = ogImage
   ? (ogImage.startsWith("http") ? ogImage : new URL(ogImage, SITE_URL).toString())
   : null;
 

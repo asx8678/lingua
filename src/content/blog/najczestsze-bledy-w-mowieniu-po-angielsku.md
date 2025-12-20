@@ -30,7 +30,7 @@ Największy błąd to brak praktyki. Nawet 10 minut rozmowy dziennie daje zauwa�
   <h3>Chcesz poprawić płynność mówienia?</h3>
   <p>Na lekcjach online szybko wyłapiemy błędy i przełożymy je na praktykę.</p>
   <div class="mt-4 flex flex-wrap gap-3">
-    <a class="btn btn-primary" href="/kurs-angielskiego-online">Kurs angielskiego online</a>
+    <a class="btn btn-primary" href="/angielski-online#kurs">Kurs angielskiego online</a>
     <a class="btn btn-secondary" href="/kontakt">Skontaktuj się</a>
   </div>
 </div>

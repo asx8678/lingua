@@ -30,7 +30,7 @@ Próbne spotkanie pozwala sprawdzić, czy tempo i styl pracy Ci odpowiadają. To
   <h3>Chcesz sprawdzić lekcję próbną?</h3>
   <p>Sprawdź kurs i porozmawiaj z lektorem o swoim celu.</p>
   <div class="mt-4 flex flex-wrap gap-3">
-    <a class="btn btn-primary" href="/kurs-angielskiego-online">Kurs angielskiego online</a>
+    <a class="btn btn-primary" href="/angielski-online#kurs">Kurs angielskiego online</a>
     <a class="btn btn-secondary" href="/kontakt">Skontaktuj się</a>
   </div>
 </div>

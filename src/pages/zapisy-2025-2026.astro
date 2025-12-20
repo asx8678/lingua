@@ -1,0 +1,138 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import { BRAND_NAME } from "../config/site";
+
+const title = `Zapisy 2025/2026 – ${BRAND_NAME}`;
+const description =
+  "Formularz zapisów na zajęcia w roku 2025/2026. Wybierz preferowany tryb, poziom i zostaw dane kontaktowe.";
+---
+
+<MainLayout title={title} description={description}>
+  <section class="hero-bg">
+    <div class="container-site py-16 sm:py-20">
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+        <div>
+          <span class="kicker">Zapisy 2025/2026</span>
+          <h1 class="mt-6">Zapisz się na zajęcia w roku 2025/2026</h1>
+          <p class="mt-6 max-w-2xl text-lg">
+            Wypełnij formularz, a wrócimy z propozycją terminu i planu nauki. Zajęcia prowadzimy stacjonarnie
+            w Legionowie oraz online.
+          </p>
+          <ul class="mt-6 space-y-2 text-sm text-slate-600">
+            <li>Odezwę się z propozycją terminu w ciągu 1–2 dni roboczych.</li>
+            <li>Ustalimy poziom, cel i preferowany tryb zajęć.</li>
+            <li>Dobierzemy plan i zaproponujemy pakiet spotkań.</li>
+          </ul>
+        </div>
+
+        <div class="card p-6">
+          <h2 class="text-lg font-extrabold text-slate-900">Formularz zapisów</h2>
+          <p class="mt-2 text-sm text-slate-600">Pola oznaczone * są wymagane.</p>
+
+          <form
+            method="post"
+            action="/api/zapisy"
+            class="mt-6 space-y-4"
+            aria-label="Formularz zapisów na zajęcia"
+          >
+            <div>
+              <label for="name" class="text-sm font-bold text-slate-900">Imię i nazwisko *</label>
+              <input
+                id="name"
+                name="name"
+                autocomplete="name"
+                required
+                class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+              />
+            </div>
+
+            <div>
+              <label for="email" class="text-sm font-bold text-slate-900">E-mail *</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+                class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+              />
+            </div>
+
+            <div>
+              <label for="phone" class="text-sm font-bold text-slate-900">Telefon (opcjonalnie)</label>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                autocomplete="tel"
+                class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+              />
+            </div>
+
+            <div>
+              <label for="mode" class="text-sm font-bold text-slate-900">Preferowany tryb *</label>
+              <select
+                id="mode"
+                name="mode"
+                required
+                class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+              >
+                <option value="">Wybierz</option>
+                <option value="stacjonarnie">Stacjonarnie (Legionowo)</option>
+                <option value="online">Online</option>
+                <option value="inne">Inne języki / matematyka</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="level" class="text-sm font-bold text-slate-900">Poziom lub cel *</label>
+              <input
+                id="level"
+                name="level"
+                required
+                class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+                placeholder="Np. A2/B1, konwersacje, matura"
+              />
+            </div>
+
+            <div>
+              <label for="availability" class="text-sm font-bold text-slate-900">Preferowane dni/godziny</label>
+              <input
+                id="availability"
+                name="availability"
+                class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+                placeholder="Np. wt/pt po 18:00"
+              />
+            </div>
+
+            <div>
+              <label for="message" class="text-sm font-bold text-slate-900">Dodatkowe informacje</label>
+              <textarea
+                id="message"
+                name="message"
+                class="mt-1 min-h-[120px] w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+                placeholder="Np. cele, preferowany format, liczba osób"
+              ></textarea>
+            </div>
+
+            <div class="flex items-start gap-3 text-sm text-slate-600">
+              <input
+                id="consent"
+                name="consent"
+                type="checkbox"
+                required
+                class="mt-1 h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary"
+              />
+              <label for="consent">
+                Wyrażam zgodę na kontakt w sprawie zapisów zgodnie z
+                <a class="font-bold text-primary no-underline hover:underline" href="/privacy">polityką prywatności</a>.
+              </label>
+            </div>
+
+            <button class="btn btn-primary w-full" type="submit">Wyślij zgłoszenie</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>

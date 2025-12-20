@@ -31,7 +31,7 @@ Najlepiej spróbować lekcji próbnej online i ocenić, czy taka forma odpowiada
   <h3>Chcesz sprawdzić naukę online?</h3>
   <p>Umów próbne zajęcia i porównaj z własnym doświadczeniem.</p>
   <div class="mt-4 flex flex-wrap gap-3">
-    <a class="btn btn-primary" href="/kurs-angielskiego-online">Kurs angielskiego online</a>
+    <a class="btn btn-primary" href="/angielski-online#kurs">Kurs angielskiego online</a>
     <a class="btn btn-secondary" href="/kontakt">Skontaktuj się</a>
   </div>
 </div>

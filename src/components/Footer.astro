@@ -7,6 +7,7 @@ const year = new Date().getFullYear();
 
 const hasEmail = !isTodo(CONTACT_EMAIL);
 const hasPhone = !isTodo(CONTACT_PHONE);
+const contactFormHref = "/kontakt#formularz";
 ---
 
 <footer class="border-t border-slate-200 bg-slate-50">
@@ -24,8 +25,8 @@ const hasPhone = !isTodo(CONTACT_PHONE);
         <div class="mt-4 space-y-2 text-sm">
           <a class="link-muted no-underline" href="/angielski-stacjonarnie">Angielski stacjonarnie</a>
           <a class="link-muted no-underline" href="/angielski-online">Angielski online</a>
-          <a class="link-muted no-underline" href="/lekcje-angielskiego-online">Lekcje indywidualne</a>
-          <a class="link-muted no-underline" href="/kurs-angielskiego-online">Kursy grupowe</a>
+          <a class="link-muted no-underline" href="/angielski-online#lekcje">Lekcje indywidualne</a>
+          <a class="link-muted no-underline" href="/angielski-online#kurs">Kursy grupowe</a>
         </div>
       </div>
 
@@ -54,12 +55,12 @@ const hasPhone = !isTodo(CONTACT_PHONE);
             {hasEmail ? (
               <a class="link-muted no-underline" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
             ) : (
-              <span class="text-slate-600">{CONTACT_EMAIL}</span>
+              <a class="link-muted no-underline" href={contactFormHref}>Formularz kontaktowy</a>
             )}
             {hasPhone ? (
               <a class="link-muted no-underline" href={`tel:${CONTACT_PHONE}`}>{CONTACT_PHONE}</a>
             ) : (
-              <span class="text-slate-600">{CONTACT_PHONE}</span>
+              <span class="text-slate-600">Oddzwonimy po zgłoszeniu</span>
             )}
             <a class="link-muted no-underline" href="/privacy">Polityka prywatności</a>
           </div>

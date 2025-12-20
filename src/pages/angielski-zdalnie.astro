@@ -4,62 +4,91 @@ import CTASection from "../components/CTASection.astro";
 import FaqSection from "../components/FaqSection.astro";
 import { BRAND_NAME } from "../config/site";
 
-const title = `Angielski zdalnie – ucz się z domu | ${BRAND_NAME}`;
+const title = `Angielski zdalnie – lekcje online z lektorem | ${BRAND_NAME}`;
 const description =
-  "Lekcje angielskiego zdalnie dopasowane do poziomu. Elastyczne godziny. Zapisz się na lekcję próbną.";
+  "Lekcje angielskiego zdalnie przez internet. Zajęcia 1:1 i grupowe z doświadczonym lektorem. Elastyczne godziny, bez dojazdów. Umów lekcję próbną online.";
 
-const reasons = [
+const benefits = [
   {
-    title: "Zero dojazdów",
-    text: "Uczysz się z domu, biura lub w podróży. Oszczędzasz czas i łatwiej trzymasz regularność.",
+    title: "Nauka z dowolnego miejsca",
+    text: "Uczysz się z domu, biura lub w podróży. Wystarczy komputer i internet.",
   },
   {
-    title: "Elastyczny grafik",
-    text: "Łatwiej znaleźć stały termin lub dostosować go do zmian w pracy i życiu.",
+    title: "Elastyczne godziny",
+    text: "Dopasowujemy terminy do Twojego grafiku. Rano, w przerwie obiadowej lub wieczorem.",
   },
   {
-    title: "Sprawdzony rytm",
-    text: "Spotkania online są krótsze, konkretne i skupione na mówieniu.",
+    title: "Oszczędność czasu",
+    text: "Zero dojazdów oznacza więcej czasu na naukę i inne obowiązki.",
+  },
+  {
+    title: "Taki sam poziom jak stacjonarnie",
+    text: "Lekcje online są równie skuteczne. Ten sam program, ten sam lektor, te same rezultaty.",
   },
 ];
 
-const routine = [
-  "Szybka rozgrzewka konwersacyjna na start.",
-  "Ćwiczenie słownictwa w praktycznych kontekstach.",
-  "Poprawa wymowy i intonacji w trakcie rozmowy.",
-  "Notatka po lekcji z priorytetami na kolejne spotkanie.",
+const howItWorks = [
+  {
+    step: "1",
+    title: "Umów lekcję próbną",
+    text: "Napisz do nas i ustal termin bezpłatnej lekcji próbnej online.",
+  },
+  {
+    step: "2",
+    title: "Diagnoza i plan",
+    text: "Sprawdzimy Twój poziom i ustalimy cele. Otrzymasz indywidualny plan nauki.",
+  },
+  {
+    step: "3",
+    title: "Regularne spotkania",
+    text: "Spotykamy się online w ustalonych terminach. Pracujemy nad Twoimi celami.",
+  },
+  {
+    step: "4",
+    title: "Widzisz postępy",
+    text: "Regularny feedback i materiały po lekcji pomagają utrwalić wiedzę.",
+  },
+];
+
+const forWhom = [
+  "Zapracowani profesjonaliści bez czasu na dojazdy",
+  "Rodzice małych dzieci uczący się z domu",
+  "Osoby mieszkające daleko od szkół językowych",
+  "Studenci szukający elastycznych godzin",
+  "Osoby często podróżujące służbowo",
+  "Wszyscy preferujący naukę z domu",
 ];
 
 const faqs = [
   {
-    question: "Czy muszę mieć kamerę włączoną?",
+    question: "Jakich narzędzi używacie do lekcji online?",
     answer:
-      "Zachęcamy do korzystania z kamery, bo ułatwia komunikację, ale zawsze dostosowujemy się do komfortu.",
+      "Korzystamy z popularnych platform do wideokonferencji (Zoom, Google Meet, Microsoft Teams). Wybieramy to, co jest dla Ciebie najwygodniejsze.",
   },
   {
-    question: "Jak utrzymać motywację w nauce zdalnej?",
+    question: "Co potrzebuję do lekcji zdalnych?",
     answer:
-      "Pomagają krótkie cele tygodniowe, regularne spotkania i szybki feedback po lekcji.",
+      "Wystarczy komputer lub tablet z kamerą, słuchawki z mikrofonem i stabilne połączenie internetowe.",
   },
   {
-    question: "Czy zdalnie poprawiacie wymowę?",
+    question: "Czy lekcje online są równie skuteczne jak stacjonarne?",
     answer:
-      "Tak. Pracujemy na krótkich fragmentach i od razu korygujemy brzmienie.",
+      "Tak. Badania pokazują, że dobrze prowadzone lekcje online są równie efektywne. Kluczem jest regularność i zaangażowanie.",
   },
   {
-    question: "Czy dostanę plan nauki?",
+    question: "Czy mogę przejść na zajęcia stacjonarne?",
     answer:
-      "Tak. Plan zależy od celu — inaczej wygląda przygotowanie do rozmów, inaczej do egzaminu.",
+      "Oczywiście. Jeśli mieszkasz w okolicach Legionowa, możesz w każdej chwili zmienić formę zajęć lub łączyć obie opcje.",
   },
   {
-    question: "Co jeśli potrzebuję niestandardowych godzin?",
+    question: "Jak wygląda lekcja próbna online?",
     answer:
-      "Daj znać, kiedy możesz się uczyć. Sprawdzimy dostępne terminy i zaproponujemy rozwiązanie.",
+      "To 30-minutowe spotkanie, podczas którego sprawdzimy Twój poziom, poznamy Twoje cele i pokażemy, jak wyglądają nasze zajęcia.",
   },
   {
-    question: "Czy angielski zdalnie sprawdzi się w mini-grupie?",
+    question: "Czy otrzymam materiały do nauki?",
     answer:
-      "Tak. Mini-grupa daje więcej konwersacji i interakcji, a tempo nadal jest dopasowane.",
+      "Tak. Po każdej lekcji wysyłamy podsumowanie, słownictwo i materiały do utrwalenia. Wszystko w formie elektronicznej.",
   },
 ];
 ---
@@ -70,28 +99,28 @@ const faqs = [
       <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
         <div>
           <span class="kicker">Angielski zdalnie</span>
-          <h1 class="mt-6">Angielski zdalnie – ucz się z domu i mów swobodniej</h1>
+          <h1 class="mt-6">Lekcje angielskiego online — ucz się z dowolnego miejsca</h1>
           <p class="mt-6 max-w-2xl text-lg">
-            Zdalna nauka to wygoda i większa regularność. Zamiast dojeżdżać, spotykasz się z lektorem online
-            i pracujesz nad realnymi sytuacjami językowymi.
+            Nie możesz dojeżdżać na zajęcia? Ucz się angielskiego zdalnie z doświadczonym lektorem.
+            Elastyczne godziny, ten sam poziom nauczania, zero dojazdów.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
-            <a class="btn btn-primary" href="/kontakt">Lekcja próbna</a>
+            <a class="btn btn-primary" href="/kontakt#formularz">Umów lekcję próbną</a>
             <a class="btn btn-secondary" href="/cennik">Zobacz cennik</a>
           </div>
           <p class="mt-4 text-sm text-slate-500">
-            Jeśli wolisz klasyczny kurs, sprawdź
-            <a class="font-bold text-primary no-underline hover:underline" href="/kurs-angielskiego-online">kurs angielskiego online</a>.
+            Mieszkasz w Legionowie? Sprawdź nasze
+            <a class="font-bold text-primary no-underline hover:underline" href="/angielski-stacjonarnie">zajęcia stacjonarne</a>.
           </p>
         </div>
 
-        <div class="grid gap-4">
-          {reasons.map((item) => (
-            <div class="card p-6">
-              <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
-              <p class="mt-2 text-sm text-slate-600">{item.text}</p>
-            </div>
-          ))}
+        <div class="relative">
+          <img
+            src="/images/hero.svg"
+            alt="Lekcje angielskiego online zdalnie"
+            loading="eager"
+            class="w-full rounded-3xl border border-slate-200 shadow-soft"
+          />
         </div>
       </div>
     </div>
@@ -99,42 +128,86 @@ const faqs = [
 
   <section class="section">
     <div class="container-site">
-      <h2>Jak wygląda lekcja zdalna</h2>
+      <h2>Zalety nauki angielskiego zdalnie</h2>
       <p class="mt-4 max-w-3xl">
-        Każde spotkanie ma jasny cel. Rozmawiamy, ćwiczymy słownictwo w kontekście i od razu poprawiamy błędy.
+        Lekcje online to wygodna alternatywa dla zajęć stacjonarnych. Oto dlaczego warto:
       </p>
-      <ul class="mt-6 grid gap-3 text-sm text-slate-600 sm:grid-cols-2">
-        {routine.map((item) => (
-          <li class="card p-4">{item}</li>
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        {benefits.map((item) => (
+          <div class="card p-6">
+            <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
+            <p class="mt-2 text-sm text-slate-600">{item.text}</p>
+          </div>
         ))}
-      </ul>
-      <div class="mt-8">
-        <a class="btn btn-secondary" href="/lekcje-angielskiego-online">Poznaj lekcje online</a>
       </div>
     </div>
   </section>
 
   <section class="section section-muted">
     <div class="container-site">
+      <h2>Jak zacząć naukę zdalną?</h2>
+      <p class="mt-4 max-w-3xl">
+        Rozpoczęcie nauki online jest proste. Oto jak wygląda proces:
+      </p>
+      <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {howItWorks.map((item) => (
+          <div class="card p-6 text-center">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary text-lg font-bold text-white">
+              {item.step}
+            </span>
+            <h3 class="mt-4 text-lg font-extrabold text-slate-900">{item.title}</h3>
+            <p class="mt-2 text-sm text-slate-600">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-site">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
         <div>
           <h2>Dla kogo jest angielski zdalnie?</h2>
           <p class="mt-4">
-            Dla osób, które chcą uczyć się regularnie i bez zbędnych dojazdów. To świetna opcja dla zapracowanych,
-            rodziców, studentów i osób pracujących zdalnie.
+            Lekcje online są idealne dla osób, które cenią elastyczność i wygodę nauki z domu.
           </p>
-          <div class="mt-6">
-            <a class="btn btn-primary" href="/kontakt">Umów konsultację</a>
-          </div>
+          <ul class="mt-6 space-y-3">
+            {forWhom.map((item) => (
+              <li class="flex items-start gap-3 text-sm text-slate-600">
+                <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary" aria-hidden="true"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
         <div class="card p-6">
-          <h3 class="text-lg font-extrabold text-slate-900">Z czym najczęściej przychodzą kursanci</h3>
+          <h3 class="text-lg font-extrabold text-slate-900">Co wyróżnia nasze lekcje online?</h3>
           <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
-            <li>Chcę swobodnie rozmawiać po angielsku w pracy.</li>
-            <li>Potrzebuję rozruszać mówienie po długiej przerwie.</li>
-            <li>Chcę poprawić wymowę i płynność.</li>
-            <li>Planuję wyjazd i potrzebuję praktycznych dialogów.</li>
+            <li>Indywidualne podejście do każdego ucznia</li>
+            <li>Nacisk na praktyczną konwersację</li>
+            <li>Materiały wysyłane po każdej lekcji</li>
+            <li>Elastyczne przesuwanie terminów</li>
+            <li>Możliwość nagrywania lekcji (za zgodą)</li>
+            <li>Wsparcie techniczne na starcie</li>
           </ul>
+          <div class="mt-6">
+            <a class="btn btn-primary" href="/kontakt#formularz">Rozpocznij naukę online</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container-site">
+      <div class="card p-8 text-center">
+        <h2 class="text-2xl font-extrabold">Pierwsza lekcja za darmo</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-slate-600">
+          Nie jesteś pewien, czy nauka online jest dla Ciebie? Wypróbuj bezpłatną lekcję próbną.
+          Sprawdzisz jakość połączenia, poznasz lektora i dowiesz się, jak działają nasze zajęcia.
+        </p>
+        <div class="mt-6">
+          <a class="btn btn-primary" href="/kontakt#formularz">Umów bezpłatną lekcję próbną</a>
         </div>
       </div>
     </div>
@@ -143,7 +216,8 @@ const faqs = [
   <FaqSection title="Angielski zdalnie — pytania i odpowiedzi" items={faqs} />
 
   <CTASection
-    title="Chcesz uczyć się zdalnie bez stresu?"
-    description="Opowiedz o swoich celach, a zaproponujemy plan i terminy zajęć."
+    title="Gotowy na angielski online?"
+    description="Napisz do nas i umów bezpłatną lekcję próbną. Sprawdź, jak wygodna może być nauka zdalna."
+    note="Odpowiadamy szybko — zwykle w ciągu 24h w dni robocze."
   />
 </MainLayout>

@@ -88,6 +88,7 @@ const jsonLd = [orgJsonLd, websiteJsonLd, ...structuredData].filter(Boolean);
       ogType={ogType}
       ogImageAlt={ogImageAlt}
     />
+    <slot name="head" />
 
     <link rel="icon" href="/favicon.svg" />
 

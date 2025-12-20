@@ -31,7 +31,7 @@ postęp i większy koszt w dłuższej perspektywie.
   <h3>Chcesz poznać cenę dopasowaną do Twojego celu?</h3>
   <p>Sprawdź szczegóły kursu i zapytaj o plan nauki.</p>
   <div class="mt-4 flex flex-wrap gap-3">
-    <a class="btn btn-primary" href="/kurs-angielskiego-online">Kurs angielskiego online</a>
+    <a class="btn btn-primary" href="/angielski-online#kurs">Kurs angielskiego online</a>
     <a class="btn btn-secondary" href="/kontakt">Skontaktuj się</a>
   </div>
 </div>

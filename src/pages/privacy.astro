@@ -5,6 +5,7 @@ import { BRAND_NAME, CONTACT_EMAIL, CONTACT_PHONE, BUSINESS_ADDRESS } from "../c
 const title = `Polityka prywatności | ${BRAND_NAME}`;
 const description =
   "Polityka prywatności serwisu angielskiego online. Informacje o przetwarzaniu danych osobowych.";
+const updatedAt = new Date().toLocaleDateString("pl-PL");
 ---
 
 <MainLayout title={title} description={description}>
@@ -61,7 +62,7 @@ const description =
             Jeśli korzystasz z analityki lub narzędzi marketingowych, opisz tutaj zakres i cel ich użycia.
           </p>
 
-          <p class="text-sm text-slate-600">Ostatnia aktualizacja: [TODO]</p>
+          <p class="text-sm text-slate-600">Ostatnia aktualizacja: {updatedAt}</p>
         </div>
       </div>
 

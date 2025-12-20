@@ -31,7 +31,7 @@ Plan, materiały po lekcji i jasny feedback. Bez tego łatwo utknąć na etapie 
   <h3>Chcesz uczyć się po pracy bez dojazdów?</h3>
   <p>Dobierzemy format i tempo idealne dla dorosłych kursantów.</p>
   <div class="mt-4 flex flex-wrap gap-3">
-    <a class="btn btn-primary" href="/kurs-angielskiego-online">Kurs angielskiego online</a>
+    <a class="btn btn-primary" href="/angielski-online#kurs">Kurs angielskiego online</a>
     <a class="btn btn-secondary" href="/kontakt">Skontaktuj się</a>
   </div>
 </div>

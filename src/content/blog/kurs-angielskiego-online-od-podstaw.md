@@ -30,7 +30,7 @@ Najczęściej to nieregularność i zbyt duża ilość materiału naraz. Lepiej 
   <h3>Chcesz zacząć spokojnie i bez stresu?</h3>
   <p>Dobierzemy poziom i plan nauki od podstaw.</p>
   <div class="mt-4 flex flex-wrap gap-3">
-    <a class="btn btn-primary" href="/kurs-angielskiego-online">Kurs angielskiego online</a>
+    <a class="btn btn-primary" href="/angielski-online#kurs">Kurs angielskiego online</a>
     <a class="btn btn-secondary" href="/kontakt">Skontaktuj się</a>
   </div>
 </div>

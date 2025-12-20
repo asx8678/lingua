@@ -1,149 +1,26 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import CTASection from "../components/CTASection.astro";
-import FaqSection from "../components/FaqSection.astro";
 import { BRAND_NAME } from "../config/site";
 
-const title = `Lekcje angielskiego online – 1:1 lub grupa | ${BRAND_NAME}`;
-const description =
-  "Lekcje angielskiego online z doświadczonym lektorem. Konwersacje i gramatyka. Umów próbne zajęcia.";
-
-const formats = [
-  {
-    title: "Lekcje 1:1",
-    text: "Cała uwaga lektora jest dla Ciebie. Tempo i zakres dobieramy indywidualnie.",
-  },
-  {
-    title: "Mini-grupa",
-    text: "2–4 osoby to więcej rozmów, dynamiki i motywacji, bez chaosu dużej grupy.",
-  },
-  {
-    title: "Konwersacje",
-    text: "Skupiamy się na mówieniu, poprawie płynności i naturalnym brzmieniu wypowiedzi.",
-  },
-];
-
-const details = [
-  "Każda lekcja ma cel i jasny temat.",
-  "Ćwiczymy dialogi, które przydadzą się w pracy i życiu codziennym.",
-  "Wprowadzamy gramatykę tam, gdzie jest potrzebna.",
-  "Dostajesz podsumowanie i listę słów po spotkaniu.",
-];
-
-const faqs = [
-  {
-    question: "Czy lekcje online są lepsze 1:1 czy w grupie?",
-    answer:
-      "To zależy od Twojego celu. 1:1 daje pełną personalizację, a mini-grupa więcej interakcji.",
-  },
-  {
-    question: "Ile trwa jedna lekcja?",
-    answer:
-      "Długość ustalamy indywidualnie, aby pasowała do Twojego planu dnia i koncentracji.",
-  },
-  {
-    question: "Czy na lekcjach jest gramatyka?",
-    answer:
-      "Tak, ale w praktycznym kontekście. Zależy nam, aby była od razu używana w mówieniu.",
-  },
-  {
-    question: "Czy mogę skupić się tylko na konwersacjach?",
-    answer:
-      "Tak. Jeśli potrzebujesz głównie mówienia, dopasujemy tematykę i ćwiczenia.",
-  },
-  {
-    question: "Czy lekcje online są dobre dla osób zapracowanych?",
-    answer:
-      "Tak. Zdalny формат ułatwia regularność, bo nie tracisz czasu na dojazdy.",
-  },
-  {
-    question: "Czy można zmieniać tematykę lekcji?",
-    answer:
-      "Tak. Program jest elastyczny, dostosowujemy go do aktualnych potrzeb.",
-  },
-];
+const target = "/angielski-online#lekcje";
+const title = `Lekcje angielskiego online — przekierowanie | ${BRAND_NAME}`;
+const description = "Ta strona została przeniesiona do sekcji z lekcjami online.";
 ---
 
-<MainLayout title={title} description={description}>
-  <section class="hero-bg">
-    <div class="container-site py-16 sm:py-20">
-      <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
-        <div>
-          <span class="kicker">Lekcje angielskiego online</span>
-          <h1 class="mt-6">Lekcje angielskiego online dopasowane do Twojego celu</h1>
-          <p class="mt-6 max-w-2xl text-lg">
-            Chcesz więcej mówienia, lepszą wymowę albo uporządkowaną gramatykę? Dobieramy format i tempo,
-            abyś szybko zobaczył efekty.
-          </p>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <a class="btn btn-primary" href="/kontakt">Umów próbne zajęcia</a>
-            <a class="btn btn-secondary" href="/cennik">Sprawdź cennik</a>
-          </div>
-          <p class="mt-4 text-sm text-slate-500">
-            Preferujesz zajęcia twarzą w twarz? Sprawdź
-            <a class="font-bold text-primary no-underline hover:underline" href="/angielski-stacjonarnie">lekcje stacjonarne w Legionowie</a>.
-          </p>
-        </div>
-
-        <div class="grid gap-4">
-          {formats.map((format) => (
-            <div class="card p-6">
-              <h3 class="text-lg font-extrabold text-slate-900">{format.title}</h3>
-              <p class="mt-2 text-sm text-slate-600">{format.text}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
+<MainLayout title={title} description={description} canonical="/angielski-online">
+  <Fragment slot="head">
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+  </Fragment>
 
   <section class="section">
     <div class="container-site">
-      <h2>Na czym skupiamy się podczas lekcji</h2>
-      <p class="mt-4 max-w-3xl">
-        Lekcje są dynamiczne i praktyczne. Pracujemy na sytuacjach, które spotkasz w pracy, podróży lub codziennym życiu.
+      <h1>Przekierowanie…</h1>
+      <p class="mt-4 text-slate-600">
+        Jeśli przekierowanie nie nastąpi automatycznie, kliknij poniższy przycisk.
       </p>
-      <ul class="mt-6 grid gap-3 text-sm text-slate-600 sm:grid-cols-2">
-        {details.map((item) => (
-          <li class="card p-4">{item}</li>
-        ))}
-      </ul>
-      <div class="mt-8">
-        <a class="btn btn-secondary" href="/angielski-zdalnie">Dowiedz się więcej o nauce zdalnej</a>
+      <div class="mt-6">
+        <a class="btn btn-primary" href={target}>Przejdź do lekcji online</a>
       </div>
     </div>
   </section>
-
-  <section class="section section-muted">
-    <div class="container-site">
-      <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
-        <div>
-          <h2>Kiedy lekcje online są najlepszym wyborem?</h2>
-          <p class="mt-4">
-            Gdy potrzebujesz elastycznego grafiku i szybkiej reakcji lektora na Twoje potrzeby. To idealne rozwiązanie
-            dla osób, które chcą mówić częściej i pewniej.
-          </p>
-          <div class="mt-6">
-            <a class="btn btn-primary" href="/kontakt">Skonsultuj swój cel</a>
-          </div>
-        </div>
-        <div class="card p-6">
-          <h3 class="text-lg font-extrabold text-slate-900">Najczęstsze obszary pracy</h3>
-          <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
-            <li>Płynność i swoboda wypowiedzi.</li>
-            <li>Słownictwo branżowe i codzienne.</li>
-            <li>Wymowa, akcent i intonacja.</li>
-            <li>Gramatyka w rozmowach i mailach.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <FaqSection title="Lekcje angielskiego online — FAQ" items={faqs} />
-
-  <CTASection
-    title="Chcesz regularnych lekcji online?"
-    description="Opowiedz o swoim poziomie i celu, a zaproponujemy najlepszy format zajęć."
-  />
 </MainLayout>

@@ -9,6 +9,8 @@ const description =
 const hasEmail = !isTodo(CONTACT_EMAIL);
 const hasPhone = !isTodo(CONTACT_PHONE);
 const formAction = hasEmail ? `mailto:${CONTACT_EMAIL}` : "#";
+const emailFallback = "Formularz kontaktowy";
+const phoneFallback = "Oddzwonimy po zgłoszeniu";
 ---
 
 <MainLayout title={title} description={description}>
@@ -30,7 +32,7 @@ const formAction = hasEmail ? `mailto:${CONTACT_EMAIL}` : "#";
                 {hasEmail ? (
                   <a class="no-underline" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
                 ) : (
-                  <span>{CONTACT_EMAIL}</span>
+                  <a class="no-underline" href="#formularz">{emailFallback}</a>
                 )}
               </div>
               <p class="mt-2 text-sm">Odpowiadamy najszybciej mailowo.</p>
@@ -42,7 +44,7 @@ const formAction = hasEmail ? `mailto:${CONTACT_EMAIL}` : "#";
                 {hasPhone ? (
                   <a class="no-underline" href={`tel:${CONTACT_PHONE}`}>{CONTACT_PHONE}</a>
                 ) : (
-                  <span>{CONTACT_PHONE}</span>
+                  <span>{phoneFallback}</span>
                 )}
               </div>
               <p class="mt-2 text-sm">Jeśli nie odbierzemy, oddzwonimy.</p>
@@ -61,7 +63,7 @@ const formAction = hasEmail ? `mailto:${CONTACT_EMAIL}` : "#";
           </p>
         </div>
 
-        <div class="card p-6">
+        <div class="card p-6" id="formularz">
           <h2 class="text-lg font-extrabold text-slate-900">Formularz kontaktowy</h2>
           <p class="mt-2 text-sm text-slate-600">Pola oznaczone * są wymagane.</p>
 
@@ -132,12 +134,6 @@ const formAction = hasEmail ? `mailto:${CONTACT_EMAIL}` : "#";
             </div>
 
             <button class="btn btn-primary w-full" type="submit">Wyślij wiadomość</button>
-
-            {!hasEmail && (
-              <p class="text-xs text-amber-600">
-                Uzupełnij CONTACT_EMAIL w konfiguracji, aby formularz działał. Na razie użyj danych kontaktowych powyżej.
-              </p>
-            )}
           </form>
         </div>
       </div>

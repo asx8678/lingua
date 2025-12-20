@@ -32,7 +32,7 @@ Zapisuj nowe słowa, regularnie powtarzaj i raz w tygodniu podsumuj, co już pot
   <h3>Chcesz gotowego planu nauki?</h3>
   <p>Dobierzemy rytm i zakres lekcji do Twojego celu.</p>
   <div class="mt-4 flex flex-wrap gap-3">
-    <a class="btn btn-primary" href="/kurs-angielskiego-online">Kurs angielskiego online</a>
+    <a class="btn btn-primary" href="/angielski-online#kurs">Kurs angielskiego online</a>
     <a class="btn btn-secondary" href="/kontakt">Skontaktuj się</a>
   </div>
 </div>
