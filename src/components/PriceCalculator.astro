@@ -188,9 +188,6 @@ const DATA = {
       const plan = getPlan(planEl.value);
       if (!plan) return;
 
-      const persons = Math.max(1, Math.min(10, Number(personsEl.value || 1)));
-      personsEl.value = String(persons);
-
       const showTotal = Boolean(showTotalEl?.checked);
       totalBlockEl?.classList.toggle("hidden", !showTotal);
 
@@ -206,6 +203,14 @@ const DATA = {
       setText(outNoteEl, "");
 
       if (plan.kind === "course") {
+        // Ustaw minimum osób dla kursu
+        const minPersons = plan.minPersons;
+        personsEl.setAttribute("min", String(minPersons));
+
+        // Wymuś minimalną liczbę osób
+        let persons = Math.max(minPersons, Math.min(10, Number(personsEl.value || minPersons)));
+        personsEl.value = String(persons);
+
         sessionsEl.value = String(plan.sessions);
         sessionsEl.setAttribute("disabled", "disabled");
         sessionsEl.classList.add("bg-slate-100");
@@ -225,19 +230,20 @@ const DATA = {
           setText(outTotalSubEl, `${persons} os.`);
         }
 
-        const warn = persons < plan.minPersons;
         setText(
           outNoteEl,
-          warn
-            ? `Ten kurs jest w cenniku „od ${plan.minPersons} osób”. Wybrałeś(aś) ${persons} — wynik traktuj orientacyjnie.`
-            : `Kurs: ${plan.sessions} spotkań × ${plan.minutes} min. Wymagana grupa: od ${plan.minPersons} osób.`
+          `Kurs: ${plan.sessions} spotkań × ${plan.minutes} min. Wymagana grupa: od ${plan.minPersons} osób.`
         );
 
-        setText(personsHintEl, `Kurs: od ${plan.minPersons} osób`);
+        setText(personsHintEl, `Min. ${plan.minPersons} osób`);
         return;
       }
 
-      // Package
+      // Package - przywróć min=1
+      personsEl.setAttribute("min", "1");
+      const persons = Math.max(1, Math.min(3, Number(personsEl.value || 1)));
+      personsEl.value = String(persons);
+
       sessionsEl.removeAttribute("disabled");
       sessionsEl.classList.remove("bg-slate-100");
 
