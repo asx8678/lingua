@@ -290,6 +290,15 @@ const DATA = {
       setText(personsHintEl, "Pakiety: 1–3 osoby");
     }
 
+    // Wymuszaj minimum osób przy każdej zmianie
+    personsEl?.addEventListener("change", () => {
+      const plan = getPlan(planEl.value);
+      if (plan?.kind === "course" && Number(personsEl.value) < plan.minPersons) {
+        personsEl.value = String(plan.minPersons);
+      }
+      update();
+    });
+
     form?.addEventListener("input", update);
     planEl?.addEventListener("change", update);
     showTotalEl?.addEventListener("change", update);
