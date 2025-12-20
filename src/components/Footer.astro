@@ -1,5 +1,6 @@
 ---
 import Logo from "./Logo.astro";
+import { subjects } from "../data/subjects";
 import { CONTACT_EMAIL, CONTACT_PHONE, BRAND_NAME, isTodo } from "../config/site";
 
 const year = new Date().getFullYear();
@@ -10,11 +11,11 @@ const hasPhone = !isTodo(CONTACT_PHONE);
 
 <footer class="border-t border-slate-200 bg-slate-50">
   <div class="container-site py-12">
-    <div class="grid gap-10 lg:grid-cols-3">
+    <div class="grid gap-10 lg:grid-cols-4">
       <div>
         <Logo />
         <p class="mt-4 text-sm text-slate-600">
-          Szkoła języka angielskiego w Legionowie. Kursy stacjonarne i online dla wszystkich poziomów.
+          Szkoła języków obcych i matematyki w Legionowie. Zajęcia stacjonarne i online dla wszystkich poziomów.
         </p>
       </div>
 
@@ -25,6 +26,15 @@ const hasPhone = !isTodo(CONTACT_PHONE);
           <a class="link-muted no-underline" href="/angielski-online">Angielski online</a>
           <a class="link-muted no-underline" href="/lekcje-angielskiego-online">Lekcje indywidualne</a>
           <a class="link-muted no-underline" href="/kurs-angielskiego-online">Kursy grupowe</a>
+        </div>
+      </div>
+
+      <div aria-label="Uczymy">
+        <div class="text-sm font-extrabold text-slate-900">Uczymy</div>
+        <div class="mt-4 flex flex-wrap gap-2 text-sm">
+          {subjects.map((subject) => (
+            <span class="chip">{subject}</span>
+          ))}
         </div>
       </div>
 

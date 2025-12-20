@@ -1,0 +1,33 @@
+---
+import type { Teacher } from "../data/teachers";
+
+const { teacher, loading = "lazy" } = Astro.props as {
+  teacher: Teacher;
+  loading?: "lazy" | "eager";
+};
+
+const imageSrc = teacher.image && teacher.image.length > 0
+  ? teacher.image
+  : "/images/teachers/placeholder.svg";
+const imageAlt = `Zdjęcie: ${teacher.name}`;
+---
+
+<article class="card flex h-full flex-col overflow-hidden">
+  <div class="aspect-[4/3] w-full overflow-hidden bg-slate-100">
+    <img
+      src={imageSrc}
+      alt={imageAlt}
+      loading={loading}
+      class="h-full w-full object-cover"
+    />
+  </div>
+  <div class="flex flex-1 flex-col p-5">
+    <h3 class="text-lg font-extrabold text-slate-900">{teacher.name}</h3>
+    <p class="mt-1 text-sm text-slate-600">{teacher.role}</p>
+    <div class="mt-4 flex flex-wrap gap-2">
+      {teacher.languages.map((language) => (
+        <span class="chip">{language}</span>
+      ))}
+    </div>
+  </div>
+</article>

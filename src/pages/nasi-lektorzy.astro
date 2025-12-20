@@ -1,0 +1,36 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import TeacherCard from "../components/TeacherCard.astro";
+import { teachers } from "../data/teachers";
+import { taughtLanguages } from "../data/subjects";
+import { BRAND_NAME } from "../config/site";
+
+const languagesList = new Intl.ListFormat("pl", {
+  style: "long",
+  type: "conjunction",
+}).format(taughtLanguages);
+
+const title = `Nasi lektorzy – języki obce i matematyka | ${BRAND_NAME}`;
+const description = `Poznaj zespół lektorów Lingua Legionowo. Uczymy ${languagesList} oraz matematyki stacjonarnie w Legionowie i online.`;
+---
+
+<MainLayout title={title} description={description}>
+  <section class="section bg-primary/5">
+    <div class="container-site">
+      <div class="max-w-3xl">
+        <span class="kicker">Nasi lektorzy</span>
+        <h1 class="mt-6">Poznaj zespół Lingua Legionowo</h1>
+        <p class="mt-4 text-lg">
+          Nasi lektorzy uczą języków obcych — {languagesList} — oraz matematyki. Zajęcia prowadzimy
+          stacjonarnie w Legionowie i online, w małych grupach lub indywidualnie.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {teachers.map((teacher, index) => (
+          <TeacherCard teacher={teacher} loading={index === 0 ? "eager" : "lazy"} />
+        ))}
+      </div>
+    </div>
+  </section>
+</MainLayout>

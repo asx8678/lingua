@@ -24,3 +24,25 @@ Rekomendacje:
 ## Zapisy (formularz)
 
 "Realistic photo, close-up of hands filling out a simple form with a pen next to a laptop, clean minimal desk, soft daylight, subtle blue accents, no text, no logos, 16:9"
+
+## Hero (loop wideo — języki + matematyka)
+
+"Seamless 6-8s loop video, bright modern classroom in Legionowo, diverse teens and adults studying together, language flashcards and notebooks with subtle math symbols and formulas (no readable text), warm daylight, clean blue accents, natural candid motion, no logos, 16:9"
+
+## Tło sekcji „Nasi lektorzy”
+
+"Soft abstract background image, layered paper-like shapes, light blue gradient (#0052CC accents), clean minimal composition, subtle depth, no text, no logos, 16:9"
+
+## Mini b-roll: online
+
+"Short 6s loop video, student on laptop in a cozy home setup, video call with teacher visible but blurred, notebooks and headphones, calm blue accents, natural light, no text, no logos, 16:9"
+
+## Mini b-roll: stacjonarnie
+
+"Short 6s loop video, teacher explaining at a whiteboard in a small classroom, students taking notes, warm daylight, modern school interior, subtle blue accents, no text, no logos, 16:9"
+
+### Gdzie wstawić (sugestia)
+
+- Hero: loop wideo w miejscu obecnej ilustracji.
+- Nasi lektorzy: statyczne tło sekcji (pod kartami).
+- Online/stacjonarnie: mini b-roll w sekcjach oferty lub obok CTA.
