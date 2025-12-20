@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
+import cloudflare from "@astrojs/cloudflare";
 
 const SITEMAP_EXCLUDE = new Set([
   "/lekcje-angielskiego-online",
@@ -10,8 +11,9 @@ const SITEMAP_EXCLUDE = new Set([
 // https://astro.build/config
 export default defineConfig({
   site: "https://lingualegionowo.pl",
-  output: "static",
+  output: "server",
   trailingSlash: "never",
+  adapter: cloudflare(),
   integrations: [
     tailwind({ applyBaseStyles: false }),
     sitemap({
