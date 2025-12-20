@@ -88,6 +88,13 @@ const jsonLd = [orgJsonLd, websiteJsonLd, ...structuredData].filter(Boolean);
       ogType={ogType}
       ogImageAlt={ogImageAlt}
     />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FS7CKXXZ6J"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FS7CKXXZ6J');
+    </script>
     <slot name="head" />
 
     <link rel="icon" href="/favicon.svg" />
