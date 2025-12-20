@@ -316,7 +316,8 @@ const DATA = {
       setText(outNoteEl, "");
 
       if (plan.kind === "course") {
-        sessionsEl.value = String(plan.sessions);
+        const sessions = 10;
+        sessionsEl.value = String(sessions);
         sessionsEl.setAttribute("disabled", "disabled");
         sessionsEl.classList.add("bg-slate-100");
         sessionStepButtons.forEach((btn) => {
@@ -327,21 +328,21 @@ const DATA = {
           btn.setAttribute("disabled", "disabled");
           btn.classList.add("opacity-50", "cursor-not-allowed");
         });
-        setPresetActive("sessions", plan.sessions);
+        setPresetActive("sessions", sessions);
 
-        const groupTotal = plan.price;
-        const perPersonTotal = plan.price / persons;
-        const perSession = perPersonTotal / plan.sessions;
+        const perSession = (plan.price / plan.sessions) / persons;
+        const perPersonTotal = perSession * sessions;
+        const groupTotal = perPersonTotal * persons;
 
         setText(outPerSessionEl, pln(perSession));
         setText(outPerSessionSubEl, `${plan.minutes} min`);
 
         setText(outPerTotalEl, pln(perPersonTotal));
-        setText(outPerTotalSubEl, `cena z cennika / osoba`);
+        setText(outPerTotalSubEl, `${sessions} spotkań / osoba`);
 
         if (showTotal) {
           setText(outTotalEl, pln(groupTotal));
-          setText(outTotalSubEl, `${persons} os.`);
+          setText(outTotalSubEl, `${sessions} spotkań`);
         }
 
         const warn = persons < plan.minPersons;
@@ -349,10 +350,11 @@ const DATA = {
           outNoteEl,
           warn
             ? `Ten kurs jest w cenniku „od ${plan.minPersons} osób”. Wybrałeś(aś) ${persons} — wynik traktuj orientacyjnie.`
-            : `Kurs: ${plan.sessions} spotkań × ${plan.minutes} min. Cena z cennika dotyczy całej grupy i jest dzielona na osoby.`
+            : `Kurs: ${plan.sessions} spotkań × ${plan.minutes} min. Kalkulator pokazuje cenę za ${sessions} spotkań.`
         );
 
         setText(personsHintEl, `Kurs: od ${plan.minPersons} osób`);
+        setText(sessionsHintEl, `Kurs ma ${plan.sessions} spotkań — kalkulator pokazuje ${sessions}.`);
         return;
       }
 
