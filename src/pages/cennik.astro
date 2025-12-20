@@ -1,42 +1,31 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
+import PriceCalculator from "../components/PriceCalculator.astro";
 import { BRAND_NAME } from "../config/site";
 
 const title = `Cennik – kursy angielskiego w Legionowie | ${BRAND_NAME}`;
 const description =
-  "Sprawdź ceny kursów angielskiego w Legionowie. Lekcje stacjonarne i online, 1:1 i grupowe. Umów lekcję próbną.";
+  "Sprawdź ceny kursów angielskiego i matematyki w Legionowie. Lekcje stacjonarne i online, 1:1 i grupowe.";
 
-const pricing = [
+const hourlyRates = [
   {
     title: "Lekcje 1:1",
-    price: "Wycena indywidualna",
-    note: "Cena zależy od długości i liczby spotkań. Szczegóły w cenniku PDF.",
-    features: [
-      "Pełna personalizacja planu",
-      "Stały feedback po każdej lekcji",
-      "Elastyczne terminy",
-    ],
+    price: "130 zł / 60 min",
+    note: "Pakiet 10 spotkań: 1300 zł / osoba.",
+    features: ["Pełna personalizacja planu", "Stały feedback po każdej lekcji"],
   },
   {
-    title: "Mini-grupa 2–4 osoby",
-    price: "Wycena indywidualna",
-    note: "Niższy koszt na osobę i więcej rozmów niż w dużej grupie. Szczegóły w cenniku PDF.",
-    features: [
-      "Więcej interakcji i motywacji",
-      "Wspólny cel i poziom",
-      "Materiały po zajęciach",
-    ],
+    title: "Duet (2 osoby)",
+    price: "80 zł / 60 min",
+    note: "Pakiet 10 spotkań: 800 zł / osoba.",
+    features: ["Więcej rozmów i motywacji", "Wspólny poziom i cel"],
   },
   {
-    title: "Kurs online (program)",
-    price: "Wycena indywidualna",
-    note: "Kurs z jasnym planem i materiałami — idealny dla osób, które chcą struktury. Szczegóły w cenniku PDF.",
-    features: [
-      "Plan na 4–12 tygodni",
-      "Konwersacje + gramatyka",
-      "Regularne podsumowania",
-    ],
+    title: "Trójka (3 osoby)",
+    price: "65 zł / 60 min",
+    note: "Pakiet 10 spotkań: 650 zł / osoba.",
+    features: ["Przystępna cena / osoba", "Dobra dynamika grupy"],
   },
 ];
 
@@ -58,6 +47,9 @@ const steps = [
             Cena zależy od formatu zajęć (stacjonarnie/online), długości spotkań i częstotliwości.
             Poniżej znajdziesz orientacyjne warianty, a szczegóły ustalamy po krótkiej rozmowie.
           </p>
+          <p class="mt-4 text-sm text-slate-600">
+            Matematyka ma takie same stawki jak angielski.
+          </p>
           <div class="mt-8 flex flex-wrap gap-3">
             <a class="btn btn-primary" href="/kontakt#formularz">Poproś o wycenę</a>
             <a class="btn btn-secondary" href="/cennik-lingua.pdf">Pobierz cennik PDF</a>
@@ -72,7 +64,7 @@ const steps = [
             ))}
           </ul>
           <div class="mt-6">
-            <a class="btn btn-secondary" href="/kontakt">Umów konsultację</a>
+            <a class="btn btn-secondary" href="/kontakt#formularz">Umów konsultację</a>
           </div>
         </div>
       </div>
@@ -81,13 +73,14 @@ const steps = [
 
   <section class="section">
     <div class="container-site">
-      <h2>Najczęściej wybierane pakiety</h2>
+      <h2>Ceny za 60 min (angielski i matematyka)</h2>
       <p class="mt-4 max-w-3xl">
-        Wybierz format zajęć i tempo nauki. Możemy dopasować liczbę spotkań i długość lekcji do Twojego kalendarza.
+        Poniższe stawki dotyczą pakietów 10 spotkań. Dla kursów grupowych i innych długości lekcji
+        skorzystaj z kalkulatora lub pełnego cennika PDF.
       </p>
 
       <div class="mt-8 grid gap-6 lg:grid-cols-3">
-        {pricing.map((item) => (
+        {hourlyRates.map((item) => (
           <div class="card p-6">
             <div class="text-xs font-bold uppercase tracking-widest text-slate-500">{item.title}</div>
             <div class="mt-3 text-3xl font-extrabold text-slate-900">{item.price}</div>
@@ -109,6 +102,18 @@ const steps = [
 
       <div class="mt-8">
         <a class="btn btn-ghost" href="/cennik-lingua.pdf">Pobierz pełny cennik (PDF)</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container-site">
+      <h2>Kalkulator ceny</h2>
+      <p class="mt-4 max-w-3xl">
+        Wybierz pakiet lub kurs, a kalkulator pokaże koszt na osobę i orientacyjną cenę całej grupy.
+      </p>
+      <div class="mt-8">
+        <PriceCalculator />
       </div>
     </div>
   </section>
