@@ -16,7 +16,7 @@ const description =
   `Lingua Legionowo — szkoła języków obcych i matematyki. Uczymy ${languagesList} i prowadzimy zajęcia ` +
   "z matematyki stacjonarnie w Legionowie oraz online.";
 
-const previewTeachers = teachers.slice(0, 3);
+const previewTeachers = teachers.slice(0, 4);
 
 const offerCards = [
   {
@@ -117,28 +117,6 @@ const subjectChips = ["Angielski", "Inne języki", "Matematyka"];
     </div>
   </section>
 
-  <section class="section section-muted">
-    <div class="container-site">
-      <h2>Jak pracujemy</h2>
-      <p class="mt-4 max-w-3xl">
-        Niezależnie od wybranego trybu, otrzymujesz jasny plan nauki i wsparcie na każdym etapie.
-      </p>
-
-      <div class="mt-8 grid gap-6 lg:grid-cols-3">
-        {steps.map((step) => (
-          <div class="card p-6">
-            <h3 class="text-lg font-extrabold text-slate-900">{step.title}</h3>
-            <p class="mt-3 text-sm">{step.text}</p>
-          </div>
-        ))}
-      </div>
-
-      <div class="mt-8">
-        <a class="btn btn-secondary" href="/kontakt#formularz">Porozmawiaj o planie nauki</a>
-      </div>
-    </div>
-  </section>
-
   <section class="section">
     <div class="container-site">
       <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
@@ -159,6 +137,28 @@ const subjectChips = ["Angielski", "Inne języki", "Matematyka"];
         {previewTeachers.map((teacher, index) => (
           <TeacherCard teacher={teacher} loading={index === 0 ? "eager" : "lazy"} />
         ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container-site">
+      <h2>Jak pracujemy</h2>
+      <p class="mt-4 max-w-3xl">
+        Niezależnie od wybranego trybu, otrzymujesz jasny plan nauki i wsparcie na każdym etapie.
+      </p>
+
+      <div class="mt-8 grid gap-6 lg:grid-cols-3">
+        {steps.map((step) => (
+          <div class="card p-6">
+            <h3 class="text-lg font-extrabold text-slate-900">{step.title}</h3>
+            <p class="mt-3 text-sm">{step.text}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-8">
+        <a class="btn btn-secondary" href="/kontakt#formularz">Porozmawiaj o planie nauki</a>
       </div>
     </div>
   </section>
