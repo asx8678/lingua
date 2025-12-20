@@ -221,17 +221,18 @@ const DATA = {
         <div id="out-per-total-sub" class="mt-1 text-xs text-slate-500"></div>
       </div>
 
-      <div id="total-block" class="hidden">
-        <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Łącznie (grupa)</div>
-        <div id="out-total" class="mt-2 text-3xl font-extrabold text-slate-900">—</div>
-        <div id="out-total-sub" class="mt-1 text-xs text-slate-500"></div>
-      </div>
+    <div id="total-block" class="hidden">
+      <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Łącznie (grupa)</div>
+      <div id="out-total" class="mt-2 text-3xl font-extrabold text-slate-900">—</div>
+      <div id="out-total-sub" class="mt-1 text-xs text-slate-500"></div>
+    </div>
     </div>
 
     <div class="mt-4 flex items-center gap-2 text-xs text-slate-600">
       <input
         id="show-total"
         type="checkbox"
+        checked
         class="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary"
       />
       <label for="show-total" class="select-none">Pokaż koszt dla całej grupy</label>
@@ -255,6 +256,7 @@ const DATA = {
     const sessionStepButtons = form?.querySelectorAll('[data-target="sessions"]') ?? [];
     const presetButtons = form?.querySelectorAll("[data-preset][data-value]") ?? [];
     const sessionPresetButtons = form?.querySelectorAll('[data-preset="sessions"]') ?? [];
+    const personsPresetButtons = form?.querySelectorAll('[data-preset="persons"]') ?? [];
     const personsEl = document.getElementById("persons");
     const sessionsEl = document.getElementById("sessions");
     const showTotalEl = document.getElementById("show-total");
@@ -310,6 +312,16 @@ const DATA = {
       });
     }
 
+    function setPersonsPresetState(min, max) {
+      personsPresetButtons.forEach((btn) => {
+        const value = Number(btn.dataset.value);
+        const disabled = value < min || value > max;
+        btn.toggleAttribute("disabled", disabled);
+        btn.classList.toggle("opacity-50", disabled);
+        btn.classList.toggle("cursor-not-allowed", disabled);
+      });
+    }
+
     let lastPlanId = planEl?.value;
 
     function update() {
@@ -320,11 +332,17 @@ const DATA = {
       const planChanged = plan.id !== lastPlanId;
       lastPlanId = plan.id;
 
-      const persons = Math.max(1, Math.min(10, Number(personsEl.value || 1)));
+      const personsMin = plan.kind === "course" ? plan.minPersons : 1;
+      const personsMax = plan.kind === "course" ? 10 : 3;
+      personsEl.setAttribute("min", String(personsMin));
+      personsEl.setAttribute("max", String(personsMax));
+      const personsInput = Number(personsEl.value || personsMin);
+      const persons = Math.max(personsMin, Math.min(personsMax, personsInput));
       personsEl.value = String(persons);
       setPresetActive("persons", persons);
+      setPersonsPresetState(personsMin, personsMax);
 
-      const showTotal = Boolean(showTotalEl?.checked);
+      const showTotal = Boolean(showTotalEl?.checked ?? true);
       totalBlockEl?.classList.toggle("hidden", !showTotal);
 
       // reset
@@ -400,16 +418,6 @@ const DATA = {
       sessionsEl.value = String(sessions);
       setPresetActive("sessions", sessions);
 
-      // pakiety w cenniku są dla 1–3 osób
-      if (persons > 3) {
-        setText(personsHintEl, "Pakiety: 1–3 osoby");
-        setText(
-          outNoteEl,
-          "Pakiety w cenniku są podane dla 1–3 osób. Dla większej grupy wybierz kurs lub skontaktuj się z nami."
-        );
-        return;
-      }
-
       const price10 = plan.pricePerPerson[String(persons)];
       const perSession = price10 / plan.baseSessions;
       const perPersonTotal = perSession * sessions;
@@ -461,6 +469,7 @@ const DATA = {
 
     presetButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
+        if (btn.hasAttribute("disabled")) return;
         const target = btn.dataset.preset === "sessions" ? sessionsEl : personsEl;
         const value = Number(btn.dataset.value || 0);
         if (!Number.isFinite(value)) return;
