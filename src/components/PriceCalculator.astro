@@ -299,11 +299,15 @@ const DATA = {
       });
     }
 
+    let lastPlanId = planEl?.value;
+
     function update() {
       const plan = getPlan(planEl.value);
       if (!plan) return;
 
       setActivePlan(plan.id);
+      const planChanged = plan.id !== lastPlanId;
+      lastPlanId = plan.id;
 
       const persons = Math.max(1, Math.min(10, Number(personsEl.value || 1)));
       personsEl.value = String(persons);
@@ -378,6 +382,9 @@ const DATA = {
         btn.classList.remove("opacity-50", "cursor-not-allowed");
       });
 
+      if (planChanged) {
+        sessionsEl.value = String(plan.baseSessions);
+      }
       const sessions = Math.max(1, Math.min(200, Number(sessionsEl.value || plan.baseSessions)));
       sessionsEl.value = String(sessions);
       setPresetActive("sessions", sessions);
