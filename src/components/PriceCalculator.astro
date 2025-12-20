@@ -39,6 +39,14 @@ const DATA = {
       minutes: 60,
       minPersons: 4,
     },
+    {
+      id: "kurs-4200",
+      label: "Kurs — 56 spotkań × 90 min",
+      price: 4200,
+      sessions: 56,
+      minutes: 90,
+      minPersons: 4,
+    },
   ],
 };
 ---
@@ -316,7 +324,7 @@ const DATA = {
       setText(outNoteEl, "");
 
       if (plan.kind === "course") {
-        const sessions = 10;
+        const sessions = plan.sessions;
         sessionsEl.value = String(sessions);
         sessionsEl.setAttribute("disabled", "disabled");
         sessionsEl.classList.add("bg-slate-100");
@@ -330,15 +338,15 @@ const DATA = {
         });
         setPresetActive("sessions", sessions);
 
-        const perSession = (plan.price / plan.sessions) / persons;
-        const perPersonTotal = perSession * sessions;
+        const perPersonTotal = plan.price;
+        const perSession = perPersonTotal / plan.sessions;
         const groupTotal = perPersonTotal * persons;
 
         setText(outPerSessionEl, pln(perSession));
         setText(outPerSessionSubEl, `${plan.minutes} min`);
 
         setText(outPerTotalEl, pln(perPersonTotal));
-        setText(outPerTotalSubEl, `${sessions} spotkań / osoba`);
+        setText(outPerTotalSubEl, `cena z cennika / osoba`);
 
         if (showTotal) {
           setText(outTotalEl, pln(groupTotal));
@@ -350,11 +358,11 @@ const DATA = {
           outNoteEl,
           warn
             ? `Ten kurs jest w cenniku „od ${plan.minPersons} osób”. Wybrałeś(aś) ${persons} — wynik traktuj orientacyjnie.`
-            : `Kurs: ${plan.sessions} spotkań × ${plan.minutes} min. Kalkulator pokazuje cenę za ${sessions} spotkań.`
+            : `Kurs: ${plan.sessions} spotkań × ${plan.minutes} min. Wymagana grupa: od ${plan.minPersons} osób.`
         );
 
         setText(personsHintEl, `Kurs: od ${plan.minPersons} osób`);
-        setText(sessionsHintEl, `Kurs ma ${plan.sessions} spotkań — kalkulator pokazuje ${sessions}.`);
+        setText(sessionsHintEl, `Kurs: ${plan.sessions} spotkań`);
         return;
       }
 
