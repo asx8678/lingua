@@ -3,11 +3,6 @@
 // Uwaga: Jeżeli rozliczenie w Twoim przypadku wygląda inaczej (np. niestandardowa liczba spotkań),
 // wynik traktuj jako orientacyjny i skontaktuj się ze szkołą.
 
-const SUBJECTS = [
-  { id: "matematyka", label: "Matematyka" },
-  { id: "angielski", label: "Angielski" },
-];
-
 const DATA = {
   packages: [
     {
@@ -57,10 +52,10 @@ const DATA = {
 ---
 
 <div class="card p-6">
-  <div class="notice text-sm">
+  <div class="text-xs text-slate-600">
     Matematyka ma takie same stawki jak angielski.
   </div>
-  <div class="mt-3 text-xs text-slate-600">
+  <div class="mt-2 text-xs text-slate-600">
     Pakiety 10 spotkań (cena / osoba): 60 min — 1300 zł (1), 800 zł (2), 650 zł (3). 45 min — 1000 zł (1),
     600 zł (2), 500 zł (3).
   </div>
@@ -69,23 +64,6 @@ const DATA = {
   </div>
 
   <form id="price-calc" class="grid gap-4" aria-label="Kalkulator ceny">
-    <div>
-      <div class="text-sm font-bold text-slate-900">Przedmiot</div>
-      <div class="mt-2 flex flex-wrap gap-2" role="group" aria-label="Przedmiot">
-        {SUBJECTS.map((subject) => (
-          <button
-            type="button"
-            class="btn btn-secondary px-4 py-2 text-xs"
-            data-subject={subject.id}
-          >
-            {subject.label}
-          </button>
-        ))}
-      </div>
-      <input id="subject" name="subject" type="hidden" value="matematyka" />
-      <p id="subject-hint" class="mt-1 text-xs text-slate-500"></p>
-    </div>
-
     <div>
       <div class="text-sm font-bold text-slate-900">Typ</div>
       <div class="mt-2 grid gap-4 lg:grid-cols-2">
@@ -271,9 +249,6 @@ const DATA = {
     const DATA = /** @type {const} */ (JSON.parse(document.getElementById('price-data').textContent));
 
     const form = document.getElementById("price-calc");
-    const subjectEl = document.getElementById("subject");
-    const subjectHintEl = document.getElementById("subject-hint");
-    const subjectButtons = form?.querySelectorAll("[data-subject]") ?? [];
     const planEl = document.getElementById("plan");
     const planButtons = form?.querySelectorAll("[data-plan]") ?? [];
     const stepButtons = form?.querySelectorAll("[data-target][data-step]") ?? [];
@@ -323,22 +298,6 @@ const DATA = {
         btn.classList.toggle("btn-primary", isActive);
         btn.classList.toggle("btn-secondary", !isActive);
       });
-    }
-
-    function setActiveSubject(id) {
-      if (!subjectEl) return;
-      subjectEl.value = id;
-      subjectButtons.forEach((btn) => {
-        const isActive = btn.dataset.subject === id;
-        btn.classList.toggle("btn-primary", isActive);
-        btn.classList.toggle("btn-secondary", !isActive);
-      });
-      if (subjectHintEl) {
-        subjectHintEl.textContent =
-          id === "matematyka"
-            ? "Matematyka ma te same stawki co angielski."
-            : "Angielski jest bazą cenową kalkulatora.";
-      }
     }
 
     function setPresetActive(target, value) {
@@ -500,12 +459,6 @@ const DATA = {
       });
     });
 
-    subjectButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        setActiveSubject(btn.dataset.subject);
-      });
-    });
-
     presetButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
         const target = btn.dataset.preset === "sessions" ? sessionsEl : personsEl;
@@ -519,7 +472,6 @@ const DATA = {
     form?.addEventListener("input", update);
     planEl?.addEventListener("change", update);
     showTotalEl?.addEventListener("change", update);
-    setActiveSubject(subjectEl?.value);
     setActivePlan(planEl?.value);
     update();
   </script>
