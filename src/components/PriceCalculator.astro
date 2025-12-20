@@ -46,12 +46,38 @@ const DATA = {
 <div class="card p-6">
   <form id="price-calc" class="grid gap-4" aria-label="Kalkulator ceny">
     <div>
-      <label for="plan" class="text-sm font-bold text-slate-900">Typ</label>
-      <select
-        id="plan"
-        name="plan"
-        class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
-      >
+      <div class="text-sm font-bold text-slate-900">Typ</div>
+      <div class="mt-2 grid gap-4 lg:grid-cols-2">
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Pakiety (10 spotkań)</div>
+          <div class="mt-2 flex flex-wrap gap-2" role="group" aria-label="Pakiety">
+            {DATA.packages.map((p) => (
+              <button
+                type="button"
+                class="btn btn-secondary px-4 py-2 text-xs"
+                data-plan={p.id}
+              >
+                {p.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Kursy (grupy)</div>
+          <div class="mt-2 flex flex-wrap gap-2" role="group" aria-label="Kursy">
+            {DATA.courses.map((c) => (
+              <button
+                type="button"
+                class="btn btn-secondary px-4 py-2 text-xs"
+                data-plan={c.id}
+              >
+                {c.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+      <select id="plan" name="plan" class="sr-only" aria-hidden="true" tabindex="-1">
         <optgroup label="Pakiety (10 spotkań)">
           {DATA.packages.map((p) => (
             <option value={p.id} selected={p.id === "pakiet-45"}>{p.label}</option>
@@ -68,31 +94,71 @@ const DATA = {
     <div class="grid gap-4 sm:grid-cols-2">
       <div>
         <label for="persons" class="text-sm font-bold text-slate-900">Liczba osób</label>
-        <input
-          id="persons"
-          name="persons"
-          type="number"
-          inputmode="numeric"
-          min="1"
-          max="10"
-          value="1"
-          class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
-        />
+        <div class="mt-1 flex items-center gap-2">
+          <button
+            type="button"
+            class="rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-700 transition hover:bg-slate-100"
+            data-target="persons"
+            data-step="-1"
+            aria-label="Zmniejsz liczbę osób"
+          >
+            −
+          </button>
+          <input
+            id="persons"
+            name="persons"
+            type="number"
+            inputmode="numeric"
+            min="1"
+            max="10"
+            value="1"
+            class="w-full rounded-xl border-slate-300 bg-white text-center focus:border-primary focus:ring-primary"
+          />
+          <button
+            type="button"
+            class="rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-700 transition hover:bg-slate-100"
+            data-target="persons"
+            data-step="1"
+            aria-label="Zwiększ liczbę osób"
+          >
+            +
+          </button>
+        </div>
         <p id="persons-hint" class="mt-1 text-xs text-slate-500"></p>
       </div>
 
       <div>
         <label for="sessions" class="text-sm font-bold text-slate-900">Liczba spotkań</label>
-        <input
-          id="sessions"
-          name="sessions"
-          type="number"
-          inputmode="numeric"
-          min="1"
-          max="200"
-          value="10"
-          class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
-        />
+        <div class="mt-1 flex items-center gap-2">
+          <button
+            type="button"
+            class="rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-700 transition hover:bg-slate-100"
+            data-target="sessions"
+            data-step="-1"
+            aria-label="Zmniejsz liczbę spotkań"
+          >
+            −
+          </button>
+          <input
+            id="sessions"
+            name="sessions"
+            type="number"
+            inputmode="numeric"
+            min="1"
+            max="200"
+            value="10"
+            class="w-full rounded-xl border-slate-300 bg-white text-center focus:border-primary focus:ring-primary"
+          />
+          <button
+            type="button"
+            class="rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-700 transition hover:bg-slate-100"
+            data-target="sessions"
+            data-step="1"
+            aria-label="Zwiększ liczbę spotkań"
+          >
+            +
+          </button>
+        </div>
         <p id="sessions-hint" class="mt-1 text-xs text-slate-500"></p>
       </div>
     </div>
@@ -141,6 +207,9 @@ const DATA = {
 
     const form = document.getElementById("price-calc");
     const planEl = document.getElementById("plan");
+    const planButtons = form?.querySelectorAll("[data-plan]") ?? [];
+    const stepButtons = form?.querySelectorAll("[data-target][data-step]") ?? [];
+    const sessionStepButtons = form?.querySelectorAll('[data-target="sessions"]') ?? [];
     const personsEl = document.getElementById("persons");
     const sessionsEl = document.getElementById("sessions");
     const showTotalEl = document.getElementById("show-total");
@@ -176,9 +245,21 @@ const DATA = {
       el.textContent = txt;
     }
 
+    function setActivePlan(id) {
+      if (!planEl) return;
+      planEl.value = id;
+      planButtons.forEach((btn) => {
+        const isActive = btn.dataset.plan === id;
+        btn.classList.toggle("btn-primary", isActive);
+        btn.classList.toggle("btn-secondary", !isActive);
+      });
+    }
+
     function update() {
       const plan = getPlan(planEl.value);
       if (!plan) return;
+
+      setActivePlan(plan.id);
 
       const persons = Math.max(1, Math.min(10, Number(personsEl.value || 1)));
       personsEl.value = String(persons);
@@ -201,6 +282,10 @@ const DATA = {
         sessionsEl.value = String(plan.sessions);
         sessionsEl.setAttribute("disabled", "disabled");
         sessionsEl.classList.add("bg-slate-100");
+        sessionStepButtons.forEach((btn) => {
+          btn.setAttribute("disabled", "disabled");
+          btn.classList.add("opacity-50", "cursor-not-allowed");
+        });
 
         const perPersonTotal = plan.price;
         const perSession = plan.price / plan.sessions;
@@ -232,6 +317,10 @@ const DATA = {
       // Package
       sessionsEl.removeAttribute("disabled");
       sessionsEl.classList.remove("bg-slate-100");
+      sessionStepButtons.forEach((btn) => {
+        btn.removeAttribute("disabled");
+        btn.classList.remove("opacity-50", "cursor-not-allowed");
+      });
 
       const sessions = Math.max(1, Math.min(200, Number(sessionsEl.value || plan.baseSessions)));
       sessionsEl.value = String(sessions);
@@ -276,9 +365,29 @@ const DATA = {
       setText(personsHintEl, "Pakiety: 1–3 osoby");
     }
 
+    planButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        setActivePlan(btn.dataset.plan);
+        update();
+      });
+    });
+
+    stepButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const target = btn.dataset.target === "sessions" ? sessionsEl : personsEl;
+        const step = Number(btn.dataset.step || 0);
+        const min = Number(target.min || 1);
+        const max = Number(target.max || 200);
+        const next = Math.max(min, Math.min(max, Number(target.value || 0) + step));
+        target.value = String(next);
+        update();
+      });
+    });
+
     form?.addEventListener("input", update);
     planEl?.addEventListener("change", update);
     showTotalEl?.addEventListener("change", update);
+    setActivePlan(planEl?.value);
     update();
   </script>
 </div>
