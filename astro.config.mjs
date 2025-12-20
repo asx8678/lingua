@@ -19,6 +19,7 @@ export default defineConfig({
         const { pathname } = new URL(page);
         return !SITEMAP_EXCLUDE.has(pathname);
       },
+      lastmod: new Date(),
     }),
   ],
 });
