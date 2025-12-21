@@ -84,6 +84,24 @@ export const CTA_SECONDARY_HREF = SECONDARY_CTA.href;
 
 export const isTodo = (value: string | undefined | null) => !value;
 
+export type BreadcrumbItem = {
+  name: string;
+  url?: string;
+};
+
+export function generateBreadcrumbSchema(items: BreadcrumbItem[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url ? new URL(item.url, SITE_URL).toString() : undefined,
+    })),
+  };
+}
+
 export const DATA_PROCESSORS = [
   {
     name: "Cloudflare, Inc.",

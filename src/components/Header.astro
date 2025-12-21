@@ -44,7 +44,9 @@ const linkClass = (href: string) =>
     <details class="relative lg:hidden" id="mobile-menu">
       <summary
         class="list-none cursor-pointer select-none rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-900 shadow-sm transition hover:bg-slate-100"
-        aria-label="Otwórz menu"
+        aria-label="Menu nawigacji"
+        aria-expanded="false"
+        aria-controls="mobile-menu-content"
       >
         <span class="inline-flex items-center gap-2">
           Menu
@@ -94,6 +96,41 @@ const linkClass = (href: string) =>
     <script is:inline>
       const menu = document.getElementById("mobile-menu");
       const menuContent = document.getElementById("mobile-menu-content");
+      const summary = menu?.querySelector("summary");
+
+      function updateAriaExpanded() {
+        const isOpen = menu?.hasAttribute("open");
+        summary?.setAttribute("aria-expanded", String(isOpen));
+      }
+
+      function getFocusableElements() {
+        if (!menuContent) return [];
+        return Array.from(
+          menuContent.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])')
+        );
+      }
+
+      function trapFocus(e) {
+        if (!menu?.hasAttribute("open")) return;
+
+        const focusable = getFocusableElements();
+        if (!focusable.length) return;
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.key === "Tab") {
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
+
+      menu?.addEventListener("toggle", updateAriaExpanded);
 
       menuContent?.addEventListener("click", (e) => {
         if (e.target.tagName === "A") {
@@ -110,8 +147,9 @@ const linkClass = (href: string) =>
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && menu?.hasAttribute("open")) {
           menu.removeAttribute("open");
-          menu.querySelector("summary")?.focus();
+          summary?.focus();
         }
+        trapFocus(e);
       });
     </script>
   </div>

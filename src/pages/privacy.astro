@@ -15,7 +15,15 @@ import {
 const title = `Polityka prywatności | ${BRAND_NAME}`;
 const description =
   "Polityka prywatności serwisu Lingua Legionowo. Informacje o przetwarzaniu danych osobowych zgodnie z RODO.";
-const updatedAt = "21.12.2025";
+
+const lastModified = import.meta.env.BUILD_TIME
+  ? new Date(import.meta.env.BUILD_TIME)
+  : new Date();
+const updatedAt = lastModified.toLocaleDateString("pl-PL", {
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
+});
 const controllerName = BUSINESS.legalEntityName || BRAND_NAME;
 const addressLine = FULL_ADDRESS || BUSINESS.city;
 const hasEmail = !isTodo(CONTACT_EMAIL);

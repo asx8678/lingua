@@ -1,6 +1,6 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import { BRAND_NAME, CONTACT_EMAIL, CONTACT_PHONE, isTodo } from "../config/site";
+import { BRAND_NAME, CONTACT_EMAIL, CONTACT_PHONE, isTodo, generateBreadcrumbSchema } from "../config/site";
 
 const title = `Kontakt – szkoła angielskiego Legionowo | ${BRAND_NAME}`;
 const description =
@@ -11,9 +11,14 @@ const hasPhone = !isTodo(CONTACT_PHONE);
 const formAction = hasEmail ? "/api/kontakt" : "#";
 const emailFallback = "Skontaktuj się przez formularz.";
 const phoneFallback = "Skontaktuj się przez formularz.";
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: "Strona główna", url: "/" },
+  { name: "Kontakt" },
+]);
 ---
 
-<MainLayout title={title} description={description} canonical="/kontakt">
+<MainLayout title={title} description={description} canonical="/kontakt" structuredData={[breadcrumbSchema]}>
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-start">

@@ -2,7 +2,7 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
 import FaqSection from "../components/FaqSection.astro";
-import { BRAND_NAME } from "../config/site";
+import { BRAND_NAME, generateBreadcrumbSchema } from "../config/site";
 
 const title = `Angielski online – lekcje z lektorem | ${BRAND_NAME}`;
 const description =
@@ -135,9 +135,15 @@ const faqJsonLd = {
     },
   })),
 };
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: "Strona główna", url: "/" },
+  { name: "Oferta", url: "/oferta" },
+  { name: "Angielski online" },
+]);
 ---
 
-<MainLayout title={title} description={description} canonical="/angielski-online" structuredData={[faqJsonLd]}>
+<MainLayout title={title} description={description} canonical="/angielski-online" structuredData={[faqJsonLd, breadcrumbSchema]}>
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-center">

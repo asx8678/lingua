@@ -40,5 +40,6 @@ export const teachers: Teacher[] = [
     name: "Marcin",
     role: "Lektor",
     languages: ["Angielski", "Francuski"],
+    image: "/images/teachers/placeholder.svg",
   },
 ];
