@@ -8,7 +8,8 @@ const MIN_NAME_LENGTH = 2;
 const MAX_NAME_LENGTH = 100;
 const MIN_MESSAGE_LENGTH = 20;
 const MAX_MESSAGE_LENGTH = 5000;
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Require at least 2 characters in TLD for better validation
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 // Rate limit config
 const RATE_LIMIT_CONFIG = {

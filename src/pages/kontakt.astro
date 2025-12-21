@@ -154,7 +154,13 @@ const phoneFallback = "Skontaktuj się przez formularz.";
 
             <button class="btn btn-primary w-full" type="submit" id="submit-btn">
               <span id="submit-text">Wyślij wiadomość</span>
-              <span id="submit-loading" class="hidden">Wysyłanie...</span>
+              <span id="submit-loading" class="hidden items-center gap-2">
+                <svg class="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Wysyłanie...
+              </span>
             </button>
           </form>
 
@@ -188,7 +194,7 @@ const phoneFallback = "Skontaktuj się przez formularz.";
       { id: "consent", type: "checkbox", message: "Wymagana jest zgoda na kontakt." },
     ];
 
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     const throttleMs = 60 * 1000;
     const throttleKey = "lingua-contact-throttle";
 
@@ -251,9 +257,15 @@ const phoneFallback = "Skontaktuj się przez formularz.";
     };
 
     const setLoading = (loading) => {
-      if (submitBtn) submitBtn.disabled = loading;
+      if (submitBtn) {
+        submitBtn.disabled = loading;
+        submitBtn.setAttribute("aria-busy", String(loading));
+      }
       if (submitText) submitText.classList.toggle("hidden", loading);
-      if (submitLoading) submitLoading.classList.toggle("hidden", !loading);
+      if (submitLoading) {
+        submitLoading.classList.toggle("hidden", !loading);
+        submitLoading.classList.toggle("inline-flex", loading);
+      }
     };
 
     const showSuccess = () => {

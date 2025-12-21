@@ -106,6 +106,13 @@ const linkClass = (href: string) =>
           menu.removeAttribute("open");
         }
       });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && menu?.hasAttribute("open")) {
+          menu.removeAttribute("open");
+          menu.querySelector("summary")?.focus();
+        }
+      });
     </script>
   </div>
 </header>

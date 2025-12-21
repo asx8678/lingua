@@ -59,6 +59,7 @@ export function initPriceCalculator(data: PricingData): void {
       const isActive = btn.dataset.plan === id;
       btn.classList.toggle("btn-primary", isActive);
       btn.classList.toggle("btn-secondary", !isActive);
+      btn.setAttribute("aria-pressed", String(isActive));
     });
   }
 
@@ -69,6 +70,7 @@ export function initPriceCalculator(data: PricingData): void {
       btn.classList.toggle("bg-primary/10", isActive);
       btn.classList.toggle("border-primary/40", isActive);
       btn.classList.toggle("text-primary", isActive);
+      btn.setAttribute("aria-pressed", String(isActive));
     });
   }
 
