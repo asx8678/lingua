@@ -1,13 +1,23 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import { BRAND_NAME } from "../config/site";
+import { BRAND_NAME, generateBreadcrumbSchema } from "../config/site";
 
 const title = `Zapisy 2025/2026 – ${BRAND_NAME}`;
 const description =
   "Formularz zapisów na zajęcia w roku 2025/2026. Wybierz preferowany tryb, poziom i zostaw dane kontaktowe.";
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: "Strona główna", url: "/" },
+  { name: "Zapisy 2025/2026" },
+]);
 ---
 
-<MainLayout title={title} description={description}>
+<MainLayout
+  title={title}
+  description={description}
+  canonical="/zapisy-2025-2026"
+  structuredData={[breadcrumbSchema]}
+>
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
@@ -15,17 +25,17 @@ const description =
           <span class="kicker">Zapisy 2025/2026</span>
           <h1 class="mt-6">Zapisz się na zajęcia w roku 2025/2026</h1>
           <p class="mt-6 max-w-2xl text-lg">
-            Wypełnij formularz, a wrócimy z propozycją terminu i planu nauki. Zajęcia prowadzimy stacjonarnie
-            w Legionowie oraz online.
+            Wypełnij formularz, a wrócimy z propozycją terminu i planu nauki. Zajęcia prowadzimy
+            stacjonarnie w Legionowie oraz online.
           </p>
           <ul class="mt-6 space-y-2 text-sm text-slate-600">
-            <li>Odezwę się z propozycją terminu w ciągu 1–2 dni roboczych.</li>
+            <li>Odezwiemy się z propozycją terminu w ciągu 1–2 dni roboczych.</li>
             <li>Ustalimy poziom, cel i preferowany tryb zajęć.</li>
             <li>Dobierzemy plan i zaproponujemy pakiet spotkań.</li>
           </ul>
         </div>
 
-        <div class="card p-6">
+        <div class="card p-6" id="formularz">
           <h2 class="text-lg font-extrabold text-slate-900">Formularz zapisów</h2>
           <p class="mt-2 text-sm text-slate-600">Pola oznaczone * są wymagane.</p>
 
@@ -34,7 +44,24 @@ const description =
             action="/api/zapisy"
             class="mt-6 space-y-4"
             aria-label="Formularz zapisów na zajęcia"
+            data-signup-form
           >
+            <div
+              class="relative"
+              aria-hidden="true"
+              style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;"
+            >
+              <label for="company">Firma</label>
+              <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div
+              id="form-alert"
+              class="hidden rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-700"
+              role="alert"
+            >
+            </div>
+
             <div>
               <label for="name" class="text-sm font-bold text-slate-900">Imię i nazwisko *</label>
               <input
@@ -42,8 +69,11 @@ const description =
                 name="name"
                 autocomplete="name"
                 required
+                minlength="2"
+                aria-describedby="name-error"
                 class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
               />
+              <p id="name-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
             </div>
 
             <div>
@@ -54,19 +84,27 @@ const description =
                 type="email"
                 autocomplete="email"
                 required
+                aria-describedby="email-error"
                 class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
               />
+              <p id="email-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
             </div>
 
             <div>
-              <label for="phone" class="text-sm font-bold text-slate-900">Telefon (opcjonalnie)</label>
+              <label for="phone" class="text-sm font-bold text-slate-900"
+                >Telefon (opcjonalnie)</label
+              >
               <input
                 id="phone"
                 name="phone"
                 type="tel"
                 autocomplete="tel"
+                pattern="[0-9+\-\s]{7,20}"
+                aria-describedby="phone-error"
                 class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+                placeholder="Np. +48 123 456 789"
               />
+              <p id="phone-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
             </div>
 
             <div>
@@ -75,6 +113,7 @@ const description =
                 id="mode"
                 name="mode"
                 required
+                aria-describedby="mode-error"
                 class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
               >
                 <option value="">Wybierz</option>
@@ -82,6 +121,7 @@ const description =
                 <option value="online">Online</option>
                 <option value="inne">Inne języki / matematyka</option>
               </select>
+              <p id="mode-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
             </div>
 
             <div>
@@ -90,13 +130,18 @@ const description =
                 id="level"
                 name="level"
                 required
+                minlength="2"
+                aria-describedby="level-error"
                 class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
                 placeholder="Np. A2/B1, konwersacje, matura"
               />
+              <p id="level-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
             </div>
 
             <div>
-              <label for="availability" class="text-sm font-bold text-slate-900">Preferowane dni/godziny</label>
+              <label for="availability" class="text-sm font-bold text-slate-900"
+                >Preferowane dni/godziny</label
+              >
               <input
                 id="availability"
                 name="availability"
@@ -106,13 +151,15 @@ const description =
             </div>
 
             <div>
-              <label for="message" class="text-sm font-bold text-slate-900">Dodatkowe informacje</label>
+              <label for="message" class="text-sm font-bold text-slate-900"
+                >Dodatkowe informacje</label
+              >
               <textarea
                 id="message"
                 name="message"
+                maxlength="2000"
                 class="mt-1 min-h-[120px] w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
-                placeholder="Np. cele, preferowany format, liczba osób"
-              ></textarea>
+                placeholder="Np. cele, preferowany format, liczba osób"></textarea>
             </div>
 
             <div class="flex items-start gap-3 text-sm text-slate-600">
@@ -121,18 +168,228 @@ const description =
                 name="consent"
                 type="checkbox"
                 required
+                aria-describedby="consent-error"
                 class="mt-1 h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary"
               />
               <label for="consent">
                 Wyrażam zgodę na kontakt w sprawie zapisów zgodnie z
-                <a class="font-bold text-primary no-underline hover:underline" href="/privacy">polityką prywatności</a>.
+                <a class="font-bold text-primary no-underline hover:underline" href="/privacy"
+                  >polityką prywatności</a
+                >.
               </label>
             </div>
+            <p id="consent-error" class="text-xs text-rose-600" aria-live="polite"></p>
 
-            <button class="btn btn-primary w-full" type="submit">Wyślij zgłoszenie</button>
+            <button class="btn btn-primary w-full" type="submit" id="submit-btn">
+              <span id="submit-text">Wyślij zgłoszenie</span>
+              <span id="submit-loading" class="hidden items-center gap-2">
+                <svg
+                  class="h-4 w-4 animate-spin"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <circle
+                    class="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    stroke-width="4"></circle>
+                  <path
+                    class="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+                Wysyłanie...
+              </span>
+            </button>
           </form>
+
+          <div
+            id="signup-success"
+            class="mt-6 hidden rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800"
+            role="status"
+            tabindex="-1"
+          >
+            <strong>Dziękujemy za zgłoszenie!</strong> Odezwiemy się w ciągu 1–2 dni roboczych z propozycją
+            terminu i planu nauki.
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <script is:inline>
+    const form = document.querySelector("[data-signup-form]");
+    const alertEl = document.getElementById("form-alert");
+    const successEl = document.getElementById("signup-success");
+    const honeypotEl = document.getElementById("company");
+    const submitBtn = document.getElementById("submit-btn");
+    const submitText = document.getElementById("submit-text");
+    const submitLoading = document.getElementById("submit-loading");
+
+    const fields = [
+      { id: "name", min: 2, message: "Podaj imię i nazwisko (min. 2 znaki)." },
+      { id: "email", type: "email", message: "Podaj poprawny adres e-mail." },
+      { id: "mode", type: "select", message: "Wybierz preferowany tryb zajęć." },
+      { id: "level", min: 2, message: "Podaj poziom lub cel nauki." },
+      { id: "consent", type: "checkbox", message: "Wymagana jest zgoda na kontakt." },
+    ];
+
+    const emailPattern =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+    const throttleMs = 60 * 1000;
+    const throttleKey = "lingua-signup-throttle";
+
+    const getErrorEl = (id) => document.getElementById(`${id}-error`);
+
+    const setError = (field, message) => {
+      const errorEl = getErrorEl(field.id);
+      if (errorEl) errorEl.textContent = message;
+      field.setAttribute("aria-invalid", "true");
+    };
+
+    const clearError = (field) => {
+      const errorEl = getErrorEl(field.id);
+      if (errorEl) errorEl.textContent = "";
+      field.removeAttribute("aria-invalid");
+    };
+
+    const validate = () => {
+      let firstInvalid = null;
+      fields.forEach((rule) => {
+        const field = document.getElementById(rule.id);
+        if (!field) return;
+        clearError(field);
+
+        const value = field.type === "checkbox" ? field.checked : field.value.trim();
+        let valid = true;
+
+        if (rule.type === "checkbox") {
+          valid = Boolean(value);
+        } else if (rule.type === "email") {
+          valid = emailPattern.test(value);
+        } else if (rule.type === "select") {
+          valid = value !== "";
+        } else if (rule.min) {
+          valid = value.length >= rule.min;
+        }
+
+        if (!valid) {
+          setError(field, rule.message);
+          if (!firstInvalid) firstInvalid = field;
+        }
+      });
+
+      if (firstInvalid) {
+        firstInvalid.focus();
+      }
+
+      return !firstInvalid;
+    };
+
+    const showAlert = (message) => {
+      if (!alertEl) return;
+      alertEl.textContent = message;
+      alertEl.classList.remove("hidden");
+      alertEl.scrollIntoView({ behavior: "smooth", block: "center" });
+    };
+
+    const clearAlert = () => {
+      if (!alertEl) return;
+      alertEl.textContent = "";
+      alertEl.classList.add("hidden");
+    };
+
+    const setLoading = (loading) => {
+      if (submitBtn) {
+        submitBtn.disabled = loading;
+        submitBtn.setAttribute("aria-busy", String(loading));
+      }
+      if (submitText) submitText.classList.toggle("hidden", loading);
+      if (submitLoading) {
+        submitLoading.classList.toggle("hidden", !loading);
+        submitLoading.classList.toggle("inline-flex", loading);
+      }
+    };
+
+    const showSuccess = () => {
+      if (form) form.classList.add("hidden");
+      if (successEl) {
+        successEl.classList.remove("hidden");
+        successEl.focus();
+      }
+    };
+
+    form?.addEventListener("input", (event) => {
+      const target = event.target;
+      if (!target?.id) return;
+      clearAlert();
+      clearError(target);
+    });
+
+    form?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      clearAlert();
+
+      if (honeypotEl?.value?.trim()) {
+        showAlert("Wykryliśmy podejrzaną aktywność. Spróbuj ponownie za chwilę.");
+        return;
+      }
+
+      const lastSubmit = Number(localStorage.getItem(throttleKey) || 0);
+      if (Date.now() - lastSubmit < throttleMs) {
+        showAlert("Prosimy odczekać 60 sekund przed kolejną próbą wysłania formularza.");
+        return;
+      }
+
+      if (!validate()) {
+        return;
+      }
+
+      setLoading(true);
+
+      try {
+        const formData = new FormData(form);
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: formData,
+        });
+
+        if (response.redirected && response.url.startsWith("mailto:")) {
+          localStorage.setItem(throttleKey, String(Date.now()));
+          window.location.href = response.url;
+          showSuccess();
+          return;
+        }
+
+        if (response.status === 303) {
+          const mailto = response.headers.get("Location");
+          if (mailto?.startsWith("mailto:")) {
+            localStorage.setItem(throttleKey, String(Date.now()));
+            window.location.href = mailto;
+            showSuccess();
+            return;
+          }
+        }
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          showAlert(data.error || "Wystąpił błąd. Spróbuj ponownie.");
+          return;
+        }
+
+        localStorage.setItem(throttleKey, String(Date.now()));
+        showSuccess();
+      } catch (error) {
+        console.error("Form submission error:", error);
+        showAlert("Wystąpił błąd połączenia. Sprawdź internet i spróbuj ponownie.");
+      } finally {
+        setLoading(false);
+      }
+    });
+  </script>
 </MainLayout>

@@ -29,13 +29,37 @@ const process = [
   "Regularne podsumowania",
 ];
 
+const standards = [
+  {
+    title: "Diagnoza na starcie",
+    text: "Poznajemy Twój poziom, cel i sposób nauki, aby dobrze dopasować plan.",
+  },
+  {
+    title: "Plan w jasno opisanych krokach",
+    text: "Ustalamy zakres, tematy i rytm spotkań, żebyś widział postęp.",
+  },
+  {
+    title: "Materiały po każdej lekcji",
+    text: "Dostajesz podsumowanie, słownictwo i krótkie zadania do utrwalenia.",
+  },
+  {
+    title: "Regularny feedback",
+    text: "Wiesz, co już działa dobrze i co wymaga ćwiczeń.",
+  },
+];
+
 const breadcrumbSchema = generateBreadcrumbSchema([
   { name: "Strona główna", url: "/" },
   { name: "O nas" },
 ]);
 ---
 
-<MainLayout title={title} description={description} canonical="/o-nas" structuredData={[breadcrumbSchema]}>
+<MainLayout
+  title={title}
+  description={description}
+  canonical="/o-nas"
+  structuredData={[breadcrumbSchema]}
+>
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
@@ -44,8 +68,8 @@ const breadcrumbSchema = generateBreadcrumbSchema([
           <h1 class="mt-6">Szkoła języka angielskiego w Legionowie</h1>
           <p class="mt-6 max-w-2xl text-lg">
             {BRAND_NAME} to lokalna szkoła językowa, w której najważniejsze jest praktyczne użycie języka.
-            Oferujemy zajęcia stacjonarne w Legionowie oraz lekcje online dla osób spoza Legionowa.
-            Pomagamy kursantom przejść od pasywnego rozumienia do swobodnej komunikacji.
+            Oferujemy zajęcia stacjonarne w Legionowie oraz lekcje online dla osób spoza Legionowa. Pomagamy
+            kursantom przejść od pasywnego rozumienia do swobodnej komunikacji.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
             <a class="btn btn-primary" href="/kontakt">Porozmawiaj z nami</a>
@@ -53,21 +77,24 @@ const breadcrumbSchema = generateBreadcrumbSchema([
           </div>
           <p class="mt-4 text-sm text-slate-500">
             Interesuje Cię oferta? Sprawdź
-            <a class="font-bold text-primary no-underline hover:underline" href="/cennik">cennik</a>.
+            <a class="font-bold text-primary no-underline hover:underline" href="/cennik">cennik</a
+            >.
           </p>
         </div>
 
         <div class="card p-6">
           <h2 class="text-2xl font-extrabold tracking-tight">Jak pracujemy</h2>
           <ol class="mt-4 space-y-3 text-sm text-slate-600">
-            {process.map((step, index) => (
-              <li class="flex items-start gap-3">
-                <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
-                  {index + 1}
-                </span>
-                <span>{step}</span>
-              </li>
-            ))}
+            {
+              process.map((step, index) => (
+                <li class="flex items-start gap-3">
+                  <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
+                    {index + 1}
+                  </span>
+                  <span>{step}</span>
+                </li>
+              ))
+            }
           </ol>
         </div>
       </div>
@@ -78,20 +105,43 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     <div class="container-site">
       <h2>Dlaczego kursanci zostają na dłużej</h2>
       <p class="mt-4 max-w-3xl">
-        Dobrze zaplanowana nauka daje spokój i przewidywalne efekty. Stawiamy na jasny plan i realne postępy.
+        Dobrze zaplanowana nauka daje spokój i przewidywalne efekty. Stawiamy na jasny plan i realne
+        postępy.
       </p>
 
       <div class="mt-8 grid gap-6 lg:grid-cols-3">
-        {values.map((value) => (
-          <div class="card p-6">
-            <h3 class="text-lg font-extrabold text-slate-900">{value.title}</h3>
-            <p class="mt-3 text-sm text-slate-600">{value.text}</p>
-          </div>
-        ))}
+        {
+          values.map((value) => (
+            <div class="card p-6">
+              <h3 class="text-lg font-extrabold text-slate-900">{value.title}</h3>
+              <p class="mt-3 text-sm text-slate-600">{value.text}</p>
+            </div>
+          ))
+        }
       </div>
 
       <div class="mt-8">
         <a class="btn btn-secondary" href="/angielski-stacjonarnie">Zajęcia stacjonarne</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-site">
+      <h2>Nasze standardy pracy</h2>
+      <p class="mt-4 max-w-3xl">
+        Stawiamy na jasne zasady współpracy i mierzalne efekty. Poniżej znajdziesz elementy, które
+        dostajesz w standardzie.
+      </p>
+      <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {
+          standards.map((item) => (
+            <div class="card p-6">
+              <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
+              <p class="mt-3 text-sm text-slate-600">{item.text}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>

@@ -16,19 +16,26 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ]);
 ---
 
-<MainLayout title={title} description={description} canonical="/oferta" structuredData={[breadcrumbSchema]}>
+<MainLayout
+  title={title}
+  description={description}
+  canonical="/oferta"
+  structuredData={[breadcrumbSchema]}
+>
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">
       <div class="max-w-3xl">
         <span class="kicker">Oferta</span>
         <h1 class="mt-6">Wybierz formę nauki dopasowaną do Ciebie</h1>
         <p class="mt-6 text-lg">
-          Uczymy stacjonarnie w Legionowie i online. Poniżej wybierzesz główny kierunek, a resztę dopasujemy
-          do Twojego poziomu i celu.
+          Uczymy stacjonarnie w Legionowie i online. Poniżej wybierzesz główny kierunek, a resztę
+          dopasujemy do Twojego poziomu i celu.
         </p>
         <div class="mt-8 flex flex-wrap items-center gap-4">
           <a class="btn btn-primary" href="/kontakt">Umów konsultację</a>
-          <a class="text-sm font-bold text-primary no-underline hover:underline" href="/cennik">Zobacz cennik →</a>
+          <a class="text-sm font-bold text-primary no-underline hover:underline" href="/cennik"
+            >Zobacz cennik →</a
+          >
         </div>
       </div>
     </div>
@@ -37,10 +44,14 @@ const breadcrumbSchema = generateBreadcrumbSchema([
   <section class="section">
     <div class="container-site">
       <div class="grid gap-6 md:grid-cols-2">
-        <a class="card p-6 no-underline transition hover:-translate-y-0.5" href="/angielski-stacjonarnie">
+        <a
+          class="card p-6 no-underline transition hover:-translate-y-0.5"
+          href="/angielski-stacjonarnie"
+        >
           <h2 class="text-lg font-extrabold text-slate-900">Angielski stacjonarnie</h2>
           <p class="mt-3 text-sm text-slate-600">
-            Zajęcia w naszej szkole w Legionowie. Bezpośredni kontakt z lektorem i pełna koncentracja.
+            Zajęcia w naszej szkole w Legionowie. Bezpośredni kontakt z lektorem i pełna
+            koncentracja.
           </p>
           <span class="mt-4 inline-flex text-sm font-bold text-primary">Poznaj szczegóły →</span>
         </a>
@@ -59,13 +70,11 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     <div class="container-site">
       <h2>Inne języki i matematyka</h2>
       <p class="mt-4 max-w-3xl">
-        Prowadzimy także zajęcia z innych języków oraz matematyki. Program i terminy dopasowujemy do grupy
-        i poziomu.
+        Prowadzimy także zajęcia z innych języków oraz matematyki. Program i terminy dopasowujemy do
+        grupy i poziomu.
       </p>
       <div class="mt-6 flex flex-wrap gap-2">
-        {otherSubjects.map((subject) => (
-          <span class="chip text-sm">{subject}</span>
-        ))}
+        {otherSubjects.map((subject) => <span class="chip text-sm">{subject}</span>)}
       </div>
       <div class="mt-6">
         <a class="btn btn-secondary" href="/kontakt">Zapytaj o dostępność</a>

@@ -1,6 +1,14 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import { BRAND_NAME, CONTACT_EMAIL, CONTACT_PHONE, isTodo, generateBreadcrumbSchema } from "../config/site";
+import {
+  BRAND_NAME,
+  BUSINESS,
+  CONTACT_EMAIL,
+  CONTACT_PHONE,
+  FULL_ADDRESS,
+  isTodo,
+  generateBreadcrumbSchema,
+} from "../config/site";
 
 const title = `Kontakt – szkoła angielskiego Legionowo | ${BRAND_NAME}`;
 const description =
@@ -11,6 +19,12 @@ const hasPhone = !isTodo(CONTACT_PHONE);
 const formAction = hasEmail ? "/api/kontakt" : "#";
 const emailFallback = "Skontaktuj się przez formularz.";
 const phoneFallback = "Skontaktuj się przez formularz.";
+const addressLine = FULL_ADDRESS || BUSINESS.city;
+const hasAddress = Boolean(addressLine);
+const hasHours = Boolean(BUSINESS.openingHours);
+const mapHref = hasAddress
+  ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressLine)}`
+  : "";
 
 const breadcrumbSchema = generateBreadcrumbSchema([
   { name: "Strona główna", url: "/" },
@@ -18,7 +32,12 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ]);
 ---
 
-<MainLayout title={title} description={description} canonical="/kontakt" structuredData={[breadcrumbSchema]}>
+<MainLayout
+  title={title}
+  description={description}
+  canonical="/kontakt"
+  structuredData={[breadcrumbSchema]}
+>
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
@@ -29,16 +48,23 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             Napisz kilka słów o swoim poziomie i celu. Zaproponujemy plan nauki i terminy —
             stacjonarnie w Legionowie lub online.
           </p>
+          <p class="mt-3 text-sm text-slate-600">
+            Konsultacja obejmuje rozmowę o celu, krótką diagnozę poziomu i propozycję planu.
+          </p>
 
-          <div class="mt-10 grid gap-4 sm:grid-cols-2">
+          <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <div class="card p-6">
               <div class="text-xs font-bold uppercase tracking-widest text-slate-500">E-mail</div>
               <div class="mt-3 text-base font-extrabold text-primary">
-                {hasEmail ? (
-                  <a class="no-underline" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
-                ) : (
-                  <span>{emailFallback}</span>
-                )}
+                {
+                  hasEmail ? (
+                    <a class="no-underline" href={`mailto:${CONTACT_EMAIL}`}>
+                      {CONTACT_EMAIL}
+                    </a>
+                  ) : (
+                    <span>{emailFallback}</span>
+                  )
+                }
               </div>
               <p class="mt-2 text-sm">Odpowiadamy najszybciej mailowo.</p>
             </div>
@@ -46,25 +72,63 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             <div class="card p-6">
               <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Telefon</div>
               <div class="mt-3 text-base font-extrabold text-primary">
-                {hasPhone ? (
-                  <a class="no-underline" href={`tel:${CONTACT_PHONE}`}>{CONTACT_PHONE}</a>
-                ) : (
-                  <span>{phoneFallback}</span>
-                )}
+                {
+                  hasPhone ? (
+                    <a class="no-underline" href={`tel:${CONTACT_PHONE}`}>
+                      {CONTACT_PHONE}
+                    </a>
+                  ) : (
+                    <span>{phoneFallback}</span>
+                  )
+                }
               </div>
               <p class="mt-2 text-sm">Jeśli nie odbierzemy, oddzwonimy.</p>
             </div>
+            {
+              (hasAddress || hasHours) && (
+                <div class="card p-6">
+                  <div class="text-xs font-bold uppercase tracking-widest text-slate-500">
+                    Lokalizacja
+                  </div>
+                  {hasAddress && (
+                    <div class="mt-3 text-base font-extrabold text-slate-900">{addressLine}</div>
+                  )}
+                  {hasAddress && (
+                    <a
+                      class="mt-2 inline-flex text-sm font-bold text-primary no-underline hover:underline"
+                      href={mapHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Zobacz na mapie
+                    </a>
+                  )}
+                  {hasHours && (
+                    <p class="mt-2 text-sm text-slate-600">
+                      Godziny otwarcia: {BUSINESS.openingHours}
+                    </p>
+                  )}
+                </div>
+              )
+            }
           </div>
 
           <p class="mt-6 text-sm text-slate-500">
-            Szkoła Lingua znajduje się w centrum Legionowa. Oferujemy także lekcje online dla osób spoza Legionowa.
+            Szkoła Lingua znajduje się w centrum Legionowa. Oferujemy także lekcje online dla osób
+            spoza Legionowa.
           </p>
           <p class="mt-2 text-sm text-slate-500">
             Zobacz też
-            <a class="font-bold text-primary no-underline hover:underline" href="/angielski-stacjonarnie">zajęcia stacjonarne</a>,
-            <a class="font-bold text-primary no-underline hover:underline" href="/angielski-online">lekcje online</a>
+            <a
+              class="font-bold text-primary no-underline hover:underline"
+              href="/angielski-stacjonarnie">zajęcia stacjonarne</a
+            >,
+            <a class="font-bold text-primary no-underline hover:underline" href="/angielski-online"
+              >lekcje online</a
+            >
             i
-            <a class="font-bold text-primary no-underline hover:underline" href="/cennik">cennik</a>.
+            <a class="font-bold text-primary no-underline hover:underline" href="/cennik">cennik</a
+            >.
           </p>
         </div>
 
@@ -79,12 +143,21 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             aria-label="Formularz kontaktowy"
             data-contact-form
           >
-            <div class="relative" aria-hidden="true" style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;">
+            <div
+              class="relative"
+              aria-hidden="true"
+              style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;"
+            >
               <label for="company">Firma</label>
               <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
             </div>
 
-            <div id="form-alert" class="hidden rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-700" role="alert"></div>
+            <div
+              id="form-alert"
+              class="hidden rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-700"
+              role="alert"
+            >
+            </div>
 
             <div>
               <label for="name" class="text-sm font-bold text-slate-900">Imię i nazwisko *</label>
@@ -115,7 +188,9 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             </div>
 
             <div>
-              <label for="phone" class="text-sm font-bold text-slate-900">Telefon (opcjonalnie)</label>
+              <label for="phone" class="text-sm font-bold text-slate-900"
+                >Telefon (opcjonalnie)</label
+              >
               <input
                 id="phone"
                 name="phone"
@@ -136,8 +211,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
                 minlength="20"
                 aria-describedby="message-error"
                 class="mt-1 min-h-[120px] w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
-                placeholder="Np. poziom, cel, preferowane dni/godziny…"
-              ></textarea>
+                placeholder="Np. poziom, cel, preferowane dni/godziny…"></textarea>
               <p id="message-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
             </div>
 
@@ -152,7 +226,9 @@ const breadcrumbSchema = generateBreadcrumbSchema([
               />
               <label for="consent">
                 Wyrażam zgodę na kontakt w sprawie kursu zgodnie z
-                <a class="font-bold text-primary no-underline hover:underline" href="/privacy">polityką prywatności</a>.
+                <a class="font-bold text-primary no-underline hover:underline" href="/privacy"
+                  >polityką prywatności</a
+                >.
               </label>
             </div>
             <p id="consent-error" class="text-xs text-rose-600" aria-live="polite"></p>
@@ -160,9 +236,24 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             <button class="btn btn-primary w-full" type="submit" id="submit-btn">
               <span id="submit-text">Wyślij wiadomość</span>
               <span id="submit-loading" class="hidden items-center gap-2">
-                <svg class="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                <svg
+                  class="h-4 w-4 animate-spin"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <circle
+                    class="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    stroke-width="4"></circle>
+                  <path
+                    class="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
                 </svg>
                 Wysyłanie...
               </span>
@@ -175,8 +266,8 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             role="status"
             tabindex="-1"
           >
-            <strong>Dziękujemy!</strong> Twoja wiadomość została wysłana. Odezwiemy się w ciągu
-            1–2 dni roboczych.
+            <strong>Dziękujemy!</strong> Twoja wiadomość została wysłana. Odezwiemy się w ciągu 1–2 dni
+            roboczych.
           </div>
         </div>
       </div>

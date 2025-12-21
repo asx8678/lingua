@@ -2,7 +2,7 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "./CTASection.astro";
 import FaqSection from "./FaqSection.astro";
-import { BRAND_NAME } from "../config/site";
+import { BRAND_NAME, generateBreadcrumbSchema } from "../config/site";
 import type { LandingPageData } from "../data/landing-pages";
 
 interface Props {
@@ -11,9 +11,33 @@ interface Props {
 
 const { data } = Astro.props;
 const fullTitle = `${data.title} | ${BRAND_NAME}`;
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: data.faqs.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: "Strona główna", url: "/" },
+  { name: "Oferta", url: "/oferta" },
+  { name: data.kicker },
+]);
 ---
 
-<MainLayout title={fullTitle} description={data.description} canonical={data.canonical}>
+<MainLayout
+  title={fullTitle}
+  description={data.description}
+  canonical={data.canonical}
+  structuredData={[faqJsonLd, breadcrumbSchema]}
+>
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
@@ -47,16 +71,18 @@ const fullTitle = `${data.title} | ${BRAND_NAME}`;
     <div class="container-site">
       <h2>Dlaczego {BRAND_NAME}?</h2>
       <p class="mt-4 max-w-3xl">
-        Jesteśmy lokalną szkołą językową, która rozumie potrzeby mieszkańców Legionowa.
-        Bez dojazdów do Warszawy — ucz się blisko domu.
+        Jesteśmy lokalną szkołą językową, która rozumie potrzeby mieszkańców Legionowa. Bez dojazdów
+        do Warszawy — ucz się blisko domu.
       </p>
       <div class="mt-8 grid gap-6 md:grid-cols-2">
-        {data.benefits.map((item) => (
-          <div class="card p-6">
-            <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
-            <p class="mt-2 text-sm text-slate-600">{item.text}</p>
-          </div>
-        ))}
+        {
+          data.benefits.map((item) => (
+            <div class="card p-6">
+              <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
+              <p class="mt-2 text-sm text-slate-600">{item.text}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -68,13 +94,17 @@ const fullTitle = `${data.title} | ${BRAND_NAME}`;
         Wybierz formę nauki dopasowaną do swoich potrzeb i możliwości czasowych.
       </p>
       <div class="mt-8 grid gap-6 md:grid-cols-2">
-        {data.offers.map((item) => (
-          <a class="card p-6 no-underline transition hover:-translate-y-0.5" href={item.href}>
-            <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
-            <p class="mt-2 text-sm text-slate-600">{item.text}</p>
-            <span class="mt-4 inline-flex text-sm font-bold text-primary">Dowiedz się więcej →</span>
-          </a>
-        ))}
+        {
+          data.offers.map((item) => (
+            <a class="card p-6 no-underline transition hover:-translate-y-0.5" href={item.href}>
+              <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
+              <p class="mt-2 text-sm text-slate-600">{item.text}</p>
+              <span class="mt-4 inline-flex text-sm font-bold text-primary">
+                Dowiedz się więcej →
+              </span>
+            </a>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -88,12 +118,19 @@ const fullTitle = `${data.title} | ${BRAND_NAME}`;
             Prowadzimy zajęcia dla różnych grup wiekowych i na różnych poziomach zaawansowania.
           </p>
           <ul class="mt-6 space-y-3">
-            {data.targetAudience.map((item) => (
-              <li class="flex items-start gap-3 text-sm text-slate-600">
-                <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary" aria-hidden="true"></span>
-                <span><strong>{item.label}</strong> — {item.description}</span>
-              </li>
-            ))}
+            {
+              data.targetAudience.map((item) => (
+                <li class="flex items-start gap-3 text-sm text-slate-600">
+                  <span
+                    class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary"
+                    aria-hidden="true"
+                  />
+                  <span>
+                    <strong>{item.label}</strong> — {item.description}
+                  </span>
+                </li>
+              ))
+            }
           </ul>
         </div>
         <div class="card p-6">
@@ -102,9 +139,7 @@ const fullTitle = `${data.title} | ${BRAND_NAME}`;
             {data.locationCard.intro}
           </p>
           <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
-            {data.locationCard.features.map((feature) => (
-              <li>{feature}</li>
-            ))}
+            {data.locationCard.features.map((feature) => <li>{feature}</li>)}
           </ul>
           <div class="mt-6">
             <a class="btn btn-primary" href="/kontakt">Skontaktuj się z nami</a>
@@ -116,9 +151,5 @@ const fullTitle = `${data.title} | ${BRAND_NAME}`;
 
   <FaqSection title={`${data.kicker} — pytania i odpowiedzi`} items={data.faqs} />
 
-  <CTASection
-    title={data.cta.title}
-    description={data.cta.description}
-    note={data.cta.note}
-  />
+  <CTASection title={data.cta.title} description={data.cta.description} note={data.cta.note} />
 </MainLayout>

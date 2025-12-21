@@ -2,7 +2,11 @@
 import Logo from "./Logo.astro";
 import { BRAND_TAGLINE, CTA_PRIMARY_HREF, CTA_PRIMARY_LABEL } from "../config/site";
 
-const { currentPath = "/" } = Astro.props as { currentPath?: string };
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = "/" } = Astro.props;
 
 const nav = [
   { href: "/oferta", label: "Oferta" },
@@ -30,11 +34,17 @@ const linkClass = (href: string) =>
     </div>
 
     <nav class="hidden items-center gap-1 lg:flex" aria-label="Główna nawigacja">
-      {nav.map((item) => (
-        <a href={item.href} class={linkClass(item.href)} aria-current={isActive(item.href) ? "page" : undefined}>
-          {item.label}
-        </a>
-      ))}
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class={linkClass(item.href)}
+            aria-current={isActive(item.href) ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
     </nav>
 
     <div class="hidden items-center gap-3 lg:flex">
@@ -60,9 +70,9 @@ const linkClass = (href: string) =>
             stroke-linejoin="round"
             aria-hidden="true"
           >
-            <path d="M4 6h16" />
-            <path d="M4 12h16" />
-            <path d="M4 18h16" />
+            <path d="M4 6h16"></path>
+            <path d="M4 12h16"></path>
+            <path d="M4 18h16"></path>
           </svg>
         </span>
       </summary>
@@ -73,19 +83,21 @@ const linkClass = (href: string) =>
         aria-label="Menu nawigacji"
         id="mobile-menu-content"
       >
-        {nav.map((item) => (
-          <a
-            href={item.href}
-            class={
-              isActive(item.href)
-                ? "block rounded-xl bg-primary/10 px-4 py-3 text-sm font-semibold text-primary"
-                : "block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100"
-            }
-            aria-current={isActive(item.href) ? "page" : undefined}
-          >
-            {item.label}
-          </a>
-        ))}
+        {
+          nav.map((item) => (
+            <a
+              href={item.href}
+              class={
+                isActive(item.href)
+                  ? "block rounded-xl bg-primary/10 px-4 py-3 text-sm font-semibold text-primary"
+                  : "block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100"
+              }
+              aria-current={isActive(item.href) ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          ))
+        }
 
         <div class="mt-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
           <a class="btn btn-primary w-full" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>

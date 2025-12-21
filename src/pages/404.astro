@@ -1,6 +1,6 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import { BRAND_NAME } from "../config/site";
+import { BRAND_NAME, generateBreadcrumbSchema } from "../config/site";
 
 const title = `404 – nie znaleziono strony | ${BRAND_NAME}`;
 const description = "Strona nie istnieje lub została przeniesiona. Wróć na stronę główną.";
@@ -11,9 +11,20 @@ const popularPages = [
   { href: "/cennik", label: "Cennik" },
   { href: "/kontakt", label: "Kontakt" },
 ];
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: "Strona główna", url: "/" },
+  { name: "Błąd 404" },
+]);
 ---
 
-<MainLayout title={title} description={description}>
+<MainLayout
+  title={title}
+  description={description}
+  canonical="/404"
+  robots="noindex,follow"
+  structuredData={[breadcrumbSchema]}
+>
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
@@ -21,8 +32,8 @@ const popularPages = [
           <span class="kicker">Błąd 404</span>
           <h1 class="mt-6">Nie znaleziono strony</h1>
           <p class="mt-4 max-w-2xl text-lg">
-            Wygląda na to, że ten adres nie istnieje lub został przeniesiony.
-            Sprawdź poniższe linki lub wróć na stronę główną.
+            Wygląda na to, że ten adres nie istnieje lub został przeniesiony. Sprawdź poniższe linki
+            lub wróć na stronę główną.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
             <a class="btn btn-primary" href="/">Wróć na stronę główną</a>
@@ -33,14 +44,16 @@ const popularPages = [
         <div class="card p-6">
           <h2 class="text-lg font-extrabold text-slate-900">Popularne strony</h2>
           <div class="mt-4 flex flex-col gap-2">
-            {popularPages.map((page) => (
-              <a
-                href={page.href}
-                class="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100"
-              >
-                {page.label} →
-              </a>
-            ))}
+            {
+              popularPages.map((page) => (
+                <a
+                  href={page.href}
+                  class="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100"
+                >
+                  {page.label} →
+                </a>
+              ))
+            }
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@
 import MainLayout from "../../layouts/MainLayout.astro";
 import CTASection from "../../components/CTASection.astro";
 import { getCollection } from "astro:content";
-import { BRAND_NAME } from "../../config/site";
+import { BRAND_NAME, generateBreadcrumbSchema } from "../../config/site";
 
 const title = `Blog – angielski online | ${BRAND_NAME}`;
 const description =
@@ -14,16 +14,26 @@ const posts = (await getCollection("blog"))
 
 const formatDate = (date: Date) =>
   new Intl.DateTimeFormat("pl-PL", { dateStyle: "medium" }).format(date);
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: "Strona główna", url: "/" },
+  { name: "Blog" },
+]);
 ---
 
-<MainLayout title={title} description={description} canonical="/blog">
+<MainLayout
+  title={title}
+  description={description}
+  canonical="/blog"
+  structuredData={[breadcrumbSchema]}
+>
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">
       <span class="kicker">Blog</span>
       <h1 class="mt-6">Blog o angielskim online</h1>
       <p class="mt-6 max-w-3xl text-lg">
-        Znajdziesz tu praktyczne wskazówki: jak uczyć się regularnie, jak poprawić mówienie i jak wybrać odpowiedni
-        kurs angielskiego online.
+        Znajdziesz tu praktyczne wskazówki: jak uczyć się regularnie, jak poprawić mówienie i jak
+        wybrać odpowiedni kurs angielskiego online.
       </p>
       <div class="mt-8 flex flex-wrap gap-3">
         <a class="btn btn-primary" href="/angielski-online#kurs">Zobacz kurs online</a>
@@ -40,21 +50,26 @@ const formatDate = (date: Date) =>
     <div class="container-site">
       <h2>Najnowsze wpisy</h2>
       <div class="mt-8 grid gap-6">
-        {posts.map((post) => (
-          <a class="card p-6 no-underline transition hover:-translate-y-0.5" href={`/blog/${post.slug}`}>
-            <div class="flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-widest text-slate-500">
-              <span>{formatDate(post.data.pubDate)}</span>
-              {post.data.tags?.length > 0 && (
-                <span class="rounded-full bg-slate-100 px-3 py-1 text-[10px] text-slate-600">
-                  {post.data.tags.join(" · ")}
-                </span>
-              )}
-            </div>
-            <h3 class="mt-4 text-xl font-extrabold text-slate-900">{post.data.title}</h3>
-            <p class="mt-2 text-sm text-slate-600">{post.data.description}</p>
-            <span class="mt-4 inline-flex text-sm font-bold text-primary">Czytaj dalej →</span>
-          </a>
-        ))}
+        {
+          posts.map((post) => (
+            <a
+              class="card p-6 no-underline transition hover:-translate-y-0.5"
+              href={`/blog/${post.slug}`}
+            >
+              <div class="flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-widest text-slate-500">
+                <span>{formatDate(post.data.pubDate)}</span>
+                {post.data.tags?.length > 0 && (
+                  <span class="rounded-full bg-slate-100 px-3 py-1 text-[10px] text-slate-600">
+                    {post.data.tags.join(" · ")}
+                  </span>
+                )}
+              </div>
+              <h3 class="mt-4 text-xl font-extrabold text-slate-900">{post.data.title}</h3>
+              <p class="mt-2 text-sm text-slate-600">{post.data.description}</p>
+              <span class="mt-4 inline-flex text-sm font-bold text-primary">Czytaj dalej →</span>
+            </a>
+          ))
+        }
       </div>
     </div>
   </section>

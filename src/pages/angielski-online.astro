@@ -93,13 +93,11 @@ const faqs = [
   },
   {
     question: "Czy muszę mieć dobre łącze internetowe?",
-    answer:
-      "Wystarczy stabilne Wi‑Fi i słuchawki z mikrofonem. Resztę konfigurujemy na start.",
+    answer: "Wystarczy stabilne Wi‑Fi i słuchawki z mikrofonem. Resztę konfigurujemy na start.",
   },
   {
     question: "Czy angielski online sprawdzi się przy niskim poziomie?",
-    answer:
-      "Tak. Zaczynamy od prostych dialogów i utrwalamy słownictwo w praktyce.",
+    answer: "Tak. Zaczynamy od prostych dialogów i utrwalamy słownictwo w praktyce.",
   },
   {
     question: "Jakie platformy wykorzystujecie?",
@@ -108,13 +106,11 @@ const faqs = [
   },
   {
     question: "Czy dostanę materiały do samodzielnej pracy?",
-    answer:
-      "Tak. Po lekcji otrzymujesz podsumowanie i krótkie zadania do utrwalenia.",
+    answer: "Tak. Po lekcji otrzymujesz podsumowanie i krótkie zadania do utrwalenia.",
   },
   {
     question: "Czy mogę zmienić tryb zajęć z grupowych na 1:1?",
-    answer:
-      "Tak, jeśli Twoje potrzeby się zmienią, dopasujemy formę współpracy.",
+    answer: "Tak, jeśli Twoje potrzeby się zmienią, dopasujemy formę współpracy.",
   },
   {
     question: "Jak szybko mogę zacząć?",
@@ -143,7 +139,12 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ]);
 ---
 
-<MainLayout title={title} description={description} canonical="/angielski-online" structuredData={[faqJsonLd, breadcrumbSchema]}>
+<MainLayout
+  title={title}
+  description={description}
+  canonical="/angielski-online"
+  structuredData={[faqJsonLd, breadcrumbSchema]}
+>
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
@@ -151,8 +152,9 @@ const breadcrumbSchema = generateBreadcrumbSchema([
           <span class="kicker">Angielski online</span>
           <h1 class="mt-6">Angielski online z lektorem, który stawia na mówienie</h1>
           <p class="mt-6 max-w-2xl text-lg">
-            Pracujemy na żywo, z naciskiem na realne rozmowy. Dostajesz plan nauki, jasne cele i regularny feedback,
-            dzięki czemu szybciej przechodzisz z rozumienia do swobodnego mówienia.
+            Pracujemy na żywo, z naciskiem na realne rozmowy. Dostajesz plan nauki, jasne cele i
+            regularny feedback, dzięki czemu szybciej przechodzisz z rozumienia do swobodnego
+            mówienia.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
             <a class="btn btn-primary" href="/kontakt">Umów konsultację</a>
@@ -160,17 +162,22 @@ const breadcrumbSchema = generateBreadcrumbSchema([
           </div>
           <p class="mt-4 text-sm text-slate-500">
             Mieszkasz w Legionowie? Sprawdź nasze
-            <a class="font-bold text-primary no-underline hover:underline" href="/angielski-stacjonarnie">zajęcia stacjonarne</a>.
+            <a
+              class="font-bold text-primary no-underline hover:underline"
+              href="/angielski-stacjonarnie">zajęcia stacjonarne</a
+            >.
           </p>
         </div>
 
         <div class="grid gap-4">
-          {benefits.map((item) => (
-            <div class="card p-6">
-              <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
-              <p class="mt-2 text-sm text-slate-600">{item.text}</p>
-            </div>
-          ))}
+          {
+            benefits.map((item) => (
+              <div class="card p-6">
+                <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
+                <p class="mt-2 text-sm text-slate-600">{item.text}</p>
+              </div>
+            ))
+          }
         </div>
       </div>
     </div>
@@ -180,20 +187,22 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     <div class="container-site">
       <h2>Co dostajesz w ramach lekcji online</h2>
       <p class="mt-4 max-w-3xl">
-        Angielski online to nie tylko rozmowa na kamerze. To konkretna ścieżka rozwoju i narzędzia, które wspierają
-        regularną praktykę.
+        Angielski online to nie tylko rozmowa na kamerze. To konkretna ścieżka rozwoju i narzędzia,
+        które wspierają regularną praktykę.
       </p>
       <div class="mt-8 grid gap-6 md:grid-cols-2">
         <div class="card p-6">
           <h3 class="text-lg font-extrabold text-slate-900">Stały plan i rytm</h3>
           <p class="mt-3 text-sm">
-            Ustalamy częstotliwość spotkań, zakres tematów i krótkie cele tygodniowe. Dzięki temu widzisz postęp.
+            Ustalamy częstotliwość spotkań, zakres tematów i krótkie cele tygodniowe. Dzięki temu
+            widzisz postęp.
           </p>
         </div>
         <div class="card p-6">
           <h3 class="text-lg font-extrabold text-slate-900">Materiały po lekcji</h3>
           <p class="mt-3 text-sm">
-            Otrzymujesz podsumowanie, słownictwo i krótkie ćwiczenia, które utrwalają to, co przerobiliśmy.
+            Otrzymujesz podsumowanie, słownictwo i krótkie ćwiczenia, które utrwalają to, co
+            przerobiliśmy.
           </p>
         </div>
       </div>
@@ -207,32 +216,30 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     <div class="container-site">
       <h2>Lekcje angielskiego online dopasowane do Twojego celu</h2>
       <p class="mt-4 max-w-3xl">
-        Chcesz więcej mówienia, lepszą wymowę albo uporządkowaną gramatykę? Dobieramy format i tempo,
-        abyś szybko zobaczył efekty.
+        Chcesz więcej mówienia, lepszą wymowę albo uporządkowaną gramatykę? Dobieramy format i
+        tempo, abyś szybko zobaczył efekty.
       </p>
       <div class="mt-8 grid gap-6 md:grid-cols-3">
-        {lessonFormats.map((format) => (
-          <div class="card p-6">
-            <h3 class="text-lg font-extrabold text-slate-900">{format.title}</h3>
-            <p class="mt-2 text-sm text-slate-600">{format.text}</p>
-          </div>
-        ))}
+        {
+          lessonFormats.map((format) => (
+            <div class="card p-6">
+              <h3 class="text-lg font-extrabold text-slate-900">{format.title}</h3>
+              <p class="mt-2 text-sm text-slate-600">{format.text}</p>
+            </div>
+          ))
+        }
       </div>
       <div class="mt-8 grid gap-6 lg:grid-cols-2 lg:items-start">
         <div>
           <h3 class="text-lg font-extrabold text-slate-900">Na czym skupiamy się podczas lekcji</h3>
           <ul class="mt-4 grid gap-3 text-sm text-slate-600 sm:grid-cols-2">
-            {lessonDetails.map((item) => (
-              <li class="card p-4">{item}</li>
-            ))}
+            {lessonDetails.map((item) => <li class="card p-4">{item}</li>)}
           </ul>
         </div>
         <div class="card p-6">
           <h3 class="text-lg font-extrabold text-slate-900">Najczęstsze obszary pracy</h3>
           <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
-            {lessonAreas.map((item) => (
-              <li>{item}</li>
-            ))}
+            {lessonAreas.map((item) => <li>{item}</li>)}
           </ul>
         </div>
       </div>
@@ -246,32 +253,30 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     <div class="container-site">
       <h2>Kurs angielskiego online z jasnym planem i wsparciem</h2>
       <p class="mt-4 max-w-3xl">
-        Jeśli chcesz uczyć się regularnie i z konkretnym planem, kurs online to najlepsza opcja. Dostajesz
-        strukturę, materiały i wsparcie lektora na każdym etapie.
+        Jeśli chcesz uczyć się regularnie i z konkretnym planem, kurs online to najlepsza opcja.
+        Dostajesz strukturę, materiały i wsparcie lektora na każdym etapie.
       </p>
       <div class="mt-8 grid gap-6 md:grid-cols-2">
-        {courseModules.map((module) => (
-          <div class="card p-6">
-            <h3 class="text-lg font-extrabold text-slate-900">{module.title}</h3>
-            <p class="mt-2 text-sm text-slate-600">{module.text}</p>
-          </div>
-        ))}
+        {
+          courseModules.map((module) => (
+            <div class="card p-6">
+              <h3 class="text-lg font-extrabold text-slate-900">{module.title}</h3>
+              <p class="mt-2 text-sm text-slate-600">{module.text}</p>
+            </div>
+          ))
+        }
       </div>
       <div class="mt-8 grid gap-6 lg:grid-cols-2">
         <div class="card p-6">
           <h3 class="text-lg font-extrabold text-slate-900">Co daje kurs online</h3>
           <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
-            {courseOutcomes.map((item) => (
-              <li>{item}</li>
-            ))}
+            {courseOutcomes.map((item) => <li>{item}</li>)}
           </ul>
         </div>
         <div class="card p-6">
           <h3 class="text-lg font-extrabold text-slate-900">Przykładowe cele kursu</h3>
           <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
-            {courseGoals.map((item) => (
-              <li>{item}</li>
-            ))}
+            {courseGoals.map((item) => <li>{item}</li>)}
           </ul>
         </div>
       </div>
@@ -286,6 +291,6 @@ const breadcrumbSchema = generateBreadcrumbSchema([
   <CTASection
     title="Chcesz zacząć angielski online?"
     description="Napisz, jaki masz poziom i cel. Zaproponujemy formę zajęć, terminy i plan nauki."
-    note="Odpowiadamy szybko — zwykle w ciągu 24h w dni robocze."
+    note="Odpowiadamy szybko — zwykle w ciągu 1–2 dni roboczych."
   />
 </MainLayout>

@@ -1,8 +1,8 @@
 import type { APIRoute } from "astro";
 import { BRAND_NAME, CONTACT_EMAIL } from "../../config/site";
-import { sendEmail, formatContactEmail } from "../../lib/email";
+import { sendEmail, formatSignupEmail } from "../../lib/email";
 import { checkRateLimit, getClientIp } from "../../lib/rate-limit";
-import { validateContactForm, RATE_LIMIT_CONFIG } from "../../lib/validation";
+import { validateSignupForm, RATE_LIMIT_CONFIG, MODE_LABELS } from "../../lib/validation";
 import { HONEYPOT_FIELD } from "../../lib/constants";
 
 export const POST: APIRoute = async ({ request, locals }) => {
@@ -10,10 +10,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
   if (!CONTACT_EMAIL) {
     console.error("CONTACT_EMAIL not configured");
     return new Response(
-      JSON.stringify({
-        success: false,
-        error: "Formularz kontaktowy jest tymczasowo niedostępny.",
-      }),
+      JSON.stringify({ success: false, error: "Formularz jest tymczasowo niedostępny." }),
       { status: 503, headers: { "Content-Type": "application/json" } }
     );
   }
@@ -28,7 +25,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
   if (!rateLimitResult.allowed) {
     const retryAfter = Math.ceil((rateLimitResult.resetAt - Date.now()) / 1000);
     return new Response(
-      JSON.stringify({ success: false, error: "Zbyt wiele prób. Spróbuj ponownie później." }),
+      JSON.stringify({ success: false, error: "Zbyt wiele prób. Spróbuj ponownie za 60 sekund." }),
       {
         status: 429,
         headers: {
@@ -61,7 +58,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
   }
 
   // Validate form data
-  const validation = validateContactForm(formData);
+  const validation = validateSignupForm(formData);
   if (!validation.valid) {
     return new Response(JSON.stringify({ success: false, error: validation.error }), {
       status: 400,
@@ -69,22 +66,25 @@ export const POST: APIRoute = async ({ request, locals }) => {
     });
   }
 
-  const { name, email, phone, message } = validation.data;
+  const data = validation.data;
 
   // Get Resend API key
   const resendApiKey = runtime?.env?.RESEND_API_KEY ?? import.meta.env.RESEND_API_KEY;
 
-  // If no API key, fall back to mailto redirect (for backward compatibility)
+  // If no API key, fall back to mailto redirect
   if (!resendApiKey) {
     console.warn("RESEND_API_KEY not configured, falling back to mailto redirect");
-    const subject = `Zapytanie z formularza — ${BRAND_NAME}`;
+    const subject = `Zapis na zajęcia 2025/2026 — ${BRAND_NAME}`;
     const bodyLines = [
-      `Imię i nazwisko: ${name}`,
-      `E-mail: ${email}`,
-      `Telefon: ${phone || "-"}`,
+      `Imię i nazwisko: ${data.name}`,
+      `E-mail: ${data.email}`,
+      `Telefon: ${data.phone || "-"}`,
+      `Tryb: ${MODE_LABELS[data.mode] || data.mode}`,
+      `Poziom/cel: ${data.level}`,
+      `Dostępność: ${data.availability || "-"}`,
       "",
-      "Wiadomość:",
-      message,
+      "Dodatkowe informacje:",
+      data.message || "-",
     ];
     const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
 
@@ -95,11 +95,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
   }
 
   // Send email via Resend
-  const emailContent = formatContactEmail({
-    name,
-    email,
-    phone,
-    message,
+  const emailContent = formatSignupEmail({
+    ...data,
     brandName: BRAND_NAME,
   });
 
@@ -111,7 +108,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       subject: emailContent.subject,
       text: emailContent.text,
       html: emailContent.html,
-      replyTo: email,
+      replyTo: data.email,
     },
     resendApiKey
   );
@@ -122,7 +119,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       JSON.stringify({
         success: false,
         error:
-          "Nie udało się wysłać wiadomości. Spróbuj ponownie lub skontaktuj się telefonicznie.",
+          "Nie udało się wysłać zgłoszenia. Spróbuj ponownie lub skontaktuj się telefonicznie.",
       }),
       { status: 500, headers: { "Content-Type": "application/json" } }
     );

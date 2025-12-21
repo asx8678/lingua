@@ -3,10 +3,7 @@ import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import cloudflare from "@astrojs/cloudflare";
 
-const SITEMAP_EXCLUDE = new Set([
-  "/lekcje-angielskiego-online",
-  "/kurs-angielskiego-online",
-]);
+const SITEMAP_EXCLUDE = new Set(["/lekcje-angielskiego-online", "/kurs-angielskiego-online"]);
 
 // https://astro.build/config
 export default defineConfig({

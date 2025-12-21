@@ -93,7 +93,7 @@ export const angielskiLegionowo: LandingPageData = {
     {
       question: "Ile kosztują lekcje angielskiego w Legionowie?",
       answer:
-        "Ceny zależą od formy zajęć. Lekcje grupowe od 40 zł/60min, mini-grupy od 60 zł/60min, zajęcia indywidualne od 100 zł/60min.",
+        "Ceny zależą od formy zajęć, liczby osób i długości spotkań. Najaktualniejsze stawki znajdziesz w cenniku lub podamy je po krótkiej konsultacji.",
     },
     {
       question: "Czy mogę umówić bezpłatną konsultację?",
@@ -121,7 +121,7 @@ export const angielskiLegionowo: LandingPageData = {
     title: "Zacznij naukę angielskiego w Legionowie",
     description:
       "Umów bezpłatną konsultację i diagnozę poziomu i poznaj naszą szkołę. Znajdziesz nas w centrum Legionowa.",
-    note: "Odpowiadamy szybko — zwykle w ciągu 24h w dni robocze.",
+    note: "Odpowiadamy szybko — zwykle w ciągu 1–2 dni roboczych.",
   },
 };
 
@@ -222,7 +222,7 @@ export const angielskiZdalnie: LandingPageData = {
     title: "Zacznij naukę angielskiego online",
     description:
       "Umów bezpłatną konsultację i diagnozę poziomu. Sprawdzimy, czy lekcje online są dla Ciebie.",
-    note: "Odpowiadamy szybko — zwykle w ciągu 24h w dni robocze.",
+    note: "Odpowiadamy szybko — zwykle w ciągu 1–2 dni roboczych.",
   },
 };
 

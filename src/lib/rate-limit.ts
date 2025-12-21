@@ -72,11 +72,7 @@ export async function checkRateLimit(
 // In-memory fallback for development
 const memoryStore = new Map<string, RateLimitEntry>();
 
-function checkRateLimitInMemory(
-  ip: string,
-  now: number,
-  config: RateLimitConfig
-): RateLimitResult {
+function checkRateLimitInMemory(ip: string, now: number, config: RateLimitConfig): RateLimitResult {
   const stored = memoryStore.get(ip);
   let entry: RateLimitEntry;
 

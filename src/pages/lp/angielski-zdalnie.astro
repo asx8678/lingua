@@ -110,7 +110,10 @@ const faqs = [
           </div>
           <p class="mt-4 text-sm text-slate-500">
             Mieszkasz w Legionowie? Sprawdź nasze
-            <a class="font-bold text-primary no-underline hover:underline" href="/angielski-stacjonarnie">zajęcia stacjonarne</a>.
+            <a
+              class="font-bold text-primary no-underline hover:underline"
+              href="/angielski-stacjonarnie">zajęcia stacjonarne</a
+            >.
           </p>
         </div>
 
@@ -119,6 +122,10 @@ const faqs = [
             src="/images/hero.svg"
             alt="Lekcje angielskiego online zdalnie"
             loading="eager"
+            width="600"
+            height="400"
+            decoding="async"
+            fetchpriority="high"
             class="w-full rounded-3xl border border-slate-200 shadow-soft"
           />
         </div>
@@ -133,12 +140,14 @@ const faqs = [
         Lekcje online to wygodna alternatywa dla zajęć stacjonarnych. Oto dlaczego warto:
       </p>
       <div class="mt-8 grid gap-6 md:grid-cols-2">
-        {benefits.map((item) => (
-          <div class="card p-6">
-            <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
-            <p class="mt-2 text-sm text-slate-600">{item.text}</p>
-          </div>
-        ))}
+        {
+          benefits.map((item) => (
+            <div class="card p-6">
+              <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
+              <p class="mt-2 text-sm text-slate-600">{item.text}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -146,19 +155,19 @@ const faqs = [
   <section class="section section-muted">
     <div class="container-site">
       <h2>Jak zacząć naukę zdalną?</h2>
-      <p class="mt-4 max-w-3xl">
-        Rozpoczęcie nauki online jest proste. Oto jak wygląda proces:
-      </p>
+      <p class="mt-4 max-w-3xl">Rozpoczęcie nauki online jest proste. Oto jak wygląda proces:</p>
       <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {howItWorks.map((item) => (
-          <div class="card p-6 text-center">
-            <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary text-lg font-bold text-white">
-              {item.step}
-            </span>
-            <h3 class="mt-4 text-lg font-extrabold text-slate-900">{item.title}</h3>
-            <p class="mt-2 text-sm text-slate-600">{item.text}</p>
-          </div>
-        ))}
+        {
+          howItWorks.map((item) => (
+            <div class="card p-6 text-center">
+              <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary text-lg font-bold text-white">
+                {item.step}
+              </span>
+              <h3 class="mt-4 text-lg font-extrabold text-slate-900">{item.title}</h3>
+              <p class="mt-2 text-sm text-slate-600">{item.text}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -172,12 +181,17 @@ const faqs = [
             Lekcje online są idealne dla osób, które cenią elastyczność i wygodę nauki z domu.
           </p>
           <ul class="mt-6 space-y-3">
-            {forWhom.map((item) => (
-              <li class="flex items-start gap-3 text-sm text-slate-600">
-                <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary" aria-hidden="true"></span>
-                <span>{item}</span>
-              </li>
-            ))}
+            {
+              forWhom.map((item) => (
+                <li class="flex items-start gap-3 text-sm text-slate-600">
+                  <span
+                    class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary"
+                    aria-hidden="true"
+                  />
+                  <span>{item}</span>
+                </li>
+              ))
+            }
           </ul>
         </div>
         <div class="card p-6">
@@ -203,8 +217,8 @@ const faqs = [
       <div class="card p-8 text-center">
         <h2 class="text-2xl font-extrabold">Bezpłatna konsultacja i diagnoza poziomu</h2>
         <p class="mx-auto mt-4 max-w-2xl text-slate-600">
-          Nie jesteś pewien, czy nauka online jest dla Ciebie? Umów konsultację, podczas której sprawdzimy poziom,
-          poznamy Twoje cele i ustalimy najlepszy plan nauki.
+          Nie jesteś pewien, czy nauka online jest dla Ciebie? Umów konsultację, podczas której
+          sprawdzimy poziom, poznamy Twoje cele i ustalimy najlepszy plan nauki.
         </p>
         <div class="mt-6">
           <a class="btn btn-primary" href="/kontakt">Umów bezpłatną konsultację</a>
@@ -218,6 +232,6 @@ const faqs = [
   <CTASection
     title="Gotowy na angielski online?"
     description="Napisz do nas i umów bezpłatną konsultację i diagnozę poziomu. Sprawdź, jak wygodna może być nauka zdalna."
-    note="Odpowiadamy szybko — zwykle w ciągu 24h w dni robocze."
+    note="Odpowiadamy szybko — zwykle w ciągu 1–2 dni roboczych."
   />
 </MainLayout>

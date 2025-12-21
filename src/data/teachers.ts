@@ -37,7 +37,7 @@ export const teachers: Teacher[] = [
     image: "/images/teachers/malgorzata.png",
   },
   {
-    name: "Marcin",
+    name: "Marcin K.",
     role: "Lektor",
     languages: ["Angielski", "Francuski"],
     image: "/images/teachers/placeholder.svg",

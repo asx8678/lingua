@@ -77,8 +77,7 @@ const faqs = [
   },
   {
     question: "Czy są dostępne zajęcia dla dzieci?",
-    answer:
-      "Tak, prowadzimy zajęcia dla różnych grup wiekowych, w tym dla dzieci i młodzieży.",
+    answer: "Tak, prowadzimy zajęcia dla różnych grup wiekowych, w tym dla dzieci i młodzieży.",
   },
   {
     question: "Jak często odbywają się zajęcia?",
@@ -112,7 +111,12 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ]);
 ---
 
-<MainLayout title={title} description={description} canonical="/angielski-stacjonarnie" structuredData={[faqJsonLd, breadcrumbSchema]}>
+<MainLayout
+  title={title}
+  description={description}
+  canonical="/angielski-stacjonarnie"
+  structuredData={[faqJsonLd, breadcrumbSchema]}
+>
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
@@ -120,8 +124,9 @@ const breadcrumbSchema = generateBreadcrumbSchema([
           <span class="kicker">Angielski stacjonarnie</span>
           <h1 class="mt-6">Kursy angielskiego w Legionowie — ucz się twarzą w twarz z lektorem</h1>
           <p class="mt-6 max-w-2xl text-lg">
-            Bezpośredni kontakt z doświadczonym lektorem, profesjonalne warunki nauki i pełna koncentracja na Twoich celach.
-            Zajęcia indywidualne i grupowe dla wszystkich poziomów zaawansowania.
+            Bezpośredni kontakt z doświadczonym lektorem, profesjonalne warunki nauki i pełna
+            koncentracja na Twoich celach. Zajęcia indywidualne i grupowe dla wszystkich poziomów
+            zaawansowania.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
             <a class="btn btn-primary" href="/kontakt">Umów konsultację</a>
@@ -129,7 +134,9 @@ const breadcrumbSchema = generateBreadcrumbSchema([
           </div>
           <p class="mt-4 text-sm text-slate-500">
             Nie możesz dojeżdżać? Sprawdź nasze
-            <a class="font-bold text-primary no-underline hover:underline" href="/angielski-online">lekcje online</a>.
+            <a class="font-bold text-primary no-underline hover:underline" href="/angielski-online"
+              >lekcje online</a
+            >.
           </p>
         </div>
 
@@ -138,6 +145,10 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             src="/images/hero.svg"
             alt="Lekcja angielskiego stacjonarnie w Legionowie"
             loading="eager"
+            width="600"
+            height="400"
+            decoding="async"
+            fetchpriority="high"
             class="w-full rounded-3xl border border-slate-200 shadow-soft"
           />
         </div>
@@ -153,12 +164,14 @@ const breadcrumbSchema = generateBreadcrumbSchema([
         zwiększa efektywność i motywację do regularnej pracy.
       </p>
       <div class="mt-8 grid gap-6 md:grid-cols-2">
-        {benefits.map((item) => (
-          <div class="card p-6">
-            <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
-            <p class="mt-2 text-sm text-slate-600">{item.text}</p>
-          </div>
-        ))}
+        {
+          benefits.map((item) => (
+            <div class="card p-6">
+              <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
+              <p class="mt-2 text-sm text-slate-600">{item.text}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -170,13 +183,15 @@ const breadcrumbSchema = generateBreadcrumbSchema([
         Wybierz format nauki dopasowany do Twoich potrzeb, czasu i budżetu.
       </p>
       <div class="mt-8 grid gap-6 lg:grid-cols-3">
-        {formats.map((item) => (
-          <div class="card p-6">
-            <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
-            <p class="mt-2 text-sm text-slate-600">{item.text}</p>
-            <p class="mt-4 text-sm font-bold text-primary">{item.price}</p>
-          </div>
-        ))}
+        {
+          formats.map((item) => (
+            <div class="card p-6">
+              <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
+              <p class="mt-2 text-sm text-slate-600">{item.text}</p>
+              <p class="mt-4 text-sm font-bold text-primary">{item.price}</p>
+            </div>
+          ))
+        }
       </div>
       <div class="mt-8 text-center">
         <a class="btn btn-primary" href="/zapisy-2025-2026">Zapisz się na kurs</a>
@@ -190,16 +205,21 @@ const breadcrumbSchema = generateBreadcrumbSchema([
         <div>
           <h2>Dla kogo są zajęcia stacjonarne?</h2>
           <p class="mt-4">
-            Nasze kursy stacjonarne są idealne dla osób, które cenią bezpośredni kontakt
-            z nauczycielem i strukturę tradycyjnych zajęć.
+            Nasze kursy stacjonarne są idealne dla osób, które cenią bezpośredni kontakt z
+            nauczycielem i strukturę tradycyjnych zajęć.
           </p>
           <ul class="mt-6 space-y-3">
-            {forWhom.map((item) => (
-              <li class="flex items-start gap-3 text-sm text-slate-600">
-                <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary" aria-hidden="true"></span>
-                <span>{item}</span>
-              </li>
-            ))}
+            {
+              forWhom.map((item) => (
+                <li class="flex items-start gap-3 text-sm text-slate-600">
+                  <span
+                    class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary"
+                    aria-hidden="true"
+                  />
+                  <span>{item}</span>
+                </li>
+              ))
+            }
           </ul>
         </div>
         <div class="card p-6">
@@ -224,8 +244,8 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       <div class="card p-8 text-center">
         <h2 class="text-2xl font-extrabold">Nasza lokalizacja</h2>
         <p class="mx-auto mt-4 max-w-2xl text-slate-600">
-          Szkoła Lingua znajduje się w centrum Legionowa, z łatwym dojazdem komunikacją miejską i dostępnym parkingiem.
-          Dokładny adres i wskazówki dojazdu przekażemy przy zapisie.
+          Szkoła Lingua znajduje się w centrum Legionowa, z łatwym dojazdem komunikacją miejską i
+          dostępnym parkingiem. Dokładny adres i wskazówki dojazdu przekażemy przy zapisie.
         </p>
         <div class="mt-6">
           <a class="btn btn-primary" href="/kontakt">Skontaktuj się z nami</a>
@@ -239,6 +259,6 @@ const breadcrumbSchema = generateBreadcrumbSchema([
   <CTASection
     title="Gotowy na naukę angielskiego w Legionowie?"
     description="Umów bezpłatną konsultację i diagnozę poziomu. Poznasz naszą metodę nauczania i ustalisz indywidualny plan nauki."
-    note="Odpowiadamy szybko — zwykle w ciągu 24h w dni robocze."
+    note="Odpowiadamy szybko — zwykle w ciągu 1–2 dni roboczych."
   />
 </MainLayout>

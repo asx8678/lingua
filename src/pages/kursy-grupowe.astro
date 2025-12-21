@@ -1,7 +1,7 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
-import { BRAND_NAME } from "../config/site";
+import { BRAND_NAME, generateBreadcrumbSchema } from "../config/site";
 
 const title = `Kursy grupowe w Legionowie — stały plan i regularny postęp | ${BRAND_NAME}`;
 const description =
@@ -33,9 +33,20 @@ const organization = [
     text: "Kurs ma strukturę, dzięki której łatwiej śledzić postęp.",
   },
 ];
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: "Strona główna", url: "/" },
+  { name: "Oferta", url: "/oferta" },
+  { name: "Kursy grupowe" },
+]);
 ---
 
-<MainLayout title={title} description={description} canonical="/kursy-grupowe">
+<MainLayout
+  title={title}
+  description={description}
+  canonical="/kursy-grupowe"
+  structuredData={[breadcrumbSchema]}
+>
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
@@ -43,8 +54,8 @@ const organization = [
           <span class="kicker">Kursy grupowe</span>
           <h1 class="mt-6">Kursy grupowe w Legionowie — stały plan i regularny postęp</h1>
           <p class="mt-6 max-w-2xl text-lg">
-            Kursy grupowe łączą systematyczność z motywacją zespołu. Otrzymujesz plan, materiały i wsparcie,
-            a my dbamy o tempo i wyraźny postęp.
+            Kursy grupowe łączą systematyczność z motywacją zespołu. Otrzymujesz plan, materiały i
+            wsparcie, a my dbamy o tempo i wyraźny postęp.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
             <a class="btn btn-primary" href="/kontakt">Umów konsultację</a>
@@ -52,15 +63,14 @@ const organization = [
           </div>
           <p class="mt-4 text-sm text-slate-500">
             Potrzebujesz cen? Zobacz
-            <a class="font-bold text-primary no-underline hover:underline" href="/cennik">cennik</a>.
+            <a class="font-bold text-primary no-underline hover:underline" href="/cennik">cennik</a
+            >.
           </p>
         </div>
         <div class="card p-6">
           <h2 class="text-2xl font-extrabold tracking-tight">Dlaczego kursy grupowe działają</h2>
           <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
-            {highlights.map((item) => (
-              <li>{item}</li>
-            ))}
+            {highlights.map((item) => <li>{item}</li>)}
           </ul>
         </div>
       </div>
@@ -71,15 +81,21 @@ const organization = [
     <div class="container-site">
       <h2>Dla kogo są kursy grupowe</h2>
       <p class="mt-4 max-w-3xl">
-        Kursy grupowe sprawdzają się u osób, które cenią regularność i motywację płynącą z pracy w zespole.
+        Kursy grupowe sprawdzają się u osób, które cenią regularność i motywację płynącą z pracy w
+        zespole.
       </p>
       <ul class="mt-6 space-y-3">
-        {forWhom.map((item) => (
-          <li class="flex items-start gap-3 text-sm text-slate-600">
-            <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary" aria-hidden="true"></span>
-            <span>{item}</span>
-          </li>
-        ))}
+        {
+          forWhom.map((item) => (
+            <li class="flex items-start gap-3 text-sm text-slate-600">
+              <span
+                class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary"
+                aria-hidden="true"
+              />
+              <span>{item}</span>
+            </li>
+          ))
+        }
       </ul>
     </div>
   </section>
@@ -88,15 +104,18 @@ const organization = [
     <div class="container-site">
       <h2>Organizacja grup i poziomów</h2>
       <p class="mt-4 max-w-3xl">
-        Najpierw diagnozujemy poziom, potem dobieramy grupę i harmonogram. Dzięki temu kurs jest spójny.
+        Najpierw diagnozujemy poziom, potem dobieramy grupę i harmonogram. Dzięki temu kurs jest
+        spójny.
       </p>
       <div class="mt-8 grid gap-6 md:grid-cols-3">
-        {organization.map((item) => (
-          <div class="card p-6">
-            <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
-            <p class="mt-3 text-sm text-slate-600">{item.text}</p>
-          </div>
-        ))}
+        {
+          organization.map((item) => (
+            <div class="card p-6">
+              <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
+              <p class="mt-3 text-sm text-slate-600">{item.text}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>

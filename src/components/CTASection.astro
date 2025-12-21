@@ -1,6 +1,16 @@
 ---
 import { PRIMARY_CTA, SECONDARY_CTA } from "../config/site";
 
+interface Props {
+  title: string;
+  description: string;
+  primaryLabel?: string;
+  primaryHref?: string;
+  secondaryLabel?: string | null;
+  secondaryHref?: string;
+  note?: string;
+}
+
 const {
   title,
   description,
@@ -11,6 +21,7 @@ const {
   note,
 } = Astro.props;
 ---
+
 <section class="section">
   <div class="container-site">
     <div class="cta-panel">
@@ -19,9 +30,13 @@ const {
 
       <div class="mt-6 flex flex-wrap gap-3">
         <a class="btn btn-primary" href={primaryHref}>{primaryLabel}</a>
-        {secondaryLabel && secondaryHref && (
-          <a class="btn btn-secondary" href={secondaryHref}>{secondaryLabel}</a>
-        )}
+        {
+          secondaryLabel && secondaryHref && (
+            <a class="btn btn-secondary" href={secondaryHref}>
+              {secondaryLabel}
+            </a>
+          )
+        }
       </div>
 
       {note && <p class="mt-4 text-xs text-slate-500">{note}</p>}

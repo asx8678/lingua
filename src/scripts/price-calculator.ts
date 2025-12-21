@@ -5,8 +5,23 @@ import type { PRICING_DATA } from "../data/pricing";
 
 type PricingData = typeof PRICING_DATA;
 type Plan =
-  | { kind: "package"; id: string; label: string; minutes: number; baseSessions: number; pricePerPerson: Record<number, number> }
-  | { kind: "course"; id: string; label: string; price: number; sessions: number; minutes: number; minPersons: number };
+  | {
+      kind: "package";
+      id: string;
+      label: string;
+      minutes: number;
+      baseSessions: number;
+      pricePerPerson: Record<number, number>;
+    }
+  | {
+      kind: "course";
+      id: string;
+      label: string;
+      price: number;
+      sessions: number;
+      minutes: number;
+      minPersons: number;
+    };
 
 const fmt = new Intl.NumberFormat("pl-PL", { maximumFractionDigits: 0 });
 const pln = (v: number): string => `${fmt.format(Math.round(v))} zł`;
@@ -28,10 +43,14 @@ export function initPriceCalculator(data: PricingData): void {
   const planEl = document.getElementById("plan") as HTMLSelectElement | null;
   const planButtons = form?.querySelectorAll<HTMLButtonElement>("[data-plan]") ?? [];
   const stepButtons = form?.querySelectorAll<HTMLButtonElement>("[data-target][data-step]") ?? [];
-  const sessionStepButtons = form?.querySelectorAll<HTMLButtonElement>('[data-target="sessions"]') ?? [];
-  const presetButtons = form?.querySelectorAll<HTMLButtonElement>("[data-preset][data-value]") ?? [];
-  const sessionPresetButtons = form?.querySelectorAll<HTMLButtonElement>('[data-preset="sessions"]') ?? [];
-  const personsPresetButtons = form?.querySelectorAll<HTMLButtonElement>('[data-preset="persons"]') ?? [];
+  const sessionStepButtons =
+    form?.querySelectorAll<HTMLButtonElement>('[data-target="sessions"]') ?? [];
+  const presetButtons =
+    form?.querySelectorAll<HTMLButtonElement>("[data-preset][data-value]") ?? [];
+  const sessionPresetButtons =
+    form?.querySelectorAll<HTMLButtonElement>('[data-preset="sessions"]') ?? [];
+  const personsPresetButtons =
+    form?.querySelectorAll<HTMLButtonElement>('[data-preset="persons"]') ?? [];
   const personsEl = document.getElementById("persons") as HTMLInputElement | null;
   const sessionsEl = document.getElementById("sessions") as HTMLInputElement | null;
   const showTotalEl = document.getElementById("show-total") as HTMLInputElement | null;
@@ -173,7 +192,7 @@ export function initPriceCalculator(data: PricingData): void {
     if (planChanged) {
       sessionsEl!.value = String(plan.baseSessions);
     }
-    const sessions = Math.max(1, Math.min(200, Number(sessionsEl!.value || plan.baseSessions)));
+    const sessions = Math.max(1, Math.min(100, Number(sessionsEl!.value || plan.baseSessions)));
     sessionsEl!.value = String(sessions);
     setPresetActive("sessions", sessions);
 
@@ -186,7 +205,10 @@ export function initPriceCalculator(data: PricingData): void {
     if (!isMultiple) {
       setText(sessionsHintEl, "Wyliczenie orientacyjne (proporcjonalnie do pakietu 10 spotkań).");
     } else {
-      setText(sessionsHintEl, `Pakiet: ${sessions / plan.baseSessions} × ${plan.baseSessions} spotkań`);
+      setText(
+        sessionsHintEl,
+        `Pakiet: ${sessions / plan.baseSessions} × ${plan.baseSessions} spotkań`
+      );
     }
 
     setText(outPerSessionEl, pln(perSession));
@@ -219,7 +241,7 @@ export function initPriceCalculator(data: PricingData): void {
       const target = btn.dataset.target === "sessions" ? sessionsEl! : personsEl!;
       const step = Number(btn.dataset.step || 0);
       const min = Number(target.min || 1);
-      const max = Number(target.max || 200);
+      const max = Number(target.max || 100);
       const next = Math.max(min, Math.min(max, Number(target.value || 0) + step));
       target.value = String(next);
       update();

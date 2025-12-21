@@ -1,0 +1,7 @@
+dist
+.astro
+node_modules
+.wrangler
+*.min.js
+pnpm-lock.yaml
+package-lock.json

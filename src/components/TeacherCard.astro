@@ -1,15 +1,16 @@
 ---
 import type { Teacher } from "../data/teachers";
 
-const { teacher, loading = "lazy" } = Astro.props as {
+interface Props {
   teacher: Teacher;
   loading?: "lazy" | "eager";
-};
+}
 
-const imageSrc = teacher.image && teacher.image.length > 0
-  ? teacher.image
-  : "/images/teachers/placeholder.svg";
-const imageAlt = `Zdjęcie: ${teacher.name}`;
+const { teacher, loading = "lazy" } = Astro.props;
+
+const imageSrc =
+  teacher.image && teacher.image.length > 0 ? teacher.image : "/images/teachers/placeholder.svg";
+const imageAlt = `${teacher.name}, ${teacher.role} – ${teacher.languages.join(", ")}`;
 ---
 
 <article class="card flex h-full flex-col overflow-hidden">
@@ -24,13 +25,11 @@ const imageAlt = `Zdjęcie: ${teacher.name}`;
       class="h-full w-full object-cover"
     />
   </div>
-  <div class="flex flex-1 flex-col p-5">
+  <div class="flex flex-1 flex-col p-6">
     <h3 class="text-lg font-extrabold text-slate-900">{teacher.name}</h3>
     <p class="mt-1 text-sm text-slate-600">{teacher.role}</p>
     <div class="mt-4 flex flex-wrap gap-2">
-      {teacher.languages.map((language) => (
-        <span class="chip">{language}</span>
-      ))}
+      {teacher.languages.map((language) => <span class="chip">{language}</span>)}
     </div>
   </div>
 </article>

@@ -75,7 +75,8 @@ export const formatPLN = (value: number): string => {
 
 // Summary text for display
 export const PRICING_SUMMARY = {
-  packages: "Pakiety 10 spotkań (cena / osoba): 60 min — 1300 zł (1), 800 zł (2), 650 zł (3). 45 min — 1000 zł (1), 600 zł (2), 500 zł (3).",
+  packages:
+    "Pakiety 10 spotkań (cena / osoba): 60 min — 1300 zł (1), 800 zł (2), 650 zł (3). 45 min — 1000 zł (1), 600 zł (2), 500 zł (3).",
   courses: "Kursy grupowe (cena / osoba): 30×90 — 2700 zł, 56×60 — 2800 zł, 56×90 — 4200 zł.",
   note: "Matematyka ma takie same stawki jak angielski.",
 };

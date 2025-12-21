@@ -1,7 +1,7 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
 import { getCollection } from "astro:content";
-import { BRAND_NAME, SITE_URL } from "../../config/site";
+import { BRAND_NAME, SITE_URL, generateBreadcrumbSchema } from "../../config/site";
 
 export const prerender = true;
 
@@ -18,7 +18,9 @@ const { Content } = await post.render();
 const title = `${post.data.title} | ${BRAND_NAME}`;
 const description = post.data.description;
 
-const formattedDate = new Intl.DateTimeFormat("pl-PL", { dateStyle: "medium" }).format(post.data.pubDate);
+const formattedDate = new Intl.DateTimeFormat("pl-PL", { dateStyle: "medium" }).format(
+  post.data.pubDate
+);
 const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).toString();
 
 const articleJsonLd = {
@@ -38,12 +40,26 @@ const articleJsonLd = {
   },
   mainEntityOfPage: canonicalUrl,
 };
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: "Strona główna", url: "/" },
+  { name: "Blog", url: "/blog" },
+  { name: post.data.title },
+]);
 ---
 
-<MainLayout title={title} description={description} ogType="article" structuredData={[articleJsonLd]}>
+<MainLayout
+  title={title}
+  description={description}
+  ogType="article"
+  canonical={canonicalUrl}
+  structuredData={[articleJsonLd, breadcrumbSchema]}
+>
   <article class="section">
     <div class="container-site">
-      <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Blog · {formattedDate}</div>
+      <div class="text-xs font-bold uppercase tracking-widest text-slate-500">
+        Blog · {formattedDate}
+      </div>
       <div class="prose prose-slate mt-6 max-w-none">
         <Content />
       </div>

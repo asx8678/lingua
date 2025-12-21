@@ -1,19 +1,13 @@
 ---
-type PricingTableProps = {
+interface Props {
   title: string;
   subtitle?: string;
   columns?: string[];
   rows?: string[][];
   footnote?: string;
-};
+}
 
-const {
-  title,
-  subtitle,
-  columns = [],
-  rows = [],
-  footnote,
-} = Astro.props as PricingTableProps;
+const { title, subtitle, columns = [], rows = [], footnote } = Astro.props;
 ---
 
 <section class="card p-6">
@@ -23,22 +17,34 @@ const {
   <div class="mt-4 overflow-x-auto">
     <table class="w-full min-w-[520px] text-left text-sm">
       <thead>
-        <tr class="border-b border-slate-200 text-xs font-bold uppercase tracking-widest text-slate-500">
-          {columns.map((c) => (
-            <th class="py-3 pr-4" scope="col">{c}</th>
-          ))}
+        <tr
+          class="border-b border-slate-200 text-xs font-bold uppercase tracking-widest text-slate-500"
+        >
+          {
+            columns.map((c) => (
+              <th class="py-3 pr-4" scope="col">
+                {c}
+              </th>
+            ))
+          }
         </tr>
       </thead>
       <tbody>
-        {rows.map((r) => (
-          <tr class="border-b border-slate-100 last:border-0">
-            {r.map((cell, i) => (
-              <td class={i === 0 ? "py-3 pr-4 font-extrabold text-slate-900" : "py-3 pr-4 text-slate-600"}>
-                {cell}
-              </td>
-            ))}
-          </tr>
-        ))}
+        {
+          rows.map((r) => (
+            <tr class="border-b border-slate-100 last:border-0">
+              {r.map((cell, i) => (
+                <td
+                  class={
+                    i === 0 ? "py-3 pr-4 font-extrabold text-slate-900" : "py-3 pr-4 text-slate-600"
+                  }
+                >
+                  {cell}
+                </td>
+              ))}
+            </tr>
+          ))
+        }
       </tbody>
     </table>
   </div>

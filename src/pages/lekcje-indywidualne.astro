@@ -1,7 +1,7 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
-import { BRAND_NAME } from "../config/site";
+import { BRAND_NAME, generateBreadcrumbSchema } from "../config/site";
 
 const title = `Lekcje indywidualne w Legionowie i online | ${BRAND_NAME}`;
 const description =
@@ -43,9 +43,20 @@ const formats = [
     text: "Mała grupa z większą dynamiką i korzystną ceną.",
   },
 ];
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: "Strona główna", url: "/" },
+  { name: "Oferta", url: "/oferta" },
+  { name: "Lekcje indywidualne" },
+]);
 ---
 
-<MainLayout title={title} description={description} canonical="/lekcje-indywidualne">
+<MainLayout
+  title={title}
+  description={description}
+  canonical="/lekcje-indywidualne"
+  structuredData={[breadcrumbSchema]}
+>
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
@@ -53,8 +64,8 @@ const formats = [
           <span class="kicker">Lekcje indywidualne</span>
           <h1 class="mt-6">Lekcje indywidualne w Legionowie i online</h1>
           <p class="mt-6 max-w-2xl text-lg">
-            Skupiamy się na Twoim celu i tempie nauki. Konsultacja, diagnoza poziomu i spójny plan prowadzą
-            do regularnych postępów — stacjonarnie lub online.
+            Skupiamy się na Twoim celu i tempie nauki. Konsultacja, diagnoza poziomu i spójny plan
+            prowadzą do regularnych postępów — stacjonarnie lub online.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
             <a class="btn btn-primary" href="/kontakt">Umów konsultację</a>
@@ -64,9 +75,7 @@ const formats = [
         <div class="card p-6">
           <h2 class="text-2xl font-extrabold tracking-tight">Dla kogo to rozwiązanie?</h2>
           <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
-            {forWhom.map((item) => (
-              <li>{item}</li>
-            ))}
+            {forWhom.map((item) => <li>{item}</li>)}
           </ul>
         </div>
       </div>
@@ -77,15 +86,18 @@ const formats = [
     <div class="container-site">
       <h2>Jak pracujemy</h2>
       <p class="mt-4 max-w-3xl">
-        Pierwsze spotkanie to diagnoza poziomu i rozmowa o celu. Na tej podstawie ustalamy plan nauki.
+        Pierwsze spotkanie to diagnoza poziomu i rozmowa o celu. Na tej podstawie ustalamy plan
+        nauki.
       </p>
       <div class="mt-8 grid gap-6 lg:grid-cols-3">
-        {steps.map((step) => (
-          <div class="card p-6">
-            <h3 class="text-lg font-extrabold text-slate-900">{step.title}</h3>
-            <p class="mt-3 text-sm text-slate-600">{step.text}</p>
-          </div>
-        ))}
+        {
+          steps.map((step) => (
+            <div class="card p-6">
+              <h3 class="text-lg font-extrabold text-slate-900">{step.title}</h3>
+              <p class="mt-3 text-sm text-slate-600">{step.text}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -97,12 +109,14 @@ const formats = [
         Wybierz format dopasowany do budżetu i preferowanego stylu nauki.
       </p>
       <div class="mt-8 grid gap-6 md:grid-cols-3">
-        {formats.map((format) => (
-          <div class="card p-6">
-            <h3 class="text-lg font-extrabold text-slate-900">{format.title}</h3>
-            <p class="mt-3 text-sm text-slate-600">{format.text}</p>
-          </div>
-        ))}
+        {
+          formats.map((format) => (
+            <div class="card p-6">
+              <h3 class="text-lg font-extrabold text-slate-900">{format.title}</h3>
+              <p class="mt-3 text-sm text-slate-600">{format.text}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>

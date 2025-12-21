@@ -10,15 +10,14 @@ import {
   ANALYTICS_ENABLED,
   ANALYTICS_ID,
   isTodo,
+  generateBreadcrumbSchema,
 } from "../config/site";
 
 const title = `Polityka prywatności | ${BRAND_NAME}`;
 const description =
   "Polityka prywatności serwisu Lingua Legionowo. Informacje o przetwarzaniu danych osobowych zgodnie z RODO.";
 
-const lastModified = import.meta.env.BUILD_TIME
-  ? new Date(import.meta.env.BUILD_TIME)
-  : new Date();
+const lastModified = import.meta.env.BUILD_TIME ? new Date(import.meta.env.BUILD_TIME) : new Date();
 const updatedAt = lastModified.toLocaleDateString("pl-PL", {
   day: "2-digit",
   month: "2-digit",
@@ -29,17 +28,27 @@ const addressLine = FULL_ADDRESS || BUSINESS.city;
 const hasEmail = !isTodo(CONTACT_EMAIL);
 const hasPhone = !isTodo(CONTACT_PHONE);
 const contactFallback = "Skontaktuj się przez formularz.";
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: "Strona główna", url: "/" },
+  { name: "Polityka prywatności" },
+]);
 ---
 
-<MainLayout title={title} description={description} canonical="/privacy">
+<MainLayout
+  title={title}
+  description={description}
+  canonical="/privacy"
+  structuredData={[breadcrumbSchema]}
+>
   <section class="hero-bg relative overflow-hidden">
     <div class="container-site py-16">
       <span class="kicker">Dokument</span>
       <h1 class="mt-6">Polityka prywatności</h1>
 
       <p class="mt-6 max-w-4xl text-lg">
-        Dbamy o bezpieczeństwo danych i transparentnie informujemy, jak je przetwarzamy. Poniżej znajdziesz pełne zasady
-        obowiązujące w serwisie {BRAND_NAME}.
+        Dbamy o bezpieczeństwo danych i transparentnie informujemy, jak je przetwarzamy. Poniżej
+        znajdziesz pełne zasady obowiązujące w serwisie {BRAND_NAME}.
       </p>
 
       <div class="card mt-8 p-6">
@@ -48,14 +57,24 @@ const contactFallback = "Skontaktuj się przez formularz.";
           <p>{controllerName}</p>
           <p>
             Adres: {addressLine}<br />
-            {hasEmail ? <>E-mail: {CONTACT_EMAIL}<br /></> : null}
+            {
+              hasEmail ? (
+                <>
+                  E-mail: {CONTACT_EMAIL}
+                  <br />
+                </>
+              ) : null
+            }
             {hasPhone ? <>Telefon: {CONTACT_PHONE}</> : null}
             {!hasEmail && !hasPhone ? contactFallback : null}
           </p>
 
           <h2>Zakres danych osobowych</h2>
           <ul>
-            <li>dane kontaktowe podane w formularzu lub wiadomości e-mail (imię, adres e-mail, telefon)</li>
+            <li>
+              dane kontaktowe podane w formularzu lub wiadomości e-mail (imię, adres e-mail,
+              telefon)
+            </li>
             <li>treść zapytań dotyczących kursów i lekcji</li>
             <li>dane techniczne i logi serwera (adres IP, typ przeglądarki, czas żądania)</li>
           </ul>
@@ -69,13 +88,14 @@ const contactFallback = "Skontaktuj się przez formularz.";
           </ul>
 
           <h2>Podstawa prawna</h2>
-          <p>
-            Dane przetwarzamy zgodnie z art. 6 ust. 1 RODO:
-          </p>
+          <p>Dane przetwarzamy zgodnie z art. 6 ust. 1 RODO:</p>
           <ul>
             <li>lit. a — zgoda (np. formularz kontaktowy, jeśli wyrażono zgodę)</li>
             <li>lit. b — działania zmierzające do zawarcia umowy lub realizacja umowy</li>
-            <li>lit. f — prawnie uzasadniony interes administratora (bezpieczeństwo, statystyka, obrona roszczeń)</li>
+            <li>
+              lit. f — prawnie uzasadniony interes administratora (bezpieczeństwo, statystyka,
+              obrona roszczeń)
+            </li>
           </ul>
 
           <h2>Odbiorcy danych i podmioty przetwarzające</h2>
@@ -83,54 +103,87 @@ const contactFallback = "Skontaktuj się przez formularz.";
             Korzystamy z usług sprawdzonych dostawców, którzy przetwarzają dane na nasze zlecenie:
           </p>
           <ul>
-            {DATA_PROCESSORS.map((processor) => (
-              <li>{processor.name} — {processor.purpose} ({processor.location})</li>
-            ))}
+            {
+              DATA_PROCESSORS.map((processor) => (
+                <li>
+                  {processor.name} — {processor.purpose} ({processor.location})
+                </li>
+              ))
+            }
           </ul>
           <p>
-            W razie potrzeby dane mogą być przekazywane poza EOG na podstawie standardowych klauzul umownych.
+            W razie potrzeby dane mogą być przekazywane poza EOG na podstawie standardowych klauzul
+            umownych.
           </p>
 
           <h2>Prawa użytkownika</h2>
           <p>
-            Masz prawo do: dostępu do danych, sprostowania, usunięcia, ograniczenia przetwarzania, przenoszenia danych,
-            sprzeciwu wobec przetwarzania oraz cofnięcia zgody w dowolnym momencie. Skargę możesz złożyć do Prezesa UODO.
+            Masz prawo do: dostępu do danych, sprostowania, usunięcia, ograniczenia przetwarzania,
+            przenoszenia danych, sprzeciwu wobec przetwarzania oraz cofnięcia zgody w dowolnym
+            momencie. Skargę możesz złożyć do Prezesa UODO.
           </p>
 
           <h2>Okres przechowywania</h2>
           <p>
-            Dane przechowujemy przez czas niezbędny do realizacji celu kontaktu, a następnie przez okres przedawnienia
-            roszczeń (standardowo do 3 lat) lub zgodnie z obowiązkami prawnymi.
+            Dane przechowujemy przez czas niezbędny do realizacji celu kontaktu, a następnie przez
+            okres przedawnienia roszczeń (standardowo do 3 lat) lub zgodnie z obowiązkami prawnymi.
           </p>
 
           <h2>Cookies i analityka</h2>
-          {ANALYTICS_ENABLED ? (
-            <p>
-              Serwis korzysta z narzędzi analitycznych (Google Analytics, identyfikator {ANALYTICS_ID}) w celu
-              mierzenia ruchu i poprawy jakości strony. Dane mogą obejmować identyfikatory cookies i informacje o
-              urządzeniu. Możesz ograniczyć użycie cookies w ustawieniach przeglądarki.
-            </p>
-          ) : (
-            <p>
-              Serwis nie korzysta z narzędzi analitycznych ani marketingowych. Wykorzystujemy wyłącznie niezbędne
-              pliki cookies związane z bezpieczeństwem i działaniem strony.
-            </p>
-          )}
+          {
+            ANALYTICS_ENABLED ? (
+              <>
+                <p>
+                  Serwis korzysta z narzędzi analitycznych (Google Analytics, identyfikator{" "}
+                  {ANALYTICS_ID}) w celu mierzenia ruchu i poprawy jakości strony. Dane mogą
+                  obejmować identyfikatory cookies i informacje o urządzeniu. Możesz ograniczyć
+                  użycie cookies w ustawieniach przeglądarki.
+                </p>
+                <p class="mt-4">
+                  Analitykę uruchamiamy po uzyskaniu zgody. Decyzję możesz zmienić w dowolnym
+                  momencie.
+                </p>
+                <button
+                  type="button"
+                  class="btn btn-secondary mt-4"
+                  data-analytics-consent-reset
+                >
+                  Zmień ustawienia analityki
+                </button>
+              </>
+            ) : (
+              <p>
+                Serwis nie korzysta z narzędzi analitycznych ani marketingowych. Wykorzystujemy
+                wyłącznie niezbędne pliki cookies związane z bezpieczeństwem i działaniem strony.
+              </p>
+            )
+          }
 
           <h2>Kontakt w sprawach prywatności</h2>
           <p>
-            {hasEmail && hasPhone && (
-              <>W sprawach prywatności napisz na adres: <strong>{CONTACT_EMAIL}</strong> lub zadzwoń: <strong>{CONTACT_PHONE}</strong>.</>
-            )}
-            {hasEmail && !hasPhone && (
-              <>W sprawach prywatności napisz na adres: <strong>{CONTACT_EMAIL}</strong>.</>
-            )}
-            {!hasEmail && hasPhone && (
-              <>W sprawach prywatności zadzwoń: <strong>{CONTACT_PHONE}</strong>.</>
-            )}
-            {!hasEmail && !hasPhone && (
-              <>W sprawach prywatności: {contactFallback}</>
-            )}
+            {
+              hasEmail && hasPhone && (
+                <>
+                  W sprawach prywatności napisz na adres: <strong>{CONTACT_EMAIL}</strong> lub
+                  zadzwoń: <strong>{CONTACT_PHONE}</strong>.
+                </>
+              )
+            }
+            {
+              hasEmail && !hasPhone && (
+                <>
+                  W sprawach prywatności napisz na adres: <strong>{CONTACT_EMAIL}</strong>.
+                </>
+              )
+            }
+            {
+              !hasEmail && hasPhone && (
+                <>
+                  W sprawach prywatności zadzwoń: <strong>{CONTACT_PHONE}</strong>.
+                </>
+              )
+            }
+            {!hasEmail && !hasPhone && <>W sprawach prywatności: {contactFallback}</>}
           </p>
 
           <p class="text-sm text-slate-600">Ostatnia aktualizacja: {updatedAt}</p>
