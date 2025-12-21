@@ -23,11 +23,11 @@ Lektor powinien mieć plan nauki oraz materiały do pracy między zajęciami. To
 ## Dopasowanie do celu
 Jeśli potrzebujesz konwersacji, upewnij się, że zajęcia są nastawione na mówienie, a nie tylko teorię.
 
-## Lekcja próbna
-Próbne spotkanie pozwala sprawdzić, czy tempo i styl pracy Ci odpowiadają. To najlepszy sposób na świadomą decyzję.
+## Konsultacja i diagnoza poziomu
+Pierwsze spotkanie pozwala sprawdzić, czy tempo i styl pracy Ci odpowiadają, oraz ustalić plan nauki.
 
 <div class="cta-panel">
-  <h3>Chcesz sprawdzić lekcję próbną?</h3>
+  <h3>Chcesz umówić konsultację?</h3>
   <p>Sprawdź kurs i porozmawiaj z lektorem o swoim celu.</p>
   <div class="mt-4 flex flex-wrap gap-3">
     <a class="btn btn-primary" href="/angielski-online#kurs">Kurs angielskiego online</a>

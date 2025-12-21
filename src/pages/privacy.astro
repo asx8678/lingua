@@ -9,6 +9,7 @@ import {
   DATA_PROCESSORS,
   ANALYTICS_ENABLED,
   ANALYTICS_ID,
+  isTodo,
 } from "../config/site";
 
 const title = `Polityka prywatności | ${BRAND_NAME}`;
@@ -17,6 +18,9 @@ const description =
 const updatedAt = new Date().toLocaleDateString("pl-PL");
 const controllerName = BUSINESS.legalEntityName || BRAND_NAME;
 const addressLine = FULL_ADDRESS || BUSINESS.city;
+const hasEmail = !isTodo(CONTACT_EMAIL);
+const hasPhone = !isTodo(CONTACT_PHONE);
+const contactFallback = "Skontaktuj się przez formularz.";
 ---
 
 <MainLayout title={title} description={description}>
@@ -36,8 +40,9 @@ const addressLine = FULL_ADDRESS || BUSINESS.city;
           <p>{controllerName}</p>
           <p>
             Adres: {addressLine}<br />
-            E-mail: {CONTACT_EMAIL}<br />
-            Telefon: {CONTACT_PHONE}
+            {hasEmail ? <>E-mail: {CONTACT_EMAIL}<br /></> : null}
+            {hasPhone ? <>Telefon: {CONTACT_PHONE}</> : null}
+            {!hasEmail && !hasPhone ? contactFallback : null}
           </p>
 
           <h2>Zakres danych osobowych</h2>
@@ -106,8 +111,18 @@ const addressLine = FULL_ADDRESS || BUSINESS.city;
 
           <h2>Kontakt w sprawach prywatności</h2>
           <p>
-            W sprawach prywatności napisz na adres: <strong>{CONTACT_EMAIL}</strong> lub zadzwoń:
-            <strong> {CONTACT_PHONE}</strong>.
+            {hasEmail && hasPhone && (
+              <>W sprawach prywatności napisz na adres: <strong>{CONTACT_EMAIL}</strong> lub zadzwoń: <strong>{CONTACT_PHONE}</strong>.</>
+            )}
+            {hasEmail && !hasPhone && (
+              <>W sprawach prywatności napisz na adres: <strong>{CONTACT_EMAIL}</strong>.</>
+            )}
+            {!hasEmail && hasPhone && (
+              <>W sprawach prywatności zadzwoń: <strong>{CONTACT_PHONE}</strong>.</>
+            )}
+            {!hasEmail && !hasPhone && (
+              <>W sprawach prywatności: {contactFallback}</>
+            )}
           </p>
 
           <p class="text-sm text-slate-600">Ostatnia aktualizacja: {updatedAt}</p>

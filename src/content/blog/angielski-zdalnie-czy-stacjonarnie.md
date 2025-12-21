@@ -25,11 +25,11 @@ Zdalnie sprawdzi się u osób zapracowanych i mobilnych. Stacjonarnie może być
 oddzielenia nauki od domu.
 
 ## Jak podjąć decyzję
-Najlepiej spróbować lekcji próbnej online i ocenić, czy taka forma odpowiada Twojemu stylowi pracy.
+Najlepiej umówić konsultację i diagnozę poziomu online i ocenić, czy taka forma odpowiada Twojemu stylowi pracy.
 
 <div class="cta-panel">
   <h3>Chcesz sprawdzić naukę online?</h3>
-  <p>Umów próbne zajęcia i porównaj z własnym doświadczeniem.</p>
+  <p>Umów konsultację i porównaj z własnym doświadczeniem.</p>
   <div class="mt-4 flex flex-wrap gap-3">
     <a class="btn btn-primary" href="/angielski-online#kurs">Kurs angielskiego online</a>
     <a class="btn btn-secondary" href="/kontakt">Skontaktuj się</a>

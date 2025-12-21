@@ -4,13 +4,13 @@ import { BRAND_NAME, CONTACT_EMAIL, CONTACT_PHONE, isTodo } from "../config/site
 
 const title = `Kontakt – szkoła angielskiego Legionowo | ${BRAND_NAME}`;
 const description =
-  "Skontaktuj się i umów lekcję próbną w szkole Lingua Legionowo. Oferujemy kursy stacjonarne i online. Odpowiadamy szybko.";
+  "Skontaktuj się i umów konsultację oraz diagnozę poziomu w szkole Lingua Legionowo. Oferujemy kursy stacjonarne i online. Odpowiadamy szybko.";
 
 const hasEmail = !isTodo(CONTACT_EMAIL);
 const hasPhone = !isTodo(CONTACT_PHONE);
 const formAction = hasEmail ? "/api/kontakt" : "#";
-const emailFallback = "Formularz kontaktowy";
-const phoneFallback = "Oddzwonimy po zgłoszeniu";
+const emailFallback = "Skontaktuj się przez formularz.";
+const phoneFallback = "Skontaktuj się przez formularz.";
 ---
 
 <MainLayout title={title} description={description}>
@@ -32,7 +32,7 @@ const phoneFallback = "Oddzwonimy po zgłoszeniu";
                 {hasEmail ? (
                   <a class="no-underline" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
                 ) : (
-                  <a class="no-underline" href="#formularz">{emailFallback}</a>
+                  <span>{emailFallback}</span>
                 )}
               </div>
               <p class="mt-2 text-sm">Odpowiadamy najszybciej mailowo.</p>
@@ -52,7 +52,7 @@ const phoneFallback = "Oddzwonimy po zgłoszeniu";
           </div>
 
           <p class="mt-6 text-sm text-slate-500">
-            Szkoła Lingua znajduje się w centrum Legionowa. Oferujemy także lekcje online dla osób z daleka.
+            Szkoła Lingua znajduje się w centrum Legionowa. Oferujemy także lekcje online dla osób spoza Legionowa.
           </p>
           <p class="mt-2 text-sm text-slate-500">
             Zobacz też

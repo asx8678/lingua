@@ -15,6 +15,17 @@ npm install
 npm run dev
 ```
 
+## Konfiguracja kontaktu
+
+Ustaw publiczne dane kontaktowe w `.env` (lub skopiuj `.env.example`):
+
+```
+PUBLIC_CONTACT_EMAIL=
+PUBLIC_CONTACT_PHONE=
+PUBLIC_CONTACT_CITY=Legionowo
+PUBLIC_CONTACT_ADDRESS=
+```
+
 ## Styling (Tailwind CSS)
 
 - Konfiguracja: `tailwind.config.cjs`

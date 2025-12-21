@@ -1,0 +1,112 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import CTASection from "../components/CTASection.astro";
+import { BRAND_NAME } from "../config/site";
+
+const title = `Kursy grupowe w Legionowie — stały plan i regularny postęp | ${BRAND_NAME}`;
+const description =
+  "Kursy grupowe języków obcych i matematyki w Legionowie oraz online. Stały plan, materiały i regularny feedback.";
+
+const highlights = [
+  "Stały rytm spotkań i jasny plan nauki.",
+  "Materiały i zadania między zajęciami.",
+  "Regularny feedback i podsumowania.",
+];
+
+const forWhom = [
+  "Dzieci i młodzież uczący się w stałym rytmie.",
+  "Dorośli, którzy lubią pracę w grupie i wzajemną motywację.",
+  "Osoby przygotowujące się do egzaminów lub wyjazdów.",
+];
+
+const organization = [
+  {
+    title: "Dobór poziomu",
+    text: "Grupy tworzymy na podstawie diagnozy poziomu i celu nauki.",
+  },
+  {
+    title: "Małe grupy",
+    text: "Dbamy o komfort i czas na mówienie dla każdego uczestnika.",
+  },
+  {
+    title: "Spójny program",
+    text: "Kurs ma strukturę, dzięki której łatwiej śledzić postęp.",
+  },
+];
+---
+
+<MainLayout title={title} description={description}>
+  <section class="hero-bg">
+    <div class="container-site py-16 sm:py-20">
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div>
+          <span class="kicker">Kursy grupowe</span>
+          <h1 class="mt-6">Kursy grupowe w Legionowie — stały plan i regularny postęp</h1>
+          <p class="mt-6 max-w-2xl text-lg">
+            Kursy grupowe łączą systematyczność z motywacją zespołu. Otrzymujesz plan, materiały i wsparcie,
+            a my dbamy o tempo i wyraźny postęp.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a class="btn btn-primary" href="/kontakt">Umów konsultację</a>
+            <a class="btn btn-secondary" href="/zapisy-2025-2026">Zapisz się</a>
+          </div>
+          <p class="mt-4 text-sm text-slate-500">
+            Potrzebujesz cen? Zobacz
+            <a class="font-bold text-primary no-underline hover:underline" href="/cennik">cennik</a>.
+          </p>
+        </div>
+        <div class="card p-6">
+          <h2 class="text-2xl font-extrabold tracking-tight">Dlaczego kursy grupowe działają</h2>
+          <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
+            {highlights.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-site">
+      <h2>Dla kogo są kursy grupowe</h2>
+      <p class="mt-4 max-w-3xl">
+        Kursy grupowe sprawdzają się u osób, które cenią regularność i motywację płynącą z pracy w zespole.
+      </p>
+      <ul class="mt-6 space-y-3">
+        {forWhom.map((item) => (
+          <li class="flex items-start gap-3 text-sm text-slate-600">
+            <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary" aria-hidden="true"></span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container-site">
+      <h2>Organizacja grup i poziomów</h2>
+      <p class="mt-4 max-w-3xl">
+        Najpierw diagnozujemy poziom, potem dobieramy grupę i harmonogram. Dzięki temu kurs jest spójny.
+      </p>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        {organization.map((item) => (
+          <div class="card p-6">
+            <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
+            <p class="mt-3 text-sm text-slate-600">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title="Chcesz dołączyć do kursu grupowego?"
+    description="Umów konsultację i diagnozę poziomu — zaproponujemy grupę i plan nauki."
+    primaryLabel="Umów konsultację"
+    primaryHref="/kontakt"
+    secondaryLabel="Zapisz się"
+    secondaryHref="/zapisy-2025-2026"
+  />
+</MainLayout>

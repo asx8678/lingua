@@ -1,13 +1,22 @@
 export const SITE_URL = "https://lingualegionowo.pl";
+export const SITE_NAME = "Lingua Legionowo";
 
-export const BUSINESS = {
-  businessName: "Lingua Legionowo",
-  legalEntityName: import.meta.env.PUBLIC_LEGAL_ENTITY_NAME ?? "",
-  streetAddress: import.meta.env.PUBLIC_STREET_ADDRESS ?? "",
-  postalCode: import.meta.env.PUBLIC_POSTAL_CODE ?? "",
-  city: import.meta.env.PUBLIC_CITY ?? "Legionowo",
+export const CONTACT = {
   email: import.meta.env.PUBLIC_CONTACT_EMAIL ?? "",
   phone: import.meta.env.PUBLIC_CONTACT_PHONE ?? "",
+  city: import.meta.env.PUBLIC_CONTACT_CITY ?? import.meta.env.PUBLIC_CITY ?? "Legionowo",
+  address: import.meta.env.PUBLIC_CONTACT_ADDRESS ?? import.meta.env.PUBLIC_STREET_ADDRESS ?? "",
+  postalCode: import.meta.env.PUBLIC_POSTAL_CODE ?? "",
+};
+
+export const BUSINESS = {
+  businessName: SITE_NAME,
+  legalEntityName: import.meta.env.PUBLIC_LEGAL_ENTITY_NAME ?? "",
+  streetAddress: CONTACT.address,
+  postalCode: CONTACT.postalCode,
+  city: CONTACT.city,
+  email: CONTACT.email,
+  phone: CONTACT.phone,
   openingHours: import.meta.env.PUBLIC_OPENING_HOURS ?? "",
   geo: {
     latitude: import.meta.env.PUBLIC_GEO_LAT ?? "",
@@ -24,16 +33,16 @@ export const BRAND_NAME = BUSINESS.businessName;
 export const BRAND_TAGLINE = "Szkoła języków obcych i matematyki w Legionowie";
 
 const addressParts = [
-  BUSINESS.streetAddress,
-  [BUSINESS.postalCode, BUSINESS.city].filter(Boolean).join(" ").trim(),
+  CONTACT.address,
+  [CONTACT.postalCode, CONTACT.city].filter(Boolean).join(" ").trim(),
 ].filter(Boolean);
 
 export const FULL_ADDRESS = addressParts.join(", ");
-export const ADDRESS_SHORT = BUSINESS.city;
-export const BUSINESS_ADDRESS = FULL_ADDRESS || BUSINESS.city;
+export const ADDRESS_SHORT = CONTACT.city;
+export const BUSINESS_ADDRESS = FULL_ADDRESS || CONTACT.city;
 
-export const CONTACT_EMAIL = BUSINESS.email;
-export const CONTACT_PHONE = BUSINESS.phone;
+export const CONTACT_EMAIL = CONTACT.email;
+export const CONTACT_PHONE = CONTACT.phone;
 
 export const ANALYTICS_ID = import.meta.env.PUBLIC_GA_ID ?? "G-FS7CKXXZ6J";
 export const ANALYTICS_ENABLED = Boolean(ANALYTICS_ID);
@@ -49,12 +58,22 @@ export const ALTERNATE_DOMAINS = {
 
 export const DEFAULT_TITLE = `${BRAND_NAME} — języki obce i matematyka w Legionowie`;
 export const DEFAULT_DESCRIPTION =
-  "Szkoła języków obcych i matematyki w Legionowie. Zajęcia stacjonarne i online dla wszystkich poziomów. Umów lekcję próbną.";
+  "Szkoła języków obcych i matematyki w Legionowie. Zajęcia stacjonarne i online dla wszystkich poziomów. Umów konsultację i diagnozę poziomu.";
 
-export const CTA_PRIMARY_LABEL = "Lekcja próbna";
-export const CTA_PRIMARY_HREF = "/kontakt#formularz";
-export const CTA_SECONDARY_LABEL = "Zapisz się";
-export const CTA_SECONDARY_HREF = "/zapisy-2025-2026";
+export const PRIMARY_CTA = {
+  label: "Umów konsultację",
+  href: "/kontakt",
+};
+
+export const SECONDARY_CTA = {
+  label: "Zapisz się",
+  href: "/zapisy-2025-2026",
+};
+
+export const CTA_PRIMARY_LABEL = PRIMARY_CTA.label;
+export const CTA_PRIMARY_HREF = PRIMARY_CTA.href;
+export const CTA_SECONDARY_LABEL = SECONDARY_CTA.label;
+export const CTA_SECONDARY_HREF = SECONDARY_CTA.href;
 
 export const isTodo = (value: string | undefined | null) => !value;
 
