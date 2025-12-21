@@ -143,11 +143,8 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             aria-label="Formularz kontaktowy"
             data-contact-form
           >
-            <div
-              class="relative"
-              aria-hidden="true"
-              style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;"
-            >
+            <!-- Honeypot field for spam prevention - hidden from users -->
+            <div class="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
               <label for="company">Firma</label>
               <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
             </div>
