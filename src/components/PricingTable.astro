@@ -1,11 +1,19 @@
 ---
+type PricingTableProps = {
+  title: string;
+  subtitle?: string;
+  columns?: string[];
+  rows?: string[][];
+  footnote?: string;
+};
+
 const {
   title,
   subtitle,
   columns = [],
   rows = [],
   footnote,
-} = Astro.props;
+} = Astro.props as PricingTableProps;
 ---
 
 <section class="card p-6">

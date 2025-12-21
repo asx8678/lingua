@@ -49,6 +49,17 @@ const DATA = {
     },
   ],
 };
+
+const defaultPlan = DATA.packages.find((p) => p.id === "pakiet-45") ?? DATA.packages[0];
+const defaultPersons = 1;
+const defaultSessions = defaultPlan.baseSessions;
+const defaultPrice10 = defaultPlan.pricePerPerson[defaultPersons];
+const defaultPerSession = defaultPrice10 / defaultPlan.baseSessions;
+const defaultPerPersonTotal = defaultPerSession * defaultSessions;
+const defaultGroupTotal = defaultPerPersonTotal * defaultPersons;
+const defaultFormatter = new Intl.NumberFormat("pl-PL", { maximumFractionDigits: 0 });
+const defaultPln = (value: number) => `${defaultFormatter.format(Math.round(value))} zł`;
+const defaultNote = `Pakiet ${defaultPlan.baseSessions} spotkań × ${defaultPlan.minutes} min: ${defaultPln(defaultPrice10)} / osoba (wg cennika).`;
 ---
 
 <div class="card p-6">
@@ -119,6 +130,7 @@ const DATA = {
             class="rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-700 transition hover:bg-slate-100"
             data-target="persons"
             data-step="-1"
+            aria-controls="persons"
             aria-label="Zmniejsz liczbę osób"
           >
             −
@@ -129,8 +141,9 @@ const DATA = {
             type="number"
             inputmode="numeric"
             min="1"
-            max="10"
+            max="3"
             value="1"
+            aria-describedby="persons-hint"
             class="w-full rounded-xl border-slate-300 bg-white text-center focus:border-primary focus:ring-primary"
           />
           <button
@@ -138,6 +151,7 @@ const DATA = {
             class="rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-700 transition hover:bg-slate-100"
             data-target="persons"
             data-step="1"
+            aria-controls="persons"
             aria-label="Zwiększ liczbę osób"
           >
             +
@@ -166,6 +180,7 @@ const DATA = {
             class="rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-700 transition hover:bg-slate-100"
             data-target="sessions"
             data-step="-1"
+            aria-controls="sessions"
             aria-label="Zmniejsz liczbę spotkań"
           >
             −
@@ -178,6 +193,7 @@ const DATA = {
             min="1"
             max="200"
             value="10"
+            aria-describedby="sessions-hint"
             class="w-full rounded-xl border-slate-300 bg-white text-center focus:border-primary focus:ring-primary"
           />
           <button
@@ -185,6 +201,7 @@ const DATA = {
             class="rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-700 transition hover:bg-slate-100"
             data-target="sessions"
             data-step="1"
+            aria-controls="sessions"
             aria-label="Zwiększ liczbę spotkań"
           >
             +
@@ -207,25 +224,31 @@ const DATA = {
     </div>
   </form>
 
-  <div class="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
-    <div class="grid gap-4 sm:grid-cols-3 sm:items-end">
+  <div class="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5" aria-live="polite">
+    <div class="grid gap-4 sm:grid-cols-3 sm:items-end" role="status">
       <div>
         <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Za spotkanie / osoba</div>
-        <div id="out-per-session" class="mt-2 text-3xl font-extrabold text-slate-900">—</div>
-        <div id="out-per-session-sub" class="mt-1 text-xs text-slate-500"></div>
+        <div id="out-per-session" class="mt-2 text-3xl font-extrabold text-slate-900">
+          {defaultPln(defaultPerSession)}
+        </div>
+        <div id="out-per-session-sub" class="mt-1 text-xs text-slate-500">{defaultPlan.minutes} min</div>
       </div>
 
       <div>
         <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Łącznie / osoba</div>
-        <div id="out-per-total" class="mt-2 text-3xl font-extrabold text-slate-900">—</div>
-        <div id="out-per-total-sub" class="mt-1 text-xs text-slate-500"></div>
+        <div id="out-per-total" class="mt-2 text-3xl font-extrabold text-slate-900">
+          {defaultPln(defaultPerPersonTotal)}
+        </div>
+        <div id="out-per-total-sub" class="mt-1 text-xs text-slate-500">{defaultSessions} spotkań</div>
       </div>
 
-    <div id="total-block" class="hidden">
-      <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Łącznie (grupa)</div>
-      <div id="out-total" class="mt-2 text-3xl font-extrabold text-slate-900">—</div>
-      <div id="out-total-sub" class="mt-1 text-xs text-slate-500"></div>
-    </div>
+      <div id="total-block">
+        <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Łącznie (grupa)</div>
+        <div id="out-total" class="mt-2 text-3xl font-extrabold text-slate-900">
+          {defaultPln(defaultGroupTotal)}
+        </div>
+        <div id="out-total-sub" class="mt-1 text-xs text-slate-500">{defaultPersons} os.</div>
+      </div>
     </div>
 
     <div class="mt-4 flex items-center gap-2 text-xs text-slate-600">
@@ -238,14 +261,14 @@ const DATA = {
       <label for="show-total" class="select-none">Pokaż koszt dla całej grupy</label>
     </div>
 
-    <div id="out-note" class="mt-4 text-xs text-slate-600"></div>
+    <div id="out-note" class="mt-4 text-xs text-slate-600">{defaultNote}</div>
   </div>
 
   <p class="mt-4 text-xs text-slate-500">
     Kalkulator bazuje na cenniku 2025/2026. W przypadku kursów liczba spotkań jest stała.
   </p>
 
-  <script type="application/json" id="price-data" set:html={JSON.stringify(DATA)}></script>
+  <script is:inline type="application/json" id="price-data" set:html={JSON.stringify(DATA)}></script>
   <script is:inline>
     const DATA = /** @type {const} */ (JSON.parse(document.getElementById('price-data').textContent));
 

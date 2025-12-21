@@ -1,7 +1,14 @@
 ---
-const { title, items = [], ctaHref = "/cennik-lingua.pdf", ctaLabel = "POBIERZ CENNIK" } = Astro.props;
+type PriceCardProps = {
+  title: string;
+  items?: string[];
+  ctaHref?: string;
+  ctaLabel?: string;
+};
 
-const splitArrow = (text) => {
+const { title, items = [], ctaHref = "/cennik-lingua.pdf", ctaLabel = "POBIERZ CENNIK" } = Astro.props as PriceCardProps;
+
+const splitArrow = (text: string) => {
   const parts = String(text).split("→").map((s) => s.trim());
   if (parts.length >= 2) return { left: parts[0], right: parts.slice(1).join(" → ") };
   return { left: String(text), right: "" };

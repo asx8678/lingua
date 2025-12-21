@@ -1,5 +1,14 @@
 ---
-const { title = "FAQ", items = [], id } = Astro.props;
+type FaqItem = {
+  question: string;
+  answer: string;
+};
+
+const { title = "FAQ", items = [], id } = Astro.props as {
+  title?: string;
+  items?: FaqItem[];
+  id?: string;
+};
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -26,5 +35,5 @@ const jsonLd = {
       ))}
     </div>
   </div>
-  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
 </section>

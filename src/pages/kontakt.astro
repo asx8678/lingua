@@ -8,7 +8,7 @@ const description =
 
 const hasEmail = !isTodo(CONTACT_EMAIL);
 const hasPhone = !isTodo(CONTACT_PHONE);
-const formAction = hasEmail ? `mailto:${CONTACT_EMAIL}` : "#";
+const formAction = hasEmail ? "/api/kontakt" : "#";
 const emailFallback = "Formularz kontaktowy";
 const phoneFallback = "Oddzwonimy po zgłoszeniu";
 ---
@@ -70,10 +70,17 @@ const phoneFallback = "Oddzwonimy po zgłoszeniu";
           <form
             method="post"
             action={formAction}
-            enctype="text/plain"
             class="mt-6 space-y-4"
             aria-label="Formularz kontaktowy"
+            data-contact-form
           >
+            <div class="relative" aria-hidden="true" style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;">
+              <label for="company">Firma</label>
+              <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div id="form-alert" class="hidden rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-700" role="alert"></div>
+
             <div>
               <label for="name" class="text-sm font-bold text-slate-900">Imię i nazwisko *</label>
               <input
@@ -81,8 +88,11 @@ const phoneFallback = "Oddzwonimy po zgłoszeniu";
                 name="name"
                 autocomplete="name"
                 required
+                minlength="2"
+                aria-describedby="name-error"
                 class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
               />
+              <p id="name-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
             </div>
 
             <div>
@@ -93,8 +103,10 @@ const phoneFallback = "Oddzwonimy po zgłoszeniu";
                 type="email"
                 autocomplete="email"
                 required
+                aria-describedby="email-error"
                 class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
               />
+              <p id="email-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
             </div>
 
             <div>
@@ -104,8 +116,10 @@ const phoneFallback = "Oddzwonimy po zgłoszeniu";
                 name="phone"
                 type="tel"
                 autocomplete="tel"
+                aria-describedby="phone-error"
                 class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
               />
+              <p id="phone-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
             </div>
 
             <div>
@@ -114,9 +128,12 @@ const phoneFallback = "Oddzwonimy po zgłoszeniu";
                 id="message"
                 name="message"
                 required
+                minlength="20"
+                aria-describedby="message-error"
                 class="mt-1 min-h-[120px] w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
                 placeholder="Np. poziom, cel, preferowane dni/godziny…"
               ></textarea>
+              <p id="message-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
             </div>
 
             <div class="flex items-start gap-3 text-sm text-slate-600">
@@ -125,6 +142,7 @@ const phoneFallback = "Oddzwonimy po zgłoszeniu";
                 name="consent"
                 type="checkbox"
                 required
+                aria-describedby="consent-error"
                 class="mt-1 h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary"
               />
               <label for="consent">
@@ -132,11 +150,129 @@ const phoneFallback = "Oddzwonimy po zgłoszeniu";
                 <a class="font-bold text-primary no-underline hover:underline" href="/privacy">polityką prywatności</a>.
               </label>
             </div>
+            <p id="consent-error" class="text-xs text-rose-600" aria-live="polite"></p>
 
             <button class="btn btn-primary w-full" type="submit">Wyślij wiadomość</button>
           </form>
+
+          <div
+            id="contact-success"
+            class="mt-6 hidden rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800"
+            role="status"
+            tabindex="-1"
+          >
+            Dziękujemy! Otwieramy Twoją aplikację pocztową z przygotowaną wiadomością. Odezwiemy się w ciągu
+            1–2 dni roboczych. Jeśli okno poczty się nie pojawi, skorzystaj z adresu e-mail podanego obok.
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <script is:inline>
+    const form = document.querySelector("[data-contact-form]");
+    const alertEl = document.getElementById("form-alert");
+    const successEl = document.getElementById("contact-success");
+    const honeypotEl = document.getElementById("company");
+
+    const fields = [
+      { id: "name", min: 2, message: "Podaj imię i nazwisko (min. 2 znaki)." },
+      { id: "email", type: "email", message: "Podaj poprawny adres e-mail." },
+      { id: "message", min: 20, message: "Wiadomość powinna mieć co najmniej 20 znaków." },
+      { id: "consent", type: "checkbox", message: "Wymagana jest zgoda na kontakt." },
+    ];
+
+    const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+    const throttleMs = 60 * 1000;
+    const throttleKey = "lingua-contact-throttle";
+
+    const getErrorEl = (id) => document.getElementById(`${id}-error`);
+
+    const setError = (field, message) => {
+      const errorEl = getErrorEl(field.id);
+      if (errorEl) errorEl.textContent = message;
+      field.setAttribute("aria-invalid", "true");
+    };
+
+    const clearError = (field) => {
+      const errorEl = getErrorEl(field.id);
+      if (errorEl) errorEl.textContent = "";
+      field.removeAttribute("aria-invalid");
+    };
+
+    const validate = () => {
+      let firstInvalid = null;
+      fields.forEach((rule) => {
+        const field = document.getElementById(rule.id);
+        if (!field) return;
+        clearError(field);
+
+        const value = field.type === "checkbox" ? field.checked : field.value.trim();
+        let valid = true;
+
+        if (rule.type === "checkbox") {
+          valid = Boolean(value);
+        } else if (rule.type === "email") {
+          valid = emailPattern.test(value);
+        } else if (rule.min) {
+          valid = value.length >= rule.min;
+        }
+
+        if (!valid) {
+          setError(field, rule.message);
+          if (!firstInvalid) firstInvalid = field;
+        }
+      });
+
+      if (firstInvalid) {
+        firstInvalid.focus();
+      }
+
+      return !firstInvalid;
+    };
+
+    const showAlert = (message) => {
+      if (!alertEl) return;
+      alertEl.textContent = message;
+      alertEl.classList.remove("hidden");
+    };
+
+    const clearAlert = () => {
+      if (!alertEl) return;
+      alertEl.textContent = "";
+      alertEl.classList.add("hidden");
+    };
+
+    form?.addEventListener("input", (event) => {
+      const target = event.target;
+      if (!target?.id) return;
+      clearAlert();
+      clearError(target);
+    });
+
+    form?.addEventListener("submit", (event) => {
+      clearAlert();
+      if (honeypotEl?.value?.trim()) {
+        event.preventDefault();
+        showAlert("Wykryliśmy podejrzaną aktywność. Spróbuj ponownie za chwilę.");
+        return;
+      }
+
+      const lastSubmit = Number(localStorage.getItem(throttleKey) || 0);
+      if (Date.now() - lastSubmit < throttleMs) {
+        event.preventDefault();
+        showAlert("Prosimy odczekać minutę przed kolejną próbą wysłania formularza.");
+        return;
+      }
+
+      if (!validate()) {
+        event.preventDefault();
+        return;
+      }
+
+      localStorage.setItem(throttleKey, String(Date.now()));
+      successEl?.classList.remove("hidden");
+      successEl?.focus();
+    });
+  </script>
 </MainLayout>

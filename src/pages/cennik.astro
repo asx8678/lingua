@@ -34,6 +34,24 @@ const steps = [
   "Wybierz preferowany format (1:1 / mini-grupa)",
   "Dostaniesz propozycję planu i cenę",
 ];
+
+const faq = [
+  {
+    question: "Jak liczymy cenę pakietów 10 spotkań?",
+    answer:
+      "Stawki bazują na pakietach 10 spotkań. Kalkulator przelicza koszt proporcjonalnie, jeśli wybierzesz inną liczbę spotkań.",
+  },
+  {
+    question: "Jak rozliczane są kursy grupowe?",
+    answer:
+      "Kursy mają stałą liczbę spotkań i cenę za osobę zgodnie z cennikiem (30×90 lub 56×60/90 min). Minimalna liczba osób wynika z cennika.",
+  },
+  {
+    question: "Czy matematyka kosztuje tyle samo co angielski?",
+    answer:
+      "Tak, matematyka jest wyceniana według tych samych stawek co angielski.",
+  },
+];
 ---
 
 <MainLayout title={title} description={description}>
@@ -46,6 +64,9 @@ const steps = [
           <p class="mt-6 max-w-2xl text-lg">
             Cena zależy od formatu zajęć (stacjonarnie/online), długości spotkań i częstotliwości.
             Poniżej znajdziesz orientacyjne warianty, a szczegóły ustalamy po krótkiej rozmowie.
+          </p>
+          <p class="mt-4 text-xs font-semibold uppercase tracking-widest text-slate-500">
+            Cennik aktualny na rok 2025/2026
           </p>
           <p class="mt-4 text-sm text-slate-600">
             Matematyka ma takie same stawki jak angielski.
@@ -115,6 +136,23 @@ const steps = [
       <div class="mt-8">
         <PriceCalculator />
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-site">
+      <h2>Jak działa wycena</h2>
+      <div class="mt-6 grid gap-6 md:grid-cols-3">
+        {faq.map((item) => (
+          <div class="card p-6">
+            <div class="text-sm font-extrabold text-slate-900">{item.question}</div>
+            <p class="mt-3 text-sm text-slate-600">{item.answer}</p>
+          </div>
+        ))}
+      </div>
+      <p class="mt-6 text-xs text-slate-500">
+        Cennik oparty o PDF na sezon 2025/2026. Jeśli potrzebujesz indywidualnej wyceny, skontaktuj się z nami.
+      </p>
     </div>
   </section>
 

@@ -1,7 +1,7 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
 import { getCollection } from "astro:content";
-import { BRAND_NAME } from "../../config/site";
+import { BRAND_NAME, SITE_URL } from "../../config/site";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -17,9 +17,28 @@ const title = `${post.data.title} | ${BRAND_NAME}`;
 const description = post.data.description;
 
 const formattedDate = new Intl.DateTimeFormat("pl-PL", { dateStyle: "medium" }).format(post.data.pubDate);
+const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).toString();
+
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: post.data.title,
+  description,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+  author: {
+    "@type": "Organization",
+    name: BRAND_NAME,
+  },
+  publisher: {
+    "@type": "Organization",
+    name: BRAND_NAME,
+  },
+  mainEntityOfPage: canonicalUrl,
+};
 ---
 
-<MainLayout title={title} description={description} ogType="article">
+<MainLayout title={title} description={description} ogType="article" structuredData={[articleJsonLd]}>
   <article class="section">
     <div class="container-site">
       <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Blog · {formattedDate}</div>

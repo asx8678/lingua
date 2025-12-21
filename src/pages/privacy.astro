@@ -1,11 +1,22 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import { BRAND_NAME, CONTACT_EMAIL, CONTACT_PHONE, BUSINESS_ADDRESS } from "../config/site";
+import {
+  BRAND_NAME,
+  BUSINESS,
+  CONTACT_EMAIL,
+  CONTACT_PHONE,
+  FULL_ADDRESS,
+  DATA_PROCESSORS,
+  ANALYTICS_ENABLED,
+  ANALYTICS_ID,
+} from "../config/site";
 
 const title = `Polityka prywatności | ${BRAND_NAME}`;
 const description =
-  "Polityka prywatności serwisu angielskiego online. Informacje o przetwarzaniu danych osobowych.";
+  "Polityka prywatności serwisu Lingua Legionowo. Informacje o przetwarzaniu danych osobowych zgodnie z RODO.";
 const updatedAt = new Date().toLocaleDateString("pl-PL");
+const controllerName = BUSINESS.legalEntityName || BRAND_NAME;
+const addressLine = FULL_ADDRESS || BUSINESS.city;
 ---
 
 <MainLayout title={title} description={description}>
@@ -15,51 +26,88 @@ const updatedAt = new Date().toLocaleDateString("pl-PL");
       <h1 class="mt-6">Polityka prywatności</h1>
 
       <p class="mt-6 max-w-4xl text-lg">
-        Ten dokument wymaga dostosowania do faktycznych procesów, narzędzi i danych zbieranych w serwisie.
-        Uzupełnij go przed publikacją.
+        Dbamy o bezpieczeństwo danych i transparentnie informujemy, jak je przetwarzamy. Poniżej znajdziesz pełne zasady
+        obowiązujące w serwisie {BRAND_NAME}.
       </p>
 
       <div class="card mt-8 p-6">
         <div class="prose prose-slate max-w-none">
           <h2>Administrator danych</h2>
-          <p>{BRAND_NAME}</p>
+          <p>{controllerName}</p>
           <p>
-            Adres: {BUSINESS_ADDRESS}<br />
+            Adres: {addressLine}<br />
             E-mail: {CONTACT_EMAIL}<br />
             Telefon: {CONTACT_PHONE}
           </p>
 
-          <h2>Zakres przetwarzania danych</h2>
+          <h2>Zakres danych osobowych</h2>
           <ul>
-            <li>dane kontaktowe podane w formularzu lub wiadomości e-mail</li>
+            <li>dane kontaktowe podane w formularzu lub wiadomości e-mail (imię, adres e-mail, telefon)</li>
             <li>treść zapytań dotyczących kursów i lekcji</li>
+            <li>dane techniczne i logi serwera (adres IP, typ przeglądarki, czas żądania)</li>
           </ul>
 
-          <h2>Cel przetwarzania</h2>
+          <h2>Cele przetwarzania</h2>
           <ul>
-            <li>kontakt w sprawie oferty i zapisów na zajęcia</li>
-            <li>udzielenie odpowiedzi na pytania klientów</li>
+            <li>odpowiedź na zapytania i kontakt w sprawie oferty</li>
+            <li>przygotowanie wyceny i organizacja zajęć</li>
+            <li>zapewnienie bezpieczeństwa i poprawnego działania serwisu</li>
+            <li>statystyka i analiza ruchu (jeśli włączona)</li>
           </ul>
 
           <h2>Podstawa prawna</h2>
           <p>
-            Art. 6 ust. 1 lit. a i b RODO — zgoda oraz działania zmierzające do zawarcia umowy.
+            Dane przetwarzamy zgodnie z art. 6 ust. 1 RODO:
+          </p>
+          <ul>
+            <li>lit. a — zgoda (np. formularz kontaktowy, jeśli wyrażono zgodę)</li>
+            <li>lit. b — działania zmierzające do zawarcia umowy lub realizacja umowy</li>
+            <li>lit. f — prawnie uzasadniony interes administratora (bezpieczeństwo, statystyka, obrona roszczeń)</li>
+          </ul>
+
+          <h2>Odbiorcy danych i podmioty przetwarzające</h2>
+          <p>
+            Korzystamy z usług sprawdzonych dostawców, którzy przetwarzają dane na nasze zlecenie:
+          </p>
+          <ul>
+            {DATA_PROCESSORS.map((processor) => (
+              <li>{processor.name} — {processor.purpose} ({processor.location})</li>
+            ))}
+          </ul>
+          <p>
+            W razie potrzeby dane mogą być przekazywane poza EOG na podstawie standardowych klauzul umownych.
           </p>
 
           <h2>Prawa użytkownika</h2>
           <p>
-            Masz prawo do dostępu do danych, sprostowania, usunięcia, ograniczenia przetwarzania oraz wniesienia skargi
-            do organu nadzorczego.
+            Masz prawo do: dostępu do danych, sprostowania, usunięcia, ograniczenia przetwarzania, przenoszenia danych,
+            sprzeciwu wobec przetwarzania oraz cofnięcia zgody w dowolnym momencie. Skargę możesz złożyć do Prezesa UODO.
           </p>
 
           <h2>Okres przechowywania</h2>
           <p>
-            Dane przechowujemy tylko tak długo, jak jest to konieczne do realizacji celu kontaktu.
+            Dane przechowujemy przez czas niezbędny do realizacji celu kontaktu, a następnie przez okres przedawnienia
+            roszczeń (standardowo do 3 lat) lub zgodnie z obowiązkami prawnymi.
           </p>
 
-          <h2>Pliki cookies</h2>
+          <h2>Cookies i analityka</h2>
+          {ANALYTICS_ENABLED ? (
+            <p>
+              Serwis korzysta z narzędzi analitycznych (Google Analytics, identyfikator {ANALYTICS_ID}) w celu
+              mierzenia ruchu i poprawy jakości strony. Dane mogą obejmować identyfikatory cookies i informacje o
+              urządzeniu. Możesz ograniczyć użycie cookies w ustawieniach przeglądarki.
+            </p>
+          ) : (
+            <p>
+              Serwis nie korzysta z narzędzi analitycznych ani marketingowych. Wykorzystujemy wyłącznie niezbędne
+              pliki cookies związane z bezpieczeństwem i działaniem strony.
+            </p>
+          )}
+
+          <h2>Kontakt w sprawach prywatności</h2>
           <p>
-            Jeśli korzystasz z analityki lub narzędzi marketingowych, opisz tutaj zakres i cel ich użycia.
+            W sprawach prywatności napisz na adres: <strong>{CONTACT_EMAIL}</strong> lub zadzwoń:
+            <strong> {CONTACT_PHONE}</strong>.
           </p>
 
           <p class="text-sm text-slate-600">Ostatnia aktualizacja: {updatedAt}</p>

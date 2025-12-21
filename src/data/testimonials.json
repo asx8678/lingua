@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Kasia M.",
+    "context": "Angielski online, przejście z B1 na B2",
+    "text": "Po dwóch miesiącach poczułam realny progres w mówieniu. Lekcje są konkretne, bez lania wody, a plan jest dopasowany do moich celów.",
+    "rating": 5
+  },
+  {
+    "name": "Marek P.",
+    "context": "Kurs grupowy 60 min",
+    "text": "Świetna atmosfera i systematyczny feedback po zajęciach. W grupie łatwiej utrzymać regularność, a lektor dba o każdego.",
+    "rating": 5
+  },
+  {
+    "name": "Alicja R.",
+    "context": "Matematyka – przygotowanie do egzaminu",
+    "text": "Zajęcia są dobrze uporządkowane, dostaję materiały i zadania domowe. Wreszcie rozumiem tematy, które wcześniej były trudne.",
+    "rating": 5
+  },
+  {
+    "name": "Tomek S.",
+    "context": "Lekcje indywidualne 45 min",
+    "text": "Krótko, intensywnie i bardzo praktycznie. Doceniam to, że każdy temat jest od razu ćwiczony w rozmowie.",
+    "rating": 5
+  },
+  {
+    "name": "Magda W.",
+    "context": "Angielski stacjonarnie w Legionowie",
+    "text": "Dogodne terminy, jasny plan i dużo mówienia. Zajęcia prowadzone w spokojnym tempie, ale bez nudy.",
+    "rating": 5
+  },
+  {
+    "name": "Paweł K.",
+    "context": "Kurs 90 min – przygotowanie do matury",
+    "text": "Dostaję konkretne wskazówki i ćwiczenia pod egzamin. Po kilku tygodniach czuję, że jestem lepiej przygotowany.",
+    "rating": 5
+  }
+]

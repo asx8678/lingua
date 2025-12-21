@@ -1,13 +1,14 @@
 ---
 import Logo from "./Logo.astro";
 import { subjects } from "../data/subjects";
-import { CONTACT_EMAIL, CONTACT_PHONE, BRAND_NAME, isTodo } from "../config/site";
+import { CONTACT_EMAIL, CONTACT_PHONE, BRAND_NAME, BUSINESS, FULL_ADDRESS, isTodo } from "../config/site";
 
 const year = new Date().getFullYear();
 
 const hasEmail = !isTodo(CONTACT_EMAIL);
 const hasPhone = !isTodo(CONTACT_PHONE);
 const contactFormHref = "/kontakt#formularz";
+const addressLine = FULL_ADDRESS || BUSINESS.city;
 ---
 
 <footer class="border-t border-slate-200 bg-slate-50">
@@ -62,6 +63,7 @@ const contactFormHref = "/kontakt#formularz";
             ) : (
               <span class="text-slate-600">Oddzwonimy po zgłoszeniu</span>
             )}
+            {addressLine && <span class="text-slate-600">{addressLine}</span>}
             <a class="link-muted no-underline" href="/privacy">Polityka prywatności</a>
           </div>
         </div>

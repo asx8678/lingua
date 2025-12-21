@@ -2,17 +2,11 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
 import { BRAND_NAME } from "../config/site";
+import testimonials from "../data/testimonials.json";
 
-const title = `Opinie o angielskim online | ${BRAND_NAME}`;
+const title = `Opinie kursantów | ${BRAND_NAME}`;
 const description =
-  "Sprawdź opinie o lekcjach angielskiego online. Zobacz, co kursanci mówią o nauce z lektorem.";
-
-const testimonials = [
-  {
-    title: "Opinie w przygotowaniu",
-    text: "Zbieramy opinie kursantów i opublikujemy je po uzyskaniu zgody.",
-  },
-];
+  "Poznaj opinie kursantów Lingua Legionowo. Sprawdź, co mówią o lekcjach stacjonarnych i online.";
 
 const highlights = [
   "Szybkie przejście od teorii do mówienia.",
@@ -28,13 +22,13 @@ const highlights = [
       <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
         <div>
           <span class="kicker">Opinie</span>
-          <h1 class="mt-6">Opinie o lekcjach angielskiego online</h1>
+          <h1 class="mt-6">Opinie kursantów Lingua Legionowo</h1>
           <p class="mt-6 max-w-2xl text-lg">
-            Zależy nam na rzetelnych opiniach. Zbieramy je od kursantów i uzupełnimy sekcję po uzyskaniu zgód.
+            Poniżej znajdziesz wybrane opinie osób, które uczą się z nami stacjonarnie lub online.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
-            <a class="btn btn-primary" href="/kontakt">Chcę zostawić opinię</a>
-            <a class="btn btn-secondary" href="/angielski-online">Poznaj ofertę</a>
+            <a class="btn btn-primary" href="/kontakt#formularz">Umów lekcję próbną</a>
+            <a class="btn btn-secondary" href="/cennik">Sprawdź cennik</a>
           </div>
         </div>
 
@@ -57,14 +51,18 @@ const highlights = [
     <div class="container-site">
       <h2>Opinie kursantów</h2>
       <p class="mt-4 max-w-3xl">
-        Zbieramy opinie i wrócimy do tej sekcji wkrótce. Jeśli chcesz podzielić się wrażeniami, napisz do nas.
+        Każda opinia została dodana za zgodą kursanta. Jeśli chcesz podzielić się wrażeniami, napisz do nas.
       </p>
 
       <div class="mt-8 grid gap-6 md:grid-cols-2">
         {testimonials.map((item) => (
           <div class="card p-6">
-            <div class="text-xs font-bold uppercase tracking-widest text-slate-500">{item.title}</div>
-            <p class="mt-3 text-sm text-slate-700">{item.text}</p>
+            <div class="text-xs font-bold uppercase tracking-widest text-slate-500">{item.name}</div>
+            <div class="mt-2 text-xs text-slate-500">{item.context}</div>
+            <div class="mt-3 text-sm text-slate-700">{item.text}</div>
+            <div class="mt-4 text-xs font-bold text-primary" aria-label={`Ocena ${item.rating} na 5`}>
+              Ocena: {item.rating}/5
+            </div>
           </div>
         ))}
       </div>
@@ -72,7 +70,11 @@ const highlights = [
   </section>
 
   <CTASection
-    title="Chcesz spróbować angielskiego online?"
-    description="Umów lekcję próbną i przekonaj się, jak wyglądają zajęcia na żywo."
+    title="Chcesz sprawdzić, czy to dla Ciebie?"
+    description="Napisz, jaki masz poziom i cel — zaproponujemy najlepszy format i cenę."
+    primaryLabel="Skontaktuj się"
+    primaryHref="/kontakt#formularz"
+    secondaryLabel="Zobacz cennik"
+    secondaryHref="/cennik"
   />
 </MainLayout>

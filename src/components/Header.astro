@@ -2,7 +2,7 @@
 import Logo from "./Logo.astro";
 import { BRAND_TAGLINE, CTA_PRIMARY_HREF, CTA_PRIMARY_LABEL } from "../config/site";
 
-const { currentPath = "/" } = Astro.props;
+const { currentPath = "/" } = Astro.props as { currentPath?: string };
 
 const nav = [
   { href: "/oferta", label: "Oferta" },
@@ -11,12 +11,12 @@ const nav = [
   { href: "/kontakt", label: "Kontakt" },
 ];
 
-const isActive = (href) => {
+const isActive = (href: string) => {
   if (href === "/") return currentPath === "/";
   return currentPath === href || currentPath.startsWith(href + "/") || currentPath.startsWith(href);
 };
 
-const linkClass = (href) =>
+const linkClass = (href: string) =>
   isActive(href)
     ? "rounded-full bg-primary/10 px-3 py-2 text-sm font-semibold text-primary"
     : "rounded-full px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900";
