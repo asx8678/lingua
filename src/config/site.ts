@@ -2,7 +2,7 @@ export const SITE_URL = "https://lingualegionowo.pl";
 export const SITE_NAME = "Lingua Legionowo";
 
 export const CONTACT = {
-  email: import.meta.env.PUBLIC_CONTACT_EMAIL ?? "",
+  email: import.meta.env.PUBLIC_CONTACT_EMAIL ?? "lingualegionowo@gmail.com",
   phone: import.meta.env.PUBLIC_CONTACT_PHONE ?? "+48 453 209 560",
   city: import.meta.env.PUBLIC_CONTACT_CITY ?? import.meta.env.PUBLIC_CITY ?? "Legionowo",
   address: import.meta.env.PUBLIC_CONTACT_ADDRESS ?? import.meta.env.PUBLIC_STREET_ADDRESS ?? "",
