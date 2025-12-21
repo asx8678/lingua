@@ -13,7 +13,7 @@ const emailFallback = "Skontaktuj się przez formularz.";
 const phoneFallback = "Skontaktuj się przez formularz.";
 ---
 
-<MainLayout title={title} description={description}>
+<MainLayout title={title} description={description} canonical="/kontakt">
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
@@ -152,7 +152,10 @@ const phoneFallback = "Skontaktuj się przez formularz.";
             </div>
             <p id="consent-error" class="text-xs text-rose-600" aria-live="polite"></p>
 
-            <button class="btn btn-primary w-full" type="submit">Wyślij wiadomość</button>
+            <button class="btn btn-primary w-full" type="submit" id="submit-btn">
+              <span id="submit-text">Wyślij wiadomość</span>
+              <span id="submit-loading" class="hidden">Wysyłanie...</span>
+            </button>
           </form>
 
           <div
@@ -161,8 +164,8 @@ const phoneFallback = "Skontaktuj się przez formularz.";
             role="status"
             tabindex="-1"
           >
-            Dziękujemy! Otwieramy Twoją aplikację pocztową z przygotowaną wiadomością. Odezwiemy się w ciągu
-            1–2 dni roboczych. Jeśli okno poczty się nie pojawi, skorzystaj z adresu e-mail podanego obok.
+            <strong>Dziękujemy!</strong> Twoja wiadomość została wysłana. Odezwiemy się w ciągu
+            1–2 dni roboczych.
           </div>
         </div>
       </div>
@@ -174,6 +177,9 @@ const phoneFallback = "Skontaktuj się przez formularz.";
     const alertEl = document.getElementById("form-alert");
     const successEl = document.getElementById("contact-success");
     const honeypotEl = document.getElementById("company");
+    const submitBtn = document.getElementById("submit-btn");
+    const submitText = document.getElementById("submit-text");
+    const submitLoading = document.getElementById("submit-loading");
 
     const fields = [
       { id: "name", min: 2, message: "Podaj imię i nazwisko (min. 2 znaki)." },
@@ -182,7 +188,7 @@ const phoneFallback = "Skontaktuj się przez formularz.";
       { id: "consent", type: "checkbox", message: "Wymagana jest zgoda na kontakt." },
     ];
 
-    const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const throttleMs = 60 * 1000;
     const throttleKey = "lingua-contact-throttle";
 
@@ -235,12 +241,27 @@ const phoneFallback = "Skontaktuj się przez formularz.";
       if (!alertEl) return;
       alertEl.textContent = message;
       alertEl.classList.remove("hidden");
+      alertEl.scrollIntoView({ behavior: "smooth", block: "center" });
     };
 
     const clearAlert = () => {
       if (!alertEl) return;
       alertEl.textContent = "";
       alertEl.classList.add("hidden");
+    };
+
+    const setLoading = (loading) => {
+      if (submitBtn) submitBtn.disabled = loading;
+      if (submitText) submitText.classList.toggle("hidden", loading);
+      if (submitLoading) submitLoading.classList.toggle("hidden", !loading);
+    };
+
+    const showSuccess = () => {
+      if (form) form.classList.add("hidden");
+      if (successEl) {
+        successEl.classList.remove("hidden");
+        successEl.focus();
+      }
     };
 
     form?.addEventListener("input", (event) => {
@@ -250,29 +271,68 @@ const phoneFallback = "Skontaktuj się przez formularz.";
       clearError(target);
     });
 
-    form?.addEventListener("submit", (event) => {
+    form?.addEventListener("submit", async (event) => {
+      event.preventDefault();
       clearAlert();
+
       if (honeypotEl?.value?.trim()) {
-        event.preventDefault();
         showAlert("Wykryliśmy podejrzaną aktywność. Spróbuj ponownie za chwilę.");
         return;
       }
 
       const lastSubmit = Number(localStorage.getItem(throttleKey) || 0);
       if (Date.now() - lastSubmit < throttleMs) {
-        event.preventDefault();
         showAlert("Prosimy odczekać minutę przed kolejną próbą wysłania formularza.");
         return;
       }
 
       if (!validate()) {
-        event.preventDefault();
         return;
       }
 
-      localStorage.setItem(throttleKey, String(Date.now()));
-      successEl?.classList.remove("hidden");
-      successEl?.focus();
+      setLoading(true);
+
+      try {
+        const formData = new FormData(form);
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: formData,
+        });
+
+        // Handle mailto redirect (fallback when Resend not configured)
+        if (response.redirected && response.url.startsWith("mailto:")) {
+          localStorage.setItem(throttleKey, String(Date.now()));
+          window.location.href = response.url;
+          showSuccess();
+          return;
+        }
+
+        // Handle 303 redirect to mailto (for browsers that don't follow automatically)
+        if (response.status === 303) {
+          const mailto = response.headers.get("Location");
+          if (mailto?.startsWith("mailto:")) {
+            localStorage.setItem(throttleKey, String(Date.now()));
+            window.location.href = mailto;
+            showSuccess();
+            return;
+          }
+        }
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          showAlert(data.error || "Wystąpił błąd. Spróbuj ponownie.");
+          return;
+        }
+
+        localStorage.setItem(throttleKey, String(Date.now()));
+        showSuccess();
+      } catch (error) {
+        console.error("Form submission error:", error);
+        showAlert("Wystąpił błąd połączenia. Sprawdź internet i spróbuj ponownie.");
+      } finally {
+        setLoading(false);
+      }
     });
   </script>
 </MainLayout>

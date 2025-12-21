@@ -5,7 +5,7 @@ name = "lingua"
 main = "./dist/_worker.js/index.js"
 
 # Update to today's date when you deploy
-compatibility_date = "2025-12-19"
+compatibility_date = "2025-12-21"
 
 compatibility_flags = ["nodejs_compat"]
 workers_dev = true
@@ -21,3 +21,14 @@ directory = "./dist"
 
 [observability]
 enabled = true
+
+# KV namespace for rate limiting
+[[kv_namespaces]]
+binding = "RATE_LIMIT_KV"
+id = "8d068af825d340d1b594c584cf73aa40"
+preview_id = "92ffa8df30f24803be3e4df1f469d571"
+
+# Environment variables (secrets should be set via wrangler secret)
+# Set with: wrangler secret put RESEND_API_KEY
+[vars]
+# RESEND_FROM_EMAIL = "kontakt@lingualegionowo.pl"

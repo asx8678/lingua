@@ -1,77 +1,25 @@
 ---
-// Kalkulator opiera się na liczbach z cennika 2025/2026.
-// Uwaga: Jeżeli rozliczenie w Twoim przypadku wygląda inaczej (np. niestandardowa liczba spotkań),
-// wynik traktuj jako orientacyjny i skontaktuj się ze szkołą.
+import { PRICING_DATA, PRICING_SUMMARY, formatPLN } from "../data/pricing";
 
-const DATA = {
-  packages: [
-    {
-      id: "pakiet-60",
-      label: "Pakiet — 60 min (zajęcia indywidualne / duet / trójka)",
-      minutes: 60,
-      baseSessions: 10,
-      // ceny z cennika (pakiet 10 spotkań) — kwota / osoba
-      pricePerPerson: { 1: 1300, 2: 800, 3: 650 },
-    },
-    {
-      id: "pakiet-45",
-      label: "Pakiet — 45 min (zajęcia indywidualne / duet / trójka)",
-      minutes: 45,
-      baseSessions: 10,
-      // ceny z cennika (pakiet 10 spotkań) — kwota / osoba
-      pricePerPerson: { 1: 1000, 2: 600, 3: 500 },
-    },
-  ],
-  courses: [
-    {
-      id: "kurs-2700",
-      label: "Kurs — 30 spotkań × 90 min",
-      price: 2700,
-      sessions: 30,
-      minutes: 90,
-      minPersons: 3,
-    },
-    {
-      id: "kurs-2800",
-      label: "Kurs — 56 spotkań × 60 min",
-      price: 2800,
-      sessions: 56,
-      minutes: 60,
-      minPersons: 4,
-    },
-    {
-      id: "kurs-4200",
-      label: "Kurs — 56 spotkań × 90 min",
-      price: 4200,
-      sessions: 56,
-      minutes: 90,
-      minPersons: 4,
-    },
-  ],
-};
-
-const defaultPlan = DATA.packages.find((p) => p.id === "pakiet-45") ?? DATA.packages[0];
+const defaultPlan = PRICING_DATA.packages.find((p) => p.id === "pakiet-45") ?? PRICING_DATA.packages[0];
 const defaultPersons = 1;
 const defaultSessions = defaultPlan.baseSessions;
 const defaultPrice10 = defaultPlan.pricePerPerson[defaultPersons];
 const defaultPerSession = defaultPrice10 / defaultPlan.baseSessions;
 const defaultPerPersonTotal = defaultPerSession * defaultSessions;
 const defaultGroupTotal = defaultPerPersonTotal * defaultPersons;
-const defaultFormatter = new Intl.NumberFormat("pl-PL", { maximumFractionDigits: 0 });
-const defaultPln = (value: number) => `${defaultFormatter.format(Math.round(value))} zł`;
-const defaultNote = `Pakiet ${defaultPlan.baseSessions} spotkań × ${defaultPlan.minutes} min: ${defaultPln(defaultPrice10)} / osoba (wg cennika).`;
+const defaultNote = `Pakiet ${defaultPlan.baseSessions} spotkań × ${defaultPlan.minutes} min: ${formatPLN(defaultPrice10)} / osoba (wg cennika).`;
 ---
 
 <div class="card p-6">
   <div class="text-xs text-slate-600">
-    Matematyka ma takie same stawki jak angielski.
+    {PRICING_SUMMARY.note}
   </div>
   <div class="mt-2 text-xs text-slate-600">
-    Pakiety 10 spotkań (cena / osoba): 60 min — 1300 zł (1), 800 zł (2), 650 zł (3). 45 min — 1000 zł (1),
-    600 zł (2), 500 zł (3).
+    {PRICING_SUMMARY.packages}
   </div>
   <div class="mt-2 text-xs text-slate-600">
-    Kursy grupowe (cena / osoba): 30×90 — 2700 zł, 56×60 — 2800 zł, 56×90 — 4200 zł.
+    {PRICING_SUMMARY.courses}
   </div>
 
   <form id="price-calc" class="grid gap-4" aria-label="Kalkulator ceny">
@@ -81,7 +29,7 @@ const defaultNote = `Pakiet ${defaultPlan.baseSessions} spotkań × ${defaultPla
         <div>
           <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Pakiety (10 spotkań)</div>
           <div class="mt-2 flex flex-wrap gap-2" role="group" aria-label="Pakiety">
-            {DATA.packages.map((p) => (
+            {PRICING_DATA.packages.map((p) => (
               <button
                 type="button"
                 class="btn btn-secondary px-4 py-2 text-xs"
@@ -95,7 +43,7 @@ const defaultNote = `Pakiet ${defaultPlan.baseSessions} spotkań × ${defaultPla
         <div>
           <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Kursy (grupy)</div>
           <div class="mt-2 flex flex-wrap gap-2" role="group" aria-label="Kursy">
-            {DATA.courses.map((c) => (
+            {PRICING_DATA.courses.map((c) => (
               <button
                 type="button"
                 class="btn btn-secondary px-4 py-2 text-xs"
@@ -109,12 +57,12 @@ const defaultNote = `Pakiet ${defaultPlan.baseSessions} spotkań × ${defaultPla
       </div>
       <select id="plan" name="plan" class="sr-only" aria-hidden="true" tabindex="-1">
         <optgroup label="Pakiety (10 spotkań)">
-          {DATA.packages.map((p) => (
+          {PRICING_DATA.packages.map((p) => (
             <option value={p.id} selected={p.id === "pakiet-45"}>{p.label}</option>
           ))}
         </optgroup>
         <optgroup label="Kursy (grupy)">
-          {DATA.courses.map((c) => (
+          {PRICING_DATA.courses.map((c) => (
             <option value={c.id}>{c.label}</option>
           ))}
         </optgroup>
@@ -229,7 +177,7 @@ const defaultNote = `Pakiet ${defaultPlan.baseSessions} spotkań × ${defaultPla
       <div>
         <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Za spotkanie / osoba</div>
         <div id="out-per-session" class="mt-2 text-3xl font-extrabold text-slate-900">
-          {defaultPln(defaultPerSession)}
+          {formatPLN(defaultPerSession)}
         </div>
         <div id="out-per-session-sub" class="mt-1 text-xs text-slate-500">{defaultPlan.minutes} min</div>
       </div>
@@ -237,7 +185,7 @@ const defaultNote = `Pakiet ${defaultPlan.baseSessions} spotkań × ${defaultPla
       <div>
         <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Łącznie / osoba</div>
         <div id="out-per-total" class="mt-2 text-3xl font-extrabold text-slate-900">
-          {defaultPln(defaultPerPersonTotal)}
+          {formatPLN(defaultPerPersonTotal)}
         </div>
         <div id="out-per-total-sub" class="mt-1 text-xs text-slate-500">{defaultSessions} spotkań</div>
       </div>
@@ -245,7 +193,7 @@ const defaultNote = `Pakiet ${defaultPlan.baseSessions} spotkań × ${defaultPla
       <div id="total-block">
         <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Łącznie (grupa)</div>
         <div id="out-total" class="mt-2 text-3xl font-extrabold text-slate-900">
-          {defaultPln(defaultGroupTotal)}
+          {formatPLN(defaultGroupTotal)}
         </div>
         <div id="out-total-sub" class="mt-1 text-xs text-slate-500">{defaultPersons} os.</div>
       </div>
@@ -268,243 +216,10 @@ const defaultNote = `Pakiet ${defaultPlan.baseSessions} spotkań × ${defaultPla
     Kalkulator bazuje na cenniku 2025/2026. W przypadku kursów liczba spotkań jest stała.
   </p>
 
-  <script is:inline type="application/json" id="price-data" set:html={JSON.stringify(DATA)}></script>
-  <script is:inline>
-    const DATA = /** @type {const} */ (JSON.parse(document.getElementById('price-data').textContent));
+  <script>
+    import { PRICING_DATA } from "../data/pricing";
+    import { initPriceCalculator } from "../scripts/price-calculator";
 
-    const form = document.getElementById("price-calc");
-    const planEl = document.getElementById("plan");
-    const planButtons = form?.querySelectorAll("[data-plan]") ?? [];
-    const stepButtons = form?.querySelectorAll("[data-target][data-step]") ?? [];
-    const sessionStepButtons = form?.querySelectorAll('[data-target="sessions"]') ?? [];
-    const presetButtons = form?.querySelectorAll("[data-preset][data-value]") ?? [];
-    const sessionPresetButtons = form?.querySelectorAll('[data-preset="sessions"]') ?? [];
-    const personsPresetButtons = form?.querySelectorAll('[data-preset="persons"]') ?? [];
-    const personsEl = document.getElementById("persons");
-    const sessionsEl = document.getElementById("sessions");
-    const showTotalEl = document.getElementById("show-total");
-
-    const personsHintEl = document.getElementById("persons-hint");
-    const sessionsHintEl = document.getElementById("sessions-hint");
-
-    const outPerSessionEl = document.getElementById("out-per-session");
-    const outPerSessionSubEl = document.getElementById("out-per-session-sub");
-
-    const outPerTotalEl = document.getElementById("out-per-total");
-    const outPerTotalSubEl = document.getElementById("out-per-total-sub");
-
-    const totalBlockEl = document.getElementById("total-block");
-    const outTotalEl = document.getElementById("out-total");
-    const outTotalSubEl = document.getElementById("out-total-sub");
-
-    const outNoteEl = document.getElementById("out-note");
-
-    const fmt = new Intl.NumberFormat("pl-PL", { maximumFractionDigits: 0 });
-    const pln = (v) => `${fmt.format(Math.round(v))} zł`;
-
-    const getPlan = (id) => {
-      const p = DATA.packages.find((x) => x.id === id);
-      if (p) return { kind: "package", ...p };
-      const c = DATA.courses.find((x) => x.id === id);
-      if (c) return { kind: "course", ...c };
-      return null;
-    };
-
-    function setText(el, txt) {
-      if (!el) return;
-      el.textContent = txt;
-    }
-
-    function setActivePlan(id) {
-      if (!planEl) return;
-      planEl.value = id;
-      planButtons.forEach((btn) => {
-        const isActive = btn.dataset.plan === id;
-        btn.classList.toggle("btn-primary", isActive);
-        btn.classList.toggle("btn-secondary", !isActive);
-      });
-    }
-
-    function setPresetActive(target, value) {
-      presetButtons.forEach((btn) => {
-        if (btn.dataset.preset !== target) return;
-        const isActive = Number(btn.dataset.value) === Number(value);
-        btn.classList.toggle("bg-primary/10", isActive);
-        btn.classList.toggle("border-primary/40", isActive);
-        btn.classList.toggle("text-primary", isActive);
-      });
-    }
-
-    function setPersonsPresetState(min, max) {
-      personsPresetButtons.forEach((btn) => {
-        const value = Number(btn.dataset.value);
-        const disabled = value < min || value > max;
-        btn.toggleAttribute("disabled", disabled);
-        btn.classList.toggle("opacity-50", disabled);
-        btn.classList.toggle("cursor-not-allowed", disabled);
-      });
-    }
-
-    let lastPlanId = planEl?.value;
-
-    function update() {
-      const plan = getPlan(planEl.value);
-      if (!plan) return;
-
-      setActivePlan(plan.id);
-      const planChanged = plan.id !== lastPlanId;
-      lastPlanId = plan.id;
-
-      const personsMin = plan.kind === "course" ? plan.minPersons : 1;
-      const personsMax = plan.kind === "course" ? 10 : 3;
-      personsEl.setAttribute("min", String(personsMin));
-      personsEl.setAttribute("max", String(personsMax));
-      const personsInput = Number(personsEl.value || personsMin);
-      const persons = Math.max(personsMin, Math.min(personsMax, personsInput));
-      personsEl.value = String(persons);
-      setPresetActive("persons", persons);
-      setPersonsPresetState(personsMin, personsMax);
-
-      const showTotal = Boolean(showTotalEl?.checked ?? true);
-      totalBlockEl?.classList.toggle("hidden", !showTotal);
-
-      // reset
-      setText(personsHintEl, "");
-      setText(sessionsHintEl, "");
-      setText(outPerSessionEl, "—");
-      setText(outPerSessionSubEl, "");
-      setText(outPerTotalEl, "—");
-      setText(outPerTotalSubEl, "");
-      setText(outTotalEl, "—");
-      setText(outTotalSubEl, "");
-      setText(outNoteEl, "");
-
-      if (plan.kind === "course") {
-        const sessions = plan.sessions;
-        sessionsEl.value = String(sessions);
-        sessionsEl.setAttribute("disabled", "disabled");
-        sessionsEl.classList.add("bg-slate-100");
-        sessionStepButtons.forEach((btn) => {
-          btn.setAttribute("disabled", "disabled");
-          btn.classList.add("opacity-50", "cursor-not-allowed");
-        });
-        sessionPresetButtons.forEach((btn) => {
-          btn.setAttribute("disabled", "disabled");
-          btn.classList.add("opacity-50", "cursor-not-allowed");
-        });
-        setPresetActive("sessions", sessions);
-
-        const perPersonTotal = plan.price;
-        const perSession = perPersonTotal / plan.sessions;
-        const groupTotal = perPersonTotal * persons;
-
-        setText(outPerSessionEl, pln(perSession));
-        setText(outPerSessionSubEl, `${plan.minutes} min`);
-
-        setText(outPerTotalEl, pln(perPersonTotal));
-        setText(outPerTotalSubEl, `cena z cennika / osoba`);
-
-        if (showTotal) {
-          setText(outTotalEl, pln(groupTotal));
-          setText(outTotalSubEl, `${sessions} spotkań`);
-        }
-
-        const warn = persons < plan.minPersons;
-        setText(
-          outNoteEl,
-          warn
-            ? `Ten kurs jest w cenniku „od ${plan.minPersons} osób”. Wybrałeś(aś) ${persons} — wynik traktuj orientacyjnie.`
-            : `Kurs: ${plan.sessions} spotkań × ${plan.minutes} min. Wymagana grupa: od ${plan.minPersons} osób.`
-        );
-
-        setText(personsHintEl, `Kurs: od ${plan.minPersons} osób`);
-        setText(sessionsHintEl, `Kurs: ${plan.sessions} spotkań`);
-        return;
-      }
-
-      // Package
-      sessionsEl.removeAttribute("disabled");
-      sessionsEl.classList.remove("bg-slate-100");
-      sessionStepButtons.forEach((btn) => {
-        btn.removeAttribute("disabled");
-        btn.classList.remove("opacity-50", "cursor-not-allowed");
-      });
-      sessionPresetButtons.forEach((btn) => {
-        btn.removeAttribute("disabled");
-        btn.classList.remove("opacity-50", "cursor-not-allowed");
-      });
-
-      if (planChanged) {
-        sessionsEl.value = String(plan.baseSessions);
-      }
-      const sessions = Math.max(1, Math.min(200, Number(sessionsEl.value || plan.baseSessions)));
-      sessionsEl.value = String(sessions);
-      setPresetActive("sessions", sessions);
-
-      const price10 = plan.pricePerPerson[String(persons)];
-      const perSession = price10 / plan.baseSessions;
-      const perPersonTotal = perSession * sessions;
-      const groupTotal = perPersonTotal * persons;
-
-      const isMultiple = sessions % plan.baseSessions === 0;
-      if (!isMultiple) {
-        setText(sessionsHintEl, "Wyliczenie orientacyjne (proporcjonalnie do pakietu 10 spotkań).");
-      } else {
-        setText(sessionsHintEl, `Pakiet: ${sessions / plan.baseSessions} × ${plan.baseSessions} spotkań`);
-      }
-
-      setText(outPerSessionEl, pln(perSession));
-      setText(outPerSessionSubEl, `${plan.minutes} min`);
-
-      setText(outPerTotalEl, pln(perPersonTotal));
-      setText(outPerTotalSubEl, `${sessions} spotkań`);
-
-      if (showTotal) {
-        setText(outTotalEl, pln(groupTotal));
-        setText(outTotalSubEl, `${persons} os.`);
-      }
-
-      setText(
-        outNoteEl,
-        `Pakiet ${plan.baseSessions} spotkań × ${plan.minutes} min: ${pln(price10)} / osoba (wg cennika).`
-      );
-      setText(personsHintEl, "Pakiety: 1–3 osoby");
-    }
-
-    planButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        setActivePlan(btn.dataset.plan);
-        update();
-      });
-    });
-
-    stepButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const target = btn.dataset.target === "sessions" ? sessionsEl : personsEl;
-        const step = Number(btn.dataset.step || 0);
-        const min = Number(target.min || 1);
-        const max = Number(target.max || 200);
-        const next = Math.max(min, Math.min(max, Number(target.value || 0) + step));
-        target.value = String(next);
-        update();
-      });
-    });
-
-    presetButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        if (btn.hasAttribute("disabled")) return;
-        const target = btn.dataset.preset === "sessions" ? sessionsEl : personsEl;
-        const value = Number(btn.dataset.value || 0);
-        if (!Number.isFinite(value)) return;
-        target.value = String(value);
-        update();
-      });
-    });
-
-    form?.addEventListener("input", update);
-    planEl?.addEventListener("change", update);
-    showTotalEl?.addEventListener("change", update);
-    setActivePlan(planEl?.value);
-    update();
+    initPriceCalculator(PRICING_DATA);
   </script>
 </div>
