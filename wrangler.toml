@@ -13,6 +13,10 @@ kv_namespaces = [
   { binding = "SESSION", id = "30e8829989f94d568368fdbed648dbd5", preview_id = "109cbd68dbca46bc8fe8e9c829b06e2f" }
 ]
 
+routes = [
+  { pattern = "lingualegionowo.pl/*", zone_name = "lingualegionowo.pl" }
+]
+
 [assets]
 binding = "ASSETS"
 directory = "./dist"

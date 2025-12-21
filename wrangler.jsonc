@@ -18,6 +18,13 @@
     }
   ],
 
+  "routes": [
+    {
+      "pattern": "lingualegionowo.pl/*",
+      "zone_name": "lingualegionowo.pl"
+    }
+  ],
+
   // Static assets produced by Astro (`dist/`)
   "assets": {
     "binding": "ASSETS",
