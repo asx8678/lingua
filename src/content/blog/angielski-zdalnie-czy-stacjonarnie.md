@@ -12,19 +12,24 @@ Wybór między nauką zdalną a stacjonarną zależy głównie od Twojego stylu 
 ale różnią się organizacją i wygodą.
 
 ## Wygoda i oszczędność czasu
+
 Zdalnie oszczędzasz czas na dojazdy, co ułatwia regularność. Stacjonarnie daje „wyjście z domu” i zmianę otoczenia.
 
 ## Jakość kontaktu z lektorem
+
 W online kontakt jest równie bezpośredni, jeśli zajęcia są na żywo. Liczy się przede wszystkim sposób pracy lektora.
 
 ## Regularność
+
 W praktyce łatwiej utrzymać stały rytm, gdy nie musisz dojeżdżać. To często klucz do postępu.
 
 ## Dla kogo zdalnie, a dla kogo stacjonarnie
+
 Zdalnie sprawdzi się u osób zapracowanych i mobilnych. Stacjonarnie może być lepsze, jeśli potrzebujesz silnego
 oddzielenia nauki od domu.
 
 ## Jak podjąć decyzję
+
 Najlepiej umówić konsultację i diagnozę poziomu online i ocenić, czy taka forma odpowiada Twojemu stylowi pracy.
 
 <div class="cta-panel">

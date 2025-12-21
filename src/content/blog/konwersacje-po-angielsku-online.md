@@ -12,18 +12,23 @@ Konwersacje to najszybszy sposób na przełamanie bariery językowej. W wersji o
 nawet przy napiętym grafiku.
 
 ## Dlaczego konwersacje są kluczowe
+
 Rozumienie ze słuchu i słownictwo rośnie najszybciej wtedy, gdy regularnie mówisz i słyszysz poprawne odpowiedzi.
 
 ## Jak przygotować się do rozmów
+
 Wybierz temat i przygotuj kilka słów-kluczy. Dzięki temu rozmowa będzie płynniejsza, a Ty poczujesz większą pewność.
 
 ## Tematy, które warto ćwiczyć
+
 Codzienne sytuacje, small talk, spotkania w pracy, prezentacje czy negocjacje. Wybieraj to, co realnie Cię dotyczy.
 
 ## Jak łączyć konwersacje z gramatyką
+
 Gramatykę najlepiej ćwiczyć na przykładach z rozmów. Wtedy łatwiej zapamiętać konstrukcje i zacząć używać ich na co dzień.
 
 ## Jak często ćwiczyć
+
 Najlepiej 2–3 razy w tygodniu, nawet jeśli spotkania są krótsze. Regularność daje szybkie efekty.
 
 <div class="cta-panel">

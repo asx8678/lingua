@@ -4,8 +4,14 @@ export const SITE_NAME = "Lingua Legionowo";
 export const CONTACT = {
   email: import.meta.env.PUBLIC_CONTACT_EMAIL ?? "",
   phone: import.meta.env.PUBLIC_CONTACT_PHONE ?? "",
-  city: import.meta.env.PUBLIC_CONTACT_CITY ?? import.meta.env.PUBLIC_CITY ?? "Legionowo",
-  address: import.meta.env.PUBLIC_CONTACT_ADDRESS ?? import.meta.env.PUBLIC_STREET_ADDRESS ?? "",
+  city:
+    import.meta.env.PUBLIC_CONTACT_CITY ??
+    import.meta.env.PUBLIC_CITY ??
+    "Legionowo",
+  address:
+    import.meta.env.PUBLIC_CONTACT_ADDRESS ??
+    import.meta.env.PUBLIC_STREET_ADDRESS ??
+    "",
   postalCode: import.meta.env.PUBLIC_POSTAL_CODE ?? "",
 };
 
@@ -46,7 +52,8 @@ export const CONTACT_PHONE = CONTACT.phone;
 
 export const ANALYTICS_ID = import.meta.env.PUBLIC_GA_ID ?? "G-FS7CKXXZ6J";
 export const ANALYTICS_ENABLED = Boolean(ANALYTICS_ID);
-export const EMAIL_PROVIDER_NAME = import.meta.env.PUBLIC_EMAIL_PROVIDER_NAME ?? "Dostawca poczty e-mail";
+export const EMAIL_PROVIDER_NAME =
+  import.meta.env.PUBLIC_EMAIL_PROVIDER_NAME ?? "Dostawca poczty e-mail";
 
 export const OG_IMAGE = "/images/og-lingua.jpg";
 
@@ -84,17 +91,21 @@ export const DATA_PROCESSORS = [
     location: "USA",
   },
   ...(EMAIL_PROVIDER_NAME
-    ? [{
-        name: EMAIL_PROVIDER_NAME,
-        purpose: "obsługa poczty e-mail",
-        location: "EU/USA",
-      }]
+    ? [
+        {
+          name: EMAIL_PROVIDER_NAME,
+          purpose: "obsługa poczty e-mail",
+          location: "EU/USA",
+        },
+      ]
     : []),
   ...(ANALYTICS_ENABLED
-    ? [{
-        name: "Google LLC (Google Analytics)",
-        purpose: "statystyka ruchu i analityka serwisu",
-        location: "USA",
-      }]
+    ? [
+        {
+          name: "Google LLC (Google Analytics)",
+          purpose: "statystyka ruchu i analityka serwisu",
+          location: "USA",
+        },
+      ]
     : []),
 ];

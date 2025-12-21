@@ -12,18 +12,23 @@ Dobry lektor to nie tylko doświadczenie, ale też sposób pracy dopasowany do T
 listę rzeczy, na które warto zwrócić uwagę.
 
 ## Doświadczenie i specjalizacja
+
 Sprawdź, czy lektor pracuje z osobami na Twoim poziomie i z podobnymi celami (praca, podróże, rozmowy biznesowe).
 
 ## Styl prowadzenia zajęć
+
 Dobrze, gdy lekcje mają jasny cel, a nie są tylko luźną rozmową. Warto zapytać o strukturę spotkań.
 
 ## Plan i materiały
+
 Lektor powinien mieć plan nauki oraz materiały do pracy między zajęciami. To pomaga utrzymać regularność.
 
 ## Dopasowanie do celu
+
 Jeśli potrzebujesz konwersacji, upewnij się, że zajęcia są nastawione na mówienie, a nie tylko teorię.
 
 ## Konsultacja i diagnoza poziomu
+
 Pierwsze spotkanie pozwala sprawdzić, czy tempo i styl pracy Ci odpowiadają, oraz ustalić plan nauki.
 
 <div class="cta-panel">

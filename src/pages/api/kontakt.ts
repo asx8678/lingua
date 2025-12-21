@@ -6,9 +6,9 @@ const RATE_LIMIT_MAX = 3;
 const rateLimit = new Map<string, { count: number; timestamp: number }>();
 
 const getClientIp = (request: Request) =>
-  request.headers.get("CF-Connecting-IP")
-  ?? request.headers.get("x-forwarded-for")
-  ?? "unknown";
+  request.headers.get("CF-Connecting-IP") ??
+  request.headers.get("x-forwarded-for") ??
+  "unknown";
 
 const shouldRateLimit = (ip: string, now: number) => {
   const entry = rateLimit.get(ip) ?? { count: 0, timestamp: now };
@@ -23,7 +23,9 @@ const shouldRateLimit = (ip: string, now: number) => {
 
 export const POST: APIRoute = async ({ request }) => {
   if (!CONTACT_EMAIL) {
-    return new Response("Kontakt e-mail nie jest skonfigurowany.", { status: 500 });
+    return new Response("Kontakt e-mail nie jest skonfigurowany.", {
+      status: 500,
+    });
   }
 
   const now = Date.now();

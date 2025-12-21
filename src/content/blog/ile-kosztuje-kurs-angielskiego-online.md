@@ -12,18 +12,22 @@ Cena kursu angielskiego online zależy od kilku kluczowych elementów. Warto je 
 rozwiązanie dopasowane do celu oraz budżetu.
 
 ## Co wpływa na cenę kursu online
+
 Największe znaczenie ma format zajęć, długość spotkań i częstotliwość. Istotne są także materiały, plan nauki
 oraz wsparcie lektora pomiędzy lekcjami.
 
 ## Lekcje 1:1 czy mini-grupa
+
 Zajęcia indywidualne dają maksymalną personalizację, ale są droższe. Mini-grupa obniża koszt na osobę i wciąż
 pozwala na intensywną praktykę mówienia.
 
 ## Kurs jako program, a nie pojedyncze lekcje
+
 Kurs online to nie tylko spotkania, ale też plan nauki i regularne podsumowania. Jeśli zależy Ci na szybszym
 postępie, program często okazuje się bardziej opłacalny niż pojedyncze lekcje.
 
 ## Jak porównywać oferty
+
 Sprawdź, czy w cenie masz materiały, feedback i jasno zdefiniowany plan. Cena bez struktury może oznaczać wolniejszy
 postęp i większy koszt w dłuższej perspektywie.
 

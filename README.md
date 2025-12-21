@@ -45,6 +45,7 @@ npm run preview
 ## Cloudflare Workers (Wrangler)
 
 Projekt zawiera **dwa** pliki konfiguracyjne dla Wrangler:
+
 - `wrangler.jsonc` (z komentarzami)
 - `wrangler.toml`
 
@@ -61,6 +62,7 @@ npm run cf:dev
 ```
 
 To wykona:
+
 - `astro build`
 - `wrangler dev`
 
@@ -71,6 +73,7 @@ npm run cf:deploy
 ```
 
 To wykona:
+
 - `astro build`
 - `wrangler deploy`
 

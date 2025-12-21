@@ -12,18 +12,23 @@ Wiele osób rozumie angielski, ale ma problem z mówieniem. Poniżej znajdziesz 
 — i proste sposoby, jak je wyeliminować.
 
 ## Dosłowne tłumaczenie z polskiego
+
 Zamiast tłumaczyć słowo po słowie, warto uczyć się całych zwrotów i gotowych konstrukcji.
 
 ## Zbyt długie zdania
+
 Krótsze wypowiedzi są zwykle bardziej naturalne. Lepiej mówić prosto i jasno niż budować skomplikowane struktury.
 
 ## Brak łączników w wypowiedzi
+
 Słowa typu "actually", "however" czy "for example" pomagają brzmieć bardziej naturalnie i płynnie.
 
 ## Błędy w wymowie końcówek
+
 Końcówki czasowników i liczby mnogiej są często „zjadane”. Warto ćwiczyć je na krótkich zdaniach.
 
 ## Unikanie mówienia
+
 Największy błąd to brak praktyki. Nawet 10 minut rozmowy dziennie daje zauważalny efekt.
 
 <div class="cta-panel">
