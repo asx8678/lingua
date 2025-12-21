@@ -52,9 +52,22 @@ const faq = [
       "Tak, matematyka jest wyceniana według tych samych stawek co angielski.",
   },
 ];
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
 ---
 
-<MainLayout title={title} description={description} canonical="/cennik">
+<MainLayout title={title} description={description} canonical="/cennik" structuredData={[faqJsonLd]}>
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-center">

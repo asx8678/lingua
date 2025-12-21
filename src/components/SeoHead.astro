@@ -33,6 +33,8 @@ const twitterCard = resolvedImage ? "summary_large_image" : "summary";
 <meta property="og:locale" content="pl_PL" />
 <meta property="og:site_name" content={BRAND_NAME} />
 {resolvedImage && <meta property="og:image" content={resolvedImage} />}
+{resolvedImage && <meta property="og:image:width" content="1200" />}
+{resolvedImage && <meta property="og:image:height" content="630" />}
 {resolvedImage && ogImageAlt && <meta property="og:image:alt" content={ogImageAlt} />}
 
 <meta name="twitter:card" content={twitterCard} />

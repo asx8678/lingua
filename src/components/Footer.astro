@@ -23,7 +23,7 @@ const addressLine = FULL_ADDRESS || BUSINESS.city;
 
       <div aria-label="Oferta">
         <div class="text-sm font-extrabold text-slate-900">Oferta</div>
-        <div class="mt-4 space-y-2 text-sm">
+        <div class="mt-4 flex flex-col gap-2 text-sm">
           <a class="link-muted no-underline" href="/angielski-stacjonarnie">Angielski stacjonarnie</a>
           <a class="link-muted no-underline" href="/angielski-online">Angielski online</a>
           <a class="link-muted no-underline" href="/lekcje-indywidualne">Lekcje indywidualne</a>
@@ -42,7 +42,7 @@ const addressLine = FULL_ADDRESS || BUSINESS.city;
 
       <div aria-label="Informacje i kontakt">
         <div class="text-sm font-extrabold text-slate-900">Informacje</div>
-        <div class="mt-4 space-y-2 text-sm">
+        <div class="mt-4 flex flex-col gap-2 text-sm">
           <a class="link-muted no-underline" href="/cennik">Cennik</a>
           <a class="link-muted no-underline" href="/opinie">Opinie</a>
           <a class="link-muted no-underline" href="/o-nas">O nas</a>
@@ -52,7 +52,7 @@ const addressLine = FULL_ADDRESS || BUSINESS.city;
 
         <div class="mt-6 border-t border-slate-200 pt-6">
           <div class="text-sm font-extrabold text-slate-900">Kontakt</div>
-          <div class="mt-4 space-y-2 text-sm">
+          <div class="mt-4 flex flex-col gap-2 text-sm">
             {hasEmail ? (
               <a class="link-muted no-underline" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
             ) : (

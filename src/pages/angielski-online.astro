@@ -122,9 +122,22 @@ const faqs = [
       "Zazwyczaj wystarczy krótka konsultacja i dobór terminu. Skontaktuj się, a podamy dostępne okna.",
   },
 ];
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
 ---
 
-<MainLayout title={title} description={description}>
+<MainLayout title={title} description={description} canonical="/angielski-online" structuredData={[faqJsonLd]}>
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-center">

@@ -41,7 +41,7 @@ const linkClass = (href: string) =>
       <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
     </div>
 
-    <details class="relative lg:hidden">
+    <details class="relative lg:hidden" id="mobile-menu">
       <summary
         class="list-none cursor-pointer select-none rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-900 shadow-sm transition hover:bg-slate-100"
         aria-label="Otwórz menu"
@@ -69,6 +69,7 @@ const linkClass = (href: string) =>
         class="absolute right-0 mt-2 w-[min(92vw,22rem)] rounded-2xl border border-slate-200 bg-white p-2 shadow-soft"
         role="dialog"
         aria-label="Menu nawigacji"
+        id="mobile-menu-content"
       >
         {nav.map((item) => (
           <a
@@ -89,5 +90,22 @@ const linkClass = (href: string) =>
         </div>
       </div>
     </details>
+
+    <script is:inline>
+      const menu = document.getElementById("mobile-menu");
+      const menuContent = document.getElementById("mobile-menu-content");
+
+      menuContent?.addEventListener("click", (e) => {
+        if (e.target.tagName === "A") {
+          menu?.removeAttribute("open");
+        }
+      });
+
+      document.addEventListener("click", (e) => {
+        if (menu?.hasAttribute("open") && !menu.contains(e.target)) {
+          menu.removeAttribute("open");
+        }
+      });
+    </script>
   </div>
 </header>

@@ -16,7 +16,7 @@ const formatDate = (date: Date) =>
   new Intl.DateTimeFormat("pl-PL", { dateStyle: "medium" }).format(date);
 ---
 
-<MainLayout title={title} description={description}>
+<MainLayout title={title} description={description} canonical="/blog">
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">
       <span class="kicker">Blog</span>
