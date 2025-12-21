@@ -3,7 +3,7 @@ export const SITE_NAME = "Lingua Legionowo";
 
 export const CONTACT = {
   email: import.meta.env.PUBLIC_CONTACT_EMAIL ?? "",
-  phone: import.meta.env.PUBLIC_CONTACT_PHONE ?? "",
+  phone: import.meta.env.PUBLIC_CONTACT_PHONE ?? "+48 453 209 560",
   city: import.meta.env.PUBLIC_CONTACT_CITY ?? import.meta.env.PUBLIC_CITY ?? "Legionowo",
   address: import.meta.env.PUBLIC_CONTACT_ADDRESS ?? import.meta.env.PUBLIC_STREET_ADDRESS ?? "",
   postalCode: import.meta.env.PUBLIC_POSTAL_CODE ?? "",
