@@ -52,13 +52,13 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             Konsultacja obejmuje rozmowę o celu, krótką diagnozę poziomu i propozycję planu.
           </p>
 
-          <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <div class="card p-6">
+          <div class="mt-10 grid gap-4 sm:grid-cols-3">
+            <div class="card p-5">
               <div class="text-xs font-bold uppercase tracking-widest text-slate-500">E-mail</div>
-              <div class="mt-3 text-base font-extrabold text-primary">
+              <div class="mt-3 text-sm font-bold text-primary break-all">
                 {
                   hasEmail ? (
-                    <a class="no-underline" href={`mailto:${CONTACT_EMAIL}`}>
+                    <a class="no-underline hover:underline" href={`mailto:${CONTACT_EMAIL}`}>
                       {CONTACT_EMAIL}
                     </a>
                   ) : (
@@ -66,15 +66,15 @@ const breadcrumbSchema = generateBreadcrumbSchema([
                   )
                 }
               </div>
-              <p class="mt-2 text-sm">Odpowiadamy najszybciej mailowo.</p>
+              <p class="mt-2 text-sm text-slate-600">Odpowiadamy szybko.</p>
             </div>
 
-            <div class="card p-6">
+            <div class="card p-5">
               <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Telefon</div>
-              <div class="mt-3 text-base font-extrabold text-primary">
+              <div class="mt-3 text-sm font-bold text-primary whitespace-nowrap">
                 {
                   hasPhone ? (
-                    <a class="no-underline" href={`tel:${CONTACT_PHONE}`}>
+                    <a class="no-underline hover:underline" href={`tel:${CONTACT_PHONE}`}>
                       {CONTACT_PHONE}
                     </a>
                   ) : (
@@ -82,16 +82,16 @@ const breadcrumbSchema = generateBreadcrumbSchema([
                   )
                 }
               </div>
-              <p class="mt-2 text-sm">Jeśli nie odbierzemy, oddzwonimy.</p>
+              <p class="mt-2 text-sm text-slate-600">Oddzwonimy, jeśli nie odbierzemy.</p>
             </div>
             {
               (hasAddress || hasHours) && (
-                <div class="card p-6">
+                <div class="card p-5">
                   <div class="text-xs font-bold uppercase tracking-widest text-slate-500">
                     Lokalizacja
                   </div>
                   {hasAddress && (
-                    <div class="mt-3 text-base font-extrabold text-slate-900">{addressLine}</div>
+                    <div class="mt-3 text-sm font-bold text-slate-900">{addressLine}</div>
                   )}
                   {hasAddress && (
                     <a
@@ -100,12 +100,12 @@ const breadcrumbSchema = generateBreadcrumbSchema([
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Zobacz na mapie
+                      Zobacz na mapie →
                     </a>
                   )}
                   {hasHours && (
                     <p class="mt-2 text-sm text-slate-600">
-                      Godziny otwarcia: {BUSINESS.openingHours}
+                      {BUSINESS.openingHours}
                     </p>
                   )}
                 </div>
