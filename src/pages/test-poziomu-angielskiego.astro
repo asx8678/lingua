@@ -259,11 +259,13 @@ const breadcrumbSchema = generateBreadcrumbSchema([
   /* Quiz section - mobile-first compact layout */
   .ll-card--quiz {
     padding: 16px;
+    max-width: 640px;
+    margin: 0 auto;
   }
 
   @media (min-width: 640px) {
     .ll-card--quiz {
-      padding: 24px;
+      padding: 24px 32px;
     }
   }
 
