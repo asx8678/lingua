@@ -1,0 +1,40 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import TestPoziomu from "../components/TestPoziomu.astro";
+import { BRAND_NAME, generateBreadcrumbSchema } from "../config/site";
+
+const title = `Darmowy test poziomu angielskiego online (A1–C2) | ${BRAND_NAME}`;
+const description =
+  "Sprawdź swój poziom angielskiego za darmo. Test adaptacyjny z ponad 1000 pytań. Natychmiastowy wynik z rekomendacją kursu.";
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: "Strona główna", url: "/" },
+  { name: "Test poziomu" },
+]);
+---
+
+<MainLayout
+  title={title}
+  description={description}
+  canonical="/test-poziomu"
+  structuredData={[breadcrumbSchema]}
+>
+  <section class="hero-bg">
+    <div class="container-site py-16 sm:py-20">
+      <div class="max-w-3xl">
+        <span class="kicker">Test poziomu</span>
+        <h1 class="mt-6">Sprawdź swój poziom angielskiego</h1>
+        <p class="mt-6 text-lg">
+          Darmowy test online z ponad 1000 pytań. Każde podejście to losowy zestaw, więc wynik
+          jest zawsze świeży. Po teście otrzymasz rekomendację dopasowaną do Twojego poziomu.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-site">
+      <TestPoziomu bankUrl="/question-bank-1200.json" />
+    </div>
+  </section>
+</MainLayout>

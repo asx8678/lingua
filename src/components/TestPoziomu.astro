@@ -1,0 +1,1425 @@
+---
+export interface Props {
+  /** URL to question bank JSON served from /public */
+  bankUrl?: string;
+}
+const { bankUrl = "/question-bank-1200.json" } = Astro.props;
+---
+
+<style is:global>
+.ll-test { max-width: 960px; margin: 0 auto; }
+  .ll-card { padding: 20px; border: 1px solid rgba(0,0,0,.12); border-radius: 12px; }
+  .ll-muted { opacity: .82; }
+  .ll-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .ll-spacer { height: 14px; }
+  .ll-divider { border: 0; border-top: 1px solid rgba(0,0,0,.12); margin: 18px 0; }
+
+  .ll-btn { appearance: none; border: 1px solid rgba(0,0,0,.22); background: #111; color: #fff;
+            padding: 10px 14px; border-radius: 10px; cursor: pointer; font-weight: 800; }
+  .ll-btn:disabled { opacity: .5; cursor: not-allowed; }
+  .ll-btn--ghost { background: transparent; color: inherit; font-weight: 700; }
+  .ll-link { background: none; border: none; padding: 0; color: inherit; text-decoration: underline; cursor: pointer; font-weight: 700; }
+
+  .ll-progress { height: 10px; background: rgba(0,0,0,.08); border-radius: 999px; overflow: hidden; }
+  .ll-progress__bar { height: 100%; width: 0%; background: rgba(0,0,0,.8); transition: width .2s ease; }
+
+  .ll-q { font-size: 1.15rem; margin: 10px 0 12px; }
+  .ll-options { display: grid; gap: 10px; margin: 10px 0 14px; }
+  .ll-option { display: flex; gap: 10px; align-items: flex-start; padding: 10px;
+               border: 1px solid rgba(0,0,0,.12); border-radius: 10px; cursor: pointer; }
+  .ll-option input { margin-top: 3px; }
+  .ll-option.is-right { outline: 2px solid rgba(0, 128, 0, .22); }
+  .ll-option.is-correct { border-color: rgba(0, 128, 0, .55); }
+  .ll-option.is-wrong { border-color: rgba(176, 0, 32, .55); }
+
+  .ll-feedback { margin-top: 10px; padding: 10px 12px; border: 1px solid rgba(0,0,0,.12); border-radius: 10px; }
+  .ll-feedback.good { background: rgba(0,128,0,.06); }
+  .ll-feedback.bad { background: rgba(176,0,32,.06); }
+
+  .ll-nav { display: flex; justify-content: space-between; gap: 10px; align-items: center; }
+  .ll-badge { display: inline-flex; gap: 10px; align-items: baseline; padding: 10px 12px;
+              border: 1px solid rgba(0,0,0,.12); border-radius: 12px; }
+  .ll-badge strong { font-size: 1.4rem; }
+
+.ll-scale { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.ll-scale span { padding: 6px 10px; border: 1px solid rgba(0,0,0,.12); border-radius: 999px; font-weight: 700; }
+.ll-scale span.is-active { background: rgba(0,0,0,.06); }
+
+  .ll-reco { display: grid; gap: 10px; margin-top: 10px; }
+  .ll-reco a { text-decoration: underline; }
+
+  .ll-grid2 { display: grid; gap: 12px; grid-template-columns: 1fr; }
+  @media (min-width: 760px){ .ll-grid2 { grid-template-columns: 1fr 1fr; } }
+
+  .ll-lead label { display: grid; gap: 6px; font-weight: 800; }
+  .ll-lead input, .ll-lead select { padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(0,0,0,.18); }
+  .ll-checkbox { display: flex; gap: 10px; align-items: flex-start; font-weight: 500; }
+  .ll-status { margin-top: 8px; }
+  .ll-status.is-error { color: #b00020; }
+
+  .ll-kpis { display: grid; gap: 10px; grid-template-columns: 1fr; margin-top: 12px; }
+  @media (min-width: 760px){ .ll-kpis { grid-template-columns: 1fr 1fr; } }
+  .ll-kpi { padding: 12px; border: 1px solid rgba(0,0,0,.12); border-radius: 12px; }
+  .ll-kpi strong { display: block; font-size: 1.05rem; }
+
+  .ll-table { width: 100%; border-collapse: collapse; font-size: .95rem; margin-top: 8px; }
+  .ll-table th, .ll-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid rgba(0,0,0,.10); }
+  .ll-table th { font-weight: 900; }
+
+  .ll-details { margin-top: 12px; }
+  .ll-details summary { cursor: pointer; font-weight: 900; }
+
+  .ll-review { display: grid; gap: 10px; margin-top: 10px; }
+  .ll-review-item { padding: 12px; border: 1px solid rgba(0,0,0,.12); border-radius: 12px; }
+  .ll-pill { display: inline-flex; padding: 2px 8px; border-radius: 999px; border: 1px solid rgba(0,0,0,.15); font-size: .85rem; }
+
+  .ll-callout { padding: 12px; border: 1px solid rgba(0,0,0,.12); border-radius: 12px; margin-top: 12px; }
+  .ll-callout strong { display: block; margin-bottom: 6px; }
+
+  .ll-stats { display:flex; gap: 10px; flex-wrap: wrap; align-items: center; font-weight: 700; }
+  .ll-stats .ll-num { font-weight: 900; }
+</style>
+
+<div class="ll-test" id="llPlacementTestV5" lang="pl" data-question-bank-url={bankUrl}>
+  <!-- INTRO -->
+  <section class="ll-card" data-step="intro">
+    <h1>Darmowy test poziomu angielskiego online (A1–C2)</h1>
+    <p class="ll-muted">
+      Duża baza pytań (ponad 1000). Każde podejście pokazuje tylko losowy zestaw pytań, więc nie da się “wykuć” jednego testu.
+    </p>
+
+    <div class="ll-grid2" style="margin-top: 12px;">
+      <label>
+        Zakres pytań (od jakiego poziomu)
+        <select id="llRangeSelect">
+          <option value="A1">A1–C2 (pełny placement)</option>
+          <option value="A2">A2–C2</option>
+          <option value="B1">B1–C2</option>
+          <option value="B2">B2–C2</option>
+          <option value="C1">C1–C2</option>
+          <option value="C2">C2 (tylko)</option>
+        </select>
+        <span class="ll-muted" style="font-weight: 500; font-size: .95rem;" id="llPoolInfo"></span>
+      </label>
+
+      <label>
+        Dokładność testu (liczba pytań)
+        <select id="llCountSelect">
+          <option value="25">25 (szybki)</option>
+          <option value="40" selected>40 (rekomendowany)</option>
+          <option value="60">60 (dokładny)</option>
+          <option value="80">80 (bardzo dokładny)</option>
+        </select>
+        <span class="ll-muted" style="font-weight: 500; font-size: .95rem;">
+          Im więcej pytań, tym stabilniejszy wynik (ale dłużej trwa).
+        </span>
+      </label>
+
+      <label>
+        Styl doboru pytań
+        <select id="llOrderSelect">
+          <option value="adaptive" selected>Adaptacyjny (dokładniejszy)</option>
+          <option value="mixed">Losowy</option>
+          <option value="easyToHard">Od łatwiejszych do trudniejszych</option>
+        </select>
+        <span class="ll-muted" style="font-weight: 500; font-size: .95rem;">
+          Adaptacyjny: kolejne pytania dopasowują się do Twoich odpowiedzi.
+        </span>
+      </label>
+
+      <div style="display:grid; gap: 8px;">
+        <div class="ll-row">
+          <button class="ll-btn" type="button" id="llStartBtn">Start testu</button>
+          <a class="ll-btn ll-btn--ghost" href="/kontakt">Umów konsultację</a>
+        </div>
+        <div id="llInitStatus" class="ll-callout" style="display:none;" aria-live="polite"></div>
+
+        <div class="ll-muted" style="font-size: .95rem;">
+          Po każdej odpowiedzi od razu zobaczysz, czy było dobrze, oraz poprawną odpowiedź.
+        </div>
+      </div>
+    </div>
+
+    <div class="ll-callout">
+      <strong>Jak to działa?</strong>
+      <div class="ll-muted">
+        To jest test placement (gramatyka + słownictwo). Wynik jest celowo “konserwatywny” (raczej zaniża niż zawyża).
+      </div>
+    </div>
+  </section>
+
+  <div class="ll-spacer"></div>
+
+  <!-- QUIZ -->
+  <section class="ll-card" data-step="quiz" hidden>
+    <div class="ll-progress" aria-label="Postęp testu">
+      <div class="ll-progress__bar" id="llProgressBar"></div>
+    </div>
+    <div class="ll-spacer"></div>
+
+    <div class="ll-row ll-muted" style="justify-content: space-between;">
+      <div class="ll-row ll-muted">
+        <span id="llQCounter">Pytanie 1 z 40</span>
+        <span aria-hidden="true">•</span>
+        <span id="llRangeHint">Zakres: A1–C2</span>
+      </div>
+
+      <div class="ll-stats ll-muted" aria-label="Statystyki testu">
+        <span>✅ <span class="ll-num" id="llCorrectCount">0</span></span>
+        <span>❌ <span class="ll-num" id="llWrongCount">0</span></span>
+        <span>Pozostało: <span class="ll-num" id="llRemainingCount">40</span></span>
+      </div>
+    </div>
+
+    <h2 class="ll-q" id="llQuestionText"></h2>
+
+    <form id="llOptions" class="ll-options" aria-labelledby="llQuestionText"></form>
+
+    <div id="llFeedback" class="ll-feedback" role="status" aria-live="polite" hidden></div>
+
+    <div class="ll-spacer"></div>
+
+    <div class="ll-nav">
+      <button class="ll-btn ll-btn--ghost" type="button" id="llPrevBtn">Wstecz</button>
+      <div class="ll-row">
+        <button class="ll-btn ll-btn--ghost" type="button" id="llSkipBtn">Pomiń</button>
+        <button class="ll-btn" type="button" id="llNextBtn" disabled>Dalej</button>
+      </div>
+    </div>
+
+    <div class="ll-muted" style="margin-top: 10px; font-size: .95rem;">
+      Licznik: <span id="llAnsweredCount">0</span>/<span id="llTotalCount">40</span> odpowiedziano.
+    </div>
+  </section>
+
+  <div class="ll-spacer"></div>
+
+  <!-- RESULT -->
+  <section class="ll-card" data-step="result" hidden>
+    <h2>Twój wynik</h2>
+
+    <div class="ll-badge" aria-label="Wynik testu">
+      <strong id="llResultLevel">B2</strong>
+      <span class="ll-muted" id="llResultScore">0/40 (0%)</span>
+    </div>
+<div class="ll-scale" id="llScale" aria-label="Skala poziomów (CEFR)">
+  <span data-lvl="A1">A1</span>
+  <span data-lvl="A2">A2</span>
+  <span data-lvl="B1">B1</span>
+  <span data-lvl="B2">B2</span>
+  <span data-lvl="C1">C1</span>
+  <span data-lvl="C2">C2</span>
+</div>
+<div class="ll-muted" style="margin-top: 6px; font-size: .95rem;">
+  A1 = podstawy • C2 = biegłość
+</div>
+
+    <p id="llResultDesc" class="ll-muted" style="margin-top: 10px;"></p>
+
+    <div class="ll-kpis">
+      <div class="ll-kpi">
+        <strong>Poprawne / błędne</strong>
+        <div id="llKpiCorrectWrong" class="ll-muted">—</div>
+      </div>
+      <div class="ll-kpi">
+        <strong>Zakres i długość</strong>
+        <div id="llKpiMeta" class="ll-muted">—</div>
+      </div>
+    
+      <div class="ll-kpi">
+        <strong>Na ile to pewne?</strong>
+        <div id="llKpiConfidence" class="ll-muted">—</div>
+      </div>
+</div>
+
+<details class="ll-details" id="llAdvancedStatsWrap" style="margin-top: 10px;">
+  <summary>Dla ciekawych: szczegóły wyniku</summary>
+  <div class="ll-muted" id="llAdvancedStats">—</div>
+</details>
+
+
+    <div class="ll-callout" id="llNextStepCallout" style="display:none;"></div>
+
+    <div class="ll-spacer"></div>
+
+    <h3>Rozbicie trafień wg poziomu</h3>
+    <div id="llBreakdown"></div>
+
+    <div class="ll-spacer"></div>
+
+    <h3>Rekomendacja dla Ciebie</h3>
+    <div id="llRecommendations" class="ll-reco"></div>
+
+    <details class="ll-details">
+      <summary>Pokaż odpowiedzi (review)</summary>
+      <div id="llReview" class="ll-review"></div>
+    </details>
+
+    <hr class="ll-divider">
+
+    <h3>Wyślij wynik na e-mail (lead capture)</h3>
+    <form id="llLeadForm" class="ll-lead">
+      <div class="ll-grid2">
+        <label>
+          Adres e-mail
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+
+        <label>
+          Preferowany tryb (opcjonalnie)
+          <select name="mode">
+            <option value="">— wybierz —</option>
+            <option value="stacjonarnie">Stacjonarnie w Legionowie</option>
+            <option value="online">Online</option>
+            <option value="nie_wiem">Nie wiem</option>
+          </select>
+        </label>
+
+        <label>
+          Cel (opcjonalnie)
+          <select name="goal">
+            <option value="">— wybierz —</option>
+            <option value="praca">Praca / Business English</option>
+            <option value="egzamin">Egzamin</option>
+            <option value="podroze">Podróże</option>
+            <option value="ogolny">Ogólny rozwój</option>
+          </select>
+        </label>
+
+        <label>
+          Imię (opcjonalnie)
+          <input type="text" name="name" autocomplete="given-name" placeholder="np. Adam">
+        </label>
+      </div>
+
+      <div class="ll-spacer"></div>
+
+      <label class="ll-checkbox">
+        <input type="checkbox" name="consent" required>
+        <span>
+          Wyrażam zgodę na kontakt w sprawie kursu zgodnie z <a href="/privacy" target="_blank" rel="noopener">polityką prywatności</a>.
+        </span>
+      </label>
+
+      <div class="ll-spacer"></div>
+
+      <button class="ll-btn" type="submit">Wyślij wynik</button>
+      <p class="ll-status" id="llLeadStatus" role="status" aria-live="polite"></p>
+    </form>
+
+    <hr class="ll-divider">
+
+    <h3>Co dalej?</h3>
+    <div class="ll-row" style="margin-top: 8px;">
+      <button class="ll-btn" type="button" id="llRestartSameBtn">Zrób test jeszcze raz</button>
+      <button class="ll-btn ll-btn--ghost" type="button" id="llTryHarderBtn">Testuj wyższy poziom</button>
+      <button class="ll-btn ll-btn--ghost" type="button" id="llTryEasierBtn">Testuj niższy poziom</button>
+    </div>
+
+    <div class="ll-spacer"></div>
+
+    <div class="ll-row">
+      <a class="ll-btn ll-btn--ghost" href="/oferta">Zobacz ofertę</a>
+      <a class="ll-btn ll-btn--ghost" href="/cennik">Sprawdź cennik</a>
+      <a class="ll-btn" href="/kontakt">Umów konsultację</a>
+    </div>
+  </section>
+</div>
+
+
+
+<script is:inline>
+window.__LL_LOAD_BANK__ = async (rootEl) => {
+  const QUESTION_BANK_URL = (rootEl && rootEl.dataset && rootEl.dataset.questionBankUrl) ? rootEl.dataset.questionBankUrl : "";
+  if (!QUESTION_BANK_URL){ throw new Error("Brak URL do banku pytań. Ustaw atrybut data-question-bank-url na głównym elemencie testu."); }
+  const res = await fetch(QUESTION_BANK_URL, { cache: 'no-store' });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const data = await res.json();
+  if (!Array.isArray(data)) throw new Error('Bank pytań nie jest tablicą');
+  return data;
+};
+(function(){
+  const __ll_init__ = () => {
+  // =========================
+  // KONFIGURACJA
+  // =========================
+  const LEAD_WEBHOOK_URL = ""; // webhook Make/Zapier/Formspree (opcjonalnie)
+
+  const LEVELS = ["A1","A2","B1","B2","C1","C2"];
+  const L = (lvl) => LEVELS.indexOf(lvl);
+
+  // Bardzo konserwatywne progi (hard) – wynik z dolnej granicy 95%
+  function thetaToLevel(theta){
+    if (theta < -1.5) return "A1";
+    if (theta < -0.8) return "A2";
+    if (theta < 0.0) return "B1";
+    if (theta < 0.9) return "B2";
+    if (theta < 1.7) return "C1";
+    return "C2";
+  }
+
+  const LEVEL_DESC = {
+    A1: "A1: podstawy. Skup się na słownictwie, prostych czasach i budowaniu nawyku regularnej nauki.",
+    A2: "A2: komunikacja w prostych sytuacjach. Kolejny krok to utrwalenie struktur i mówienie w praktyce.",
+    B1: "B1: dogadasz się w większości codziennych sytuacji. Warto popracować nad płynnością i pewnością.",
+    B2: "B2: solidna swoboda. Następny etap to precyzja, idiomy i język zawodowy.",
+    C1: "C1: bardzo dobra kontrola języka. Skup się na stylu, niuansach i naturalności wypowiedzi.",
+    C2: "C2: poziom biegły. Jeśli chcesz doszlifować styl/akcent – najlepsza będzie praca 1:1."
+  };
+
+  function recommendationsFor(level){
+    const common = [
+      { label: "Umów konsultację (dobór planu i terminu)", href: "/kontakt" },
+      { label: "Zobacz ofertę", href: "/oferta" },
+      { label: "Sprawdź cennik", href: "/cennik" }
+    ];
+
+    const map = {
+      A1: [
+        { label: "Angielski stacjonarnie (fundamenty + kontakt z lektorem)", href: "/angielski-stacjonarnie" },
+        { label: "Angielski online (na żywo, elastycznie)", href: "/angielski-online" },
+        { label: "Lekcje indywidualne (najszybszy start)", href: "/lekcje-indywidualne" },
+        ...common
+      ],
+      A2: [
+        { label: "Kursy grupowe (regularność i plan)", href: "/kursy-grupowe" },
+        { label: "Angielski online (mówienie od pierwszych minut)", href: "/angielski-online" },
+        { label: "Lekcje indywidualne (jeśli masz konkretny cel)", href: "/lekcje-indywidualne" },
+        ...common
+      ],
+      B1: [
+        { label: "Kursy grupowe (rytm + postęp)", href: "/kursy-grupowe" },
+        { label: "Angielski online (realne rozmowy + feedback)", href: "/angielski-online" },
+        { label: "Angielski stacjonarnie (zajęcia twarzą w twarz)", href: "/angielski-stacjonarnie" },
+        ...common
+      ],
+      B2: [
+        { label: "Angielski online (płynność + mówienie)", href: "/angielski-online" },
+        { label: "Lekcje indywidualne (biznes/egzamin/wyjazd)", href: "/lekcje-indywidualne" },
+        { label: "Angielski stacjonarnie (mini-grupy / grupy)", href: "/angielski-stacjonarnie" },
+        ...common
+      ],
+      C1: [
+        { label: "Lekcje indywidualne (styl i niuanse)", href: "/lekcje-indywidualne" },
+        { label: "Angielski online (zaawansowane konwersacje)", href: "/angielski-online" },
+        ...common
+      ],
+      C2: [
+        { label: "Lekcje indywidualne (C1+ / doszlifowanie)", href: "/lekcje-indywidualne" },
+        { label: "Umów konsultację (ustalimy cele i plan)", href: "/kontakt" },
+        ...common
+      ]
+    };
+    return map[level] || common;
+  }
+
+  // =========================
+  // Utils
+  // =========================
+  function escapeHtml(str){
+    return String(str)
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+  function logistic(x){
+    if (x > 12) return 0.999994;
+    if (x < -12) return 0.000006;
+    return 1 / (1 + Math.exp(-x));
+  }
+
+  function clamp(x, lo, hi){ return Math.max(lo, Math.min(hi, x)); }
+
+  // =========================
+  // Bayesian IRT (3PL) – wynik odporny na zgadywanie
+  // =========================
+  // Grid theta (bardziej stabilne niż MLE/Newton przy skrajnych wynikach)
+  const THETA_MIN = -4;
+  const THETA_MAX = 4;
+  const THETA_STEP = 0.05;
+  const THETA_GRID = [];
+  for (let t=THETA_MIN; t<=THETA_MAX + 1e-9; t+=THETA_STEP){
+    THETA_GRID.push(Math.round(t*100)/100);
+  }
+
+  const PRIOR_MEAN = 0;
+  const PRIOR_SD = 1.2;
+
+  function normalLogPdf(x, mean, sd){
+    const z = (x - mean) / sd;
+    return -0.5 * z * z - Math.log(sd) - 0.5*Math.log(2*Math.PI);
+  }
+
+  function p3pl(theta, q){
+    const a = (typeof q.a === "number") ? q.a : 1;
+    const b = (typeof q.b === "number") ? q.b : 0;
+    const c = (typeof q.c === "number") ? q.c : 0.25; // 4 odpowiedzi
+    const L = logistic(a * (theta - b));
+    return c + (1 - c) * L;
+  }
+
+  // Fisher information dla 3PL
+  function info3pl(theta, q){
+    const a = (typeof q.a === "number") ? q.a : 1;
+    const c = (typeof q.c === "number") ? q.c : 0.25;
+    const p = p3pl(theta, q);
+    const num = a*a * (p - c) * (p - c) * (1 - p);
+    const den = (1 - c) * (1 - c) * p;
+    if (den < 1e-9) return 0;
+    return num / den;
+  }
+
+  // Posterior z odpowiedzi: mean, sd, quantile
+  function estimatePosterior(questions, answers){
+    const logPost = new Array(THETA_GRID.length).fill(0);
+
+    // prior
+    for (let j=0;j<THETA_GRID.length;j++){
+      logPost[j] = normalLogPdf(THETA_GRID[j], PRIOR_MEAN, PRIOR_SD);
+    }
+
+    let used = 0;
+    for (let i=0;i<answers.length;i++){
+      const a = answers[i];
+      const q = questions[i];
+      if (!a || !q) continue;
+
+      // skip counts as wrong
+      let y = null;
+      if (a.skipped){
+        y = 0;
+      } else if (typeof a.correct === "boolean"){
+        y = a.correct ? 1 : 0;
+      } else {
+        continue;
+      }
+
+      used++;
+      for (let j=0;j<THETA_GRID.length;j++){
+        const p = p3pl(THETA_GRID[j], q);
+        // numerical safety
+        const pp = clamp(p, 1e-9, 1-1e-9);
+        logPost[j] += y ? Math.log(pp) : Math.log(1-pp);
+      }
+    }
+
+    // if too few items, return wide
+    if (used < 3){
+      return { theta: 0, sd: 9, q025: -4, q975: 4 };
+    }
+
+    // normalize
+    let maxLP = -Infinity;
+    for (const v of logPost) if (v > maxLP) maxLP = v;
+
+    const w = new Array(logPost.length);
+    let sumW = 0;
+    for (let j=0;j<logPost.length;j++){
+      const ww = Math.exp(logPost[j] - maxLP);
+      w[j] = ww;
+      sumW += ww;
+    }
+    if (sumW < 1e-12){
+      return { theta: 0, sd: 9, q025: -4, q975: 4 };
+    }
+
+    // mean/var
+    let m = 0;
+    let m2 = 0;
+    for (let j=0;j<w.length;j++){
+      const pj = w[j] / sumW;
+      const t = THETA_GRID[j];
+      m += t * pj;
+      m2 += t * t * pj;
+    }
+    const variance = Math.max(1e-9, m2 - m*m);
+    const sd = Math.sqrt(variance);
+
+    // quantiles
+    const targetLow = 0.025;
+    const targetHigh = 0.975;
+    let cum = 0;
+    let q025 = THETA_MIN;
+    let q975 = THETA_MAX;
+
+    for (let j=0;j<w.length;j++){
+      cum += w[j] / sumW;
+      if (cum >= targetLow){
+        q025 = THETA_GRID[j];
+        break;
+      }
+    }
+    cum = 0;
+    for (let j=0;j<w.length;j++){
+      cum += w[j] / sumW;
+      if (cum >= targetHigh){
+        q975 = THETA_GRID[j];
+        break;
+      }
+    }
+
+    return { theta: m, sd, q025, q975 };
+  }
+
+  function confidenceLabel(sd){
+    if (sd <= 0.25) return "wysoka";
+    if (sd <= 0.40) return "średnia";
+    return "niska";
+  }
+
+function confidenceExplain(sd, total){
+  // Tekst dla osób nietechnicznych
+  if (sd > 0.55) return "zrób 60–80 pytań, żeby wynik był pewniejszy";
+  if (sd > 0.45) return "zrób 40–60 pytań, żeby wynik był pewniejszy";
+  if (sd > 0.35) return "wynik jest w miarę pewny (możesz go traktować jako dobry punkt startu)";
+  return "wynik jest stabilny";
+}
+
+function modeLabel(mode){
+  if (mode === "adaptive") return "dopasowany do Twoich odpowiedzi";
+  if (mode === "easyToHard") return "od łatwiejszych do trudniejszych";
+  return "losowy";
+}
+
+
+
+  // =========================
+  // Pool / selection
+  // =========================
+  function buildPool(questionBank, minLevel){
+    const minIdx = L(minLevel);
+    return questionBank.filter(q => L(q.level) >= minIdx);
+  }
+
+  // skill targets to avoid "all grammar" tests
+  function normalizeSkill(q){
+    return q.skill || (
+      (q.text || "").toLowerCase().startsWith("choose the correct word") ? "vocabulary" :
+      (q.text || "").toLowerCase().startsWith("choose the correct idiom") ? "idiom" :
+      (q.text || "").toLowerCase().startsWith("choose the correct connector") ? "discourse" :
+      "grammar"
+    );
+  }
+
+  function computeSkillTargets(total){
+    // Simple robust mix: 60% grammar, 40% lexis (vocab+idiom+discourse)
+    const lexis = Math.round(total * 0.40);
+    const grammar = total - lexis;
+    return { grammar, lexis };
+  }
+
+  function pickNext(pool, usedIds, mode, currentTheta, skillTargets, skillCounts){
+    const remaining = pool.filter(q => !usedIds.has(q.id));
+    if (!remaining.length) return null;
+
+    if (mode === "mixed"){
+      return remaining[Math.floor(Math.random() * remaining.length)];
+    }
+
+    if (mode === "easyToHard"){
+      remaining.sort((a,b) => (a.b ?? 0) - (b.b ?? 0));
+      return remaining[0];
+    }
+
+    // adaptive (default):
+    // 1) content balance – if lexis behind, prefer lexis, else grammar
+    const needLexis = (skillCounts.lexis < skillTargets.lexis);
+    const preferred = needLexis ? ["vocabulary","idiom","discourse"] : ["grammar"];
+    let candidates = remaining.filter(q => preferred.includes(normalizeSkill(q)));
+    if (candidates.length < 10){
+      candidates = remaining; // fallback
+    }
+
+    // 2) choose items with maximum information at current theta
+    const scored = candidates.map(q => ({ q, info: info3pl(currentTheta, q) }));
+    scored.sort((a,b) => b.info - a.info);
+
+    const k = Math.min(25, scored.length);
+    const top = scored.slice(0,k).map(x => x.q);
+
+    // random among top-k to avoid repetition
+    return top[Math.floor(Math.random() * top.length)];
+  }
+
+  function formatRange(minLevel){ return `${minLevel}–C2`; }
+
+  function nextLevel(level){
+    const idx = L(level);
+    if (idx < 0 || idx >= LEVELS.length-1) return null;
+    return LEVELS[idx+1];
+  }
+  function prevLevel(level){
+    const idx = L(level);
+    if (idx <= 0) return null;
+    return LEVELS[idx-1];
+  }
+
+  // =========================
+  // UI elements
+  // =========================
+  const root = document.getElementById("llPlacementTestV5");
+  if (!root) { console.error("[LL Test] Brak elementu #llPlacementTestV5"); return; }
+  // Guard against double init (important for Astro view transitions)
+  if (root.dataset && root.dataset.llInitialized === "1") { return; }
+  if (root.dataset) { root.dataset.llInitialized = "1"; }
+  const initStatus = root.querySelector("#llInitStatus");
+  const setIntroStatus = (msg, isError=false) => {
+    if (!initStatus) return;
+    initStatus.style.display = "block";
+    initStatus.style.borderColor = isError ? "rgba(176,0,32,.55)" : "rgba(0,0,0,.12)";
+    initStatus.innerHTML = msg;
+  };
+  const clearIntroStatus = () => {
+    if (!initStatus) return;
+    initStatus.style.display = "none";
+    initStatus.innerHTML = "";
+    initStatus.style.borderColor = "rgba(0,0,0,.12)";
+  };
+
+  const intro = root.querySelector('[data-step="intro"]');
+  const quiz  = root.querySelector('[data-step="quiz"]');
+  const result= root.querySelector('[data-step="result"]');
+
+  const rangeSelect = root.querySelector("#llRangeSelect");
+  const countSelect = root.querySelector("#llCountSelect");
+  const orderSelect = root.querySelector("#llOrderSelect");
+  const poolInfo = root.querySelector("#llPoolInfo");
+
+  const startBtn = root.querySelector("#llStartBtn");
+  const prevBtn  = root.querySelector("#llPrevBtn");
+  const nextBtn  = root.querySelector("#llNextBtn");
+  const skipBtn  = root.querySelector("#llSkipBtn");
+
+  const progressBar = root.querySelector("#llProgressBar");
+  const qCounter = root.querySelector("#llQCounter");
+  const rangeHint = root.querySelector("#llRangeHint");
+  const qText = root.querySelector("#llQuestionText");
+  const optionsForm = root.querySelector("#llOptions");
+  const feedbackBox = root.querySelector("#llFeedback");
+
+  const correctCountEl = root.querySelector("#llCorrectCount");
+  const wrongCountEl = root.querySelector("#llWrongCount");
+  const remainingCountEl = root.querySelector("#llRemainingCount");
+  const answeredCountEl = root.querySelector("#llAnsweredCount");
+  const totalCountEl = root.querySelector("#llTotalCount");
+
+  const resLevel = root.querySelector("#llResultLevel");
+  const resScore = root.querySelector("#llResultScore");
+  const resDesc  = root.querySelector("#llResultDesc");
+
+  const kpiCorrectWrong = root.querySelector("#llKpiCorrectWrong");
+  const kpiMeta = root.querySelector("#llKpiMeta");
+  const kpiConfidence = root.querySelector("#llKpiConfidence");
+  const scale = root.querySelector("#llScale");
+  const advancedStats = root.querySelector("#llAdvancedStats");
+
+  const nextStepCallout = root.querySelector("#llNextStepCallout");
+  const breakdownBox = root.querySelector("#llBreakdown");
+  const recosBox = root.querySelector("#llRecommendations");
+  const reviewBox = root.querySelector("#llReview");
+
+  const leadForm = root.querySelector("#llLeadForm");
+  const leadStatus = root.querySelector("#llLeadStatus");
+  const shareBtn = root.querySelector("#llShareBtn");
+  const copyBtn  = root.querySelector("#llCopyBtn");
+
+  const restartSameBtn = root.querySelector("#llRestartSameBtn");
+  const tryHarderBtn = root.querySelector("#llTryHarderBtn");
+  const tryEasierBtn = root.querySelector("#llTryEasierBtn");
+
+  // =========================
+  // State
+  // =========================
+  let QUESTION_BANK = null;
+
+  const state = {
+    config: { minLevel: "A1", total: 40, mode: "adaptive" },
+    i: 0,
+    pool: [],
+    used: new Set(),
+    questions: [],
+    answers: [],
+    computed: null,
+    skillTargets: { grammar: 0, lexis: 0 },
+    skillCounts: { grammar: 0, lexis: 0 },
+  };
+
+  function showStep(name){
+    intro.hidden  = name !== "intro";
+    quiz.hidden   = name !== "quiz";
+    result.hidden = name !== "result";
+  }
+
+  function resetTestState(){
+    state.i = 0;
+    state.used = new Set();
+    state.questions = new Array(state.config.total).fill(null);
+    state.answers = new Array(state.config.total).fill(null);
+    state.computed = null;
+    state.skillTargets = computeSkillTargets(state.config.total);
+    state.skillCounts = { grammar: 0, lexis: 0 };
+  }
+
+  function updateSkillCounts(){
+    let g=0,l=0;
+    for (let i=0;i<state.answers.length;i++){
+      const a = state.answers[i];
+      const q = state.questions[i];
+      if (!a || !q) continue;
+      if (!(a.skipped || typeof a.correct === "boolean")) continue;
+      const sk = normalizeSkill(q);
+      if (sk === "grammar") g++; else l++;
+    }
+    state.skillCounts.grammar = g;
+    state.skillCounts.lexis = l;
+  }
+
+  function updateCounters(){
+    const total = state.config.total;
+    totalCountEl.textContent = String(total);
+
+    let correct = 0, wrong = 0, answered = 0;
+    for (let i=0;i<state.answers.length;i++){
+      const a = state.answers[i];
+      if (!a) continue;
+      if (a.skipped){
+        wrong++;
+        answered++;
+      } else if (typeof a.correct === "boolean"){
+        answered++;
+        if (a.correct) correct++; else wrong++;
+      }
+    }
+
+    correctCountEl.textContent = String(correct);
+    wrongCountEl.textContent = String(wrong);
+    answeredCountEl.textContent = String(answered);
+
+    const remaining = Math.max(0, total - answered);
+    remainingCountEl.textContent = String(remaining);
+
+    const pct = Math.round((answered / total) * 100);
+    progressBar.style.width = pct + "%";
+  }
+
+  function clearFeedback(){
+    feedbackBox.hidden = true;
+    feedbackBox.className = "ll-feedback";
+    feedbackBox.textContent = "";
+  }
+
+  function lockOptions(){
+    optionsForm.querySelectorAll("input").forEach(inp => inp.disabled = true);
+    optionsForm.querySelectorAll("label").forEach(lab => lab.style.cursor = "default");
+  }
+
+  function setFeedback({ correct, correctText, explanation }){
+    feedbackBox.hidden = false;
+    feedbackBox.className = "ll-feedback " + (correct ? "good" : "bad");
+    feedbackBox.innerHTML = correct
+      ? `✅ <strong>Dobrze.</strong>`
+      : `❌ <strong>Źle.</strong> Poprawna odpowiedź: <strong>${escapeHtml(correctText)}</strong>`;
+    if (explanation){
+      feedbackBox.innerHTML += `<div class="ll-muted" style="margin-top:6px;">${escapeHtml(explanation)}</div>`;
+    }
+  }
+
+  function ensureQuestionAt(index){
+    if (state.questions[index]) return true;
+
+    updateSkillCounts();
+    const post = estimatePosterior(state.questions, state.answers);
+    const q = pickNext(state.pool, state.used, state.config.mode, post.theta, state.skillTargets, state.skillCounts);
+    if (!q) return false;
+
+    state.used.add(q.id);
+    state.questions[index] = q;
+    return true;
+  }
+
+  function renderQuestion(){
+    // ensure question exists
+    if (!ensureQuestionAt(state.i)){
+      alert("Brak kolejnych pytań w puli. Zwiększ zakres lub użyj innego trybu.");
+      showStep("intro");
+      return;
+    }
+
+    const q = state.questions[state.i];
+    const total = state.config.total;
+
+    qCounter.textContent = `Pytanie ${state.i + 1} z ${total}`;
+    rangeHint.textContent = `Zakres: ${formatRange(state.config.minLevel)} • tryb: ${state.config.mode}`;
+    updateCounters();
+
+    qText.textContent = `(${q.level}) ${q.text}`;
+
+    optionsForm.innerHTML = "";
+    clearFeedback();
+
+    const existing = state.answers[state.i];
+
+    q.options.forEach((opt, idx) => {
+      const id = `llopt-${state.i}-${idx}`;
+
+      const label = document.createElement("label");
+      label.className = "ll-option";
+      label.setAttribute("for", id);
+
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = "llopt";
+      input.id = id;
+      input.value = String(idx);
+
+      if (existing && typeof existing.selected === "number" && existing.selected === idx){
+        input.checked = true;
+      }
+
+      input.addEventListener("change", () => {
+        if (state.answers[state.i] && (state.answers[state.i].skipped || typeof state.answers[state.i].selected === "number")) return;
+
+        const selected = idx;
+        const correctIdx = q.answer;
+        const isCorrect = selected === correctIdx;
+
+        state.answers[state.i] = { selected, correct: isCorrect };
+
+        const labels = Array.from(optionsForm.querySelectorAll(".ll-option"));
+        labels.forEach((lab, j) => {
+          if (j === correctIdx) lab.classList.add("is-right");
+          if (j === selected && isCorrect) lab.classList.add("is-correct");
+          if (j === selected && !isCorrect) lab.classList.add("is-wrong");
+        });
+
+        lockOptions();
+        setFeedback({ correct: isCorrect, correctText: q.options[correctIdx], explanation: q.explanation || "" });
+
+        nextBtn.disabled = false;
+        updateCounters();
+      });
+
+      const span = document.createElement("span");
+      span.textContent = opt;
+
+      label.appendChild(input);
+      label.appendChild(span);
+      optionsForm.appendChild(label);
+    });
+
+    prevBtn.disabled = state.i === 0;
+
+    const isLast = state.i === total - 1;
+    nextBtn.textContent = isLast ? "Zobacz wynik" : "Dalej";
+
+    // If already answered/skipped, show state
+    if (existing){
+      if (existing.skipped){
+        lockOptions();
+        feedbackBox.hidden = false;
+        feedbackBox.className = "ll-feedback bad";
+        feedbackBox.innerHTML = "⏭️ <strong>Pominięte.</strong> Poprawna odpowiedź: <strong>" + escapeHtml(q.options[q.answer]) + "</strong>";
+        nextBtn.disabled = false;
+      } else if (typeof existing.selected === "number"){
+        const correctIdx = q.answer;
+        const selected = existing.selected;
+        const isCorrect = existing.correct;
+
+        const labels = Array.from(optionsForm.querySelectorAll(".ll-option"));
+        labels.forEach((lab, j) => {
+          if (j === correctIdx) lab.classList.add("is-right");
+          if (j === selected && isCorrect) lab.classList.add("is-correct");
+          if (j === selected && !isCorrect) lab.classList.add("is-wrong");
+        });
+
+        lockOptions();
+        setFeedback({ correct: isCorrect, correctText: q.options[correctIdx], explanation: q.explanation || "" });
+        nextBtn.disabled = false;
+      }
+    } else {
+      nextBtn.disabled = true;
+    }
+  }
+
+  function computeStatsByLevel(){
+    const stats = {};
+    LEVELS.forEach(lvl => stats[lvl] = { correct: 0, total: 0 });
+
+    for (let i=0;i<state.questions.length;i++){
+      const q = state.questions[i];
+      const a = state.answers[i];
+      if (!q) continue;
+
+      // count if answered or skipped
+      if (a && (a.skipped || typeof a.correct === "boolean")){
+        stats[q.level].total += 1;
+        if (a.correct) stats[q.level].correct += 1;
+      }
+    }
+    return stats;
+  }
+
+  function computePersonFit(){
+    // simple "easy vs hard" sanity:
+    // in normal behavior: accuracy on easiest quartile should be >= accuracy on hardest quartile
+    const pairs = [];
+    for (let i=0;i<state.questions.length;i++){
+      const q = state.questions[i];
+      const a = state.answers[i];
+      if (!q || !a) continue;
+      if (!(a.skipped || typeof a.correct === "boolean")) continue;
+      const y = a.correct ? 1 : 0;
+      pairs.push({ b: q.b ?? 0, y });
+    }
+    if (pairs.length < 16) return { ok: true };
+
+    pairs.sort((x,y) => x.b - y.b);
+    const k = Math.max(3, Math.floor(pairs.length * 0.25));
+    const easy = pairs.slice(0,k);
+    const hard = pairs.slice(-k);
+
+    const acc = (arr) => arr.reduce((s,p)=>s+p.y,0) / arr.length;
+    const easyAcc = acc(easy);
+    const hardAcc = acc(hard);
+
+    // If hard accuracy is higher than easy accuracy by a noticeable margin, it may indicate guessing / inconsistency
+    const ok = (easyAcc + 0.05) >= hardAcc;
+    return { ok, easyAcc, hardAcc };
+  }
+
+  function computeResult(){
+    const total = state.config.total;
+    let correct = 0, wrong = 0, answered = 0;
+
+    for (let i=0;i<state.answers.length;i++){
+      const a = state.answers[i];
+      if (!a) continue;
+      if (a.skipped){
+        wrong++; answered++;
+      } else if (typeof a.correct === "boolean"){
+        answered++;
+        if (a.correct) correct++; else wrong++;
+      }
+    }
+
+    const pct = Math.round((correct / total) * 100);
+
+    const post = estimatePosterior(state.questions, state.answers);
+    const theta = post.theta;
+    const thetaLower = post.q025;
+    const thetaUpper = post.q975;
+
+    let strictLevel = thetaToLevel(thetaLower);
+    const midLevel = thetaToLevel(theta);
+
+    const floorApplied = (correct / total) < 0.30; // HARD FLOOR (anti-guess)
+    if (floorApplied) strictLevel = "A1";
+
+    const stats = computeStatsByLevel();
+    const fit = computePersonFit();
+
+    state.computed = {
+      total, correct, wrong, answered, pct,
+      theta, thetaLower, thetaUpper, sd: post.sd,
+      strictLevel, midLevel,
+      floorApplied,
+      stats,
+      fit
+    };
+    return state.computed;
+  }
+
+  function renderBreakdown(stats){
+    const rows = LEVELS.map(lvl => {
+      const s = stats[lvl];
+      if (s.total === 0) return "";
+      const acc = Math.round((s.correct / s.total) * 100);
+      return `<tr><td><span class="ll-pill">${lvl}</span></td><td>${s.correct}/${s.total}</td><td>${acc}%</td></tr>`;
+    }).filter(Boolean).join("");
+
+    breakdownBox.innerHTML = `
+      <table class="ll-table" aria-label="Rozbicie wyników">
+        <thead><tr><th>Poziom</th><th>Poprawne</th><th>Skuteczność</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+  }
+
+  function renderReview(){
+    reviewBox.innerHTML = state.questions.map((q, idx) => {
+      if (!q) return "";
+      const a = state.answers[idx];
+      const selectedText = (a && typeof a.selected === "number") ? q.options[a.selected] : (a && a.skipped ? "Pominięte" : "—");
+      const correctText = q.options[q.answer];
+      const mark = (a && a.correct) ? "✅" : "❌";
+      return `
+        <div class="ll-review-item">
+          <div class="ll-row" style="justify-content: space-between;">
+            <div><span class="ll-pill">${q.level}</span></div>
+            <div>${mark}</div>
+          </div>
+          <div style="margin-top: 8px; font-weight: 800;">${escapeHtml(q.text)}</div>
+          <div style="margin-top: 6px;" class="ll-muted">Twoja odpowiedź: <strong>${escapeHtml(selectedText)}</strong></div>
+          <div class="ll-muted">Poprawna odpowiedź: <strong>${escapeHtml(correctText)}</strong></div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function renderNextStepCallout(comp){
+    // Prosty komunikat: co dalej zrobić (bez technicznych liczb)
+    const selectedMin = state.config.minLevel;
+    const lowerMin = prevLevel(selectedMin);
+    const higherFromResult = nextLevel(comp.strictLevel);
+
+    let html = "";
+    let emphasis = null;
+
+    if (comp.floorApplied || comp.pct < 40){
+      // Bardzo niski wynik
+      if (selectedMin !== "A1" && lowerMin){
+        html = `
+          <div>To był prawdopodobnie <strong>za trudny</strong> zakres.</div>
+          <ul style="margin: 8px 0 0 18px;">
+            <li>Wróć i wybierz <strong>niższy zakres</strong> (np. ${lowerMin}–C2).</li>
+            <li>Dla pewniejszego wyniku ustaw <strong>40–60 pytań</strong>.</li>
+          </ul>
+        `;
+        emphasis = "lower";
+      } else {
+        html = `
+          <div>Wynik sugeruje poziom <strong>podstawowy</strong>.</div>
+          <ul style="margin: 8px 0 0 18px;">
+            <li>Dla pewniejszego wyniku zrób test jeszcze raz i ustaw <strong>40–60 pytań</strong>.</li>
+            <li>Jeśli chcesz potwierdzić poziom w mówieniu — umów krótką konsultację.</li>
+          </ul>
+        `;
+        emphasis = "retest";
+      }
+    } else if (comp.pct >= 80 && comp.sd <= 0.35 && higherFromResult){
+      // Bardzo dobry wynik
+      html = `
+        <div>Wygląda na to, że ten test był dla Ciebie <strong>łatwy</strong>.</div>
+        <ul style="margin: 8px 0 0 18px;">
+          <li>Spróbuj <strong>wyższego zakresu</strong> (np. ${higherFromResult}–C2), żeby doprecyzować wynik.</li>
+        </ul>
+      `;
+      emphasis = "higher";
+    } else if (comp.sd > 0.45){
+      // Niska pewność
+      html = `
+        <div>Wynik jest <strong>orientacyjny</strong>.</div>
+        <ul style="margin: 8px 0 0 18px;">
+          <li>Powtórz test z większą liczbą pytań: <strong>40–60</strong>.</li>
+        </ul>
+      `;
+      emphasis = "retest";
+    } else {
+      html = `
+        <div>Jeśli chcesz się upewnić:</div>
+        <ul style="margin: 8px 0 0 18px;">
+          <li>ustaw <strong>40–60 pytań</strong> i powtórz test, albo</li>
+          <li>sprawdź wyższy / niższy zakres.</li>
+        </ul>
+      `;
+    }
+
+    if (comp.fit && comp.fit.ok === false){
+      html += `<div style="margin-top: 10px;"><strong>Uwaga:</strong> odpowiedzi wyglądają na losowe — wynik może być zaniżony lub zawyżony. Powtórz test spokojnie, bez „strzelania”.</div>`;
+    }
+
+    nextStepCallout.style.display = "block";
+    nextStepCallout.innerHTML = `<strong>Co teraz zrobić?</strong><div class="ll-muted">${html}</div>`;
+
+    // Podkreśl sugerowany przycisk
+    tryHarderBtn.classList.add("ll-btn--ghost");
+    tryEasierBtn.classList.add("ll-btn--ghost");
+
+    if (emphasis === "higher"){
+      tryHarderBtn.classList.remove("ll-btn--ghost");
+    } else if (emphasis === "lower"){
+      tryEasierBtn.classList.remove("ll-btn--ghost");
+    }
+  }
+
+
+
+  function renderResult(){
+    const comp = state.computed || computeResult();
+
+    resLevel.textContent = comp.strictLevel;
+    resScore.textContent = `${comp.correct}/${comp.total} (${comp.pct}%)`;
+    resDesc.textContent = LEVEL_DESC[comp.strictLevel] || "";
+
+
+// Podświetl poziom na prostej skali A1–C2
+if (scale){
+  scale.querySelectorAll("span").forEach(s => s.classList.remove("is-active"));
+  const active = scale.querySelector(`[data-lvl="${comp.strictLevel}"]`);
+  if (active) active.classList.add("is-active");
+}
+
+// Dane techniczne schowane w <details> (dla ciekawych)
+if (advancedStats){
+    advancedStats.textContent = `Wskaźnik (theta) ≈ ${comp.theta.toFixed(2)} • Odchylenie ≈ ${comp.sd.toFixed(2)} • Przedział 95%: ${comp.thetaLower.toFixed(2)}–${comp.thetaUpper.toFixed(2)}`;
+}
+
+        kpiCorrectWrong.textContent = `Poprawne: ${comp.correct} • Błędne: ${comp.wrong}`;
+        kpiMeta.textContent = `Zakres: ${formatRange(state.config.minLevel)} • Pytania: ${state.config.total} • Tryb: ${modeLabel(state.config.mode)}`;
+            kpiConfidence.textContent = `${confidenceLabel(comp.sd)} — ${confidenceExplain(comp.sd, comp.total)}`;
+
+    renderNextStepCallout(comp);
+    renderBreakdown(comp.stats);
+
+    const recos = recommendationsFor(comp.strictLevel);
+    recosBox.innerHTML = recos.map(i => `<div>• <a href="${i.href}">${escapeHtml(i.label)}</a></div>`).join("");
+
+    renderReview();
+
+    tryHarderBtn.disabled = !nextLevel(comp.strictLevel);
+    tryEasierBtn.disabled = !prevLevel(comp.strictLevel);
+
+    if (typeof gtag === "function"){
+      gtag("event", "placement_test_complete", { level: comp.strictLevel, score_percent: comp.pct, correct: comp.correct, total: comp.total });
+    }
+  }
+
+  // =========================
+  // Load bank + start
+  // =========================
+  async function ensureBankLoaded(){
+    if (QUESTION_BANK) return true;
+    try{
+      QUESTION_BANK = await window.__LL_LOAD_BANK__(root);
+      return true;
+    } catch(err){
+      console.error(err);
+      setIntroStatus("⚠️ <strong>Nie udało się załadować bazy pytań.</strong><br>Sprawdź konfigurację (bank pytań / URL) i odśwież stronę. Jeśli używasz buildera, upewnij się, że blok HTML nie usuwa tagów <code>&lt;script&gt;</code>.", true);
+      return false;
+    }
+  }
+
+  function updatePoolInfo(){
+    if (!poolInfo) return;
+    const minLevel = rangeSelect.value;
+    if (!QUESTION_BANK){
+      poolInfo.textContent = "Po kliknięciu Start załadujemy bazę pytań i dopasujemy pulę.";
+      return;
+    }
+    const pool = buildPool(QUESTION_BANK, minLevel);
+    poolInfo.textContent = `Baza pytań: ${QUESTION_BANK.length}. W zakresie ${formatRange(minLevel)}: ${pool.length}.`;
+  }
+
+  updatePoolInfo();
+
+  async function startTest(){
+    const __oldStartText = startBtn ? startBtn.textContent : "";
+    if (startBtn){ startBtn.disabled = true; startBtn.textContent = "Ładowanie…"; }
+    setIntroStatus("Ładowanie bazy pytań…", false);
+    const ok = await ensureBankLoaded();
+    if (!ok){ if (startBtn){ startBtn.disabled = false; startBtn.textContent = __oldStartText || "Start testu"; } return; }
+
+    clearIntroStatus();
+    if (startBtn){ startBtn.disabled = false; startBtn.textContent = __oldStartText || "Start testu"; }
+
+    state.config.minLevel = rangeSelect.value;
+    state.config.total = parseInt(countSelect.value, 10);
+    state.config.mode = orderSelect.value;
+
+    resetTestState();
+    state.pool = buildPool(QUESTION_BANK, state.config.minLevel);
+
+    if (!state.pool.length){
+      alert("Brak pytań w tym zakresie. Zmień zakres.");
+      return;
+    }
+
+    showStep("quiz");
+    renderQuestion();
+
+    if (typeof gtag === "function"){
+      gtag("event", "placement_test_start", { range: formatRange(state.config.minLevel), total_questions: state.config.total, mode: state.config.mode });
+    }
+  }
+
+  startBtn.addEventListener("click", startTest);
+
+  prevBtn.addEventListener("click", () => {
+    if (state.i > 0){
+      state.i--;
+      renderQuestion();
+    }
+  });
+
+  nextBtn.addEventListener("click", () => {
+    const total = state.config.total;
+    const isLast = state.i === total - 1;
+
+    if (!isLast){
+      state.i++;
+      renderQuestion();
+      return;
+    }
+
+    computeResult();
+    showStep("result");
+    renderResult();
+  });
+
+  skipBtn.addEventListener("click", () => {
+    // If already answered or skipped, do nothing
+    if (state.answers[state.i] && (state.answers[state.i].skipped || typeof state.answers[state.i].selected === "number")) return;
+
+    // mark as skipped (counts as wrong)
+    state.answers[state.i] = { skipped: true, correct: false };
+
+    const q = state.questions[state.i];
+    lockOptions();
+    feedbackBox.hidden = false;
+    feedbackBox.className = "ll-feedback bad";
+    feedbackBox.innerHTML = "⏭️ <strong>Pominięte.</strong> Poprawna odpowiedź: <strong>" + escapeHtml(q.options[q.answer]) + "</strong>";
+
+    nextBtn.disabled = false;
+    updateCounters();
+  });
+
+  // Restart same config
+  restartSameBtn.addEventListener("click", () => {
+    showStep("intro");
+    // Keep selects as-is
+  });
+
+  function restartWithMinLevel(newMin){
+    rangeSelect.value = newMin;
+    showStep("intro");
+    // keep same total/mode, just a hint
+  }
+
+  tryHarderBtn.addEventListener("click", () => {
+    const comp = state.computed || computeResult();
+    const nl = nextLevel(comp.strictLevel);
+    if (!nl) return;
+    restartWithMinLevel(nl);
+  });
+
+  tryEasierBtn.addEventListener("click", () => {
+    const comp = state.computed || computeResult();
+    const pl = prevLevel(comp.strictLevel);
+    if (!pl) return;
+    restartWithMinLevel(pl);
+  });
+
+  // Lead capture
+  leadForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    leadStatus.className = "ll-status";
+    leadStatus.textContent = "";
+
+    const comp = state.computed || computeResult();
+
+    const formData = new FormData(leadForm);
+    const payload = {
+      email: (formData.get("email") || "").toString().trim(),
+      name: (formData.get("name") || "").toString().trim(),
+      mode: (formData.get("mode") || "").toString(),
+      goal: (formData.get("goal") || "").toString(),
+      level_strict: comp.strictLevel,
+      level_mid: comp.midLevel,
+      correct: comp.correct,
+      wrong: comp.wrong,
+      total: comp.total,
+      percent: comp.pct,
+      theta: comp.theta,
+      theta_lower_95: comp.thetaLower,
+      theta_upper_95: comp.thetaUpper,
+      range: formatRange(state.config.minLevel),
+      ts: new Date().toISOString(),
+      page: "/test-poziomu"
+    };
+
+    if (!LEAD_WEBHOOK_URL){
+      leadStatus.classList.add("is-error");
+      leadStatus.textContent = "Brak konfiguracji wysyłki. Wklej URL webhooka w LEAD_WEBHOOK_URL, aby zbierać leady i wysyłać wynik e-mailem.";
+      return;
+    }
+
+    try{
+      leadStatus.textContent = "Wysyłanie…";
+      const res = await fetch(LEAD_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+
+      leadStatus.textContent = "Gotowe. Wynik został wysłany (sprawdź też Oferty/Spam).";
+
+      if (typeof gtag === "function"){
+        gtag("event", "placement_test_email_submit", { level: payload.level_strict, score_percent: payload.percent, range: payload.range });
+      }
+    } catch(err){
+      leadStatus.classList.add("is-error");
+      leadStatus.textContent = "Nie udało się wysłać. Spróbuj ponownie albo skontaktuj się przez formularz na /kontakt.";
+    }
+  });
+
+  // Share
+  function shareUrl(){
+    const comp = state.computed || computeResult();
+    const base = (location.origin || "");
+    const params = new URLSearchParams({
+      utm_source: "share",
+      utm_medium: "social",
+      utm_campaign: "placement_test",
+      utm_content: comp.strictLevel
+    });
+    return `${base}/test-poziomu?${params.toString()}`;
+  }
+  function shareText(){
+    const comp = state.computed || computeResult();
+    return `Mój wynik w teście poziomu angielskiego: ${comp.strictLevel} (${comp.pct}%). Sprawdź swój!`;
+  }
+
+  if (shareBtn) shareBtn.addEventListener("click", async () => {
+    const url = shareUrl();
+    const text = shareText();
+    try{
+      if (navigator.share){
+        await navigator.share({ title: "Test poziomu angielskiego", text, url });
+      } else {
+        window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url), "_blank", "noopener,noreferrer");
+      }
+      if (typeof gtag === "function"){
+        gtag("event", "placement_test_share", { level: (state.computed || {}).strictLevel || "" });
+      }
+    } catch(e){}
+  });
+
+  if (copyBtn) copyBtn.addEventListener("click", async () => {
+    const url = shareUrl();
+    try{
+      await navigator.clipboard.writeText(url);
+      copyBtn.textContent = "Skopiowano";
+      setTimeout(() => copyBtn.textContent = "Kopiuj link", 1400);
+    } catch(e){
+      prompt("Skopiuj link:", url);
+    }
+  });
+
+  // Start on intro
+  showStep("intro");
+};
+  const __ll_boot__ = () => { try { __ll_init__(); } catch(e){ console.error(e); } };
+  if (document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", __ll_boot__, { once: true });
+  } else {
+    __ll_boot__();
+  }
+  // Astro View Transitions: DOMContentLoaded may not fire again after navigation
+  document.addEventListener("astro:page-load", __ll_boot__);
+  document.addEventListener("astro:after-swap", __ll_boot__);
+})();
+</script>
