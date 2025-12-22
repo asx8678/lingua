@@ -76,6 +76,29 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     </div>
   </section>
 
+  <section class="section">
+    <div class="container-site">
+      <span class="kicker">Twój progres</span>
+      <h2 class="mt-4">Zobacz, co osiągniesz na każdym poziomie</h2>
+      <p class="mt-4 max-w-3xl text-slate-600">
+        Wybierz swój obecny poziom i zobacz, co będziesz potrafić po kursie.
+      </p>
+      <div class="mt-8">
+        <div
+          data-lingua-progress-widget
+          data-lang="pl"
+          data-layout="split"
+          data-show-header="0"
+          data-track="everyday"
+          data-start-level="A2"
+          data-accent="#0052CC"
+          data-cta-href="/kontakt"
+          data-cta-text="Skontaktuj się"
+        ></div>
+      </div>
+    </div>
+  </section>
+
   <section class="section section-muted">
     <div class="container-site">
       <h2>Inne języki i matematyka</h2>
@@ -97,4 +120,6 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     description="Opowiedz o celu i dostępności, a zaproponujemy najlepszy format zajęć."
     secondaryLabel={null}
   />
+
+  <script is:inline src="/lingua-progress-widget-v2.5.0.js" defer></script>
 </MainLayout>
