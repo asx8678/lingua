@@ -23,7 +23,7 @@ const addressLine = FULL_ADDRESS || BUSINESS.city;
 const hasAddress = Boolean(addressLine);
 const hasHours = Boolean(BUSINESS.openingHours);
 const mapHref = hasAddress
-  ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressLine)}`
+  ? `https://www.google.com/maps?q=${encodeURIComponent(addressLine)}&t=m`
   : "";
 
 const breadcrumbSchema = generateBreadcrumbSchema([
