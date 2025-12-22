@@ -5,8 +5,11 @@ export const CONTACT = {
   email: import.meta.env.PUBLIC_CONTACT_EMAIL ?? "lingualegionowo@gmail.com",
   phone: import.meta.env.PUBLIC_CONTACT_PHONE ?? "+48 453 209 560",
   city: import.meta.env.PUBLIC_CONTACT_CITY ?? import.meta.env.PUBLIC_CITY ?? "Legionowo",
-  address: import.meta.env.PUBLIC_CONTACT_ADDRESS ?? import.meta.env.PUBLIC_STREET_ADDRESS ?? "",
-  postalCode: import.meta.env.PUBLIC_POSTAL_CODE ?? "",
+  address:
+    import.meta.env.PUBLIC_CONTACT_ADDRESS ??
+    import.meta.env.PUBLIC_STREET_ADDRESS ??
+    "Mikołaja Kopernika 9/lok. 5",
+  postalCode: import.meta.env.PUBLIC_POSTAL_CODE ?? "05-120",
 };
 
 export const BUSINESS = {
