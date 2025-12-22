@@ -83,69 +83,55 @@ const { bankUrl = "/question-bank-1200.json" } = Astro.props;
 <div class="ll-test" id="llPlacementTestV5" lang="pl" data-question-bank-url={bankUrl}>
   <!-- INTRO -->
   <section class="ll-card" data-step="intro">
-    <h1>Darmowy test poziomu angielskiego online (A1–C2)</h1>
-    <p class="ll-muted">
-      Duża baza pytań (ponad 1000). Każde podejście pokazuje tylko losowy zestaw pytań, więc nie da się “wykuć” jednego testu.
-    </p>
+    <div class="ll-intro-header">
+      <h1>Test poziomu angielskiego</h1>
+      <p class="ll-intro-sub">Sprawdź swój poziom w 5–10 minut</p>
+    </div>
 
-    <div class="ll-grid2" style="margin-top: 12px;">
-      <label>
-        Zakres pytań (od jakiego poziomu)
+    <div class="ll-intro-grid">
+      <div class="ll-intro-option">
+        <span class="ll-intro-label">Poziom</span>
         <select id="llRangeSelect">
-          <option value="A1">A1–C2 (pełny placement)</option>
-          <option value="A2">A2–C2</option>
-          <option value="B1">B1–C2</option>
-          <option value="B2">B2–C2</option>
-          <option value="C1">C1–C2</option>
-          <option value="C2">C2 (tylko)</option>
+          <option value="A1">A1–C2</option>
+          <option value="A2">od A2</option>
+          <option value="B1">od B1</option>
+          <option value="B2">od B2</option>
+          <option value="C1">od C1</option>
+          <option value="C2">tylko C2</option>
         </select>
-        <span class="ll-muted" style="font-weight: 500; font-size: .95rem;" id="llPoolInfo"></span>
-      </label>
+      </div>
 
-      <label>
-        Dokładność testu (liczba pytań)
+      <div class="ll-intro-option">
+        <span class="ll-intro-label">Pytania</span>
         <select id="llCountSelect">
-          <option value="25">25 (szybki)</option>
-          <option value="40" selected>40 (rekomendowany)</option>
-          <option value="60">60 (dokładny)</option>
-          <option value="80">80 (bardzo dokładny)</option>
+          <option value="25">25</option>
+          <option value="40" selected>40</option>
+          <option value="60">60</option>
         </select>
-        <span class="ll-muted" style="font-weight: 500; font-size: .95rem;">
-          Im więcej pytań, tym stabilniejszy wynik (ale dłużej trwa).
-        </span>
-      </label>
+      </div>
 
-      <label>
-        Styl doboru pytań
+      <div class="ll-intro-option ll-intro-option--hidden">
+        <span class="ll-intro-label">Tryb</span>
         <select id="llOrderSelect">
-          <option value="adaptive" selected>Adaptacyjny (dokładniejszy)</option>
+          <option value="adaptive" selected>Adaptacyjny</option>
           <option value="mixed">Losowy</option>
-          <option value="easyToHard">Od łatwiejszych do trudniejszych</option>
+          <option value="easyToHard">Progresywny</option>
         </select>
-        <span class="ll-muted" style="font-weight: 500; font-size: .95rem;">
-          Adaptacyjny: kolejne pytania dopasowują się do Twoich odpowiedzi.
-        </span>
-      </label>
-
-      <div style="display:grid; gap: 8px;">
-        <div class="ll-row">
-          <button class="ll-btn" type="button" id="llStartBtn">Start testu</button>
-          <a class="ll-btn ll-btn--ghost" href="/kontakt">Umów konsultację</a>
-        </div>
-        <div id="llInitStatus" class="ll-callout" style="display:none;" aria-live="polite"></div>
-
-        <div class="ll-muted" style="font-size: .95rem;">
-          Po każdej odpowiedzi od razu zobaczysz, czy było dobrze, oraz poprawną odpowiedź.
-        </div>
       </div>
     </div>
 
-    <div class="ll-callout">
-      <strong>Jak to działa?</strong>
-      <div class="ll-muted">
-        To jest test placement (gramatyka + słownictwo). Wynik jest celowo “konserwatywny” (raczej zaniża niż zawyża).
-      </div>
+    <div class="ll-intro-cta">
+      <button class="ll-btn ll-btn--large" type="button" id="llStartBtn">Rozpocznij test</button>
+      <div id="llInitStatus" class="ll-callout" style="display:none;" aria-live="polite"></div>
     </div>
+
+    <div class="ll-intro-features">
+      <div class="ll-feature"><span class="ll-feature-icon">&#10003;</span> Ponad 1000 pytań</div>
+      <div class="ll-feature"><span class="ll-feature-icon">&#10003;</span> Natychmiastowy wynik</div>
+      <div class="ll-feature"><span class="ll-feature-icon">&#10003;</span> Rekomendacja kursu</div>
+    </div>
+
+    <span class="ll-muted ll-intro-hide" style="font-size: .85rem; display: none;" id="llPoolInfo"></span>
   </section>
 
   <div class="ll-spacer"></div>
