@@ -164,8 +164,10 @@ const { bankUrl = "/question-bank-1200.json" } = Astro.props;
         <div class="ll-progress__bar" id="llProgressBar"></div>
       </div>
       <div class="ll-quiz-meta">
-        <span id="llQCounter" class="ll-quiz-counter">1 / 40</span>
-        <span id="llRangeHint" class="ll-quiz-range">A1–C2</span>
+        <div class="ll-quiz-meta-left">
+          <span id="llQCounter" class="ll-quiz-counter">1 / 40</span>
+          <span id="llRangeHint" class="ll-quiz-range">A1–C2</span>
+        </div>
         <div class="ll-quiz-score">
           <span class="ll-score-good">✓ <span id="llCorrectCount">0</span></span>
           <span class="ll-score-bad">✗ <span id="llWrongCount">0</span></span>
@@ -174,7 +176,7 @@ const { bankUrl = "/question-bank-1200.json" } = Astro.props;
     </div>
 
     <div class="ll-quiz-body">
-      <h2 class="ll-q" id="llQuestionText"></h2>
+      <p class="ll-q" id="llQuestionText"></p>
       <form id="llOptions" class="ll-options" aria-labelledby="llQuestionText"></form>
       <div id="llFeedback" class="ll-feedback" role="status" aria-live="polite" hidden></div>
     </div>
