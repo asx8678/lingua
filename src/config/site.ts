@@ -59,7 +59,7 @@ export const ALTERNATE_DOMAINS = {
 
 export const DEFAULT_TITLE = `${BRAND_NAME} — języki obce i matematyka w Legionowie`;
 export const DEFAULT_DESCRIPTION =
-  "Szkoła języków obcych i matematyki w Legionowie. Zajęcia stacjonarne i online dla wszystkich poziomów. Umów konsultację i diagnozę poziomu.";
+  "Szkoła języków obcych i matematyki w Legionowie. Zajęcia stacjonarne i online dla wszystkich poziomów. Skontaktuj się i umów diagnozę poziomu.";
 
 export const PRIMARY_CTA = {
   label: "Skontaktuj się",

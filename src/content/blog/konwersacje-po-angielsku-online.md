@@ -33,7 +33,7 @@ Najlepiej 2–3 razy w tygodniu, nawet jeśli spotkania są krótsze. Regularno�
 
 <div class="cta-panel">
   <h3>Chcesz więcej konwersacji?</h3>
-  <p>Umów konsultację i diagnozę poziomu i sprawdź, jak wyglądają zajęcia nastawione na mówienie.</p>
+  <p>Skontaktuj się, umów diagnozę poziomu i sprawdź, jak wyglądają zajęcia nastawione na mówienie.</p>
   <div class="mt-4 flex flex-wrap gap-3">
     <a class="btn btn-primary" href="/angielski-online#kurs">Kurs angielskiego online</a>
     <a class="btn btn-secondary" href="/kontakt">Skontaktuj się</a>

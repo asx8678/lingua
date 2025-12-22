@@ -28,7 +28,7 @@ export const angielskiLegionowo: LandingPageData = {
   slug: "angielski-legionowo",
   title: "Angielski Legionowo – kursy i lekcje języka angielskiego",
   description:
-    "Szukasz kursów angielskiego w Legionowie? Lingua oferuje profesjonalne lekcje stacjonarne i online. Zajęcia indywidualne i grupowe dla dorosłych i młodzieży. Umów konsultację.",
+    "Szukasz kursów angielskiego w Legionowie? Lingua oferuje profesjonalne lekcje stacjonarne i online. Zajęcia indywidualne i grupowe dla dorosłych i młodzieży.",
   canonical: "/angielski-legionowo",
   kicker: "Angielski Legionowo",
   h1: "Kursy angielskiego w Legionowie — lokalna szkoła językowa",
