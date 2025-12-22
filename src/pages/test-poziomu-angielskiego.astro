@@ -238,6 +238,92 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     display: none !important;
   }
 
+  /* Quiz section - compact layout */
+  .ll-card--quiz {
+    padding: 20px 24px;
+  }
+
+  .ll-quiz-header {
+    margin-bottom: 16px;
+  }
+
+  .ll-quiz-header .ll-progress {
+    height: 6px;
+    margin-bottom: 12px;
+  }
+
+  .ll-quiz-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 0.8rem;
+    color: #64748b;
+  }
+
+  .ll-quiz-counter {
+    font-weight: 700;
+    color: #334155;
+  }
+
+  .ll-quiz-range {
+    padding: 3px 10px;
+    background: #f1f5f9;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.75rem;
+  }
+
+  .ll-quiz-score {
+    display: flex;
+    gap: 12px;
+    margin-left: auto;
+    font-weight: 600;
+  }
+
+  .ll-score-good {
+    color: #16a34a;
+  }
+
+  .ll-score-bad {
+    color: #dc2626;
+  }
+
+  .ll-quiz-body {
+    margin-bottom: 16px;
+  }
+
+  .ll-quiz-body .ll-q {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0 0 12px;
+    line-height: 1.5;
+  }
+
+  .ll-quiz-body .ll-options {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+  }
+
+  .ll-quiz-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid #f1f5f9;
+  }
+
+  .ll-quiz-nav-right {
+    display: flex;
+    gap: 8px;
+  }
+
+  .ll-btn--sm {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+
   .ll-card h1 {
     font-size: 1.75rem;
     font-weight: 800;
@@ -311,11 +397,12 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 
   .ll-option {
     display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    padding: 14px 16px;
+    gap: 10px;
+    align-items: center;
+    padding: 10px 14px;
     border: 1px solid #e2e8f0;
-    border-radius: 12px;
+    border-radius: 10px;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.15s;
     background: #fff;

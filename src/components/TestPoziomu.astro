@@ -158,45 +158,37 @@ const { bankUrl = "/question-bank-1200.json" } = Astro.props;
   <div class="ll-spacer"></div>
 
   <!-- QUIZ -->
-  <section class="ll-card" data-step="quiz" hidden>
-    <div class="ll-progress" aria-label="Postęp testu">
-      <div class="ll-progress__bar" id="llProgressBar"></div>
-    </div>
-    <div class="ll-spacer"></div>
-
-    <div class="ll-row ll-muted" style="justify-content: space-between;">
-      <div class="ll-row ll-muted">
-        <span id="llQCounter">Pytanie 1 z 40</span>
-        <span aria-hidden="true">•</span>
-        <span id="llRangeHint">Zakres: A1–C2</span>
+  <section class="ll-card ll-card--quiz" data-step="quiz" hidden>
+    <div class="ll-quiz-header">
+      <div class="ll-progress" aria-label="Postęp testu">
+        <div class="ll-progress__bar" id="llProgressBar"></div>
       </div>
-
-      <div class="ll-stats ll-muted" aria-label="Statystyki testu">
-        <span>✅ <span class="ll-num" id="llCorrectCount">0</span></span>
-        <span>❌ <span class="ll-num" id="llWrongCount">0</span></span>
-        <span>Pozostało: <span class="ll-num" id="llRemainingCount">40</span></span>
+      <div class="ll-quiz-meta">
+        <span id="llQCounter" class="ll-quiz-counter">1 / 40</span>
+        <span id="llRangeHint" class="ll-quiz-range">A1–C2</span>
+        <div class="ll-quiz-score">
+          <span class="ll-score-good">✓ <span id="llCorrectCount">0</span></span>
+          <span class="ll-score-bad">✗ <span id="llWrongCount">0</span></span>
+        </div>
       </div>
     </div>
 
-    <h2 class="ll-q" id="llQuestionText"></h2>
+    <div class="ll-quiz-body">
+      <h2 class="ll-q" id="llQuestionText"></h2>
+      <form id="llOptions" class="ll-options" aria-labelledby="llQuestionText"></form>
+      <div id="llFeedback" class="ll-feedback" role="status" aria-live="polite" hidden></div>
+    </div>
 
-    <form id="llOptions" class="ll-options" aria-labelledby="llQuestionText"></form>
-
-    <div id="llFeedback" class="ll-feedback" role="status" aria-live="polite" hidden></div>
-
-    <div class="ll-spacer"></div>
-
-    <div class="ll-nav">
-      <button class="ll-btn ll-btn--ghost" type="button" id="llPrevBtn">Wstecz</button>
-      <div class="ll-row">
-        <button class="ll-btn ll-btn--ghost" type="button" id="llSkipBtn">Pomiń</button>
-        <button class="ll-btn" type="button" id="llNextBtn" disabled>Dalej</button>
+    <div class="ll-quiz-nav">
+      <button class="ll-btn ll-btn--ghost ll-btn--sm" type="button" id="llPrevBtn">← Wstecz</button>
+      <div class="ll-quiz-nav-right">
+        <button class="ll-btn ll-btn--ghost ll-btn--sm" type="button" id="llSkipBtn">Pomiń</button>
+        <button class="ll-btn ll-btn--sm" type="button" id="llNextBtn" disabled>Dalej →</button>
       </div>
     </div>
-
-    <div class="ll-muted" style="margin-top: 10px; font-size: .95rem;">
-      Licznik: <span id="llAnsweredCount">0</span>/<span id="llTotalCount">40</span> odpowiedziano.
-    </div>
+    <span id="llRemainingCount" style="display:none;">40</span>
+    <span id="llAnsweredCount" style="display:none;">0</span>
+    <span id="llTotalCount" style="display:none;">40</span>
   </section>
 
   <div class="ll-spacer"></div>
@@ -858,11 +850,11 @@ function modeLabel(mode){
     const q = state.questions[state.i];
     const total = state.config.total;
 
-    qCounter.textContent = `Pytanie ${state.i + 1} z ${total}`;
-    rangeHint.textContent = `Zakres: ${formatRange(state.config.minLevel)} • tryb: ${state.config.mode}`;
+    qCounter.textContent = `${state.i + 1} / ${total}`;
+    rangeHint.textContent = formatRange(state.config.minLevel);
     updateCounters();
 
-    qText.textContent = `(${q.level}) ${q.text}`;
+    qText.textContent = q.text;
 
     optionsForm.innerHTML = "";
     clearFeedback();
