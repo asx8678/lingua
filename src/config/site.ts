@@ -62,7 +62,7 @@ export const DEFAULT_DESCRIPTION =
   "Szkoła języków obcych i matematyki w Legionowie. Zajęcia stacjonarne i online dla wszystkich poziomów. Umów konsultację i diagnozę poziomu.";
 
 export const PRIMARY_CTA = {
-  label: "Umów konsultację",
+  label: "Skontaktuj się",
   href: "/kontakt",
 };
 
