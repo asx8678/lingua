@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { BRAND_NAME, CONTACT_EMAIL } from "../../config/site";
-import { sendContactEmail } from "../../lib/mailchannels";
+import { sendEmail, formatContactEmail } from "../../lib/email";
 import { checkRateLimit, getClientIp } from "../../lib/rate-limit";
 import { validateContactForm, RATE_LIMIT_CONFIG } from "../../lib/validation";
 import { HONEYPOT_FIELD } from "../../lib/constants";
@@ -71,24 +71,40 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
   const { name, email, phone, message } = validation.data;
 
-  // Get DKIM config from environment (optional but recommended)
-  const dkimDomain = runtime?.env?.DKIM_DOMAIN ?? import.meta.env.DKIM_DOMAIN;
-  const dkimSelector = runtime?.env?.DKIM_SELECTOR ?? import.meta.env.DKIM_SELECTOR ?? "mailchannels";
-  const dkimPrivateKey = runtime?.env?.DKIM_PRIVATE_KEY ?? import.meta.env.DKIM_PRIVATE_KEY;
+  // Get Resend API key
+  const resendApiKey = runtime?.env?.RESEND_API_KEY ?? import.meta.env.RESEND_API_KEY;
 
-  // Send email via MailChannels
-  const fromEmail = import.meta.env.MAIL_FROM ?? "noreply@lingualegionowo.pl";
+  if (!resendApiKey) {
+    console.error("RESEND_API_KEY not configured");
+    return new Response(
+      JSON.stringify({
+        success: false,
+        error: "Formularz kontaktowy jest tymczasowo niedostępny.",
+      }),
+      { status: 503, headers: { "Content-Type": "application/json" } }
+    );
+  }
 
-  const emailResult = await sendContactEmail(
-    { name, email, phone, message },
+  // Send email via Resend
+  const emailContent = formatContactEmail({
+    name,
+    email,
+    phone,
+    message,
+    brandName: BRAND_NAME,
+  });
+
+  const fromEmail = runtime?.env?.RESEND_FROM_EMAIL ?? import.meta.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev";
+  const emailResult = await sendEmail(
     {
-      toEmail: CONTACT_EMAIL,
-      fromEmail,
-      brandName: BRAND_NAME,
-      dkimDomain,
-      dkimSelector,
-      dkimPrivateKey,
-    }
+      to: CONTACT_EMAIL,
+      from: `${BRAND_NAME} <${fromEmail}>`,
+      subject: emailContent.subject,
+      text: emailContent.text,
+      html: emailContent.html,
+      replyTo: email,
+    },
+    resendApiKey
   );
 
   if (!emailResult.success) {
@@ -103,7 +119,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     );
   }
 
-  return new Response(JSON.stringify({ success: true }), {
+  return new Response(JSON.stringify({ success: true, messageId: emailResult.messageId }), {
     status: 200,
     headers: { "Content-Type": "application/json" },
   });

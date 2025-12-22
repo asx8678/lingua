@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { BRAND_NAME, CONTACT_EMAIL } from "../../config/site";
-import { sendSignupEmail } from "../../lib/mailchannels";
+import { sendEmail, formatSignupEmail } from "../../lib/email";
 import { checkRateLimit, getClientIp } from "../../lib/rate-limit";
 import { validateSignupForm, RATE_LIMIT_CONFIG } from "../../lib/validation";
 import { HONEYPOT_FIELD } from "../../lib/constants";
@@ -68,22 +68,35 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
   const data = validation.data;
 
-  // Get DKIM config from environment (optional but recommended)
-  const dkimDomain = runtime?.env?.DKIM_DOMAIN ?? import.meta.env.DKIM_DOMAIN;
-  const dkimSelector = runtime?.env?.DKIM_SELECTOR ?? import.meta.env.DKIM_SELECTOR ?? "mailchannels";
-  const dkimPrivateKey = runtime?.env?.DKIM_PRIVATE_KEY ?? import.meta.env.DKIM_PRIVATE_KEY;
+  // Get Resend API key
+  const resendApiKey = runtime?.env?.RESEND_API_KEY ?? import.meta.env.RESEND_API_KEY;
 
-  // Send email via MailChannels
-  const fromEmail = import.meta.env.MAIL_FROM ?? "noreply@lingualegionowo.pl";
+  if (!resendApiKey) {
+    console.error("RESEND_API_KEY not configured");
+    return new Response(
+      JSON.stringify({ success: false, error: "Formularz jest tymczasowo niedostępny." }),
+      { status: 503, headers: { "Content-Type": "application/json" } }
+    );
+  }
 
-  const emailResult = await sendSignupEmail(data, {
-    toEmail: CONTACT_EMAIL,
-    fromEmail,
+  // Send email via Resend
+  const emailContent = formatSignupEmail({
+    ...data,
     brandName: BRAND_NAME,
-    dkimDomain,
-    dkimSelector,
-    dkimPrivateKey,
   });
+
+  const fromEmail = runtime?.env?.RESEND_FROM_EMAIL ?? import.meta.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev";
+  const emailResult = await sendEmail(
+    {
+      to: CONTACT_EMAIL,
+      from: `${BRAND_NAME} <${fromEmail}>`,
+      subject: emailContent.subject,
+      text: emailContent.text,
+      html: emailContent.html,
+      replyTo: data.email,
+    },
+    resendApiKey
+  );
 
   if (!emailResult.success) {
     console.error("Email send failed:", emailResult.error);
@@ -97,7 +110,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     );
   }
 
-  return new Response(JSON.stringify({ success: true }), {
+  return new Response(JSON.stringify({ success: true, messageId: emailResult.messageId }), {
     status: 200,
     headers: { "Content-Type": "application/json" },
   });
