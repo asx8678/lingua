@@ -32,8 +32,8 @@ const socialLinks = [
 ].filter((link) => link.url);
 ---
 
-<footer class="border-t border-slate-200 bg-slate-50">
-  <div class="container-site py-12">
+<footer class="border-t border-slate-200 bg-gradient-to-b from-slate-50 to-slate-100/50">
+  <div class="container-site py-14">
     <div class="grid gap-10 lg:grid-cols-4">
       <div>
         <Logo />
@@ -122,16 +122,13 @@ const socialLinks = [
               <span class="text-slate-600">Godziny: {BUSINESS.openingHours}</span>
             )}
           </address>
-          <a class="link-muted no-underline mt-2 inline-block text-sm" href="/privacy"
-            >Polityka prywatności</a
-          >
         </div>
       </nav>
     </div>
 
-    <div class="mt-10 border-t border-slate-200 pt-6 text-sm text-slate-500">
-      © {year}
-      {BRAND_NAME}. Wszelkie prawa zastrzeżone.
+    <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 text-sm text-slate-500 sm:flex-row">
+      <p>© {year} {BRAND_NAME}. Wszelkie prawa zastrzeżone.</p>
+      <a class="link-muted text-sm no-underline hover:underline" href="/privacy">Polityka prywatności</a>
     </div>
   </div>
 </footer>

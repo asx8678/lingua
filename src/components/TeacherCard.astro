@@ -13,23 +13,23 @@ const imageSrc =
 const imageAlt = `${teacher.name}, ${teacher.role} – ${teacher.languages.join(", ")}`;
 ---
 
-<article class="card flex h-full flex-col overflow-hidden">
-  <div class="aspect-[16/9] w-full overflow-hidden bg-slate-100">
+<article class="card group flex h-full flex-col overflow-hidden">
+  <div class="aspect-[4/3] w-full overflow-hidden bg-slate-100">
     <img
       src={imageSrc}
       alt={imageAlt}
       loading={loading}
       width="320"
-      height="180"
+      height="240"
       decoding="async"
-      class="h-full w-full object-cover"
+      class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
     />
   </div>
-  <div class="flex flex-1 flex-col p-6">
-    <h3 class="text-lg font-extrabold text-slate-900">{teacher.name}</h3>
-    <p class="mt-1 text-sm text-slate-600">{teacher.role}</p>
-    <div class="mt-4 flex flex-wrap gap-2">
-      {teacher.languages.map((language) => <span class="chip">{language}</span>)}
+  <div class="flex flex-1 flex-col p-5">
+    <h3 class="text-base font-extrabold text-slate-900">{teacher.name}</h3>
+    <p class="mt-1 text-sm text-slate-500">{teacher.role}</p>
+    <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
+      {teacher.languages.map((language) => <span class="chip text-[11px]">{language}</span>)}
     </div>
   </div>
 </article>

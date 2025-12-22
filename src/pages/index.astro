@@ -161,17 +161,17 @@ const proofPoints = [
     </div>
   </section>
 
-  <section class="section">
+  <section class="py-12 lg:py-16">
     <div class="container-site">
       <div class="grid gap-6 md:grid-cols-3">
         {
           proofPoints.map((item) => (
-            <div class="stat-card text-center md:text-left">
+            <div class="stat-card text-center">
               <div class="text-xs font-bold uppercase tracking-widest text-primary">
                 {item.label}
               </div>
               <div class="mt-3 text-3xl font-extrabold text-slate-900">{item.value}</div>
-              <div class="mt-2 text-sm text-slate-600">{item.note}</div>
+              <div class="mt-2 text-sm text-slate-500">{item.note}</div>
             </div>
           ))
         }
@@ -210,16 +210,16 @@ const proofPoints = [
       <div class="text-center">
         <span class="kicker">Proces</span>
         <h2 class="mt-4">Jak pracujemy</h2>
-        <p class="mx-auto mt-4 max-w-2xl text-slate-600">
+        <p class="mx-auto mt-4 max-w-2xl">
           Niezależnie od wybranego trybu, otrzymujesz jasny plan nauki i wsparcie na każdym etapie.
         </p>
       </div>
 
-      <div class="mt-12 grid gap-6 lg:grid-cols-3">
+      <div class="mt-12 grid gap-8 lg:grid-cols-3">
         {
           steps.map((step, index) => (
-            <div class="card p-6 relative">
-              <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">
+            <div class="card p-6 text-center">
+              <div class="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-lg font-bold text-white shadow-md">
                 {index + 1}
               </div>
               <h3 class="text-lg font-extrabold text-slate-900">{step.title}</h3>
@@ -229,7 +229,7 @@ const proofPoints = [
         }
       </div>
 
-      <div class="mt-10 text-center">
+      <div class="mt-12 text-center">
         <a class="btn btn-primary" href="/kontakt">Porozmawiaj o planie nauki</a>
       </div>
     </div>

@@ -6,13 +6,22 @@ module.exports = {
       colors: {
         primary: {
           DEFAULT: "#0052CC",
-          700: "#0047B3",
-          800: "#003B94",
+          50: "#E6F0FF",
+          100: "#CCE0FF",
+          200: "#99C2FF",
+          300: "#66A3FF",
+          400: "#3385FF",
+          500: "#0052CC",
+          600: "#0047B3",
+          700: "#003D99",
+          800: "#003380",
+          900: "#002966",
         },
-        surface: "#F7F9FC",
+        surface: "#F8FAFC",
       },
       boxShadow: {
-        soft: "0 10px 30px rgba(2, 6, 23, 0.08)",
+        soft: "0 10px 40px -10px rgba(2, 6, 23, 0.1)",
+        "soft-lg": "0 20px 50px -15px rgba(2, 6, 23, 0.12)",
       },
       keyframes: {
         float: {

@@ -45,22 +45,32 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     <div class="container-site">
       <div class="grid gap-6 md:grid-cols-2">
         <a
-          class="card p-6 no-underline transition hover:-translate-y-0.5"
+          class="card-interactive group no-underline"
           href="/angielski-stacjonarnie"
         >
-          <h2 class="text-lg font-extrabold text-slate-900">Angielski stacjonarnie</h2>
-          <p class="mt-3 text-sm text-slate-600">
+          <h2 class="text-xl font-extrabold text-slate-900">Angielski stacjonarnie</h2>
+          <p class="mt-3 text-slate-600">
             Zajęcia w naszej szkole w Legionowie. Bezpośredni kontakt z lektorem i pełna
             koncentracja.
           </p>
-          <span class="mt-4 inline-flex text-sm font-bold text-primary">Poznaj szczegóły →</span>
+          <span class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary transition-all group-hover:gap-3">
+            Poznaj szczegóły
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </span>
         </a>
-        <a class="card p-6 no-underline transition hover:-translate-y-0.5" href="/angielski-online">
-          <h2 class="text-lg font-extrabold text-slate-900">Angielski online</h2>
-          <p class="mt-3 text-sm text-slate-600">
+        <a class="card-interactive group no-underline" href="/angielski-online">
+          <h2 class="text-xl font-extrabold text-slate-900">Angielski online</h2>
+          <p class="mt-3 text-slate-600">
             Lekcje z lektorem na żywo. Elastyczne godziny i nacisk na mówienie w praktyce.
           </p>
-          <span class="mt-4 inline-flex text-sm font-bold text-primary">Poznaj szczegóły →</span>
+          <span class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary transition-all group-hover:gap-3">
+            Poznaj szczegóły
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </span>
         </a>
       </div>
     </div>
