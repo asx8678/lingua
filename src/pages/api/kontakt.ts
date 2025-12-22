@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { BRAND_NAME, CONTACT_EMAIL } from "../../config/site";
-import { sendEmail, formatContactEmail } from "../../lib/email";
+import { sendContactEmailMailjet } from "../../lib/mailjet";
 import { checkRateLimit, getClientIp } from "../../lib/rate-limit";
 import { validateContactForm, RATE_LIMIT_CONFIG } from "../../lib/validation";
 import { HONEYPOT_FIELD } from "../../lib/constants";
@@ -71,11 +71,12 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
   const { name, email, phone, message } = validation.data;
 
-  // Get Resend API key
-  const resendApiKey = runtime?.env?.RESEND_API_KEY ?? import.meta.env.RESEND_API_KEY;
+  // Get Mailjet credentials
+  const mailjetApiKey = runtime?.env?.MAILJET_API_KEY ?? import.meta.env.MAILJET_API_KEY;
+  const mailjetSecretKey = runtime?.env?.MAILJET_SECRET_KEY ?? import.meta.env.MAILJET_SECRET_KEY;
 
-  if (!resendApiKey) {
-    console.error("RESEND_API_KEY not configured");
+  if (!mailjetApiKey || !mailjetSecretKey) {
+    console.error("Mailjet credentials not configured");
     return new Response(
       JSON.stringify({
         success: false,
@@ -85,26 +86,18 @@ export const POST: APIRoute = async ({ request, locals }) => {
     );
   }
 
-  // Send email via Resend
-  const emailContent = formatContactEmail({
-    name,
-    email,
-    phone,
-    message,
-    brandName: BRAND_NAME,
-  });
+  // Send email via Mailjet
+  const fromEmail = runtime?.env?.MAILJET_FROM_EMAIL ?? import.meta.env.MAILJET_FROM_EMAIL ?? CONTACT_EMAIL;
 
-  const fromEmail = runtime?.env?.RESEND_FROM_EMAIL ?? import.meta.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev";
-  const emailResult = await sendEmail(
+  const emailResult = await sendContactEmailMailjet(
+    { name, email, phone, message },
     {
-      to: CONTACT_EMAIL,
-      from: `${BRAND_NAME} <${fromEmail}>`,
-      subject: emailContent.subject,
-      text: emailContent.text,
-      html: emailContent.html,
-      replyTo: email,
-    },
-    resendApiKey
+      toEmail: CONTACT_EMAIL,
+      fromEmail,
+      brandName: BRAND_NAME,
+      apiKey: mailjetApiKey,
+      secretKey: mailjetSecretKey,
+    }
   );
 
   if (!emailResult.success) {

@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { BRAND_NAME, CONTACT_EMAIL } from "../../config/site";
-import { sendEmail, formatSignupEmail } from "../../lib/email";
+import { sendSignupEmailMailjet } from "../../lib/mailjet";
 import { checkRateLimit, getClientIp } from "../../lib/rate-limit";
 import { validateSignupForm, RATE_LIMIT_CONFIG } from "../../lib/validation";
 import { HONEYPOT_FIELD } from "../../lib/constants";
@@ -68,35 +68,28 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
   const data = validation.data;
 
-  // Get Resend API key
-  const resendApiKey = runtime?.env?.RESEND_API_KEY ?? import.meta.env.RESEND_API_KEY;
+  // Get Mailjet credentials
+  const mailjetApiKey = runtime?.env?.MAILJET_API_KEY ?? import.meta.env.MAILJET_API_KEY;
+  const mailjetSecretKey = runtime?.env?.MAILJET_SECRET_KEY ?? import.meta.env.MAILJET_SECRET_KEY;
 
-  if (!resendApiKey) {
-    console.error("RESEND_API_KEY not configured");
+  if (!mailjetApiKey || !mailjetSecretKey) {
+    console.error("Mailjet credentials not configured");
     return new Response(
       JSON.stringify({ success: false, error: "Formularz jest tymczasowo niedostępny." }),
       { status: 503, headers: { "Content-Type": "application/json" } }
     );
   }
 
-  // Send email via Resend
-  const emailContent = formatSignupEmail({
-    ...data,
-    brandName: BRAND_NAME,
-  });
+  // Send email via Mailjet
+  const fromEmail = runtime?.env?.MAILJET_FROM_EMAIL ?? import.meta.env.MAILJET_FROM_EMAIL ?? CONTACT_EMAIL;
 
-  const fromEmail = runtime?.env?.RESEND_FROM_EMAIL ?? import.meta.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev";
-  const emailResult = await sendEmail(
-    {
-      to: CONTACT_EMAIL,
-      from: `${BRAND_NAME} <${fromEmail}>`,
-      subject: emailContent.subject,
-      text: emailContent.text,
-      html: emailContent.html,
-      replyTo: data.email,
-    },
-    resendApiKey
-  );
+  const emailResult = await sendSignupEmailMailjet(data, {
+    toEmail: CONTACT_EMAIL,
+    fromEmail,
+    brandName: BRAND_NAME,
+    apiKey: mailjetApiKey,
+    secretKey: mailjetSecretKey,
+  });
 
   if (!emailResult.success) {
     console.error("Email send failed:", emailResult.error);
