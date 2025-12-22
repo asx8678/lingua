@@ -19,7 +19,7 @@ export function buildCSPHeader(nonce: string): string {
   return [
     "default-src 'self'",
     `script-src 'self' 'nonce-${nonce}' https://www.googletagmanager.com https://www.google-analytics.com`,
-    `style-src 'self' 'nonce-${nonce}'`,
+    `style-src 'self' 'nonce-${nonce}' 'unsafe-inline'`,
     "img-src 'self' data: https:",
     "font-src 'self'",
     "connect-src 'self' https://www.google-analytics.com",
