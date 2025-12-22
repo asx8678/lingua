@@ -3,27 +3,27 @@ import MainLayout from "../layouts/MainLayout.astro";
 import TestPoziomu from "../components/TestPoziomu.astro";
 import { BRAND_NAME, generateBreadcrumbSchema } from "../config/site";
 
-const title = `Darmowy test poziomu angielskiego online (A1–C2) | ${BRAND_NAME}`;
+const title = `Test poziomu angielskiego online – sprawdź za darmo | ${BRAND_NAME}`;
 const description =
-  "Sprawdź swój poziom angielskiego za darmo. Test adaptacyjny z ponad 1000 pytań. Natychmiastowy wynik z rekomendacją kursu.";
+  "Darmowy test poziomu angielskiego online. Ponad 1000 pytań, tryb adaptacyjny, natychmiastowy wynik z rekomendacją kursu. Poziomy A1–C2.";
 
 const breadcrumbSchema = generateBreadcrumbSchema([
   { name: "Strona główna", url: "/" },
-  { name: "Test poziomu" },
+  { name: "Test poziomu angielskiego" },
 ]);
 ---
 
 <MainLayout
   title={title}
   description={description}
-  canonical="/test-poziomu"
+  canonical="/test-poziomu-angielskiego"
   structuredData={[breadcrumbSchema]}
 >
   <div class="container-site py-6">
     <div class="mb-4 flex items-center gap-3">
       <a href="/" class="text-sm text-slate-500 hover:text-primary">Strona główna</a>
       <span class="text-slate-300">/</span>
-      <span class="text-sm font-semibold text-slate-700">Test poziomu</span>
+      <span class="text-sm font-semibold text-slate-700">Test poziomu angielskiego</span>
     </div>
     <TestPoziomu bankUrl="/question-bank-1200.json" />
   </div>
@@ -46,11 +46,11 @@ const breadcrumbSchema = generateBreadcrumbSchema([
   /* New intro styles */
   .ll-intro-header {
     text-align: center;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
   }
 
   .ll-intro-header h1 {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 800;
     color: #0f172a;
     margin: 0;
@@ -58,86 +58,29 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 
   @media (min-width: 640px) {
     .ll-intro-header h1 {
-      font-size: 2.5rem;
+      font-size: 2.25rem;
     }
   }
 
   .ll-intro-sub {
     color: #64748b;
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-top: 8px;
-  }
-
-  .ll-intro-grid {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-bottom: 32px;
-  }
-
-  .ll-intro-option {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 16px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-  }
-
-  .ll-intro-option--hidden {
-    display: none;
-  }
-
-  .ll-intro-label {
-    font-weight: 700;
-    font-size: 0.85rem;
-    color: #64748b;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-  }
-
-  .ll-intro-option select {
-    padding: 8px 12px;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    background: #fff;
-    cursor: pointer;
-    min-width: 100px;
-  }
-
-  .ll-intro-option select:focus {
-    outline: none;
-    border-color: #0052CC;
-    box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.1);
-  }
-
-  .ll-intro-cta {
-    text-align: center;
-    margin-bottom: 32px;
-  }
-
-  .ll-btn--large {
-    padding: 16px 48px;
-    font-size: 1.1rem;
-    font-weight: 800;
   }
 
   .ll-intro-features {
     display: flex;
     justify-content: center;
-    gap: 24px;
+    gap: 20px;
     flex-wrap: wrap;
+    margin-bottom: 28px;
   }
 
   .ll-feature {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     color: #475569;
     font-weight: 500;
   }
@@ -153,6 +96,142 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     border-radius: 50%;
     font-size: 0.7rem;
     font-weight: 700;
+  }
+
+  .ll-intro-settings {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 28px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (min-width: 640px) {
+    .ll-intro-settings {
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 100%;
+    }
+  }
+
+  .ll-intro-option {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+  }
+
+  .ll-option-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .ll-intro-label {
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #334155;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .ll-option-hint {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    font-weight: 500;
+  }
+
+  .ll-intro-option select {
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    background: #fff;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .ll-intro-option select:focus {
+    outline: none;
+    border-color: #0052CC;
+    box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.1);
+  }
+
+  .ll-intro-cta {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .ll-btn--large {
+    padding: 16px 48px;
+    font-size: 1.1rem;
+    font-weight: 800;
+  }
+
+  .ll-intro-info {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .ll-intro-details {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #f8fafc;
+  }
+
+  .ll-intro-details summary {
+    padding: 14px 18px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #334155;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ll-intro-details summary::before {
+    content: "?";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: #0052CC;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .ll-intro-details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .ll-intro-details-content {
+    padding: 0 18px 18px;
+    font-size: 0.875rem;
+    color: #64748b;
+    line-height: 1.6;
+  }
+
+  .ll-intro-details-content p {
+    margin: 0 0 10px;
+  }
+
+  .ll-intro-details-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  .ll-intro-details-content strong {
+    color: #334155;
   }
 
   .ll-intro-hide {

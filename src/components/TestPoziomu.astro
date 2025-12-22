@@ -84,38 +84,54 @@ const { bankUrl = "/question-bank-1200.json" } = Astro.props;
   <!-- INTRO -->
   <section class="ll-card" data-step="intro">
     <div class="ll-intro-header">
-      <h1>Test poziomu angielskiego</h1>
-      <p class="ll-intro-sub">Sprawdź swój poziom w 5–10 minut</p>
+      <h1>Test poziomu angielskiego online</h1>
+      <p class="ll-intro-sub">Sprawdź swój poziom w 5–10 minut. Wynik od razu na ekranie.</p>
     </div>
 
-    <div class="ll-intro-grid">
+    <div class="ll-intro-features">
+      <div class="ll-feature"><span class="ll-feature-icon">&#10003;</span> Ponad 1000 pytań</div>
+      <div class="ll-feature"><span class="ll-feature-icon">&#10003;</span> Natychmiastowy wynik</div>
+      <div class="ll-feature"><span class="ll-feature-icon">&#10003;</span> Rekomendacja kursu</div>
+    </div>
+
+    <div class="ll-intro-settings">
       <div class="ll-intro-option">
-        <span class="ll-intro-label">Poziom</span>
+        <div class="ll-option-header">
+          <span class="ll-intro-label">Zakres poziomów</span>
+          <span class="ll-option-hint">Nie wiesz? Zostaw A1–C2</span>
+        </div>
         <select id="llRangeSelect">
-          <option value="A1">A1–C2</option>
-          <option value="A2">od A2</option>
-          <option value="B1">od B1</option>
-          <option value="B2">od B2</option>
-          <option value="C1">od C1</option>
+          <option value="A1">A1–C2 (pełny test)</option>
+          <option value="A2">A2–C2</option>
+          <option value="B1">B1–C2</option>
+          <option value="B2">B2–C2</option>
+          <option value="C1">C1–C2</option>
           <option value="C2">tylko C2</option>
         </select>
       </div>
 
       <div class="ll-intro-option">
-        <span class="ll-intro-label">Pytania</span>
+        <div class="ll-option-header">
+          <span class="ll-intro-label">Liczba pytań</span>
+          <span class="ll-option-hint">Więcej = dokładniej</span>
+        </div>
         <select id="llCountSelect">
-          <option value="25">25</option>
-          <option value="40" selected>40</option>
-          <option value="60">60</option>
+          <option value="25">25 (szybki)</option>
+          <option value="40" selected>40 (zalecany)</option>
+          <option value="60">60 (dokładny)</option>
+          <option value="80">80 (bardzo dokładny)</option>
         </select>
       </div>
 
-      <div class="ll-intro-option ll-intro-option--hidden">
-        <span class="ll-intro-label">Tryb</span>
+      <div class="ll-intro-option">
+        <div class="ll-option-header">
+          <span class="ll-intro-label">Tryb testu</span>
+          <span class="ll-option-hint">Adaptacyjny = najlepszy</span>
+        </div>
         <select id="llOrderSelect">
           <option value="adaptive" selected>Adaptacyjny</option>
           <option value="mixed">Losowy</option>
-          <option value="easyToHard">Progresywny</option>
+          <option value="easyToHard">Od łatwych do trudnych</option>
         </select>
       </div>
     </div>
@@ -125,10 +141,15 @@ const { bankUrl = "/question-bank-1200.json" } = Astro.props;
       <div id="llInitStatus" class="ll-callout" style="display:none;" aria-live="polite"></div>
     </div>
 
-    <div class="ll-intro-features">
-      <div class="ll-feature"><span class="ll-feature-icon">&#10003;</span> Ponad 1000 pytań</div>
-      <div class="ll-feature"><span class="ll-feature-icon">&#10003;</span> Natychmiastowy wynik</div>
-      <div class="ll-feature"><span class="ll-feature-icon">&#10003;</span> Rekomendacja kursu</div>
+    <div class="ll-intro-info">
+      <details class="ll-intro-details">
+        <summary>Jak działa test?</summary>
+        <div class="ll-intro-details-content">
+          <p>Test sprawdza gramatykę i słownictwo na poziomach A1–C2 (skala CEFR). Po każdym pytaniu widzisz, czy odpowiedź była poprawna.</p>
+          <p><strong>Tryb adaptacyjny</strong> dobiera trudność pytań do Twoich odpowiedzi — dzięki temu wynik jest dokładniejszy.</p>
+          <p>Na końcu otrzymasz poziom, rozbicie wyników i rekomendację kursu.</p>
+        </div>
+      </details>
     </div>
 
     <span class="ll-muted ll-intro-hide" style="font-size: .85rem; display: none;" id="llPoolInfo"></span>
