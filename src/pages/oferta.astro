@@ -80,20 +80,8 @@ const notice = "rounded-xl border border-primary/20 bg-primary/5 p-4 text-primar
           Uczymy stacjonarnie w Legionowie i online. Poniżej wybierzesz główny kierunek, a resztę
           dopasujemy do Twojego poziomu i celu.
         </p>
-        <div class="mt-8 flex flex-wrap items-center gap-4">
-          <a
-            class={btnPrimary}
-            href={CTA_PRIMARY_HREF}
-            target={CTA_PRIMARY_TARGET}
-            rel={CTA_PRIMARY_REL}
-            data-track="cta_primary"
-            data-track-label={CTA_PRIMARY_LABEL}
-          >
-            {CTA_PRIMARY_LABEL}
-          </a>
-          <a class="text-sm font-bold text-primary no-underline hover:underline" href="/cennik"
-            >Zobacz cennik →</a
-          >
+        <div class="mt-8">
+          <a class={btnPrimary} href="/cennik">Zobacz cennik</a>
         </div>
         <div class={`mt-6 ${notice} text-sm`}>
           {enrollmentMessage}

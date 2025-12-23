@@ -50,34 +50,6 @@ const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-700
     <div class="rounded-3xl border border-primary/15 p-8 sm:p-10 shadow-soft text-center bg-cta-gradient">
       <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">{title}</h2>
       <p class="mx-auto mt-4 max-w-2xl text-slate-600 leading-relaxed">{description}</p>
-
-      <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-        <a
-          class={btnPrimary}
-          href={primaryHref}
-          target={primaryTarget}
-          rel={primaryRel}
-          data-track="cta_primary"
-          data-track-label={primaryLabel}
-        >
-          {primaryLabel}
-        </a>
-        {
-          resolvedSecondary?.label && resolvedSecondary?.href && (
-            <a
-              class={btnSecondary}
-              href={resolvedSecondary.href}
-              target={secondaryTarget}
-              rel={secondaryRel}
-              data-track="cta_secondary"
-              data-track-label={resolvedSecondary.label}
-            >
-              {resolvedSecondary.label}
-            </a>
-          )
-        }
-      </div>
-
       {note && <p class="mt-4 text-sm text-slate-500">{note}</p>}
     </div>
   </div>

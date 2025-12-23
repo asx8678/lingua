@@ -78,34 +78,11 @@ const kicker = "inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font
           {data.intro.map((paragraph) => (
             <p class="mt-4 text-lg text-slate-600">{paragraph}</p>
           ))}
-          <div class="mt-8 flex flex-wrap gap-3">
-            <a
-              class={btnPrimary}
-              href={CTA_PRIMARY_HREF}
-              target={CTA_PRIMARY_TARGET}
-              rel={CTA_PRIMARY_REL}
-              data-track="cta_primary"
-              data-track-label={CTA_PRIMARY_LABEL}
-            >
-              {CTA_PRIMARY_LABEL}
-            </a>
-            {
-              secondaryCta && (
-                <a
-                  class={btnSecondary}
-                  href={secondaryCta.href}
-                  data-track="cta_secondary"
-                  data-track-label={secondaryCta.label}
-                >
-                  {secondaryCta.label}
-                </a>
-              )
-            }
+          <div class="mt-8">
+            <a class={btnPrimary} href="/cennik">Zobacz cennik</a>
           </div>
           <p class="mt-4 text-sm text-slate-500">
-            Sprawdź
-            <a class="font-bold text-primary no-underline hover:underline" href="/cennik">cennik</a>
-            lub napisz do nas przez
+            Masz pytania? Napisz przez
             <a class="font-bold text-primary no-underline hover:underline" href="/kontakt">formularz</a>.
           </p>
         </div>
