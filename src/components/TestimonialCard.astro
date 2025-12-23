@@ -24,10 +24,10 @@ const ratingLabel = `Ocena ${testimonial.rating} na 5 gwiazdek`;
 <article class={`card ${compact ? "p-5" : "p-6"}`}>
   <div class="flex items-start justify-between gap-4">
     <div>
-      <div class="text-xs font-bold uppercase tracking-widest text-slate-500">
+      <div class="text-xs font-bold uppercase tracking-widest text-slate-600">
         {testimonial.name}
       </div>
-      <div class="mt-1 text-xs text-slate-500">{testimonial.context}</div>
+      <div class="mt-1 text-xs text-slate-600">{testimonial.context}</div>
     </div>
     {
       formattedDate && (
@@ -53,6 +53,6 @@ const ratingLabel = `Ocena ${testimonial.rating} na 5 gwiazdek`;
         ))
       }
     </div>
-    <span class="text-xs text-slate-500">{testimonial.rating}/5</span>
+    <span class="text-xs text-slate-600">{testimonial.rating}/5</span>
   </div>
 </article>

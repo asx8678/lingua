@@ -28,7 +28,7 @@ const defaultNote = `Pakiet ${defaultPlan.baseSessions} spotkań × ${defaultPla
       <div class="text-sm font-bold text-slate-900">Typ</div>
       <div class="mt-2 grid gap-4 lg:grid-cols-2">
         <div>
-          <div class="text-xs font-bold uppercase tracking-widest text-slate-500">
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-600">
             Pakiety (10 spotkań)
           </div>
           <div class="mt-2 flex flex-wrap gap-2" role="group" aria-label="Pakiety">
@@ -42,7 +42,7 @@ const defaultNote = `Pakiet ${defaultPlan.baseSessions} spotkań × ${defaultPla
           </div>
         </div>
         <div>
-          <div class="text-xs font-bold uppercase tracking-widest text-slate-500">
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-600">
             Kursy (grupy)
           </div>
           <div class="mt-2 flex flex-wrap gap-2" role="group" aria-label="Kursy">
@@ -117,7 +117,7 @@ const defaultNote = `Pakiet ${defaultPlan.baseSessions} spotkań × ${defaultPla
             ))
           }
         </div>
-        <p id="persons-hint" class="mt-1 text-xs text-slate-500"></p>
+        <p id="persons-hint" class="mt-1 text-xs text-slate-600"></p>
       </div>
 
       <div>
@@ -168,7 +168,7 @@ const defaultNote = `Pakiet ${defaultPlan.baseSessions} spotkań × ${defaultPla
             ))
           }
         </div>
-        <p id="sessions-hint" class="mt-1 text-xs text-slate-500"></p>
+        <p id="sessions-hint" class="mt-1 text-xs text-slate-600"></p>
       </div>
     </div>
   </form>
@@ -176,37 +176,37 @@ const defaultNote = `Pakiet ${defaultPlan.baseSessions} spotkań × ${defaultPla
   <div class="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5" aria-live="polite">
     <div class="grid gap-4 sm:grid-cols-3 sm:items-end" role="status">
       <div>
-        <div class="text-xs font-bold uppercase tracking-widest text-slate-500">
+        <div class="text-xs font-bold uppercase tracking-widest text-slate-600">
           Za spotkanie / osoba
         </div>
         <div id="out-per-session" class="mt-2 text-3xl font-extrabold text-slate-900">
           {formatPLN(defaultPerSession)}
         </div>
-        <div id="out-per-session-sub" class="mt-1 text-xs text-slate-500">
+        <div id="out-per-session-sub" class="mt-1 text-xs text-slate-600">
           {defaultPlan.minutes} min
         </div>
       </div>
 
       <div>
-        <div class="text-xs font-bold uppercase tracking-widest text-slate-500">
+        <div class="text-xs font-bold uppercase tracking-widest text-slate-600">
           Łącznie / osoba
         </div>
         <div id="out-per-total" class="mt-2 text-3xl font-extrabold text-slate-900">
           {formatPLN(defaultPerPersonTotal)}
         </div>
-        <div id="out-per-total-sub" class="mt-1 text-xs text-slate-500">
+        <div id="out-per-total-sub" class="mt-1 text-xs text-slate-600">
           {defaultSessions} spotkań
         </div>
       </div>
 
       <div id="total-block">
-        <div class="text-xs font-bold uppercase tracking-widest text-slate-500">
+        <div class="text-xs font-bold uppercase tracking-widest text-slate-600">
           Łącznie (grupa)
         </div>
         <div id="out-total" class="mt-2 text-3xl font-extrabold text-slate-900">
           {formatPLN(defaultGroupTotal)}
         </div>
-        <div id="out-total-sub" class="mt-1 text-xs text-slate-500">{defaultPersons} os.</div>
+        <div id="out-total-sub" class="mt-1 text-xs text-slate-600">{defaultPersons} os.</div>
       </div>
     </div>
 
@@ -223,7 +223,7 @@ const defaultNote = `Pakiet ${defaultPlan.baseSessions} spotkań × ${defaultPla
     <div id="out-note" class="mt-4 text-xs text-slate-600">{defaultNote}</div>
   </div>
 
-  <p class="mt-4 text-xs text-slate-500">
+  <p class="mt-4 text-xs text-slate-600">
     Kalkulator bazuje na cenniku 2025/2026. W przypadku kursów liczba spotkań jest stała.
   </p>
 

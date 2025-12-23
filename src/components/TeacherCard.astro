@@ -29,11 +29,11 @@ const specialties = teacher.specialties ?? TEACHER_SPECIALTIES[teacher.name] ?? 
   </div>
   <div class="flex flex-1 flex-col p-5">
     <h3 class="text-base font-extrabold text-slate-900">{teacher.name}</h3>
-    <p class="mt-1 text-sm text-slate-500">{teacher.role}</p>
+    <p class="mt-1 text-sm text-slate-600">{teacher.role}</p>
     {
       specialties.length > 0 && (
         <div class="mt-3 text-xs text-slate-600">
-          <div class="text-[11px] font-bold uppercase tracking-widest text-slate-400">
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-400">
             Specjalizacje
           </div>
           <div class="mt-1">{specialties.join(" · ")}</div>
@@ -41,7 +41,7 @@ const specialties = teacher.specialties ?? TEACHER_SPECIALTIES[teacher.name] ?? 
       )
     }
     <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
-      {teacher.languages.map((language) => <span class="chip text-[11px]">{language}</span>)}
+      {teacher.languages.map((language) => <span class="chip text-xs">{language}</span>)}
     </div>
   </div>
 </article>
