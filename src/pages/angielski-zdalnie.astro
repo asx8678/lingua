@@ -6,6 +6,8 @@ import {
   BRAND_NAME,
   CTA_PRIMARY_HREF,
   CTA_PRIMARY_LABEL,
+  CTA_PRIMARY_REL,
+  CTA_PRIMARY_TARGET,
   CTA_SECONDARY_HREF,
   CTA_SECONDARY_LABEL,
   generateBreadcrumbSchema,
@@ -257,7 +259,16 @@ const breadcrumbSchema = generateBreadcrumbSchema([
           poziom, poznamy Twoje cele i ustalimy najlepszy plan nauki.
         </p>
         <div class="mt-6">
-          <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
+          <a
+            class="btn btn-primary"
+            href={CTA_PRIMARY_HREF}
+            target={CTA_PRIMARY_TARGET}
+            rel={CTA_PRIMARY_REL}
+            data-track="cta_primary"
+            data-track-label={CTA_PRIMARY_LABEL}
+          >
+            {CTA_PRIMARY_LABEL}
+          </a>
         </div>
       </div>
     </div>
@@ -269,5 +280,6 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     title="Gotowy na angielski online?"
     description="Napisz do nas i umów bezpłatną konsultację i diagnozę poziomu. Sprawdź, jak wygodna może być nauka zdalna."
     note="Odpowiadamy szybko — zwykle w ciągu 1–2 dni roboczych."
+    variant="english"
   />
 </MainLayout>

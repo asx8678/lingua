@@ -10,9 +10,9 @@ import {
   generateBreadcrumbSchema,
 } from "../config/site";
 
-const title = `Kontakt – szkoła angielskiego Legionowo | ${BRAND_NAME}`;
+const title = `Kontakt – szkoła językowa i matematyka w Legionowie | ${BRAND_NAME}`;
 const description =
-  "Umów bezpłatną konsultację oraz diagnozę poziomu w szkole Lingua Legionowo. Oferujemy kursy stacjonarne i online. Odpowiadamy szybko.";
+  "Umów bezpłatną diagnozę i plan nauki (15 min) w szkole Lingua Legionowo. Zajęcia stacjonarne w Legionowie i online. Odpowiadamy szybko.";
 
 const hasEmail = !isTodo(CONTACT_EMAIL);
 const hasPhone = !isTodo(CONTACT_PHONE);
@@ -47,13 +47,13 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
         <div>
           <span class="kicker">Kontakt</span>
-          <h1 class="mt-6">Umów bezpłatną konsultację — Lingua Legionowo</h1>
+          <h1 class="mt-6">Umów bezpłatną diagnozę i plan nauki (15 min)</h1>
           <p class="mt-6 max-w-2xl text-lg">
             Napisz kilka słów o swoim poziomie i celu. Zaproponujemy plan nauki i terminy —
             stacjonarnie w Legionowie lub online.
           </p>
           <p class="mt-3 text-sm text-slate-600">
-            Konsultacja obejmuje rozmowę o celu, krótką diagnozę poziomu i propozycję planu.
+            Diagnoza obejmuje rozmowę o celu, krótkie sprawdzenie poziomu i propozycję planu.
           </p>
 
           <div class="mt-10 grid gap-4 sm:grid-cols-3">
@@ -177,6 +177,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             class="mt-6 space-y-4"
             aria-label="Formularz kontaktowy"
             data-contact-form
+            data-track-form="contact"
             novalidate
           >
             <!-- Honeypot field for spam prevention - hidden from users -->
@@ -192,117 +193,237 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             >
             </div>
 
-            <div>
-              <label for="name" class="text-sm font-bold text-slate-900">Imię i nazwisko *</label>
-              <input
-                id="name"
-                name="name"
-                autocomplete="name"
-                required
-                minlength="2"
-                aria-describedby="name-error"
-                class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
-              />
-              <p id="name-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
-            </div>
+            <input id="summary" name="summary" type="hidden" />
 
-            <div>
-              <label for="email" class="text-sm font-bold text-slate-900">E-mail *</label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autocomplete="email"
-                required
-                aria-describedby="email-error"
-                class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
-              />
-              <p id="email-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
-            </div>
+            <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5" data-step="1">
+              <p class="text-xs font-bold uppercase tracking-widest text-slate-500">Krok 1</p>
+              <h3 class="mt-2 text-lg font-extrabold text-slate-900">Szybkie dopasowanie</h3>
+              <p class="mt-2 text-sm text-slate-600">
+                Zaznacz 3 krótkie informacje — przygotujemy odpowiednią propozycję.
+              </p>
 
-            <div>
-              <label for="phone" class="text-sm font-bold text-slate-900"
-                >Telefon (opcjonalnie)</label
-              >
-              <input
-                id="phone"
-                name="phone"
-                type="tel"
-                autocomplete="tel"
-                aria-describedby="phone-error"
-                class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
-              />
-              <p id="phone-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
-            </div>
+              <fieldset class="mt-4">
+                <legend class="text-sm font-bold text-slate-900">Czego dotyczy? *</legend>
+                <div class="mt-2 flex flex-wrap gap-2">
+                  <label class="cursor-pointer">
+                    <input class="sr-only peer" type="radio" name="topic" value="Angielski" required />
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
+                      Angielski
+                    </span>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input class="sr-only peer" type="radio" name="topic" value="Inny język" required />
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
+                      Inny język
+                    </span>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input class="sr-only peer" type="radio" name="topic" value="Matematyka" required />
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
+                      Matematyka
+                    </span>
+                  </label>
+                </div>
+                <p id="topic-error" class="mt-2 text-xs text-rose-600" aria-live="polite"></p>
+              </fieldset>
 
-            <div>
-              <label for="company" class="text-sm font-bold text-slate-900"
-                >Firma (opcjonalnie)</label
-              >
-              <input
-                id="company"
-                name="company"
-                autocomplete="organization"
-                class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
-              />
-            </div>
+              <fieldset class="mt-4">
+                <legend class="text-sm font-bold text-slate-900">Kto się uczy? *</legend>
+                <div class="mt-2 flex flex-wrap gap-2">
+                  <label class="cursor-pointer">
+                    <input class="sr-only peer" type="radio" name="audience" value="Dziecko" required />
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
+                      Dziecko
+                    </span>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input class="sr-only peer" type="radio" name="audience" value="Nastolatek" required />
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
+                      Nastolatek
+                    </span>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input class="sr-only peer" type="radio" name="audience" value="Dorosły" required />
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
+                      Dorosły
+                    </span>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input class="sr-only peer" type="radio" name="audience" value="Firma" required />
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
+                      Firma
+                    </span>
+                  </label>
+                </div>
+                <p id="audience-error" class="mt-2 text-xs text-rose-600" aria-live="polite"></p>
+              </fieldset>
 
-            <div>
-              <label for="message" class="text-sm font-bold text-slate-900">Wiadomość *</label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                minlength="5"
-                aria-describedby="message-error"
-                class="mt-1 min-h-[120px] w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
-                placeholder="Np. poziom, cel, preferowane dni/godziny…"></textarea>
-              <p id="message-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
-            </div>
+              <fieldset class="mt-4">
+                <legend class="text-sm font-bold text-slate-900">Tryb zajęć *</legend>
+                <div class="mt-2 flex flex-wrap gap-2">
+                  <label class="cursor-pointer">
+                    <input class="sr-only peer" type="radio" name="mode" value="Stacjonarnie" required />
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
+                      Stacjonarnie
+                    </span>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input class="sr-only peer" type="radio" name="mode" value="Online" required />
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
+                      Online
+                    </span>
+                  </label>
+                </div>
+                <p id="mode-error" class="mt-2 text-xs text-rose-600" aria-live="polite"></p>
+              </fieldset>
 
-            <div class="flex items-start gap-3 text-sm text-slate-600">
-              <input
-                id="consent"
-                name="consent"
-                type="checkbox"
-                required
-                aria-describedby="consent-error"
-                class="mt-1 h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary"
-              />
-              <label for="consent">
-                Wyrażam zgodę na kontakt w sprawie kursu zgodnie z
-                <a class="font-bold text-primary no-underline hover:underline" href="/privacy"
-                  >polityką prywatności</a
-                >.
-              </label>
-            </div>
-            <p id="consent-error" class="text-xs text-rose-600" aria-live="polite"></p>
-
-            <button class="btn btn-primary w-full" type="submit" id="submit-btn">
-              <span id="submit-text">Wyślij wiadomość</span>
-              <span id="submit-loading" class="hidden items-center gap-2">
-                <svg
-                  class="h-4 w-4 animate-spin"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
+              <div class="mt-6">
+                <button
+                  class="btn btn-secondary w-full sm:w-auto"
+                  type="button"
+                  id="form-step-next"
+                  disabled
                 >
-                  <circle
-                    class="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    stroke-width="4"></circle>
-                  <path
-                    class="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  ></path>
-                </svg>
-                Wysyłanie...
-              </span>
-            </button>
+                  Przejdź do danych kontaktowych
+                </button>
+              </div>
+            </div>
+
+            <div class="space-y-4" data-step="2">
+              <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm">
+                <div class="text-xs font-bold uppercase tracking-widest text-slate-500">
+                  Podsumowanie
+                </div>
+                <p id="form-summary" class="mt-2 text-slate-600">
+                  Uzupełnij wybory w kroku 1, aby zobaczyć podsumowanie.
+                </p>
+              </div>
+
+              <div>
+                <label for="name" class="text-sm font-bold text-slate-900">Imię *</label>
+                <input
+                  id="name"
+                  name="name"
+                  autocomplete="given-name"
+                  required
+                  minlength="2"
+                  aria-describedby="name-error"
+                  class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+                />
+                <p id="name-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
+              </div>
+
+              <div>
+                <label for="email" class="text-sm font-bold text-slate-900">E-mail *</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                  aria-describedby="email-error"
+                  class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+                />
+                <p id="email-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
+              </div>
+
+              <div>
+                <label for="phone" class="text-sm font-bold text-slate-900"
+                  >Telefon (opcjonalnie)</label
+                >
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  autocomplete="tel"
+                  aria-describedby="phone-error"
+                  class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+                />
+                <p id="phone-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
+              </div>
+
+              <div>
+                <label for="company" class="text-sm font-bold text-slate-900"
+                  >Firma (opcjonalnie)</label
+                >
+                <input
+                  id="company"
+                  name="company"
+                  autocomplete="organization"
+                  class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+                />
+              </div>
+
+              <div>
+                <label for="availability" class="text-sm font-bold text-slate-900">
+                  Preferowane godziny (opcjonalnie)
+                </label>
+                <input
+                  id="availability"
+                  name="availability"
+                  autocomplete="off"
+                  class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+                  placeholder="Np. wt/czw po 17:00, soboty rano"
+                />
+              </div>
+
+              <div>
+                <label for="message" class="text-sm font-bold text-slate-900">Wiadomość *</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  minlength="5"
+                  aria-describedby="message-error"
+                  class="mt-1 min-h-[140px] w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+                  placeholder="Dopisz poziom, cel, preferowane dni/godziny…"></textarea>
+                <p id="message-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
+              </div>
+
+              <div class="flex items-start gap-3 text-sm text-slate-600">
+                <input
+                  id="consent"
+                  name="consent"
+                  type="checkbox"
+                  required
+                  aria-describedby="consent-error"
+                  class="mt-1 h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary"
+                />
+                <label for="consent">
+                  Wyrażam zgodę na kontakt w sprawie kursu zgodnie z
+                  <a class="font-bold text-primary no-underline hover:underline" href="/privacy"
+                    >polityką prywatności</a
+                  >.
+                </label>
+              </div>
+              <p id="consent-error" class="text-xs text-rose-600" aria-live="polite"></p>
+
+              <button class="btn btn-primary w-full" type="submit" id="submit-btn">
+                <span id="submit-text">Wyślij wiadomość</span>
+                <span id="submit-loading" class="hidden items-center gap-2">
+                  <svg
+                    class="h-4 w-4 animate-spin"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <circle
+                      class="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      stroke-width="4"></circle>
+                    <path
+                      class="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  Wysyłanie...
+                </span>
+              </button>
+            </div>
           </form>
 
         </div>
@@ -381,19 +502,36 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     const submitBtn = document.getElementById("submit-btn");
     const submitText = document.getElementById("submit-text");
     const submitLoading = document.getElementById("submit-loading");
+    const step1El = document.querySelector('[data-step="1"]');
+    const step2El = document.querySelector('[data-step="2"]');
+    const stepNextBtn = document.getElementById("form-step-next");
+    const summaryEl = document.getElementById("form-summary");
+    const summaryInput = document.getElementById("summary");
+    const messageField = document.getElementById("message");
+    const availabilityField = document.getElementById("availability");
+    let messageTouched = false;
 
     const fields = [
-      { id: "name", min: 2, message: "Podaj imię i nazwisko (min. 2 znaki)." },
+      { id: "name", min: 2, message: "Podaj imię (min. 2 znaki)." },
       { id: "email", type: "email", message: "Podaj poprawny adres e-mail." },
       { id: "message", min: 5, message: "Wiadomość powinna mieć co najmniej 5 znaków." },
       { id: "consent", type: "checkbox", message: "Wymagana jest zgoda na kontakt." },
     ];
+    const groupFields = [
+      { name: "topic", message: "Wybierz temat zajęć." },
+      { name: "audience", message: "Wybierz, kto się uczy." },
+      { name: "mode", message: "Wybierz preferowany tryb zajęć." },
+    ];
+    const groupFieldNames = new Set(groupFields.map((group) => group.name));
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     const throttleMs = 60 * 1000;
     const throttleKey = "lingua-contact-throttle";
 
     const getErrorEl = (id) => document.getElementById(`${id}-error`);
+    const getGroupErrorEl = (name) => document.getElementById(`${name}-error`);
+    const getSelectedValue = (name) =>
+      form?.querySelector(`input[name="${name}"]:checked`)?.value ?? "";
 
     const setError = (field, message) => {
       const errorEl = getErrorEl(field.id);
@@ -405,6 +543,21 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       const errorEl = getErrorEl(field.id);
       if (errorEl) errorEl.textContent = "";
       field.removeAttribute("aria-invalid");
+    };
+
+    const setGroupError = (name, message) => {
+      const errorEl = getGroupErrorEl(name);
+      if (errorEl) errorEl.textContent = message;
+      const firstField = form?.querySelector(`input[name="${name}"]`);
+      if (firstField) firstField.setAttribute("aria-invalid", "true");
+    };
+
+    const clearGroupError = (name) => {
+      const errorEl = getGroupErrorEl(name);
+      if (errorEl) errorEl.textContent = "";
+      form?.querySelectorAll(`input[name="${name}"]`).forEach((field) => {
+        field.removeAttribute("aria-invalid");
+      });
     };
 
     const applyFieldErrors = (fieldErrors) => {
@@ -423,8 +576,58 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       }
     };
 
+    const buildSummary = () => {
+      const topic = getSelectedValue("topic");
+      const audience = getSelectedValue("audience");
+      const mode = getSelectedValue("mode");
+      const availability = availabilityField?.value?.trim();
+      const summaryLines = [];
+
+      if (topic) summaryLines.push(`Czego dotyczy: ${topic}`);
+      if (audience) summaryLines.push(`Kto się uczy: ${audience}`);
+      if (mode) summaryLines.push(`Tryb zajęć: ${mode}`);
+      if (availability) summaryLines.push(`Preferowane godziny: ${availability}`);
+
+      return summaryLines.join("\n");
+    };
+
+    const updateSummary = () => {
+      const summary = buildSummary();
+      if (summaryEl) {
+        summaryEl.textContent =
+          summary || "Uzupełnij wybory w kroku 1, aby zobaczyć podsumowanie.";
+      }
+      if (summaryInput) summaryInput.value = summary;
+      if (messageField && !messageTouched) {
+        messageField.value = summary ? `${summary}\n\n` : "";
+      }
+      if (stepNextBtn) {
+        const canAdvance = groupFields.every((group) => Boolean(getSelectedValue(group.name)));
+        stepNextBtn.disabled = !canAdvance;
+      }
+    };
+
+    const revealStep2 = () => {
+      if (!step2El) return;
+      step2El.classList.remove("hidden");
+      step2El.setAttribute("aria-hidden", "false");
+      step2El.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
     const validate = () => {
       let firstInvalid = null;
+      groupFields.forEach((group) => {
+        clearGroupError(group.name);
+        const hasValue = Boolean(getSelectedValue(group.name));
+        if (!hasValue) {
+          setGroupError(group.name, group.message);
+          if (!firstInvalid) {
+            const firstField = form?.querySelector(`input[name="${group.name}"]`);
+            if (firstField) firstInvalid = firstField;
+          }
+        }
+      });
+
       fields.forEach((rule) => {
         const field = document.getElementById(rule.id);
         if (!field) return;
@@ -498,11 +701,30 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       successEl.focus();
     };
 
+    if (step2El) {
+      step2El.classList.add("hidden");
+      step2El.setAttribute("aria-hidden", "true");
+    }
+    updateSummary();
+
+    stepNextBtn?.addEventListener("click", () => {
+      revealStep2();
+      const nameField = document.getElementById("name");
+      nameField?.focus();
+    });
+
     form?.addEventListener("input", (event) => {
       const target = event.target;
-      if (!target?.id) return;
+      if (!target) return;
       clearAlert();
-      clearError(target);
+      if (target.id) clearError(target);
+      if (target.name && groupFieldNames.has(target.name)) {
+        clearGroupError(target.name);
+      }
+      if (target.id === "message") {
+        messageTouched = true;
+      }
+      updateSummary();
     });
 
     form?.addEventListener("submit", async (event) => {
@@ -518,6 +740,14 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       if (Date.now() - lastSubmit < throttleMs) {
         showAlert("Prosimy odczekać minutę przed kolejną próbą wysłania formularza.");
         return;
+      }
+
+      if (messageField) {
+        const summary = buildSummary();
+        const userMessage = messageField.value.trim();
+        if (summary && !userMessage.startsWith(summary)) {
+          messageField.value = userMessage ? `${summary}\n\n${userMessage}` : summary;
+        }
       }
 
       if (!validate()) {

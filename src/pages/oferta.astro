@@ -10,13 +10,45 @@ import {
   rosyjski,
   szwedzki,
 } from "../data/subject-pages";
-import { BRAND_NAME, CTA_PRIMARY_HREF, CTA_PRIMARY_LABEL, generateBreadcrumbSchema } from "../config/site";
+import {
+  BRAND_NAME,
+  CTA_PRIMARY_HREF,
+  CTA_PRIMARY_LABEL,
+  CTA_PRIMARY_REL,
+  CTA_PRIMARY_TARGET,
+  getEnrollmentMessage,
+  generateBreadcrumbSchema,
+} from "../config/site";
 
-const title = `Oferta – kursy językowe i matematyka | ${BRAND_NAME}`;
+const title = `Oferta – kursy językowe i matematyka w Legionowie | ${BRAND_NAME}`;
 const description =
-  "Wybierz formę nauki: angielski stacjonarnie, angielski online oraz inne języki i matematyka. Umów bezpłatną konsultację.";
+  "Wybierz formę nauki: angielski stacjonarnie, angielski online oraz inne języki i matematyka. Krótka diagnoza i plan nauki dopasowany do celu.";
 
 const otherOffers = [matematyka, hiszpanski, niemiecki, francuski, rosyjski, szwedzki];
+const enrollmentMessage = getEnrollmentMessage();
+
+const segments = [
+  {
+    id: "dla-dzieci",
+    title: "Dla dzieci",
+    text: "Spokojne tempo, budowanie podstaw i wsparcie w szkolnych tematach.",
+  },
+  {
+    id: "dla-mlodziezy",
+    title: "Dla młodzieży",
+    text: "Przygotowanie do egzaminów, regularny rytm i praktyka mówienia.",
+  },
+  {
+    id: "dla-doroslych",
+    title: "Dla dorosłych",
+    text: "Komunikacja w pracy i podróży, elastyczne godziny i szybki postęp.",
+  },
+  {
+    id: "dla-firm",
+    title: "Dla firm",
+    text: "Język biznesowy i zajęcia dla zespołów z jasno określonym celem.",
+  },
+];
 
 const breadcrumbSchema = generateBreadcrumbSchema([
   { name: "Strona główna", url: "/" },
@@ -40,11 +72,52 @@ const breadcrumbSchema = generateBreadcrumbSchema([
           dopasujemy do Twojego poziomu i celu.
         </p>
         <div class="mt-8 flex flex-wrap items-center gap-4">
-          <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
+          <a
+            class="btn btn-primary"
+            href={CTA_PRIMARY_HREF}
+            target={CTA_PRIMARY_TARGET}
+            rel={CTA_PRIMARY_REL}
+            data-track="cta_primary"
+            data-track-label={CTA_PRIMARY_LABEL}
+          >
+            {CTA_PRIMARY_LABEL}
+          </a>
           <a class="text-sm font-bold text-primary no-underline hover:underline" href="/cennik"
             >Zobacz cennik →</a
           >
         </div>
+        <div class="mt-6 notice text-sm">
+          {enrollmentMessage}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-site">
+      <span class="kicker">Dla kogo</span>
+      <h2 class="mt-4">Zajęcia dopasowane do wieku i celu</h2>
+      <p class="mt-4 max-w-3xl text-slate-600">
+        Zaczynamy od krótkiej diagnozy, a następnie dobieramy format i tempo pracy. Wybierz grupę,
+        a zaproponujemy najlepszy plan.
+      </p>
+      <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {segments.map((segment) => (
+          <div class="card p-6 scroll-mt-28" id={segment.id}>
+            <h3 class="text-lg font-extrabold text-slate-900">{segment.title}</h3>
+            <p class="mt-3 text-sm text-slate-600">{segment.text}</p>
+            <a
+              class="mt-4 inline-flex text-sm font-bold text-primary no-underline hover:underline"
+              href={CTA_PRIMARY_HREF}
+              target={CTA_PRIMARY_TARGET}
+              rel={CTA_PRIMARY_REL}
+              data-track="cta_primary"
+              data-track-label={CTA_PRIMARY_LABEL}
+            >
+              Umów diagnozę →
+            </a>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -79,6 +152,18 @@ const breadcrumbSchema = generateBreadcrumbSchema([
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </span>
+        </a>
+      </div>
+      <div class="mt-8">
+        <a
+          class="btn btn-primary"
+          href={CTA_PRIMARY_HREF}
+          target={CTA_PRIMARY_TARGET}
+          rel={CTA_PRIMARY_REL}
+          data-track="cta_primary"
+          data-track-label={CTA_PRIMARY_LABEL}
+        >
+          {CTA_PRIMARY_LABEL}
         </a>
       </div>
     </div>
@@ -117,7 +202,11 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       </p>
       <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {otherOffers.map((offer) => (
-          <a class="card-interactive group no-underline" href={`/${offer.slug}`}>
+          <a
+            class="card-interactive group no-underline scroll-mt-28"
+            href={`/${offer.slug}`}
+            id={offer.slug === "matematyka" ? "matematyka" : undefined}
+          >
             <h3 class="text-lg font-extrabold text-slate-900">{offer.kicker}</h3>
             <p class="mt-3 text-sm text-slate-600">{offer.description}</p>
             <span class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary transition-all group-hover:gap-3">
@@ -130,7 +219,16 @@ const breadcrumbSchema = generateBreadcrumbSchema([
         ))}
       </div>
       <div class="mt-8">
-        <a class="btn btn-secondary" href="/kontakt">Zapytaj o dostępność</a>
+        <a
+          class="btn btn-secondary"
+          href={CTA_PRIMARY_HREF}
+          target={CTA_PRIMARY_TARGET}
+          rel={CTA_PRIMARY_REL}
+          data-track="cta_secondary"
+          data-track-label="Zapytaj o dostępność"
+        >
+          Zapytaj o dostępność
+        </a>
       </div>
     </div>
   </section>

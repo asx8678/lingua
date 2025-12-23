@@ -58,6 +58,17 @@ const parseNumericEnv = (value: string | undefined) => {
   return Number.isFinite(parsed) ? parsed : null;
 };
 
+export const BOOKING_URL = import.meta.env.PUBLIC_BOOKING_URL ?? "";
+export const NEXT_INTAKE_MONTH = import.meta.env.PUBLIC_NEXT_INTAKE_MONTH ?? "";
+export const SLOTS_LEFT = parseNumericEnv(import.meta.env.PUBLIC_SLOTS_LEFT);
+export const OTHER_LANG_PRICE_1ON1_FROM = parseNumericEnv(
+  import.meta.env.PUBLIC_OTHER_LANG_PRICE_1ON1_FROM
+);
+export const OTHER_LANG_PRICE_GROUP_FROM = parseNumericEnv(
+  import.meta.env.PUBLIC_OTHER_LANG_PRICE_GROUP_FROM
+);
+export const TEST_RESULT_WEBHOOK_URL = import.meta.env.PUBLIC_TEST_RESULT_WEBHOOK_URL ?? "";
+
 export const GOOGLE_REVIEWS = {
   url: import.meta.env.PUBLIC_GOOGLE_REVIEWS_URL ?? "",
   businessName: import.meta.env.PUBLIC_GOOGLE_BUSINESS_NAME ?? BRAND_NAME,
@@ -77,20 +88,51 @@ export const ALTERNATE_DOMAINS = {
 
 export const DEFAULT_TITLE = `${BRAND_NAME} — języki obce i matematyka w Legionowie`;
 export const DEFAULT_DESCRIPTION =
-  "Szkoła języków obcych i matematyki w Legionowie. Zajęcia stacjonarne i online dla wszystkich poziomów. Umów bezpłatną konsultację i diagnozę poziomu.";
+  "Szkoła języków obcych i matematyki w Legionowie. Zajęcia stacjonarne i online dla wszystkich poziomów. Umów bezpłatną diagnozę i plan nauki.";
+
+export const TEACHER_SPECIALTIES: Record<string, string[]> = {};
+
+const isExternalUrl = (value: string) => value.startsWith("http://") || value.startsWith("https://");
+const resolvedPrimaryHref = BOOKING_URL || "/kontakt#formularz";
+const primaryIsExternal = Boolean(BOOKING_URL && isExternalUrl(BOOKING_URL));
 
 export const PRIMARY_CTA = {
-  label: "Bezpłatna konsultacja / Lekcja próbna",
-  href: "/kontakt",
+  label: "Umów bezpłatną diagnozę i plan nauki (15 min)",
+  shortLabel: "Umów diagnozę",
+  href: resolvedPrimaryHref,
+  target: primaryIsExternal ? "_blank" : undefined,
+  rel: primaryIsExternal ? "noopener noreferrer" : undefined,
 };
 
 export const SECONDARY_CTA = {
-  label: "Sprawdź poziom",
-  href: "/test-poziomu-angielskiego",
+  label: "Sprawdź poziom angielskiego (5–10 min)",
+  href: "/test",
+};
+
+export const SECONDARY_CTA_LANGUAGE = {
+  label: "Umów krótką rozmowę poziomującą",
+  href: resolvedPrimaryHref,
+};
+
+export const SECONDARY_CTA_MATH = {
+  label: "Umów diagnozę z matematyki (10 min)",
+  href: resolvedPrimaryHref,
+};
+
+export type CtaVariant = "english" | "language" | "math" | "general";
+
+export const getSecondaryCta = (variant: CtaVariant) => {
+  if (variant === "english") return SECONDARY_CTA;
+  if (variant === "language") return SECONDARY_CTA_LANGUAGE;
+  if (variant === "math") return SECONDARY_CTA_MATH;
+  return null;
 };
 
 export const CTA_PRIMARY_LABEL = PRIMARY_CTA.label;
+export const CTA_PRIMARY_LABEL_SHORT = PRIMARY_CTA.shortLabel;
 export const CTA_PRIMARY_HREF = PRIMARY_CTA.href;
+export const CTA_PRIMARY_TARGET = PRIMARY_CTA.target;
+export const CTA_PRIMARY_REL = PRIMARY_CTA.rel;
 export const CTA_SECONDARY_LABEL = SECONDARY_CTA.label;
 export const CTA_SECONDARY_HREF = SECONDARY_CTA.href;
 
@@ -139,3 +181,13 @@ export const DATA_PROCESSORS = [
       ]
     : []),
 ];
+
+export const getEnrollmentMessage = () => {
+  if (NEXT_INTAKE_MONTH && typeof SLOTS_LEFT === "number") {
+    return `Zapisy na ${NEXT_INTAKE_MONTH} — zostało ${SLOTS_LEFT} miejsc.`;
+  }
+  if (NEXT_INTAKE_MONTH) {
+    return `Zapisy na ${NEXT_INTAKE_MONTH} — liczba miejsc w grupach jest ograniczona.`;
+  }
+  return "Zapisy trwają — liczba miejsc w grupach jest ograniczona.";
+};

@@ -11,8 +11,8 @@ import {
   BRAND_NAME,
   CTA_PRIMARY_HREF,
   CTA_PRIMARY_LABEL,
-  CTA_SECONDARY_HREF,
-  CTA_SECONDARY_LABEL,
+  CTA_PRIMARY_REL,
+  CTA_PRIMARY_TARGET,
 } from "../config/site";
 
 const languagesList = new Intl.ListFormat("pl", {
@@ -20,10 +20,10 @@ const languagesList = new Intl.ListFormat("pl", {
   type: "conjunction",
 }).format(taughtLanguages);
 
-const title = `Szkoła języków obcych i matematyki w Legionowie — stacjonarnie i online | ${BRAND_NAME}`;
+const title = `Lingua Legionowo — szkoła językowa i matematyka w Legionowie | ${BRAND_NAME}`;
 const description =
-  `Lingua Legionowo — szkoła języków obcych i matematyki. Uczymy ${languagesList} i prowadzimy zajęcia ` +
-  "z matematyki stacjonarnie w Legionowie oraz online.";
+  `Szkoła języków obcych i matematyki w Legionowie. Uczymy ${languagesList} i prowadzimy zajęcia ` +
+  "stacjonarne oraz online. Umów bezpłatną diagnozę i plan nauki.";
 
 const previewTeachers = teachers.slice(0, 4);
 
@@ -58,9 +58,9 @@ const steps = [
 ];
 
 const highlights = [
-  "Zajęcia stacjonarne w Legionowie",
-  "Lekcje online dopasowane do grafiku",
-  "Poziomy od A1 do C2",
+  "Plan na 4–12 tygodni",
+  "Feedback po każdej lekcji",
+  "Stacjonarnie (Legionowo) i online",
 ];
 
 const subjectChips = ["Angielski", "Inne języki", "Matematyka"];
@@ -106,22 +106,36 @@ const homeTestimonials =
         <div>
           <span class="kicker">Szkoła języków obcych i matematyki</span>
           <h1 class="mt-6">
-            Szkoła języków obcych i matematyki w Legionowie — stacjonarnie i online
+            Języki obce i matematyka w Legionowie — plan nauki dopasowany do celu
           </h1>
           <p class="mt-6 max-w-2xl text-lg text-slate-600">
-            Uczymy języków obcych — {languagesList} — oraz matematyki. Prowadzimy zajęcia stacjonarne
-            w Legionowie i lekcje online dla osób spoza Legionowa, zawsze z naciskiem na praktykę i regularny
-            feedback.
+            Uczymy {languagesList} i matematyki. Zaczynamy od krótkiej diagnozy, a potem układamy plan
+            na 4–12 tygodni. Zajęcia stacjonarne w Legionowie i online dla dzieci, młodzieży, dorosłych
+            i firm.
           </p>
 
           <div class="mt-8 flex flex-wrap gap-4">
-            <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
-            <a class="btn btn-secondary" href={CTA_SECONDARY_HREF}>{CTA_SECONDARY_LABEL}</a>
-          </div>
-          <div class="mt-4">
-            <a class="text-sm font-bold text-primary no-underline hover:underline" href="/oferta">
-              Zobacz ofertę →
+            <a
+              class="btn btn-primary"
+              href={CTA_PRIMARY_HREF}
+              target={CTA_PRIMARY_TARGET}
+              rel={CTA_PRIMARY_REL}
+              data-track="cta_primary"
+              data-track-label={CTA_PRIMARY_LABEL}
+            >
+              {CTA_PRIMARY_LABEL}
             </a>
+            <a class="btn btn-secondary" href="/oferta" data-track="cta_secondary" data-track-label="Zobacz ofertę">
+              Zobacz ofertę
+            </a>
+          </div>
+
+          <div class="mt-4 flex flex-wrap gap-2 text-xs font-semibold text-slate-600">
+            <a class="chip text-[11px] no-underline" href="/oferta#dla-dzieci">Dla dzieci</a>
+            <a class="chip text-[11px] no-underline" href="/oferta#dla-mlodziezy">Dla młodzieży</a>
+            <a class="chip text-[11px] no-underline" href="/oferta#dla-doroslych">Dla dorosłych</a>
+            <a class="chip text-[11px] no-underline" href="/oferta#dla-firm">Dla firm</a>
+            <a class="chip text-[11px] no-underline" href="/oferta#matematyka">Matematyka</a>
           </div>
 
           <div class="mt-10 grid gap-4 text-sm text-slate-600 sm:grid-cols-2">
@@ -272,7 +286,16 @@ const homeTestimonials =
       </div>
 
       <div class="mt-12 text-center">
-        <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
+        <a
+          class="btn btn-primary"
+          href={CTA_PRIMARY_HREF}
+          target={CTA_PRIMARY_TARGET}
+          rel={CTA_PRIMARY_REL}
+          data-track="cta_primary"
+          data-track-label={CTA_PRIMARY_LABEL}
+        >
+          {CTA_PRIMARY_LABEL}
+        </a>
       </div>
     </div>
   </section>

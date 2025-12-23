@@ -1,4 +1,10 @@
 ---
+import {
+  CTA_PRIMARY_HREF,
+  CTA_PRIMARY_LABEL_SHORT,
+  TEST_RESULT_WEBHOOK_URL,
+} from "../config/site";
+
 export interface Props {
   /** URL to question bank JSON served from /public */
   bankUrl?: string;
@@ -80,7 +86,13 @@ const { bankUrl = "/question-bank-1200.json" } = Astro.props;
   .ll-stats .ll-num { font-weight: 900; }
 </style>
 
-<div class="ll-test" id="llPlacementTestV5" lang="pl" data-question-bank-url={bankUrl}>
+<div
+  class="ll-test"
+  id="llPlacementTestV5"
+  lang="pl"
+  data-question-bank-url={bankUrl}
+  data-lead-webhook-url={TEST_RESULT_WEBHOOK_URL}
+>
   <!-- INTRO -->
   <section class="ll-card" data-step="intro">
     <div class="ll-intro-header">
@@ -252,14 +264,17 @@ const { bankUrl = "/question-bank-1200.json" } = Astro.props;
     <div id="llRecommendations" class="ll-reco"></div>
 
     <details class="ll-details">
-      <summary>Pokaż odpowiedzi (review)</summary>
+      <summary>Pokaż odpowiedzi</summary>
       <div id="llReview" class="ll-review"></div>
     </details>
 
-    <hr class="ll-divider">
-
-    <h3>Wyślij wynik na e-mail (lead capture)</h3>
-    <form id="llLeadForm" class="ll-lead">
+    <div data-lead-section>
+      <hr class="ll-divider">
+      <h3>Wyślij wynik na e-mail</h3>
+      <p class="ll-muted" style="margin-top: 6px;">
+        Wyślemy podsumowanie i rekomendację na podany adres.
+      </p>
+      <form id="llLeadForm" class="ll-lead">
       <div class="ll-grid2">
         <label>
           Adres e-mail
@@ -304,9 +319,10 @@ const { bankUrl = "/question-bank-1200.json" } = Astro.props;
 
       <div class="ll-spacer"></div>
 
-      <button class="ll-btn" type="submit">Wyślij wynik</button>
-      <p class="ll-status" id="llLeadStatus" role="status" aria-live="polite"></p>
-    </form>
+        <button class="ll-btn" type="submit">Wyślij wynik</button>
+        <p class="ll-status" id="llLeadStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
 
     <hr class="ll-divider">
 
@@ -322,7 +338,14 @@ const { bankUrl = "/question-bank-1200.json" } = Astro.props;
     <div class="ll-row">
       <a class="ll-btn ll-btn--ghost" href="/oferta">Zobacz ofertę</a>
       <a class="ll-btn ll-btn--ghost" href="/cennik">Sprawdź cennik</a>
-      <a class="ll-btn" href="/kontakt">Umów konsultację</a>
+      <a
+        class="ll-btn"
+        href={CTA_PRIMARY_HREF}
+        data-track="cta_primary"
+        data-track-label={CTA_PRIMARY_LABEL_SHORT}
+      >
+        {CTA_PRIMARY_LABEL_SHORT}
+      </a>
     </div>
   </section>
 </div>
@@ -344,7 +367,9 @@ window.__LL_LOAD_BANK__ = async (rootEl) => {
   // =========================
   // KONFIGURACJA
   // =========================
-  const LEAD_WEBHOOK_URL = ""; // webhook Make/Zapier/Formspree (opcjonalnie)
+  let LEAD_WEBHOOK_URL = "";
+  const PRIMARY_CTA_HREF = {JSON.stringify(CTA_PRIMARY_HREF)};
+  const PRIMARY_CTA_LABEL = {JSON.stringify(CTA_PRIMARY_LABEL_SHORT)};
 
   const LEVELS = ["A1","A2","B1","B2","C1","C2"];
   const L = (lvl) => LEVELS.indexOf(lvl);
@@ -370,7 +395,7 @@ window.__LL_LOAD_BANK__ = async (rootEl) => {
 
   function recommendationsFor(level){
     const common = [
-      { label: "Umów konsultację (dobór planu i terminu)", href: "/kontakt" },
+      { label: PRIMARY_CTA_LABEL, href: PRIMARY_CTA_HREF },
       { label: "Zobacz ofertę", href: "/oferta" },
       { label: "Sprawdź cennik", href: "/cennik" }
     ];
@@ -407,7 +432,7 @@ window.__LL_LOAD_BANK__ = async (rootEl) => {
       ],
       C2: [
         { label: "Lekcje indywidualne (C1+ / doszlifowanie)", href: "/lekcje-indywidualne" },
-        { label: "Umów konsultację (ustalimy cele i plan)", href: "/kontakt" },
+        { label: PRIMARY_CTA_LABEL, href: PRIMARY_CTA_HREF },
         ...common
       ]
     };
@@ -666,6 +691,7 @@ function modeLabel(mode){
   // Guard against double init (important for Astro view transitions)
   if (root.dataset && root.dataset.llInitialized === "1") { return; }
   if (root.dataset) { root.dataset.llInitialized = "1"; }
+  LEAD_WEBHOOK_URL = root.dataset?.leadWebhookUrl || "";
   const initStatus = root.querySelector("#llInitStatus");
   const setIntroStatus = (msg, isError=false) => {
     if (!initStatus) return;
@@ -724,7 +750,12 @@ function modeLabel(mode){
 
   const leadForm = root.querySelector("#llLeadForm");
   const leadStatus = root.querySelector("#llLeadStatus");
+  const leadSection = root.querySelector("[data-lead-section]");
   const shareBtn = root.querySelector("#llShareBtn");
+
+  if (!LEAD_WEBHOOK_URL && leadSection) {
+    leadSection.remove();
+  }
   const copyBtn  = root.querySelector("#llCopyBtn");
 
   const restartSameBtn = root.querySelector("#llRestartSameBtn");
@@ -1095,7 +1126,7 @@ function modeLabel(mode){
           <div>Wynik sugeruje poziom <strong>podstawowy</strong>.</div>
           <ul style="margin: 8px 0 0 18px;">
             <li>Dla pewniejszego wyniku zrób test jeszcze raz i ustaw <strong>40–60 pytań</strong>.</li>
-            <li>Jeśli chcesz potwierdzić poziom w mówieniu — umów krótką konsultację.</li>
+            <li>Jeśli chcesz potwierdzić poziom w mówieniu — umów krótką diagnozę.</li>
           </ul>
         `;
         emphasis = "retest";
@@ -1314,7 +1345,7 @@ if (advancedStats){
   });
 
   // Lead capture
-  leadForm.addEventListener("submit", async (e) => {
+  if (leadForm && leadStatus) leadForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     leadStatus.className = "ll-status";
     leadStatus.textContent = "";
@@ -1338,12 +1369,12 @@ if (advancedStats){
       theta_upper_95: comp.thetaUpper,
       range: formatRange(state.config.minLevel),
       ts: new Date().toISOString(),
-      page: "/test-poziomu"
+      page: "/test-poziomu-angielskiego"
     };
 
     if (!LEAD_WEBHOOK_URL){
       leadStatus.classList.add("is-error");
-      leadStatus.textContent = "Brak konfiguracji wysyłki. Wklej URL webhooka w LEAD_WEBHOOK_URL, aby zbierać leady i wysyłać wynik e-mailem.";
+      leadStatus.textContent = "Wysyłka wyniku jest chwilowo niedostępna. Skontaktuj się przez formularz na /kontakt.";
       return;
     }
 
@@ -1356,7 +1387,7 @@ if (advancedStats){
       });
       if (!res.ok) throw new Error("HTTP " + res.status);
 
-      leadStatus.textContent = "Gotowe. Wynik został wysłany (sprawdź też Oferty/Spam).";
+      leadStatus.textContent = "Gotowe. Wynik został wysłany (sprawdź też folder Spam).";
 
       if (typeof window.gtag === "function"){
         window.gtag("event", "placement_test_email_submit", { level: payload.level_strict, score_percent: payload.percent, range: payload.range });

@@ -3,6 +3,7 @@ export type Teacher = {
   role: string;
   languages: string[];
   image?: string;
+  specialties?: string[];
 };
 
 export const teachers: Teacher[] = [

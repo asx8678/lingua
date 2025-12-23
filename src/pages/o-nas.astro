@@ -5,12 +5,14 @@ import {
   BRAND_NAME,
   CTA_PRIMARY_HREF,
   CTA_PRIMARY_LABEL,
+  CTA_PRIMARY_REL,
+  CTA_PRIMARY_TARGET,
   generateBreadcrumbSchema,
 } from "../config/site";
 
-const title = `O nas – szkoła języka angielskiego Legionowo | ${BRAND_NAME}`;
+const title = `O nas – szkoła językowa i matematyka w Legionowie | ${BRAND_NAME}`;
 const description =
-  "Poznaj szkołę Lingua Legionowo. Kursy angielskiego stacjonarnie i online. Uczymy praktycznie, z naciskiem na mówienie i konwersacje.";
+  "Poznaj szkołę Lingua Legionowo. Kursy językowe i matematyka stacjonarnie w Legionowie oraz online. Praktyczne zajęcia z jasnym planem nauki.";
 
 const values = [
   {
@@ -70,15 +72,26 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
         <div>
           <span class="kicker">O nas</span>
-          <h1 class="mt-6">Szkoła języka angielskiego w Legionowie</h1>
+          <h1 class="mt-6">Poznaj Lingua Legionowo — szkoła języków obcych i matematyki</h1>
           <p class="mt-6 max-w-2xl text-lg">
-            {BRAND_NAME} to lokalna szkoła językowa, w której najważniejsze jest praktyczne użycie języka.
-            Oferujemy zajęcia stacjonarne w Legionowie oraz lekcje online dla osób spoza Legionowa. Pomagamy
-            kursantom przejść od pasywnego rozumienia do swobodnej komunikacji.
+            {BRAND_NAME} to lokalna szkoła językowa, w której liczy się praktyka i systematyczny postęp.
+            Oferujemy zajęcia stacjonarne w Legionowie oraz lekcje online. Zaczynamy od krótkiej diagnozy,
+            a następnie układamy plan nauki dopasowany do celu.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
-            <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
-            <a class="btn btn-secondary" href="/opinie">Zobacz opinie</a>
+            <a
+              class="btn btn-primary"
+              href={CTA_PRIMARY_HREF}
+              target={CTA_PRIMARY_TARGET}
+              rel={CTA_PRIMARY_REL}
+              data-track="cta_primary"
+              data-track-label={CTA_PRIMARY_LABEL}
+            >
+              {CTA_PRIMARY_LABEL}
+            </a>
+            <a class="btn btn-secondary" href="/opinie" data-track="cta_secondary" data-track-label="Zobacz opinie">
+              Zobacz opinie
+            </a>
           </div>
           <p class="mt-4 text-sm text-slate-500">
             Interesuje Cię oferta? Sprawdź
@@ -125,8 +138,20 @@ const breadcrumbSchema = generateBreadcrumbSchema([
         }
       </div>
 
-      <div class="mt-8">
-        <a class="btn btn-secondary" href="/angielski-stacjonarnie">Zajęcia stacjonarne</a>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          class="btn btn-primary"
+          href={CTA_PRIMARY_HREF}
+          target={CTA_PRIMARY_TARGET}
+          rel={CTA_PRIMARY_REL}
+          data-track="cta_primary"
+          data-track-label={CTA_PRIMARY_LABEL}
+        >
+          {CTA_PRIMARY_LABEL}
+        </a>
+        <a class="btn btn-secondary" href="/oferta" data-track="cta_secondary" data-track-label="Zobacz ofertę">
+          Zobacz ofertę
+        </a>
       </div>
     </div>
   </section>
@@ -147,6 +172,11 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             </div>
           ))
         }
+      </div>
+      <div class="mt-8">
+        <a class="btn btn-secondary" href="/kontakt" data-track="cta_secondary" data-track-label="Zapytaj o plan nauki">
+          Zapytaj o plan nauki
+        </a>
       </div>
     </div>
   </section>

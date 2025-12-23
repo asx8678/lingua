@@ -4,11 +4,21 @@ import CTASection from "../components/CTASection.astro";
 import MonthlyCalculator from "../components/MonthlyCalculator.astro";
 import PricingTable from "../components/PricingTable.astro";
 import { PRICING_DATA, formatPLN } from "../data/pricing";
-import { BRAND_NAME, CTA_PRIMARY_HREF, CTA_PRIMARY_LABEL, generateBreadcrumbSchema } from "../config/site";
+import {
+  BRAND_NAME,
+  CTA_PRIMARY_HREF,
+  CTA_PRIMARY_LABEL,
+  CTA_PRIMARY_REL,
+  CTA_PRIMARY_TARGET,
+  OTHER_LANG_PRICE_1ON1_FROM,
+  OTHER_LANG_PRICE_GROUP_FROM,
+  getEnrollmentMessage,
+  generateBreadcrumbSchema,
+} from "../config/site";
 
-const title = `Cennik – kursy angielskiego w Legionowie | ${BRAND_NAME}`;
+const title = `Cennik – kursy językowe i matematyka w Legionowie | ${BRAND_NAME}`;
 const description =
-  "Sprawdź ceny kursów angielskiego i matematyki w Legionowie. Lekcje stacjonarne i online, 1:1 i grupowe.";
+  "Sprawdź ceny kursów angielskiego i matematyki w Legionowie. Lekcje stacjonarne i online, 1:1, mini-grupy i kursy grupowe.";
 
 const steps = [
   "Podaj poziom i cel nauki",
@@ -66,6 +76,19 @@ const courseRows = PRICING_DATA.courses.map((course) => {
 const packageFootnote =
   "Szacunek miesięczny zakłada 4 tygodnie nauki i odnosi się do pakietów 10 spotkań.";
 const courseFootnote = "Kursy grupowe mają stałą liczbę spotkań i cenę za osobę.";
+const enrollmentMessage = getEnrollmentMessage();
+
+const hasOtherLangPricing =
+  typeof OTHER_LANG_PRICE_1ON1_FROM === "number" ||
+  typeof OTHER_LANG_PRICE_GROUP_FROM === "number";
+const otherLangPricing = [
+  ...(typeof OTHER_LANG_PRICE_1ON1_FROM === "number"
+    ? [{ label: "Lekcje 1:1 od", value: formatPLN(OTHER_LANG_PRICE_1ON1_FROM) }]
+    : []),
+  ...(typeof OTHER_LANG_PRICE_GROUP_FROM === "number"
+    ? [{ label: "Mini-grupy od", value: formatPLN(OTHER_LANG_PRICE_GROUP_FROM) }]
+    : []),
+];
 
 const faq = [
   {
@@ -114,7 +137,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
         <div>
           <span class="kicker">Cennik</span>
-          <h1 class="mt-6">Cennik kursów angielskiego w Legionowie</h1>
+          <h1 class="mt-6">Cennik zajęć językowych i matematyki w Legionowie</h1>
           <p class="mt-6 max-w-2xl text-lg">
             Cena zależy od formatu zajęć (stacjonarnie/online), długości spotkań i częstotliwości.
             Poniżej znajdziesz orientacyjne warianty, a szczegóły ustalamy po krótkiej rozmowie.
@@ -123,11 +146,35 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             Cennik aktualny na rok 2025/2026
           </p>
           <p class="mt-4 text-sm text-slate-600">Matematyka ma takie same stawki jak angielski.</p>
-          <p class="mt-2 text-sm text-slate-600">
-            Pozostałe języki: wycena indywidualna — zależna od lektora i formy zajęć.
-          </p>
+          {
+            hasOtherLangPricing ? (
+              <div class="mt-4 grid gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600 sm:grid-cols-2">
+                {otherLangPricing.map((item) => (
+                  <div>
+                    <div class="text-xs font-bold uppercase tracking-widest text-slate-500">
+                      {item.label}
+                    </div>
+                    <div class="mt-2 text-lg font-extrabold text-slate-900">{item.value}</div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p class="mt-2 text-sm text-slate-600">
+                Pozostałe języki: wycena indywidualna — zależna od lektora i formy zajęć.
+              </p>
+            )
+          }
           <div class="mt-8 flex flex-wrap gap-3">
-            <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
+            <a
+              class="btn btn-primary"
+              href={CTA_PRIMARY_HREF}
+              target={CTA_PRIMARY_TARGET}
+              rel={CTA_PRIMARY_REL}
+              data-track="cta_primary"
+              data-track-label={CTA_PRIMARY_LABEL}
+            >
+              {CTA_PRIMARY_LABEL}
+            </a>
             <a class="btn btn-secondary" href="/cennik-lingua.pdf" download>
               <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path
@@ -137,6 +184,9 @@ const breadcrumbSchema = generateBreadcrumbSchema([
               </svg>
               Pobierz cennik (PDF)
             </a>
+          </div>
+          <div class="mt-6 notice text-sm">
+            {enrollmentMessage}
           </div>
         </div>
 
@@ -153,7 +203,14 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             ))}
           </ol>
           <div class="mt-8">
-            <a class="btn btn-primary w-full sm:w-auto" href={CTA_PRIMARY_HREF}>
+            <a
+              class="btn btn-primary w-full sm:w-auto"
+              href={CTA_PRIMARY_HREF}
+              target={CTA_PRIMARY_TARGET}
+              rel={CTA_PRIMARY_REL}
+              data-track="cta_primary"
+              data-track-label={CTA_PRIMARY_LABEL}
+            >
               {CTA_PRIMARY_LABEL}
             </a>
           </div>
@@ -190,7 +247,17 @@ const breadcrumbSchema = generateBreadcrumbSchema([
         <MonthlyCalculator />
       </div>
 
-      <div class="mt-8">
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          class="btn btn-primary"
+          href={CTA_PRIMARY_HREF}
+          target={CTA_PRIMARY_TARGET}
+          rel={CTA_PRIMARY_REL}
+          data-track="cta_primary"
+          data-track-label={CTA_PRIMARY_LABEL}
+        >
+          {CTA_PRIMARY_LABEL}
+        </a>
         <a class="btn btn-ghost" href="/cennik-lingua.pdf" download>
           <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path

@@ -15,7 +15,10 @@ import {
   ANALYTICS_ENABLED,
   ANALYTICS_ID,
   CTA_PRIMARY_LABEL,
+  CTA_PRIMARY_LABEL_SHORT,
   CTA_PRIMARY_HREF,
+  CTA_PRIMARY_REL,
+  CTA_PRIMARY_TARGET,
   isTodo,
 } from "../config/site";
 
@@ -51,6 +54,9 @@ const addressData = {
   addressLocality: BUSINESS.city || undefined,
   addressCountry: "PL",
 };
+
+const hasPhone = !isTodo(CONTACT_PHONE);
+const phoneHref = hasPhone ? `tel:${CONTACT_PHONE}` : "";
 
 const hasAddress = Boolean(BUSINESS.streetAddress || BUSINESS.postalCode || BUSINESS.city);
 const hasGeo = Boolean(BUSINESS.geo.latitude && BUSINESS.geo.longitude);
@@ -137,7 +143,7 @@ const jsonLd = [orgJsonLd, websiteJsonLd, ...structuredData].filter(Boolean);
     </a>
 
     <Header currentPath={currentPath} />
-    <main id="content" class="flex-1 pb-24 md:pb-0">
+    <main id="content" class="flex-1 pb-28 md:pb-0">
       <slot />
     </main>
     <Footer />
@@ -146,9 +152,29 @@ const jsonLd = [orgJsonLd, websiteJsonLd, ...structuredData].filter(Boolean);
       class="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 backdrop-blur md:hidden"
     >
       <div class="container-site py-3">
-        <a class="btn btn-primary w-full" href={CTA_PRIMARY_HREF} aria-label={CTA_PRIMARY_LABEL}>
-          {CTA_PRIMARY_LABEL}
-        </a>
+        <div class={`grid gap-2 ${hasPhone ? "grid-cols-2" : "grid-cols-1"}`}>
+          <a
+            class="btn btn-primary w-full text-xs leading-snug sm:text-sm"
+            href={CTA_PRIMARY_HREF}
+            target={CTA_PRIMARY_TARGET}
+            rel={CTA_PRIMARY_REL}
+            aria-label={CTA_PRIMARY_LABEL}
+            data-track="cta_primary"
+            data-track-label={CTA_PRIMARY_LABEL}
+          >
+            {CTA_PRIMARY_LABEL_SHORT}
+          </a>
+          {
+            hasPhone && (
+              <a
+                class="btn btn-secondary w-full text-xs leading-snug sm:text-sm"
+                href={phoneHref}
+              >
+                Zadzwoń
+              </a>
+            )
+          }
+        </div>
       </div>
     </div>
 
@@ -285,5 +311,92 @@ const jsonLd = [orgJsonLd, websiteJsonLd, ...structuredData].filter(Boolean);
         </>
       )
     }
+
+    <script is:inline>
+      (() => {
+        const consentKey = "lingua-analytics-consent";
+        const trackedForms = new WeakSet();
+
+        const hasConsent = () => {
+          try {
+            return localStorage.getItem(consentKey) === "granted";
+          } catch {
+            return false;
+          }
+        };
+
+        const track = (eventName, params = {}) => {
+          if (!hasConsent()) return;
+          if (typeof window.gtag !== "function") return;
+          window.gtag("event", eventName, params);
+        };
+
+        document.addEventListener("click", (event) => {
+          const target = event.target.closest("[data-track]");
+          if (target) {
+            const eventName = target.dataset.track;
+            if (!eventName) return;
+            track(eventName, {
+              event_category: "conversion",
+              event_label: target.dataset.trackLabel || target.textContent?.trim() || "",
+              link_url: target.getAttribute("href") || "",
+            });
+            return;
+          }
+
+          const primaryBtn = event.target.closest(".btn-primary");
+          if (primaryBtn) {
+            track("cta_primary", {
+              event_category: "conversion",
+              event_label: primaryBtn.textContent?.trim() || "",
+              link_url: primaryBtn.getAttribute("href") || "",
+            });
+            return;
+          }
+
+          const secondaryBtn = event.target.closest(".btn-secondary");
+          if (secondaryBtn) {
+            track("cta_secondary", {
+              event_category: "conversion",
+              event_label: secondaryBtn.textContent?.trim() || "",
+              link_url: secondaryBtn.getAttribute("href") || "",
+            });
+          }
+        });
+
+        document.addEventListener("click", (event) => {
+          const link = event.target.closest('a[href^="tel:"]');
+          if (!link) return;
+          track("phone_click", {
+            event_category: "conversion",
+            event_label: link.textContent?.trim() || "Telefon",
+            link_url: link.getAttribute("href") || "",
+          });
+        });
+
+        document.addEventListener("focusin", (event) => {
+          const form = event.target.closest("form[data-track-form]");
+          if (!form || trackedForms.has(form)) return;
+          trackedForms.add(form);
+          track("form_start", {
+            event_category: "conversion",
+            form_id: form.dataset.trackForm || "",
+          });
+        });
+
+        document.addEventListener(
+          "submit",
+          (event) => {
+            const form = event.target;
+            if (!form?.matches?.("form[data-track-form]")) return;
+            track("form_submit", {
+              event_category: "conversion",
+              form_id: form.dataset.trackForm || "",
+            });
+          },
+          true
+        );
+      })();
+    </script>
   </body>
 </html>

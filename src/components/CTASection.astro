@@ -1,25 +1,43 @@
 ---
-import { PRIMARY_CTA, SECONDARY_CTA } from "../config/site";
+import { PRIMARY_CTA, getSecondaryCta, type CtaVariant } from "../config/site";
 
 interface Props {
   title: string;
   description: string;
+  variant?: CtaVariant;
   primaryLabel?: string;
   primaryHref?: string;
+  primaryTarget?: string;
+  primaryRel?: string;
   secondaryLabel?: string | null;
   secondaryHref?: string;
+  secondaryTarget?: string;
+  secondaryRel?: string;
   note?: string;
 }
 
 const {
   title,
   description,
+  variant = "general",
   primaryLabel = PRIMARY_CTA.label,
   primaryHref = PRIMARY_CTA.href,
-  secondaryLabel = SECONDARY_CTA.label,
-  secondaryHref = SECONDARY_CTA.href,
+  primaryTarget = PRIMARY_CTA.target,
+  primaryRel = PRIMARY_CTA.rel,
+  secondaryLabel,
+  secondaryHref,
+  secondaryTarget,
+  secondaryRel,
   note,
 } = Astro.props;
+
+const fallbackSecondary = getSecondaryCta(variant);
+const resolvedSecondary =
+  secondaryLabel === undefined && secondaryHref === undefined
+    ? fallbackSecondary
+    : secondaryLabel && secondaryHref
+      ? { label: secondaryLabel, href: secondaryHref }
+      : null;
 ---
 
 <section class="section">
@@ -29,11 +47,27 @@ const {
       <p class="mx-auto mt-4 max-w-2xl">{description}</p>
 
       <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-        <a class="btn btn-primary" href={primaryHref}>{primaryLabel}</a>
+        <a
+          class="btn btn-primary"
+          href={primaryHref}
+          target={primaryTarget}
+          rel={primaryRel}
+          data-track="cta_primary"
+          data-track-label={primaryLabel}
+        >
+          {primaryLabel}
+        </a>
         {
-          secondaryLabel && secondaryHref && (
-            <a class="btn btn-secondary" href={secondaryHref}>
-              {secondaryLabel}
+          resolvedSecondary?.label && resolvedSecondary?.href && (
+            <a
+              class="btn btn-secondary"
+              href={resolvedSecondary.href}
+              target={secondaryTarget}
+              rel={secondaryRel}
+              data-track="cta_secondary"
+              data-track-label={resolvedSecondary.label}
+            >
+              {resolvedSecondary.label}
             </a>
           )
         }

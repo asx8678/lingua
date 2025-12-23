@@ -6,8 +6,10 @@ import {
   BRAND_NAME,
   CTA_PRIMARY_HREF,
   CTA_PRIMARY_LABEL,
-  CTA_SECONDARY_HREF,
-  CTA_SECONDARY_LABEL,
+  CTA_PRIMARY_REL,
+  CTA_PRIMARY_TARGET,
+  getSecondaryCta,
+  type CtaVariant,
   generateBreadcrumbSchema,
   SITE_URL,
 } from "../config/site";
@@ -19,6 +21,8 @@ interface Props {
 
 const { data } = Astro.props;
 const fullTitle = `${data.title} | ${BRAND_NAME}`;
+const ctaVariant: CtaVariant = data.slug === "matematyka" ? "math" : "language";
+const secondaryCta = getSecondaryCta(ctaVariant);
 
 const faqJsonLd = {
   "@context": "https://schema.org",
@@ -68,8 +72,28 @@ const courseJsonLd = {
             <p class="mt-4 text-lg text-slate-600">{paragraph}</p>
           ))}
           <div class="mt-8 flex flex-wrap gap-3">
-            <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
-            <a class="btn btn-secondary" href={CTA_SECONDARY_HREF}>{CTA_SECONDARY_LABEL}</a>
+            <a
+              class="btn btn-primary"
+              href={CTA_PRIMARY_HREF}
+              target={CTA_PRIMARY_TARGET}
+              rel={CTA_PRIMARY_REL}
+              data-track="cta_primary"
+              data-track-label={CTA_PRIMARY_LABEL}
+            >
+              {CTA_PRIMARY_LABEL}
+            </a>
+            {
+              secondaryCta && (
+                <a
+                  class="btn btn-secondary"
+                  href={secondaryCta.href}
+                  data-track="cta_secondary"
+                  data-track-label={secondaryCta.label}
+                >
+                  {secondaryCta.label}
+                </a>
+              )
+            }
           </div>
           <p class="mt-4 text-sm text-slate-500">
             Sprawdź
@@ -201,5 +225,10 @@ const courseJsonLd = {
 
   <FaqSection title={`${data.kicker} — pytania i odpowiedzi`} items={data.faqs} />
 
-  <CTASection title={data.cta.title} description={data.cta.description} note={data.cta.note} />
+  <CTASection
+    title={data.cta.title}
+    description={data.cta.description}
+    note={data.cta.note}
+    variant={ctaVariant}
+  />
 </MainLayout>
