@@ -1,0 +1,124 @@
+---
+import { PRICING_DATA, formatPLN } from "../data/pricing";
+
+const durations = Array.from(new Set(PRICING_DATA.packages.map((plan) => plan.minutes))).sort(
+  (a, b) => a - b
+);
+const personsOptions = Array.from(
+  new Set(
+    PRICING_DATA.packages.flatMap((plan) =>
+      Object.keys(plan.pricePerPerson).map((value) => Number(value))
+    )
+  )
+).sort((a, b) => a - b);
+const lessonsPerWeekOptions = [1, 2, 3];
+
+const defaultDuration = durations.includes(60) ? 60 : durations[0];
+const defaultPlan = PRICING_DATA.packages.find((plan) => plan.minutes === defaultDuration);
+const defaultPersons = personsOptions[0] ?? 1;
+const defaultLessonsPerWeek = 2;
+
+const basePrice = defaultPlan?.pricePerPerson[defaultPersons] ?? 0;
+const perSession = defaultPlan ? basePrice / defaultPlan.baseSessions : 0;
+const perMonthPerPerson = perSession * defaultLessonsPerWeek * 4;
+const perMonthTotal = perMonthPerPerson * defaultPersons;
+---
+
+<div class="card p-6">
+  <p class="text-xs font-bold uppercase tracking-widest text-slate-500">Kalkulator miesięczny</p>
+  <h3 class="mt-2 text-xl font-extrabold text-slate-900">Sprawdź orientacyjny koszt</h3>
+  <p class="mt-3 text-sm text-slate-600">
+    Uproszczone wyliczenie na podstawie pakietów 10 spotkań. Przyjmujemy 4 tygodnie w miesiącu.
+  </p>
+
+  <form id="monthly-calc" class="mt-6 grid gap-4 sm:grid-cols-3" aria-label="Kalkulator miesięczny">
+    <div>
+      <label for="monthly-duration" class="text-sm font-bold text-slate-900">Długość lekcji</label>
+      <select
+        id="monthly-duration"
+        name="duration"
+        class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+      >
+        {durations.map((value) => (
+          <option value={value} selected={value === defaultDuration}>
+            {value} min
+          </option>
+        ))}
+      </select>
+    </div>
+
+    <div>
+      <label for="monthly-lessons" class="text-sm font-bold text-slate-900">
+        Lekcje / tydzień
+      </label>
+      <select
+        id="monthly-lessons"
+        name="lessons"
+        class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+      >
+        {lessonsPerWeekOptions.map((value) => (
+          <option value={value} selected={value === defaultLessonsPerWeek}>
+            {value}
+          </option>
+        ))}
+      </select>
+    </div>
+
+    <div>
+      <label for="monthly-persons" class="text-sm font-bold text-slate-900">Liczba osób</label>
+      <select
+        id="monthly-persons"
+        name="persons"
+        class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+      >
+        {personsOptions.map((value) => (
+          <option value={value} selected={value === defaultPersons}>
+            {value}
+          </option>
+        ))}
+      </select>
+    </div>
+  </form>
+
+  <div class="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5" aria-live="polite">
+    <div class="grid gap-4 sm:grid-cols-3" role="status">
+      <div>
+        <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Cena / spotkanie</div>
+        <div id="monthly-per-session" class="mt-2 text-3xl font-extrabold text-slate-900">
+          {formatPLN(perSession)}
+        </div>
+      </div>
+      <div>
+        <div class="text-xs font-bold uppercase tracking-widest text-slate-500">
+          Miesięcznie / osoba
+        </div>
+        <div id="monthly-per-person" class="mt-2 text-3xl font-extrabold text-slate-900">
+          {formatPLN(perMonthPerPerson)}
+        </div>
+      </div>
+      <div>
+        <div class="text-xs font-bold uppercase tracking-widest text-slate-500">
+          Miesięcznie (grupa)
+        </div>
+        <div id="monthly-total" class="mt-2 text-3xl font-extrabold text-slate-900">
+          {formatPLN(perMonthTotal)}
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-4 text-xs text-slate-600" id="monthly-note">
+      Wynik jest orientacyjny i oparty o pakiety 10 spotkań.
+    </p>
+  </div>
+
+  <p class="mt-4 text-xs text-slate-500">
+    Kursy grupowe mają stałą liczbę spotkań — sprawdź tabelę kursów lub PDF.
+  </p>
+
+  <script>
+    import { PRICING_DATA } from "../data/pricing";
+    import { initMonthlyCalculator } from "../scripts/monthly-calculator";
+
+    initMonthlyCalculator(PRICING_DATA);
+  </script>
+</div>

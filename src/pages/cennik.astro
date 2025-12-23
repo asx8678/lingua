@@ -1,32 +1,14 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
+import MonthlyCalculator from "../components/MonthlyCalculator.astro";
+import PricingTable from "../components/PricingTable.astro";
+import { PRICING_DATA, formatPLN } from "../data/pricing";
 import { BRAND_NAME, CTA_PRIMARY_HREF, CTA_PRIMARY_LABEL, generateBreadcrumbSchema } from "../config/site";
 
 const title = `Cennik – kursy angielskiego w Legionowie | ${BRAND_NAME}`;
 const description =
   "Sprawdź ceny kursów angielskiego i matematyki w Legionowie. Lekcje stacjonarne i online, 1:1 i grupowe.";
-
-const hourlyRates = [
-  {
-    title: "Lekcje 1:1",
-    price: "130 zł / 60 min",
-    note: "Pakiet 10 spotkań: 1300 zł / osoba.",
-    features: ["Pełna personalizacja planu", "Stały feedback po każdej lekcji"],
-  },
-  {
-    title: "Duet (2 osoby)",
-    price: "80 zł / 60 min",
-    note: "Pakiet 10 spotkań: 800 zł / osoba.",
-    features: ["Więcej rozmów i motywacji", "Wspólny poziom i cel"],
-  },
-  {
-    title: "Trójka (3 osoby)",
-    price: "65 zł / 60 min",
-    note: "Pakiet 10 spotkań: 650 zł / osoba.",
-    features: ["Przystępna cena / osoba", "Dobra dynamika grupy"],
-  },
-];
 
 const steps = [
   "Podaj poziom i cel nauki",
@@ -34,11 +16,62 @@ const steps = [
   "Dostaniesz propozycję planu i cenę",
 ];
 
+const packageColumns = [
+  "Czas lekcji",
+  "Liczba osób",
+  "Cena / spotkanie",
+  "Pakiet 10 spotkań / osoba",
+  "Szacunkowo / mies. (4 spotkania)",
+];
+
+const packageRows = PRICING_DATA.packages.flatMap((plan) => {
+  const persons = Object.keys(plan.pricePerPerson)
+    .map((value) => Number(value))
+    .sort((a, b) => a - b);
+  return persons.map((count) => {
+    const total = plan.pricePerPerson[count];
+    const perSession = total / plan.baseSessions;
+    const perMonth = perSession * 4;
+    return [
+      `${plan.minutes} min`,
+      `${count} os.`,
+      formatPLN(perSession),
+      `${formatPLN(total)} / osoba`,
+      formatPLN(perMonth),
+    ];
+  });
+});
+
+const courseColumns = [
+  "Kurs grupowy",
+  "Czas spotkania",
+  "Liczba spotkań",
+  "Cena / osoba",
+  "Cena / spotkanie",
+  "Min. grupa",
+];
+
+const courseRows = PRICING_DATA.courses.map((course) => {
+  const perSession = course.price / course.sessions;
+  return [
+    course.label,
+    `${course.minutes} min`,
+    `${course.sessions}`,
+    `${formatPLN(course.price)} / osoba`,
+    formatPLN(perSession),
+    `od ${course.minPersons} osób`,
+  ];
+});
+
+const packageFootnote =
+  "Szacunek miesięczny zakłada 4 tygodnie nauki i odnosi się do pakietów 10 spotkań.";
+const courseFootnote = "Kursy grupowe mają stałą liczbę spotkań i cenę za osobę.";
+
 const faq = [
   {
-    question: "Jak liczymy cenę pakietów 10 spotkań?",
+    question: "Jak liczymy ceny w tabeli i kalkulatorze?",
     answer:
-      "Stawki bazują na pakietach 10 spotkań. Szczegółowe przeliczniki dla innych wariantów znajdziesz w pełnym cenniku PDF.",
+      "Pakiety bazują na 10 spotkaniach, a kalkulator miesięczny przyjmuje 4 tygodnie w miesiącu. Kursy grupowe mają stałą liczbę spotkań i cenę / osobę.",
   },
   {
     question: "Jak rozliczane są kursy grupowe?",
@@ -131,44 +164,30 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 
   <section class="section">
     <div class="container-site">
-      <h2>Ceny za 60 min (angielski i matematyka)</h2>
+      <h2>Jasne ceny za lekcje i pakiety</h2>
       <p class="mt-4 max-w-3xl">
-        Poniższe stawki dotyczą pakietów 10 spotkań. Dla kursów grupowych i innych długości lekcji
-        pobierz pełny cennik PDF.
+        W tabelach znajdziesz ceny za spotkanie, pakiet 10 spotkań oraz szacunkowy koszt miesięczny.
+        Kalkulator obok pozwala szybko policzyć wariant dopasowany do Twojego grafiku.
       </p>
 
-      <div class="mt-10 grid gap-6 lg:grid-cols-3">
-        {
-          hourlyRates.map((item, index) => (
-            <div class={`card p-6 ${index === 0 ? 'ring-2 ring-primary/20 relative' : ''}`}>
-              {index === 0 && (
-                <span class="absolute -top-3 left-6 rounded-full bg-primary px-3 py-1 text-xs font-bold text-white">
-                  Najpopularniejsze
-                </span>
-              )}
-              <div class="text-xs font-bold uppercase tracking-widest text-primary">
-                {item.title}
-              </div>
-              <div class="mt-4 text-4xl font-extrabold text-slate-900">{item.price}</div>
-              <p class="mt-3 text-sm text-slate-500">{item.note}</p>
-              <ul class="mt-5 space-y-3 text-sm text-slate-600">
-                {item.features.map((feature) => (
-                  <li class="flex items-start gap-2">
-                    <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <div class="mt-6">
-                <a class={`btn w-full ${index === 0 ? 'btn-primary' : 'btn-secondary'}`} href="/kontakt">
-                  Zapytaj o szczegóły
-                </a>
-              </div>
-            </div>
-          ))
-        }
+      <div class="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:items-start">
+        <div class="space-y-6">
+          <PricingTable
+            title="Pakiety indywidualne i mini-grupy"
+            subtitle="Ceny / osoba dla angielskiego i matematyki."
+            columns={packageColumns}
+            rows={packageRows}
+            footnote={packageFootnote}
+          />
+          <PricingTable
+            title="Kursy grupowe"
+            subtitle="Stałe programy grupowe z ustaloną liczbą spotkań."
+            columns={courseColumns}
+            rows={courseRows}
+            footnote={courseFootnote}
+          />
+        </div>
+        <MonthlyCalculator />
       </div>
 
       <div class="mt-8">
