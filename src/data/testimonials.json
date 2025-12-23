@@ -4,7 +4,9 @@
     "context": "Angielski online, przejście z B1 na B2",
     "text": "Po dwóch miesiącach poczułam realny progres w mówieniu. Lekcje są konkretne, bez lania wody, a plan jest dopasowany do moich celów.",
     "rating": 5,
-    "date": "2024-11-15"
+    "date": "2024-11-15",
+    "featuredHome": true,
+    "featuredOnline": true
   },
   {
     "name": "Marek P.",
@@ -32,7 +34,9 @@
     "context": "Angielski stacjonarnie w Legionowie",
     "text": "Dogodne terminy, jasny plan i dużo mówienia. Zajęcia prowadzone w spokojnym tempie, ale bez nudy.",
     "rating": 5,
-    "date": "2024-07-18"
+    "date": "2024-07-18",
+    "featuredHome": true,
+    "featuredInPerson": true
   },
   {
     "name": "Paweł K.",

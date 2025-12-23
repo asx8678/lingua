@@ -2,7 +2,9 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
 import FaqSection from "../components/FaqSection.astro";
+import TestimonialCard from "../components/TestimonialCard.astro";
 import TrustSection from "../components/TrustSection.astro";
+import testimonials from "../data/testimonials.json";
 import {
   BRAND_NAME,
   CTA_PRIMARY_HREF,
@@ -59,6 +61,12 @@ const forWhom = [
   "Osoby rozpoczynające naukę od podstaw",
   "Wszyscy, którzy cenią regularność i strukturę zajęć",
 ];
+
+const inPersonTestimonial =
+  testimonials.find((item) => item.featuredInPerson) ??
+  testimonials.find((item) => item.context.toLowerCase().includes("stacjonarn")) ??
+  testimonials[0];
+const hasInPersonTestimonial = Boolean(inPersonTestimonial);
 
 const faqs = [
   {
@@ -259,6 +267,23 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       </div>
     </div>
   </section>
+
+  {
+    hasInPersonTestimonial && (
+      <section class="section">
+        <div class="container-site">
+          <span class="kicker">Opinie</span>
+          <h2 class="mt-4">Jak wygląda nauka stacjonarna oczami kursantów</h2>
+          <p class="mt-4 max-w-3xl text-sm text-slate-600">
+            Bezpośredni kontakt i jasny plan to elementy, które kursanci cenią najbardziej.
+          </p>
+          <div class="mt-6 max-w-2xl">
+            <TestimonialCard testimonial={inPersonTestimonial} />
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   <TrustSection />
 

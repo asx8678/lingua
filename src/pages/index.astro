@@ -2,6 +2,7 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
 import TeacherCard from "../components/TeacherCard.astro";
+import TestimonialCard from "../components/TestimonialCard.astro";
 import TrustSection from "../components/TrustSection.astro";
 import { teachers } from "../data/teachers";
 import { taughtLanguages } from "../data/subjects";
@@ -86,6 +87,10 @@ const proofPoints = [
     note: "Słownictwo i krótkie zadania do utrwalenia",
   },
 ];
+
+const featuredTestimonials = testimonials.filter((item) => item.featuredHome).slice(0, 2);
+const homeTestimonials =
+  featuredTestimonials.length > 0 ? featuredTestimonials : testimonials.slice(0, 2);
 ---
 
 <MainLayout title={title} description={description} canonical="/">
@@ -192,6 +197,29 @@ const proofPoints = [
   </section>
 
   <TrustSection />
+
+  <section class="section">
+    <div class="container-site">
+      <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <span class="kicker">Opinie</span>
+          <h2 class="mt-6">Co mówią kursanci</h2>
+          <p class="mt-4 max-w-3xl">
+            Krótkie opinie osób, które uczą się z nami stacjonarnie lub online.
+          </p>
+        </div>
+        <div class="mt-6 lg:mt-0">
+          <a class="btn btn-secondary" href="/opinie">Zobacz wszystkie</a>
+        </div>
+      </div>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        {homeTestimonials.map((item) => (
+          <TestimonialCard testimonial={item} />
+        ))}
+      </div>
+    </div>
+  </section>
 
   <section class="section">
     <div class="container-site">

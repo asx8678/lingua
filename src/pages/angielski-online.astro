@@ -2,7 +2,9 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
 import FaqSection from "../components/FaqSection.astro";
+import TestimonialCard from "../components/TestimonialCard.astro";
 import TrustSection from "../components/TrustSection.astro";
+import testimonials from "../data/testimonials.json";
 import {
   BRAND_NAME,
   CTA_PRIMARY_HREF,
@@ -92,6 +94,12 @@ const courseGoals = [
   "Odświeżenie gramatyki i uporządkowanie wiedzy.",
   "Budowanie pewności w mówieniu po dłuższej przerwie.",
 ];
+
+const onlineTestimonial =
+  testimonials.find((item) => item.featuredOnline) ??
+  testimonials.find((item) => item.context.toLowerCase().includes("online")) ??
+  testimonials[0];
+const hasOnlineTestimonial = Boolean(onlineTestimonial);
 
 const faqs = [
   {
@@ -298,6 +306,23 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       </div>
     </div>
   </section>
+
+  {
+    hasOnlineTestimonial && (
+      <section class="section">
+        <div class="container-site">
+          <span class="kicker">Opinie</span>
+          <h2 class="mt-4">Efekty lekcji online w praktyce</h2>
+          <p class="mt-4 max-w-3xl text-sm text-slate-600">
+            Zobacz, jak kursanci oceniają regularne lekcje online z naciskiem na mówienie.
+          </p>
+          <div class="mt-6 max-w-2xl">
+            <TestimonialCard testimonial={onlineTestimonial} />
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   <TrustSection />
 
