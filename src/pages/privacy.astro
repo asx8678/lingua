@@ -9,7 +9,6 @@ import {
   DATA_PROCESSORS,
   ANALYTICS_ENABLED,
   ANALYTICS_ID,
-  isTodo,
   generateBreadcrumbSchema,
 } from "../config/site";
 
@@ -25,8 +24,8 @@ const updatedAt = lastModified.toLocaleDateString("pl-PL", {
 });
 const controllerName = BUSINESS.legalEntityName || BRAND_NAME;
 const addressLine = FULL_ADDRESS || BUSINESS.city;
-const hasEmail = !isTodo(CONTACT_EMAIL);
-const hasPhone = !isTodo(CONTACT_PHONE);
+const hasEmail = !!CONTACT_EMAIL;
+const hasPhone = !!CONTACT_PHONE;
 const contactFallback = "Skontaktuj się przez formularz.";
 
 const breadcrumbSchema = generateBreadcrumbSchema([
