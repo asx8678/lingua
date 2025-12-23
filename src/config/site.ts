@@ -1,193 +1,27 @@
-export const SITE_URL = "https://lingualegionowo.pl";
-export const SITE_NAME = "Lingua Legionowo";
+/**
+ * Site Configuration
+ * Re-exports from domain-specific config files for backwards compatibility
+ */
 
-export const CONTACT = {
-  email: import.meta.env.PUBLIC_CONTACT_EMAIL ?? "lingualegionowo@gmail.com",
-  phone: import.meta.env.PUBLIC_CONTACT_PHONE ?? "+48 453 209 560",
-  city: import.meta.env.PUBLIC_CONTACT_CITY ?? import.meta.env.PUBLIC_CITY ?? "Legionowo",
-  address:
-    import.meta.env.PUBLIC_CONTACT_ADDRESS ??
-    import.meta.env.PUBLIC_STREET_ADDRESS ??
-    "Mikołaja Kopernika 9/lok. 5",
-  postalCode: import.meta.env.PUBLIC_POSTAL_CODE ?? "05-120",
-};
+// Re-export everything from domain-specific configs
+export { SITE_URL, SITE_NAME, CONTACT, BUSINESS, BRAND_NAME, BRAND_TAGLINE, FULL_ADDRESS, ADDRESS_SHORT, BUSINESS_ADDRESS, CONTACT_EMAIL, CONTACT_PHONE, DATA_PROCESSORS } from "./business";
 
-export const BUSINESS = {
-  businessName: SITE_NAME,
-  legalEntityName: import.meta.env.PUBLIC_LEGAL_ENTITY_NAME ?? "",
-  streetAddress: CONTACT.address,
-  postalCode: CONTACT.postalCode,
-  city: CONTACT.city,
-  email: CONTACT.email,
-  phone: CONTACT.phone,
-  openingHours: import.meta.env.PUBLIC_OPENING_HOURS ?? "8:00–21:00",
-  geo: {
-    latitude: import.meta.env.PUBLIC_GEO_LAT ?? "",
-    longitude: import.meta.env.PUBLIC_GEO_LNG ?? "",
-  },
-  social: {
-    facebook: import.meta.env.PUBLIC_FACEBOOK_URL ?? "",
-    instagram: import.meta.env.PUBLIC_INSTAGRAM_URL ?? "",
-    youtube: import.meta.env.PUBLIC_YOUTUBE_URL ?? "",
-  },
-};
+export { DEFAULT_TITLE, DEFAULT_DESCRIPTION, OG_IMAGE, OG_IMAGE_ALT, generateBreadcrumbSchema, generateFaqSchema, type BreadcrumbItem } from "./seo";
 
-export const BRAND_NAME = BUSINESS.businessName;
-export const BRAND_TAGLINE = "Szkoła języków obcych i matematyki w Legionowie";
+export { ANALYTICS_ID, ANALYTICS_ENABLED, EMAIL_PROVIDER_NAME, BOOKING_URL, NEXT_INTAKE_MONTH, SLOTS_LEFT, OTHER_LANG_PRICE_1ON1_FROM, OTHER_LANG_PRICE_GROUP_FROM, TEST_RESULT_WEBHOOK_URL, GOOGLE_REVIEWS, YEARS_IN_OPERATION, STORAGE_KEYS, TRACK_CATEGORIES, getEnrollmentMessage } from "./analytics";
 
-const addressParts = [
-  CONTACT.address,
-  [CONTACT.postalCode, CONTACT.city].filter(Boolean).join(" ").trim(),
-].filter(Boolean);
+export { PRIMARY_CTA, SECONDARY_CTA, SECONDARY_CTA_LANGUAGE, SECONDARY_CTA_MATH, getSecondaryCta, CTA_PRIMARY_LABEL, CTA_PRIMARY_LABEL_SHORT, CTA_PRIMARY_HREF, CTA_PRIMARY_TARGET, CTA_PRIMARY_REL, CTA_SECONDARY_LABEL, CTA_SECONDARY_HREF, type CtaVariant } from "./cta";
 
-export const FULL_ADDRESS = addressParts.join(", ");
-export const ADDRESS_SHORT = CONTACT.city;
-export const BUSINESS_ADDRESS = FULL_ADDRESS || CONTACT.city;
-
-export const CONTACT_EMAIL = CONTACT.email;
-export const CONTACT_PHONE = CONTACT.phone;
-
-export const ANALYTICS_ID = import.meta.env.PUBLIC_GA_ID ?? "G-FS7CKXXZ6J";
-export const ANALYTICS_ENABLED = Boolean(ANALYTICS_ID);
-export const EMAIL_PROVIDER_NAME =
-  import.meta.env.PUBLIC_EMAIL_PROVIDER_NAME ?? "Dostawca poczty e-mail";
-
-const parseNumericEnv = (value: string | undefined) => {
-  if (!value) return null;
-  const parsed = Number(value);
-  return Number.isFinite(parsed) ? parsed : null;
-};
-
-export const BOOKING_URL = import.meta.env.PUBLIC_BOOKING_URL ?? "";
-export const NEXT_INTAKE_MONTH = import.meta.env.PUBLIC_NEXT_INTAKE_MONTH ?? "";
-export const SLOTS_LEFT = parseNumericEnv(import.meta.env.PUBLIC_SLOTS_LEFT);
-export const OTHER_LANG_PRICE_1ON1_FROM = parseNumericEnv(
-  import.meta.env.PUBLIC_OTHER_LANG_PRICE_1ON1_FROM
-);
-export const OTHER_LANG_PRICE_GROUP_FROM = parseNumericEnv(
-  import.meta.env.PUBLIC_OTHER_LANG_PRICE_GROUP_FROM
-);
-export const TEST_RESULT_WEBHOOK_URL = import.meta.env.PUBLIC_TEST_RESULT_WEBHOOK_URL ?? "";
-
-export const GOOGLE_REVIEWS = {
-  url: import.meta.env.PUBLIC_GOOGLE_REVIEWS_URL ?? "",
-  businessName: import.meta.env.PUBLIC_GOOGLE_BUSINESS_NAME ?? BRAND_NAME,
-  rating: parseNumericEnv(import.meta.env.PUBLIC_GOOGLE_REVIEWS_RATING),
-  count: parseNumericEnv(import.meta.env.PUBLIC_GOOGLE_REVIEWS_COUNT),
-};
-
-export const YEARS_IN_OPERATION = import.meta.env.PUBLIC_YEARS_IN_OPERATION ?? "";
-
-export const OG_IMAGE = "/images/og-lingua.png";
-
-// Alternate domains for redirects
-export const ALTERNATE_DOMAINS = {
-  angielskilegionowo: "angielskilegionowo.pl",
-  angielskizdalnie: "angielskizdalnie.pl",
-};
-
-export const DEFAULT_TITLE = `${BRAND_NAME} — języki obce i matematyka w Legionowie`;
-export const DEFAULT_DESCRIPTION =
-  "Szkoła języków obcych i matematyki w Legionowie. Zajęcia stacjonarne i online dla wszystkich poziomów. Umów bezpłatną diagnozę i plan nauki.";
-
-export const TEACHER_SPECIALTIES: Record<string, string[]> = {};
-
-const isExternalUrl = (value: string) => value.startsWith("http://") || value.startsWith("https://");
-const resolvedPrimaryHref = BOOKING_URL || "/kontakt#formularz";
-const primaryIsExternal = Boolean(BOOKING_URL && isExternalUrl(BOOKING_URL));
-
-export const PRIMARY_CTA = {
-  label: "Napisz do nas",
-  shortLabel: "Napisz do nas",
-  href: resolvedPrimaryHref,
-  target: primaryIsExternal ? "_blank" : undefined,
-  rel: primaryIsExternal ? "noopener noreferrer" : undefined,
-};
-
-export const SECONDARY_CTA = {
-  label: "Sprawdź poziom angielskiego (5–10 min)",
-  href: "/test",
-};
-
-export const SECONDARY_CTA_LANGUAGE = {
-  label: "Umów krótką rozmowę poziomującą",
-  href: resolvedPrimaryHref,
-};
-
-export const SECONDARY_CTA_MATH = {
-  label: "Umów diagnozę z matematyki (10 min)",
-  href: resolvedPrimaryHref,
-};
-
-export type CtaVariant = "english" | "language" | "math" | "general";
-
-export const getSecondaryCta = (variant: CtaVariant) => {
-  if (variant === "english") return SECONDARY_CTA;
-  if (variant === "language") return SECONDARY_CTA_LANGUAGE;
-  if (variant === "math") return SECONDARY_CTA_MATH;
-  return null;
-};
-
-export const CTA_PRIMARY_LABEL = PRIMARY_CTA.label;
-export const CTA_PRIMARY_LABEL_SHORT = PRIMARY_CTA.shortLabel;
-export const CTA_PRIMARY_HREF = PRIMARY_CTA.href;
-export const CTA_PRIMARY_TARGET = PRIMARY_CTA.target;
-export const CTA_PRIMARY_REL = PRIMARY_CTA.rel;
-export const CTA_SECONDARY_LABEL = SECONDARY_CTA.label;
-export const CTA_SECONDARY_HREF = SECONDARY_CTA.href;
-
+// Legacy exports (deprecated - use isEmpty from utils instead)
+/** @deprecated Use optional chaining instead */
 export const isTodo = (value: string | undefined | null) => !value;
 
-export type BreadcrumbItem = {
-  name: string;
-  url?: string;
-};
-
-export function generateBreadcrumbSchema(items: BreadcrumbItem[]) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: items.map((item, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: item.name,
-      item: item.url ? new URL(item.url, SITE_URL).toString() : undefined,
-    })),
-  };
-}
-
-export const DATA_PROCESSORS = [
-  {
-    name: "Cloudflare, Inc.",
-    purpose: "hosting i CDN",
-    location: "USA",
-  },
-  ...(EMAIL_PROVIDER_NAME
-    ? [
-        {
-          name: EMAIL_PROVIDER_NAME,
-          purpose: "obsługa poczty e-mail",
-          location: "EU/USA",
-        },
-      ]
-    : []),
-  ...(ANALYTICS_ENABLED
-    ? [
-        {
-          name: "Google LLC (Google Analytics)",
-          purpose: "statystyka ruchu i analityka serwisu",
-          location: "USA",
-        },
-      ]
-    : []),
-];
-
-export const getEnrollmentMessage = () => {
-  if (NEXT_INTAKE_MONTH && typeof SLOTS_LEFT === "number") {
-    return `Zapisy na ${NEXT_INTAKE_MONTH} — zostało ${SLOTS_LEFT} miejsc.`;
-  }
-  if (NEXT_INTAKE_MONTH) {
-    return `Zapisy na ${NEXT_INTAKE_MONTH} — liczba miejsc w grupach jest ograniczona.`;
-  }
-  return "Zapisy trwają — liczba miejsc w grupach jest ograniczona.";
+// Teacher specialties mapping
+export const TEACHER_SPECIALTIES: Record<string, string[]> = {
+  "Kasia": ["Business English", "Egzaminy Cambridge"],
+  "Ola": ["Konwersacje", "Hiszpański dla początkujących"],
+  "Natalia": ["Hiszpański A1-B2", "Kultura Ameryki Łacińskiej"],
+  "Janina": ["Rosyjski dla Polaków", "Tłumaczenia"],
+  "Małgorzata": ["Niemiecki biznesowy", "Szwedzki"],
+  "Marcin K.": ["Angielski akademicki", "Francuski A1-B1"],
 };

@@ -20,9 +20,13 @@ const splitArrow = (text: string) => {
   if (parts.length >= 2) return { left: parts[0], right: parts.slice(1).join(" → ") };
   return { left: String(text), right: "" };
 };
+
+// Tailwind class constants
+const card = "rounded-2xl border border-slate-200/80 bg-white shadow-sm transition-shadow hover:shadow-md";
+const btnSecondary = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary border border-slate-200 bg-white text-slate-700 shadow-sm hover:border-primary/30 hover:text-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0";
 ---
 
-<div class="card relative overflow-hidden p-6">
+<div class={`${card} relative overflow-hidden p-6`}>
   <div
     class="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary/60 to-primary/10"
     aria-hidden="true"
@@ -78,6 +82,6 @@ const splitArrow = (text: string) => {
   </ul>
 
   <div class="mt-6">
-    <a class="btn btn-secondary w-full" href={ctaHref} download>{ctaLabel}</a>
+    <a class={`${btnSecondary} w-full`} href={ctaHref} download>{ctaLabel}</a>
   </div>
 </div>

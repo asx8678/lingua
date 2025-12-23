@@ -25,6 +25,12 @@ const breadcrumbSchema = generateBreadcrumbSchema([
   { name: "Strona główna", url: "/" },
   { name: "Nasi lektorzy" },
 ]);
+
+// Tailwind class constants
+const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+const btnPrimary = `${btnBase} bg-primary text-white shadow-md hover:bg-primary-700 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:shadow-md`;
+const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-700 shadow-sm hover:border-primary/30 hover:text-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0`;
+const kicker = "inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary";
 ---
 
 <MainLayout
@@ -33,10 +39,10 @@ const breadcrumbSchema = generateBreadcrumbSchema([
   canonical="/nasi-lektorzy"
   structuredData={[breadcrumbSchema]}
 >
-  <section class="section bg-primary/5">
-    <div class="container-site">
+  <section class="py-16 lg:py-24 bg-primary/5">
+    <div class="mx-auto w-full max-w-7xl px-6">
       <div class="max-w-3xl">
-        <span class="kicker">Nasi lektorzy</span>
+        <span class={kicker}>Nasi lektorzy</span>
         <h1 class="mt-6">Poznaj zespół Lingua Legionowo</h1>
         <p class="mt-4 text-lg">
           Nasi lektorzy uczą języków obcych — {languagesList} — oraz matematyki. Zajęcia prowadzimy stacjonarnie
@@ -44,7 +50,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
         </p>
         <div class="mt-6 flex flex-wrap gap-3">
           <a
-            class="btn btn-primary"
+            class={btnPrimary}
             href={CTA_PRIMARY_HREF}
             target={CTA_PRIMARY_TARGET}
             rel={CTA_PRIMARY_REL}
@@ -53,7 +59,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
           >
             {CTA_PRIMARY_LABEL}
           </a>
-          <a class="btn btn-secondary" href="/oferta" data-track="cta_secondary" data-track-label="Zobacz ofertę">
+          <a class={btnSecondary} href="/oferta" data-track="cta_secondary" data-track-label="Zobacz ofertę">
             Zobacz ofertę
           </a>
         </div>

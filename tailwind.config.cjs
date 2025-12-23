@@ -23,6 +23,10 @@ module.exports = {
         soft: "0 10px 40px -10px rgba(2, 6, 23, 0.1)",
         "soft-lg": "0 20px 50px -15px rgba(2, 6, 23, 0.12)",
       },
+      backgroundImage: {
+        "hero-gradient": "linear-gradient(160deg, #f8fafc 0%, #f1f5f9 40%, #ffffff 100%)",
+        "cta-gradient": "linear-gradient(135deg, rgba(0, 82, 204, 0.08) 0%, rgba(0, 82, 204, 0.03) 50%, white 100%)",
+      },
       keyframes: {
         float: {
           "0%, 100%": { transform: "translateY(0)" },

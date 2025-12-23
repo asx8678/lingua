@@ -18,6 +18,10 @@ const contactFormHref = "/kontakt";
 const addressLine = FULL_ADDRESS || BUSINESS.city;
 const hasHours = Boolean(BUSINESS.openingHours);
 
+// Tailwind class constants
+const linkMuted = "text-slate-600 transition-colors hover:text-primary";
+const chip = "inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-600";
+
 const socialLinks = [
   {
     name: "Facebook",
@@ -33,11 +37,11 @@ const socialLinks = [
 ---
 
 <footer class="border-t border-slate-200 bg-gradient-to-b from-slate-50 to-slate-100/50">
-  <div class="container-site py-14">
+  <div class="mx-auto w-full max-w-7xl px-6 py-14">
     <div class="grid gap-10 lg:grid-cols-4">
       <div>
         <Logo />
-        <p class="mt-4 text-sm text-slate-600">
+        <p class="mt-4 text-sm text-slate-600 leading-relaxed">
           Szkoła języków obcych i matematyki w Legionowie. Zajęcia stacjonarne i online dla
           wszystkich poziomów.
         </p>
@@ -66,32 +70,32 @@ const socialLinks = [
         <h2 id="footer-offer-heading" class="text-sm font-extrabold text-slate-900">Oferta</h2>
         <ul class="mt-4 flex flex-col gap-2 text-sm">
           <li>
-            <a class="link-muted no-underline" href="/angielski-stacjonarnie"
+            <a class={`${linkMuted} no-underline`} href="/angielski-stacjonarnie"
               >Angielski stacjonarnie</a>
           </li>
-          <li><a class="link-muted no-underline" href="/angielski-online">Angielski online</a></li>
+          <li><a class={`${linkMuted} no-underline`} href="/angielski-online">Angielski online</a></li>
           <li>
-            <a class="link-muted no-underline" href="/lekcje-indywidualne">Lekcje indywidualne</a>
+            <a class={`${linkMuted} no-underline`} href="/lekcje-indywidualne">Lekcje indywidualne</a>
           </li>
-          <li><a class="link-muted no-underline" href="/kursy-grupowe">Kursy grupowe</a></li>
+          <li><a class={`${linkMuted} no-underline`} href="/kursy-grupowe">Kursy grupowe</a></li>
         </ul>
       </nav>
 
       <div>
         <h2 class="text-sm font-extrabold text-slate-900">Uczymy</h2>
         <div class="mt-4 flex flex-wrap gap-2 text-sm">
-          {subjects.map((subject) => <span class="chip">{subject}</span>)}
+          {subjects.map((subject) => <span class={chip}>{subject}</span>)}
         </div>
       </div>
 
       <nav aria-labelledby="footer-info-heading">
         <h2 id="footer-info-heading" class="text-sm font-extrabold text-slate-900">Informacje</h2>
         <ul class="mt-4 flex flex-col gap-2 text-sm">
-          <li><a class="link-muted no-underline" href="/cennik">Cennik</a></li>
-          <li><a class="link-muted no-underline" href="/opinie">Opinie</a></li>
-          <li><a class="link-muted no-underline" href="/o-nas">O nas</a></li>
-          <li><a class="link-muted no-underline" href="/blog">Blog</a></li>
-          <li><a class="link-muted no-underline" href="/kontakt">Kontakt</a></li>
+          <li><a class={`${linkMuted} no-underline`} href="/cennik">Cennik</a></li>
+          <li><a class={`${linkMuted} no-underline`} href="/opinie">Opinie</a></li>
+          <li><a class={`${linkMuted} no-underline`} href="/o-nas">O nas</a></li>
+          <li><a class={`${linkMuted} no-underline`} href="/blog">Blog</a></li>
+          <li><a class={`${linkMuted} no-underline`} href="/kontakt">Kontakt</a></li>
         </ul>
 
         <div class="mt-6 border-t border-slate-200 pt-6">
@@ -99,18 +103,18 @@ const socialLinks = [
           <address class="mt-4 flex flex-col gap-2 text-sm not-italic">
             {
               hasEmail ? (
-                <a class="link-muted no-underline" href={`mailto:${CONTACT_EMAIL}`}>
+                <a class={`${linkMuted} no-underline`} href={`mailto:${CONTACT_EMAIL}`}>
                   {CONTACT_EMAIL}
                 </a>
               ) : (
-                <a class="link-muted no-underline" href={contactFormHref}>
+                <a class={`${linkMuted} no-underline`} href={contactFormHref}>
                   Formularz kontaktowy
                 </a>
               )
             }
             {
               hasPhone ? (
-                <a class="link-muted no-underline" href={`tel:${CONTACT_PHONE}`}>
+                <a class={`${linkMuted} no-underline`} href={`tel:${CONTACT_PHONE}`}>
                   {CONTACT_PHONE}
                 </a>
               ) : (
@@ -128,7 +132,7 @@ const socialLinks = [
 
     <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 text-sm text-slate-500 sm:flex-row">
       <p>© {year} {BRAND_NAME}. Wszelkie prawa zastrzeżone.</p>
-      <a class="link-muted text-sm no-underline hover:underline" href="/privacy">Polityka prywatności</a>
+      <a class={`${linkMuted} text-sm no-underline hover:underline`} href="/privacy">Polityka prywatności</a>
     </div>
   </div>
 </footer>

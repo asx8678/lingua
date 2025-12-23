@@ -28,12 +28,18 @@ const trustStats = [
   { label: "Lektorzy", value: String(teacherCount) },
   { label: "Języki", value: String(languageCount) },
 ];
+
+// Tailwind class constants
+const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+const btnPrimary = `${btnBase} bg-primary text-white shadow-md hover:bg-primary-700 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:shadow-md`;
+const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-700 shadow-sm hover:border-primary/30 hover:text-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0`;
+const card = "rounded-2xl border border-slate-200/80 bg-white shadow-sm transition-shadow hover:shadow-md";
 ---
 
-<section class="section section-muted">
-  <div class="container-site">
-    <div class="section-header">
-      <span class="kicker">Zaufanie</span>
+<section class="py-16 lg:py-24 bg-slate-50">
+  <div class="mx-auto w-full max-w-7xl px-6">
+    <div class="text-center max-w-2xl mx-auto">
+      <span class="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary">Zaufanie</span>
       <h2 class="mt-4">Dlaczego kursanci wybierają {BRAND_NAME}</h2>
       <p class="mt-4">
         Łączymy lokalną szkołę z elastycznością zajęć online. Poniżej znajdziesz najważniejsze
@@ -42,7 +48,7 @@ const trustStats = [
     </div>
 
     <div class="mt-10 grid gap-6 lg:grid-cols-3">
-      <div class="card p-6">
+      <div class={`${card} p-6`}>
         <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Opinie</div>
         <h3 class="mt-3 text-xl font-extrabold text-slate-900">Opinie z Google</h3>
         <p class="mt-3 text-sm text-slate-600">
@@ -79,13 +85,13 @@ const trustStats = [
         )}
 
         <div class="mt-6">
-          <a class="btn btn-secondary w-full" href={reviewCtaHref} target={hasGoogleReviews ? "_blank" : undefined} rel={hasGoogleReviews ? "noopener noreferrer" : undefined}>
+          <a class={`${btnSecondary} w-full`} href={reviewCtaHref} target={hasGoogleReviews ? "_blank" : undefined} rel={hasGoogleReviews ? "noopener noreferrer" : undefined}>
             {reviewCtaLabel}
           </a>
         </div>
       </div>
 
-      <div class="card p-6">
+      <div class={`${card} p-6`}>
         <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Poznaj lektorów</div>
         <h3 class="mt-3 text-xl font-extrabold text-slate-900">Zespół i podejście</h3>
         <p class="mt-3 text-sm text-slate-600">
@@ -133,19 +139,19 @@ const trustStats = [
         )}
 
         <div class="mt-6 flex flex-wrap gap-3">
-          <a class="btn btn-primary" href="/nasi-lektorzy">Poznaj lektorów</a>
-          <a class="btn btn-secondary" href="/o-nas">O nas</a>
+          <a class={btnPrimary} href="/nasi-lektorzy">Poznaj lektorów</a>
+          <a class={btnSecondary} href="/o-nas">O nas</a>
         </div>
       </div>
 
-      <div class="card p-6">
+      <div class={`${card} p-6`}>
         <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Zdjęcia</div>
         <h3 class="mt-3 text-xl font-extrabold text-slate-900">Szkoła i zajęcia</h3>
         <p class="mt-3 text-sm text-slate-600">
           Chcesz zobaczyć szkołę na miejscu? Umów konsultację — pokażemy sale i opowiemy o organizacji zajęć.
         </p>
         <div class="mt-6">
-          <a class="btn btn-secondary w-full" href="/kontakt">Umów wizytę w szkole</a>
+          <a class={`${btnSecondary} w-full`} href="/kontakt">Umów wizytę w szkole</a>
         </div>
       </div>
     </div>

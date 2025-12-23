@@ -91,20 +91,30 @@ const proofPoints = [
 const featuredTestimonials = testimonials.filter((item) => item.featuredHome).slice(0, 2);
 const homeTestimonials =
   featuredTestimonials.length > 0 ? featuredTestimonials : testimonials.slice(0, 2);
+
+// Tailwind class constants
+const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+const btnPrimary = `${btnBase} bg-primary text-white shadow-md hover:bg-primary-700 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:shadow-md`;
+const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-700 shadow-sm hover:border-primary/30 hover:text-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0`;
+const card = "rounded-2xl border border-slate-200/80 bg-white shadow-sm transition-shadow hover:shadow-md";
+const cardInteractive = `${card} p-6 cursor-pointer hover:-translate-y-0.5`;
+const chip = "inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-600";
+const statCard = "rounded-2xl border border-slate-200 bg-white p-6 shadow-sm";
+const kicker = "inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary";
 ---
 
 <MainLayout title={title} description={description} canonical="/">
-  <section class="hero-bg relative overflow-hidden">
+  <section class="bg-hero-gradient relative overflow-hidden">
     <!-- Decorative background elements -->
     <div class="absolute inset-0 overflow-hidden" aria-hidden="true">
       <div class="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-primary/5 blur-3xl"></div>
       <div class="absolute -left-20 top-1/2 h-96 w-96 rounded-full bg-primary/5 blur-3xl"></div>
     </div>
 
-    <div class="container-site relative py-16 sm:py-24 lg:py-28">
+    <div class="mx-auto w-full max-w-7xl px-6 relative py-16 sm:py-24 lg:py-28">
       <div class="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
         <div>
-          <span class="kicker">Szkoła języków obcych i matematyki</span>
+          <span class={kicker}>Szkoła języków obcych i matematyki</span>
           <h1 class="mt-6">
             Języki obce i matematyka w Legionowie — plan nauki dopasowany do celu
           </h1>
@@ -116,7 +126,7 @@ const homeTestimonials =
 
           <div class="mt-8 flex flex-wrap gap-4">
             <a
-              class="btn btn-primary"
+              class={btnPrimary}
               href={CTA_PRIMARY_HREF}
               target={CTA_PRIMARY_TARGET}
               rel={CTA_PRIMARY_REL}
@@ -125,17 +135,17 @@ const homeTestimonials =
             >
               {CTA_PRIMARY_LABEL}
             </a>
-            <a class="btn btn-secondary" href="/oferta" data-track="cta_secondary" data-track-label="Zobacz ofertę">
+            <a class={btnSecondary} href="/oferta" data-track="cta_secondary" data-track-label="Zobacz ofertę">
               Zobacz ofertę
             </a>
           </div>
 
           <div class="mt-4 flex flex-wrap gap-2 text-xs font-semibold text-slate-600">
-            <a class="chip text-[11px] no-underline" href="/oferta#dla-dzieci">Dla dzieci</a>
-            <a class="chip text-[11px] no-underline" href="/oferta#dla-mlodziezy">Dla młodzieży</a>
-            <a class="chip text-[11px] no-underline" href="/oferta#dla-doroslych">Dla dorosłych</a>
-            <a class="chip text-[11px] no-underline" href="/oferta#dla-firm">Dla firm</a>
-            <a class="chip text-[11px] no-underline" href="/oferta#matematyka">Matematyka</a>
+            <a class={`${chip} text-[11px] no-underline`} href="/oferta#dla-dzieci">Dla dzieci</a>
+            <a class={`${chip} text-[11px] no-underline`} href="/oferta#dla-mlodziezy">Dla młodzieży</a>
+            <a class={`${chip} text-[11px] no-underline`} href="/oferta#dla-doroslych">Dla dorosłych</a>
+            <a class={`${chip} text-[11px] no-underline`} href="/oferta#dla-firm">Dla firm</a>
+            <a class={`${chip} text-[11px] no-underline`} href="/oferta#matematyka">Matematyka</a>
           </div>
 
           <div class="mt-10 grid gap-4 text-sm text-slate-600 sm:grid-cols-2">
@@ -172,9 +182,9 @@ const homeTestimonials =
     </div>
   </section>
 
-  <section class="section section-muted">
-    <div class="container-site">
-      <span class="kicker">Czego uczymy</span>
+  <section class="py-16 lg:py-24 bg-slate-50">
+    <div class="mx-auto w-full max-w-7xl px-6">
+      <span class={kicker}>Czego uczymy</span>
       <h2 class="mt-6">Języki obce i matematyka w jednym miejscu</h2>
       <p class="mt-4 max-w-3xl">
         Uczymy w małych grupach i indywidualnie, stacjonarnie w Legionowie lub online. Najczęściej
@@ -182,7 +192,7 @@ const homeTestimonials =
       </p>
 
       <div class="mt-6 flex flex-wrap gap-2">
-        {subjectChips.map((subject) => <span class="chip text-sm">{subject}</span>)}
+        {subjectChips.map((subject) => <span class={`${chip} text-sm`}>{subject}</span>)}
       </div>
       <div class="mt-6">
         <a class="text-sm font-bold text-primary no-underline hover:underline" href="/oferta">
@@ -193,11 +203,11 @@ const homeTestimonials =
   </section>
 
   <section class="py-12 lg:py-16">
-    <div class="container-site">
+    <div class="mx-auto w-full max-w-7xl px-6">
       <div class="grid gap-6 md:grid-cols-3">
         {
           proofPoints.map((item) => (
-            <div class="stat-card text-center">
+            <div class={`${statCard} text-center`}>
               <div class="text-xs font-bold uppercase tracking-widest text-primary">
                 {item.label}
               </div>
@@ -212,18 +222,18 @@ const homeTestimonials =
 
   <TrustSection />
 
-  <section class="section">
-    <div class="container-site">
+  <section class="py-16 lg:py-24">
+    <div class="mx-auto w-full max-w-7xl px-6">
       <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <span class="kicker">Opinie</span>
+          <span class={kicker}>Opinie</span>
           <h2 class="mt-6">Co mówią kursanci</h2>
           <p class="mt-4 max-w-3xl">
             Krótkie opinie osób, które uczą się z nami stacjonarnie lub online.
           </p>
         </div>
         <div class="mt-6 lg:mt-0">
-          <a class="btn btn-secondary" href="/opinie">Zobacz wszystkie</a>
+          <a class={btnSecondary} href="/opinie">Zobacz wszystkie</a>
         </div>
       </div>
 
@@ -235,11 +245,11 @@ const homeTestimonials =
     </div>
   </section>
 
-  <section class="section">
-    <div class="container-site">
+  <section class="py-16 lg:py-24">
+    <div class="mx-auto w-full max-w-7xl px-6">
       <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <span class="kicker">Nasi lektorzy</span>
+          <span class={kicker}>Nasi lektorzy</span>
           <h2 class="mt-6">Poznaj zespół, który prowadzi zajęcia</h2>
           <p class="mt-4 max-w-3xl">
             Doświadczeni lektorzy języków obcych i matematyki prowadzą zajęcia dopasowane do Twojego
@@ -247,7 +257,7 @@ const homeTestimonials =
           </p>
         </div>
         <div class="mt-6 lg:mt-0">
-          <a class="btn btn-secondary" href="/nasi-lektorzy">Zobacz wszystkich</a>
+          <a class={btnSecondary} href="/nasi-lektorzy">Zobacz wszystkich</a>
         </div>
       </div>
 
@@ -261,10 +271,10 @@ const homeTestimonials =
     </div>
   </section>
 
-  <section class="section section-muted">
-    <div class="container-site">
+  <section class="py-16 lg:py-24 bg-slate-50">
+    <div class="mx-auto w-full max-w-7xl px-6">
       <div class="text-center">
-        <span class="kicker">Proces</span>
+        <span class={kicker}>Proces</span>
         <h2 class="mt-4">Jak pracujemy</h2>
         <p class="mx-auto mt-4 max-w-2xl">
           Niezależnie od wybranego trybu, otrzymujesz jasny plan nauki i wsparcie na każdym etapie.
@@ -274,7 +284,7 @@ const homeTestimonials =
       <div class="mt-12 grid gap-8 lg:grid-cols-3">
         {
           steps.map((step, index) => (
-            <div class="card p-6 text-center">
+            <div class={`${card} p-6 text-center`}>
               <div class="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-lg font-bold text-white shadow-md">
                 {index + 1}
               </div>
@@ -287,7 +297,7 @@ const homeTestimonials =
 
       <div class="mt-12 text-center">
         <a
-          class="btn btn-primary"
+          class={btnPrimary}
           href={CTA_PRIMARY_HREF}
           target={CTA_PRIMARY_TARGET}
           rel={CTA_PRIMARY_REL}
@@ -300,11 +310,11 @@ const homeTestimonials =
     </div>
   </section>
 
-  <section class="section">
-    <div class="container-site">
+  <section class="py-16 lg:py-24">
+    <div class="mx-auto w-full max-w-7xl px-6">
       <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <span class="kicker">Oferta</span>
+          <span class={kicker}>Oferta</span>
           <h2 class="mt-4">Wybierz formę nauki dopasowaną do Ciebie</h2>
           <p class="mt-4 max-w-2xl text-slate-600">
             Dwie główne ścieżki to zajęcia stacjonarne w Legionowie i lekcje online. Pozostałe języki i
@@ -312,20 +322,20 @@ const homeTestimonials =
           </p>
         </div>
         <div class="shrink-0">
-          <a class="btn btn-secondary" href="/oferta">Zobacz pełną ofertę</a>
+          <a class={btnSecondary} href="/oferta">Zobacz pełną ofertę</a>
         </div>
       </div>
 
       <div class="mt-10 grid gap-6 md:grid-cols-2">
         {
-          offerCards.map((card) => (
+          offerCards.map((offerCard) => (
             <a
-              class={`card-interactive no-underline group ${card.featured ? "ring-2 ring-primary/50" : ""}`}
-              href={card.href}
+              class={`${cardInteractive} no-underline group ${offerCard.featured ? "ring-2 ring-primary/50" : ""}`}
+              href={offerCard.href}
             >
-              {card.featured && <span class="badge mb-4 bg-primary text-white">Polecane</span>}
-              <h3 class="text-xl font-extrabold text-slate-900">{card.title}</h3>
-              <p class="mt-3 text-slate-600">{card.text}</p>
+              {offerCard.featured && <span class="inline-block rounded-full px-3 py-1 text-xs font-bold mb-4 bg-primary text-white">Polecane</span>}
+              <h3 class="text-xl font-extrabold text-slate-900">{offerCard.title}</h3>
+              <p class="mt-3 text-slate-600">{offerCard.text}</p>
               <span class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary group-hover:gap-3 transition-all">
                 Poznaj szczegóły
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

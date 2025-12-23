@@ -38,17 +38,22 @@ const resolvedSecondary =
     : secondaryLabel && secondaryHref
       ? { label: secondaryLabel, href: secondaryHref }
       : null;
+
+// Tailwind class constants
+const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+const btnPrimary = `${btnBase} bg-primary text-white shadow-md hover:bg-primary-700 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:shadow-md`;
+const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-700 shadow-sm hover:border-primary/30 hover:text-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0`;
 ---
 
-<section class="section">
-  <div class="container-site">
-    <div class="cta-panel">
-      <h2 class="text-2xl sm:text-3xl">{title}</h2>
-      <p class="mx-auto mt-4 max-w-2xl">{description}</p>
+<section class="py-16 lg:py-24">
+  <div class="mx-auto w-full max-w-7xl px-6">
+    <div class="rounded-3xl border border-primary/15 p-8 sm:p-10 shadow-soft text-center bg-cta-gradient">
+      <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">{title}</h2>
+      <p class="mx-auto mt-4 max-w-2xl text-slate-600 leading-relaxed">{description}</p>
 
       <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
         <a
-          class="btn btn-primary"
+          class={btnPrimary}
           href={primaryHref}
           target={primaryTarget}
           rel={primaryRel}
@@ -60,7 +65,7 @@ const resolvedSecondary =
         {
           resolvedSecondary?.label && resolvedSecondary?.href && (
             <a
-              class="btn btn-secondary"
+              class={btnSecondary}
               href={resolvedSecondary.href}
               target={secondaryTarget}
               rel={secondaryRel}

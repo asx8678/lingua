@@ -5,13 +5,27 @@ interface Props {
   columns?: string[];
   rows?: string[][];
   footnote?: string;
+  /** ID for the table for accessibility */
+  tableId?: string;
 }
 
-const { title, subtitle, columns = [], rows = [], footnote } = Astro.props;
+const {
+  title,
+  subtitle,
+  columns = [],
+  rows = [],
+  footnote,
+  tableId = `pricing-table-${Math.random().toString(36).slice(2, 9)}`,
+} = Astro.props;
+
+const captionId = `${tableId}-caption`;
+
+// Tailwind class constants
+const card = "rounded-2xl border border-slate-200/80 bg-white shadow-sm transition-shadow hover:shadow-md";
 ---
 
-<section class="card p-6">
-  <h3 class="text-lg font-extrabold text-slate-900">{title}</h3>
+<section class={`${card} p-6`} aria-labelledby={captionId}>
+  <h3 id={captionId} class="text-lg font-extrabold text-slate-900">{title}</h3>
   {subtitle && <p class="mt-2 text-sm text-slate-600">{subtitle}</p>}
 
   <div class="mt-4 relative">
@@ -19,15 +33,16 @@ const { title, subtitle, columns = [], rows = [], footnote } = Astro.props;
       class="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent md:hidden"
       aria-hidden="true"
     ></div>
-    <div class="overflow-x-auto pb-2">
-      <table class="w-full min-w-[520px] text-left text-sm">
+    <div class="overflow-x-auto pb-2" tabindex="0" role="region" aria-label={`Tabela: ${title}`}>
+      <table class="w-full min-w-[520px] text-left text-sm" aria-describedby={subtitle ? `${tableId}-subtitle` : undefined}>
+        {subtitle && <caption id={`${tableId}-subtitle`} class="sr-only">{subtitle}</caption>}
         <thead>
           <tr
             class="border-b border-slate-200 text-xs font-bold uppercase tracking-widest text-slate-500"
           >
             {
-              columns.map((c) => (
-                <th class="py-3 pr-4" scope="col">
+              columns.map((c, i) => (
+                <th class="py-3 pr-4" scope="col" id={`${tableId}-col-${i}`}>
                   {c}
                 </th>
               ))
@@ -36,18 +51,25 @@ const { title, subtitle, columns = [], rows = [], footnote } = Astro.props;
         </thead>
         <tbody>
           {
-            rows.map((r) => (
+            rows.map((r, rowIndex) => (
               <tr class="border-b border-slate-100 last:border-0">
-                {r.map((cell, i) => (
-                  <td
-                    class={
-                      i === 0
-                        ? "py-3 pr-4 font-extrabold text-slate-900"
-                        : "py-3 pr-4 text-slate-600"
-                    }
-                  >
-                    {cell}
-                  </td>
+                {r.map((cell, cellIndex) => (
+                  cellIndex === 0 ? (
+                    <th
+                      scope="row"
+                      class="py-3 pr-4 font-extrabold text-slate-900"
+                      id={`${tableId}-row-${rowIndex}`}
+                    >
+                      {cell}
+                    </th>
+                  ) : (
+                    <td
+                      class="py-3 pr-4 text-slate-600"
+                      headers={`${tableId}-col-${cellIndex} ${tableId}-row-${rowIndex}`}
+                    >
+                      {cell}
+                    </td>
+                  )
                 ))}
               </tr>
             ))
@@ -55,7 +77,7 @@ const { title, subtitle, columns = [], rows = [], footnote } = Astro.props;
         </tbody>
       </table>
     </div>
-    <p class="mt-2 text-xs text-slate-500 md:hidden">
+    <p class="mt-2 text-xs text-slate-500 md:hidden" aria-live="polite">
       Przesuń tabelę w bok, aby zobaczyć wszystkie kolumny.
     </p>
   </div>

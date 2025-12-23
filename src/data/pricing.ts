@@ -73,10 +73,46 @@ export const formatPLN = (value: number): string => {
   return `${formatter.format(Math.round(value))} zł`;
 };
 
-// Summary text for display
+// Generate package summary from structured data
+const generatePackageSummary = (): string => {
+  return packages
+    .map((pkg) => {
+      const prices = Object.entries(pkg.pricePerPerson)
+        .map(([persons, price]) => `${formatPLN(price)} (${persons})`)
+        .join(", ");
+      return `${pkg.minutes} min — ${prices}`;
+    })
+    .join(". ");
+};
+
+// Generate course summary from structured data
+const generateCourseSummary = (): string => {
+  return courses
+    .map((course) => `${course.sessions}×${course.minutes} — ${formatPLN(course.price)}`)
+    .join(", ");
+};
+
+// Summary text for display (generated from structured data)
 export const PRICING_SUMMARY = {
-  packages:
-    "Pakiety 10 spotkań (cena / osoba): 60 min — 1300 zł (1), 800 zł (2), 650 zł (3). 45 min — 1000 zł (1), 600 zł (2), 500 zł (3).",
-  courses: "Kursy grupowe (cena / osoba): 30×90 — 2700 zł, 56×60 — 2800 zł, 56×90 — 4200 zł.",
+  packages: `Pakiety ${packages[0].baseSessions} spotkań (cena / osoba): ${generatePackageSummary()}.`,
+  courses: `Kursy grupowe (cena / osoba): ${generateCourseSummary()}.`,
   note: "Matematyka ma takie same stawki jak angielski.",
+};
+
+// Calculate monthly cost for a given plan
+export const calculateMonthlyCost = (
+  sessionsPerWeek: number,
+  pricePerSession: number,
+  weeksPerMonth = 4
+): number => {
+  return sessionsPerWeek * pricePerSession * weeksPerMonth;
+};
+
+// Get the cheapest option for each category
+export const getCheapestPackagePrice = (): number => {
+  return Math.min(...packages.flatMap((p) => Object.values(p.pricePerPerson)));
+};
+
+export const getCheapestCoursePrice = (): number => {
+  return Math.min(...courses.map((c) => c.price));
 };

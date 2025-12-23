@@ -6,28 +6,38 @@
     "rating": 5,
     "date": "2024-11-15",
     "featuredHome": true,
-    "featuredOnline": true
+    "featuredOnline": true,
+    "featuredInPerson": false
   },
   {
     "name": "Marek P.",
     "context": "Kurs grupowy 60 min",
     "text": "Świetna atmosfera i systematyczny feedback po zajęciach. W grupie łatwiej utrzymać regularność, a lektor dba o każdego.",
     "rating": 5,
-    "date": "2024-10-20"
+    "date": "2024-10-20",
+    "featuredHome": false,
+    "featuredOnline": false,
+    "featuredInPerson": true
   },
   {
     "name": "Alicja R.",
     "context": "Matematyka – przygotowanie do egzaminu",
     "text": "Zajęcia są dobrze uporządkowane, dostaję materiały i zadania domowe. Wreszcie rozumiem tematy, które wcześniej były trudne.",
     "rating": 5,
-    "date": "2024-09-10"
+    "date": "2024-09-10",
+    "featuredHome": false,
+    "featuredOnline": false,
+    "featuredInPerson": false
   },
   {
     "name": "Tomek S.",
     "context": "Lekcje indywidualne 45 min",
     "text": "Krótko, intensywnie i bardzo praktycznie. Doceniam to, że każdy temat jest od razu ćwiczony w rozmowie.",
     "rating": 4,
-    "date": "2024-08-25"
+    "date": "2024-08-25",
+    "featuredHome": false,
+    "featuredOnline": true,
+    "featuredInPerson": false
   },
   {
     "name": "Magda W.",
@@ -36,13 +46,77 @@
     "rating": 5,
     "date": "2024-07-18",
     "featuredHome": true,
-    "featuredInPerson": true
+    "featuredInPerson": true,
+    "featuredOnline": false
   },
   {
     "name": "Paweł K.",
     "context": "Kurs 90 min – przygotowanie do matury",
     "text": "Dostaję konkretne wskazówki i ćwiczenia pod egzamin. Po kilku tygodniach czuję, że jestem lepiej przygotowany.",
     "rating": 4,
-    "date": "2024-06-05"
+    "date": "2024-06-05",
+    "featuredHome": false,
+    "featuredOnline": false,
+    "featuredInPerson": false
+  },
+  {
+    "name": "Ewa L.",
+    "context": "Angielski biznesowy online",
+    "text": "Przygotowuję się do prezentacji w pracy. Lektorka pomaga mi z konkretnym słownictwem branżowym i poprawia błędy na bieżąco.",
+    "rating": 5,
+    "date": "2024-05-12",
+    "featuredHome": false,
+    "featuredOnline": true,
+    "featuredInPerson": false
+  },
+  {
+    "name": "Jakub N.",
+    "context": "Niemiecki – kurs grupowy",
+    "text": "Zacząłem od zera, a po pół roku prowadzę proste rozmowy. Dobra grupa i cierpliwy lektor to klucz.",
+    "rating": 5,
+    "date": "2024-04-20",
+    "featuredHome": false,
+    "featuredOnline": false,
+    "featuredInPerson": true
+  },
+  {
+    "name": "Marta Z.",
+    "context": "Hiszpański online dla początkujących",
+    "text": "Elastyczne godziny i dużo praktyki mówienia. Polecam osobom, które mają napięty grafik.",
+    "rating": 5,
+    "date": "2024-03-15",
+    "featuredHome": false,
+    "featuredOnline": true,
+    "featuredInPerson": false
+  },
+  {
+    "name": "Andrzej B.",
+    "context": "Matematyka – korepetycje dla liceum",
+    "text": "Syn w końcu zrozumiał funkcje i równania. Zajęcia są systematyczne, a postępy widoczne na kartkówkach.",
+    "rating": 5,
+    "date": "2024-02-28",
+    "featuredHome": false,
+    "featuredOnline": false,
+    "featuredInPerson": true
+  },
+  {
+    "name": "Joanna T.",
+    "context": "Angielski konwersacyjny",
+    "text": "Chciałam przełamać barierę w mówieniu i udało się. Lektor tworzy bezpieczną atmosferę do ćwiczeń.",
+    "rating": 5,
+    "date": "2024-01-10",
+    "featuredHome": false,
+    "featuredOnline": false,
+    "featuredInPerson": false
+  },
+  {
+    "name": "Piotr D.",
+    "context": "Przygotowanie do IELTS",
+    "text": "Dostałem 7.0 po 3 miesiącach przygotowań. Konkretne materiały i próbne testy bardzo pomogły.",
+    "rating": 5,
+    "date": "2023-12-05",
+    "featuredHome": false,
+    "featuredOnline": true,
+    "featuredInPerson": false
   }
 ]

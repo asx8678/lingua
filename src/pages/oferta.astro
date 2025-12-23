@@ -54,6 +54,15 @@ const breadcrumbSchema = generateBreadcrumbSchema([
   { name: "Strona główna", url: "/" },
   { name: "Oferta" },
 ]);
+
+// Tailwind class constants
+const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+const btnPrimary = `${btnBase} bg-primary text-white shadow-md hover:bg-primary-700 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:shadow-md`;
+const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-700 shadow-sm hover:border-primary/30 hover:text-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0`;
+const card = "rounded-2xl border border-slate-200/80 bg-white shadow-sm transition-shadow hover:shadow-md";
+const cardInteractive = `${card} p-6 cursor-pointer hover:-translate-y-0.5`;
+const kicker = "inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary";
+const notice = "rounded-xl border border-primary/20 bg-primary/5 p-4 text-primary";
 ---
 
 <MainLayout
@@ -62,10 +71,10 @@ const breadcrumbSchema = generateBreadcrumbSchema([
   canonical="/oferta"
   structuredData={[breadcrumbSchema]}
 >
-  <section class="hero-bg">
-    <div class="container-site py-16 sm:py-20">
+  <section class="bg-hero-gradient">
+    <div class="mx-auto w-full max-w-7xl px-6 py-16 sm:py-20">
       <div class="max-w-3xl">
-        <span class="kicker">Oferta</span>
+        <span class={kicker}>Oferta</span>
         <h1 class="mt-6">Wybierz formę nauki dopasowaną do Ciebie</h1>
         <p class="mt-6 text-lg">
           Uczymy stacjonarnie w Legionowie i online. Poniżej wybierzesz główny kierunek, a resztę
@@ -73,7 +82,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
         </p>
         <div class="mt-8 flex flex-wrap items-center gap-4">
           <a
-            class="btn btn-primary"
+            class={btnPrimary}
             href={CTA_PRIMARY_HREF}
             target={CTA_PRIMARY_TARGET}
             rel={CTA_PRIMARY_REL}
@@ -86,16 +95,16 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             >Zobacz cennik →</a
           >
         </div>
-        <div class="mt-6 notice text-sm">
+        <div class={`mt-6 ${notice} text-sm`}>
           {enrollmentMessage}
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container-site">
-      <span class="kicker">Dla kogo</span>
+  <section class="py-16 lg:py-24">
+    <div class="mx-auto w-full max-w-7xl px-6">
+      <span class={kicker}>Dla kogo</span>
       <h2 class="mt-4">Zajęcia dopasowane do wieku i celu</h2>
       <p class="mt-4 max-w-3xl text-slate-600">
         Zaczynamy od krótkiej diagnozy, a następnie dobieramy format i tempo pracy. Wybierz grupę,
@@ -103,7 +112,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       </p>
       <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         {segments.map((segment) => (
-          <div class="card p-6 scroll-mt-28" id={segment.id}>
+          <div class={`${card} p-6 scroll-mt-28`} id={segment.id}>
             <h3 class="text-lg font-extrabold text-slate-900">{segment.title}</h3>
             <p class="mt-3 text-sm text-slate-600">{segment.text}</p>
             <a
@@ -122,11 +131,11 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     </div>
   </section>
 
-  <section class="section">
-    <div class="container-site">
+  <section class="py-16 lg:py-24">
+    <div class="mx-auto w-full max-w-7xl px-6">
       <div class="grid gap-6 md:grid-cols-2">
         <a
-          class="card-interactive group no-underline"
+          class={`${cardInteractive} group no-underline`}
           href="/angielski-stacjonarnie"
         >
           <h2 class="text-xl font-extrabold text-slate-900">Angielski stacjonarnie</h2>
@@ -141,7 +150,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             </svg>
           </span>
         </a>
-        <a class="card-interactive group no-underline" href="/angielski-online">
+        <a class={`${cardInteractive} group no-underline`} href="/angielski-online">
           <h2 class="text-xl font-extrabold text-slate-900">Angielski online</h2>
           <p class="mt-3 text-slate-600">
             Lekcje z lektorem na żywo. Elastyczne godziny i nacisk na mówienie w praktyce.
@@ -156,7 +165,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       </div>
       <div class="mt-8">
         <a
-          class="btn btn-primary"
+          class={btnPrimary}
           href={CTA_PRIMARY_HREF}
           target={CTA_PRIMARY_TARGET}
           rel={CTA_PRIMARY_REL}
@@ -169,9 +178,9 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     </div>
   </section>
 
-  <section class="section">
-    <div class="container-site">
-      <span class="kicker">Twój progres</span>
+  <section class="py-16 lg:py-24">
+    <div class="mx-auto w-full max-w-7xl px-6">
+      <span class={kicker}>Twój progres</span>
       <h2 class="mt-4">Zobacz, co osiągniesz na każdym poziomie</h2>
       <p class="mt-4 max-w-3xl text-slate-600">
         Wybierz swój obecny poziom i zobacz, co będziesz potrafić po kursie.
@@ -192,9 +201,9 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     </div>
   </section>
 
-  <section class="section section-muted">
-    <div class="container-site">
-      <span class="kicker">Pozostałe kursy</span>
+  <section class="py-16 lg:py-24 bg-slate-50">
+    <div class="mx-auto w-full max-w-7xl px-6">
+      <span class={kicker}>Pozostałe kursy</span>
       <h2 class="mt-4">Inne języki i matematyka</h2>
       <p class="mt-4 max-w-3xl">
         Sprawdź szczegóły pozostałych kursów i korepetycji. Każdy program dopasowujemy do poziomu,
@@ -203,7 +212,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {otherOffers.map((offer) => (
           <a
-            class="card-interactive group no-underline scroll-mt-28"
+            class={`${cardInteractive} group no-underline scroll-mt-28`}
             href={`/${offer.slug}`}
             id={offer.slug === "matematyka" ? "matematyka" : undefined}
           >
@@ -220,7 +229,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       </div>
       <div class="mt-8">
         <a
-          class="btn btn-secondary"
+          class={btnSecondary}
           href={CTA_PRIMARY_HREF}
           target={CTA_PRIMARY_TARGET}
           rel={CTA_PRIMARY_REL}
