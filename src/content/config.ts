@@ -8,6 +8,10 @@ const blog = defineCollection({
     pubDate: z.date(),
     updatedDate: z.date().optional(),
     tags: z.array(z.string()).default([]),
+    author: z.string().default("Zespół Lingua"),
+    authorRole: z
+      .string()
+      .default("Szkoła języków obcych i matematyki w Legionowie"),
     draft: z.boolean().default(false),
   }),
 });
