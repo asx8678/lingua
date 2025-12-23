@@ -59,16 +59,6 @@
     return 'rgba(' + Math.round(rgb.r) + ',' + Math.round(rgb.g) + ',' + Math.round(rgb.b) + ',' + clamp(a, 0, 1) + ')';
   }
 
-  function mixRgb(a, b, t) {
-    t = clamp(t, 0, 1);
-    return {
-      r: a.r + (b.r - a.r) * t,
-      g: a.g + (b.g - a.g) * t,
-      b: a.b + (b.b - a.b) * t,
-      a: a.a + (b.a - a.a) * t
-    };
-  }
-
   function relLuminance(rgb) {
     function lin(c) {
       c = c / 255;
@@ -1488,11 +1478,6 @@ function setTrack(trackId) {
     // Stepper init (levels)
     stepperList.innerHTML = '';
     stepButtons.length = 0;
-
-    function focusStepInList(i) {
-      focusStepByIndex(i);
-      scrollStepIntoView(i);
-    }
 
     for (var li = 0; li < levels.length; li++) {
       var isSel = (li === state.selectedIndex);

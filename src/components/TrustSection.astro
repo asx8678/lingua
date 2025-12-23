@@ -11,9 +11,6 @@ const teacherCount = teachers.length;
 const languageCount = new Set(teachers.flatMap((teacher) => teacher.languages)).size;
 
 const hasGoogleReviews = Boolean(GOOGLE_REVIEWS.url);
-const hasReviewStats =
-  typeof GOOGLE_REVIEWS.rating === "number" && typeof GOOGLE_REVIEWS.count === "number";
-
 const ratingDisplay =
   typeof GOOGLE_REVIEWS.rating === "number"
     ? `${GOOGLE_REVIEWS.rating.toFixed(1).replace(".", ",")}/5`

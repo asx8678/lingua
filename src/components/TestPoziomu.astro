@@ -352,7 +352,7 @@ const { bankUrl = "/question-bank-1200.json" } = Astro.props;
 
 
 
-<script is:inline>
+<script is:inline define:vars={{ CTA_PRIMARY_HREF, CTA_PRIMARY_LABEL_SHORT }}>
 window.__LL_LOAD_BANK__ = async (rootEl) => {
   const QUESTION_BANK_URL = (rootEl && rootEl.dataset && rootEl.dataset.questionBankUrl) ? rootEl.dataset.questionBankUrl : "";
   if (!QUESTION_BANK_URL){ throw new Error("Brak URL do banku pytań. Ustaw atrybut data-question-bank-url na głównym elemencie testu."); }
@@ -368,8 +368,8 @@ window.__LL_LOAD_BANK__ = async (rootEl) => {
   // KONFIGURACJA
   // =========================
   let LEAD_WEBHOOK_URL = "";
-  const PRIMARY_CTA_HREF = {JSON.stringify(CTA_PRIMARY_HREF)};
-  const PRIMARY_CTA_LABEL = {JSON.stringify(CTA_PRIMARY_LABEL_SHORT)};
+  const PRIMARY_CTA_HREF = CTA_PRIMARY_HREF;
+  const PRIMARY_CTA_LABEL = CTA_PRIMARY_LABEL_SHORT;
 
   const LEVELS = ["A1","A2","B1","B2","C1","C2"];
   const L = (lvl) => LEVELS.indexOf(lvl);
