@@ -1,0 +1,177 @@
+---
+import { BRAND_NAME, GOOGLE_REVIEWS, YEARS_IN_OPERATION } from "../config/site";
+import { teachers } from "../data/teachers";
+import {
+  GOOGLE_REVIEW_HIGHLIGHTS,
+  PHOTO_PLACEHOLDERS,
+  TEACHER_CREDENTIALS,
+  TEACHING_APPROACH,
+} from "../data/trust";
+
+const teacherCount = teachers.length;
+const languageCount = new Set(teachers.flatMap((teacher) => teacher.languages)).size;
+
+const hasGoogleReviews = Boolean(GOOGLE_REVIEWS.url);
+const hasReviewStats =
+  typeof GOOGLE_REVIEWS.rating === "number" && typeof GOOGLE_REVIEWS.count === "number";
+
+const ratingDisplay =
+  typeof GOOGLE_REVIEWS.rating === "number"
+    ? `${GOOGLE_REVIEWS.rating.toFixed(1).replace(".", ",")}/5`
+    : "—";
+const countDisplay =
+  typeof GOOGLE_REVIEWS.count === "number"
+    ? new Intl.NumberFormat("pl-PL").format(GOOGLE_REVIEWS.count)
+    : "—";
+
+const reviewCtaHref = GOOGLE_REVIEWS.url || "/opinie";
+const reviewCtaLabel = hasGoogleReviews ? "Zobacz opinie w Google" : "Zobacz opinie kursantów";
+
+const trustStats = [
+  { label: "Lata działalności", value: YEARS_IN_OPERATION || "—" },
+  { label: "Lektorzy", value: String(teacherCount) },
+  { label: "Języki", value: String(languageCount) },
+];
+---
+
+<section class="section section-muted">
+  <div class="container-site">
+    <div class="section-header">
+      <span class="kicker">Zaufanie</span>
+      <h2 class="mt-4">Dlaczego kursanci wybierają {BRAND_NAME}</h2>
+      <p class="mt-4">
+        Łączymy lokalną szkołę z elastycznością zajęć online. Poniżej znajdziesz najważniejsze
+        sygnały zaufania i praktyczne informacje o zespole.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-6 lg:grid-cols-3">
+      <div class="card p-6">
+        <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Opinie</div>
+        <h3 class="mt-3 text-xl font-extrabold text-slate-900">Opinie z Google</h3>
+        <p class="mt-3 text-sm text-slate-600">
+          Sprawdź, co o nas mówią kursanci i rodzice. Opinie pomagają podjąć decyzję o starcie.
+        </p>
+
+        <div class="mt-5 grid gap-4 sm:grid-cols-2">
+          <div class="rounded-2xl border border-slate-200 bg-white p-4 text-center">
+            <div class="text-xs font-bold uppercase tracking-widest text-slate-400">Ocena</div>
+            <div class="mt-2 text-3xl font-extrabold text-slate-900">{ratingDisplay}</div>
+            <div class="mt-1 text-xs text-slate-500">Google Reviews</div>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-white p-4 text-center">
+            <div class="text-xs font-bold uppercase tracking-widest text-slate-400">Liczba opinii</div>
+            <div class="mt-2 text-3xl font-extrabold text-slate-900">{countDisplay}</div>
+            <div class="mt-1 text-xs text-slate-500">Google Reviews</div>
+          </div>
+        </div>
+
+        {!hasReviewStats && (
+          <p class="mt-3 text-xs text-slate-500">
+            Dane oceny i liczby opinii uzupełnimy po podłączeniu profilu Google.
+          </p>
+        )}
+
+        {GOOGLE_REVIEW_HIGHLIGHTS.length > 0 && (
+          <div class="mt-5">
+            <div class="text-xs font-bold uppercase tracking-widest text-slate-400">
+              Opinie z Google
+            </div>
+            <div class="mt-3 grid gap-3">
+              {GOOGLE_REVIEW_HIGHLIGHTS.map((item) => (
+                <div class="rounded-2xl border border-slate-200 bg-white p-4 text-sm text-slate-600">
+                  <p>“{item.text}”</p>
+                  {item.author && <p class="mt-2 text-xs font-semibold">— {item.author}</p>}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div class="mt-6">
+          <a class="btn btn-secondary w-full" href={reviewCtaHref} target={hasGoogleReviews ? "_blank" : undefined} rel={hasGoogleReviews ? "noopener noreferrer" : undefined}>
+            {reviewCtaLabel}
+          </a>
+        </div>
+      </div>
+
+      <div class="card p-6">
+        <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Poznaj lektorów</div>
+        <h3 class="mt-3 text-xl font-extrabold text-slate-900">Zespół i podejście</h3>
+        <p class="mt-3 text-sm text-slate-600">
+          Uczysz się z lektorami, którzy prowadzą zajęcia stacjonarne i online oraz dopasowują plan
+          do Twoich potrzeb.
+        </p>
+
+        <div class="mt-5 grid gap-3 sm:grid-cols-3">
+          {trustStats.map((item) => (
+            <div class="rounded-2xl border border-slate-200 bg-white p-4 text-center">
+              <div class="text-xs font-bold uppercase tracking-widest text-slate-400">
+                {item.label}
+              </div>
+              <div class="mt-2 text-lg font-extrabold text-slate-900">{item.value}</div>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-5">
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-400">Podejście</div>
+          <ul class="mt-3 space-y-2 text-sm text-slate-600">
+            {TEACHING_APPROACH.map((item) => (
+              <li class="flex items-start gap-2">
+                <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary" aria-hidden="true"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {TEACHER_CREDENTIALS.length > 0 ? (
+          <div class="mt-5">
+            <div class="text-xs font-bold uppercase tracking-widest text-slate-400">
+              Kwalifikacje
+            </div>
+            <ul class="mt-3 space-y-2 text-sm text-slate-600">
+              {TEACHER_CREDENTIALS.map((item) => (
+                <li class="flex items-start gap-2">
+                  <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary" aria-hidden="true"></span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <p class="mt-5 text-xs text-slate-500">
+            Kwalifikacje lektorów uzupełnimy po publikacji profili.
+          </p>
+        )}
+
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a class="btn btn-primary" href="/nasi-lektorzy">Poznaj lektorów</a>
+          <a class="btn btn-secondary" href="/o-nas">O nas</a>
+        </div>
+      </div>
+
+      <div class="card p-6">
+        <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Zdjęcia</div>
+        <h3 class="mt-3 text-xl font-extrabold text-slate-900">Szkoła i zajęcia</h3>
+        <p class="mt-3 text-sm text-slate-600">
+          Dodamy realne zdjęcia sal, zajęć i zespołu, abyś mógł zobaczyć klimat szkoły.
+        </p>
+        <div class="mt-5 grid gap-3">
+          {PHOTO_PLACEHOLDERS.map((item) => (
+            <div class="rounded-2xl border border-dashed border-slate-200 bg-white p-4">
+              <div class="text-xs font-bold uppercase tracking-widest text-slate-400">
+                {item.title}
+              </div>
+              <p class="mt-2 text-sm text-slate-600">{item.description}</p>
+            </div>
+          ))}
+        </div>
+        <div class="mt-6">
+          <a class="btn btn-secondary w-full" href="/kontakt">Umów wizytę w szkole</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

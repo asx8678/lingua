@@ -2,6 +2,7 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
 import FaqSection from "../components/FaqSection.astro";
+import TrustSection from "../components/TrustSection.astro";
 import {
   BRAND_NAME,
   CTA_PRIMARY_HREF,
@@ -297,6 +298,8 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       </div>
     </div>
   </section>
+
+  <TrustSection />
 
   <FaqSection title="Angielski online — najczęstsze pytania" items={faqs} />
 

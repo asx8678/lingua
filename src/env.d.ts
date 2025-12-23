@@ -27,6 +27,7 @@ interface ImportMetaEnv {
   // Business information
   readonly PUBLIC_LEGAL_ENTITY_NAME?: string;
   readonly PUBLIC_OPENING_HOURS?: string;
+  readonly PUBLIC_YEARS_IN_OPERATION?: string;
 
   // Geolocation
   readonly PUBLIC_GEO_LAT?: string;
@@ -36,6 +37,10 @@ interface ImportMetaEnv {
   readonly PUBLIC_FACEBOOK_URL?: string;
   readonly PUBLIC_INSTAGRAM_URL?: string;
   readonly PUBLIC_YOUTUBE_URL?: string;
+  readonly PUBLIC_GOOGLE_REVIEWS_URL?: string;
+  readonly PUBLIC_GOOGLE_REVIEWS_RATING?: string;
+  readonly PUBLIC_GOOGLE_REVIEWS_COUNT?: string;
+  readonly PUBLIC_GOOGLE_BUSINESS_NAME?: string;
 
   // Analytics
   readonly PUBLIC_GA_ID?: string;

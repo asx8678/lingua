@@ -20,7 +20,7 @@ export const BUSINESS = {
   city: CONTACT.city,
   email: CONTACT.email,
   phone: CONTACT.phone,
-  openingHours: import.meta.env.PUBLIC_OPENING_HOURS ?? "",
+  openingHours: import.meta.env.PUBLIC_OPENING_HOURS ?? "8:00–21:00",
   geo: {
     latitude: import.meta.env.PUBLIC_GEO_LAT ?? "",
     longitude: import.meta.env.PUBLIC_GEO_LNG ?? "",
@@ -51,6 +51,21 @@ export const ANALYTICS_ID = import.meta.env.PUBLIC_GA_ID ?? "G-FS7CKXXZ6J";
 export const ANALYTICS_ENABLED = Boolean(ANALYTICS_ID);
 export const EMAIL_PROVIDER_NAME =
   import.meta.env.PUBLIC_EMAIL_PROVIDER_NAME ?? "Dostawca poczty e-mail";
+
+const parseNumericEnv = (value: string | undefined) => {
+  if (!value) return null;
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : null;
+};
+
+export const GOOGLE_REVIEWS = {
+  url: import.meta.env.PUBLIC_GOOGLE_REVIEWS_URL ?? "",
+  businessName: import.meta.env.PUBLIC_GOOGLE_BUSINESS_NAME ?? BRAND_NAME,
+  rating: parseNumericEnv(import.meta.env.PUBLIC_GOOGLE_REVIEWS_RATING),
+  count: parseNumericEnv(import.meta.env.PUBLIC_GOOGLE_REVIEWS_COUNT),
+};
+
+export const YEARS_IN_OPERATION = import.meta.env.PUBLIC_YEARS_IN_OPERATION ?? "";
 
 export const OG_IMAGE = "/images/og-lingua.png";
 

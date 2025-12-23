@@ -1,6 +1,7 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
+import TrustSection from "../components/TrustSection.astro";
 import { subjects } from "../data/subjects";
 import { BRAND_NAME, CTA_PRIMARY_HREF, CTA_PRIMARY_LABEL, generateBreadcrumbSchema } from "../config/site";
 
@@ -114,6 +115,8 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       </div>
     </div>
   </section>
+
+  <TrustSection />
 
   <CTASection
     title="Nie wiesz, co wybrać?"
