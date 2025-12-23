@@ -26,51 +26,65 @@ const consentKey = STORAGE_KEYS.analyticsConsent;
       window.gtag("event", eventName, params);
     };
 
-    // Track clicks on elements with data-track attribute
+    // Consolidated click listener for better performance
     document.addEventListener("click", (event) => {
-      const target = event.target.closest("[data-track]");
-      if (target) {
-        const eventName = target.dataset.track;
-        if (!eventName) return;
-        track(eventName, {
-          event_category: target.dataset.trackCategory || TRACK_CATEGORIES.conversion,
-          event_label: target.dataset.trackLabel || target.textContent?.trim() || "",
-          link_url: target.getAttribute("href") || "",
-        });
-        return;
-      }
+      // Logic 1: Tracking attributes & buttons
+      (() => {
+        const target = event.target.closest("[data-track]");
+        if (target) {
+          const eventName = target.dataset.track;
+          if (!eventName) return;
+          track(eventName, {
+            event_category: target.dataset.trackCategory || TRACK_CATEGORIES.conversion,
+            event_label: target.dataset.trackLabel || target.textContent?.trim() || "",
+            link_url: target.getAttribute("href") || "",
+          });
+          return;
+        }
 
-      // Track primary button clicks
-      const primaryBtn = event.target.closest(".btn-primary");
-      if (primaryBtn) {
-        track("cta_primary", {
+        const primaryBtn = event.target.closest(".btn-primary");
+        if (primaryBtn) {
+          track("cta_primary", {
+            event_category: TRACK_CATEGORIES.conversion,
+            event_label: primaryBtn.textContent?.trim() || "",
+            link_url: primaryBtn.getAttribute("href") || "",
+          });
+          return;
+        }
+
+        const secondaryBtn = event.target.closest(".btn-secondary");
+        if (secondaryBtn) {
+          track("cta_secondary", {
+            event_category: TRACK_CATEGORIES.conversion,
+            event_label: secondaryBtn.textContent?.trim() || "",
+            link_url: secondaryBtn.getAttribute("href") || "",
+          });
+        }
+      })();
+
+      // Logic 2: Phone links
+      (() => {
+        const link = event.target.closest('a[href^="tel:"]');
+        if (!link) return;
+        track("phone_click", {
           event_category: TRACK_CATEGORIES.conversion,
-          event_label: primaryBtn.textContent?.trim() || "",
-          link_url: primaryBtn.getAttribute("href") || "",
+          event_label: link.textContent?.trim() || "Telefon",
+          link_url: link.getAttribute("href") || "",
         });
-        return;
-      }
+      })();
 
-      // Track secondary button clicks
-      const secondaryBtn = event.target.closest(".btn-secondary");
-      if (secondaryBtn) {
-        track("cta_secondary", {
-          event_category: TRACK_CATEGORIES.conversion,
-          event_label: secondaryBtn.textContent?.trim() || "",
-          link_url: secondaryBtn.getAttribute("href") || "",
+      // Logic 3: Outbound links
+      (() => {
+        const link = event.target.closest('a[href^="http"]');
+        if (!link) return;
+        const url = new URL(link.href);
+        if (url.hostname === window.location.hostname) return;
+        track("outbound_click", {
+          event_category: TRACK_CATEGORIES.engagement,
+          event_label: url.hostname,
+          link_url: link.href,
         });
-      }
-    });
-
-    // Track phone link clicks
-    document.addEventListener("click", (event) => {
-      const link = event.target.closest('a[href^="tel:"]');
-      if (!link) return;
-      track("phone_click", {
-        event_category: TRACK_CATEGORIES.conversion,
-        event_label: link.textContent?.trim() || "Telefon",
-        link_url: link.getAttribute("href") || "",
-      });
+      })();
     });
 
     // Track form starts (first field focus)
@@ -97,18 +111,5 @@ const consentKey = STORAGE_KEYS.analyticsConsent;
       },
       true
     );
-
-    // Track outbound link clicks
-    document.addEventListener("click", (event) => {
-      const link = event.target.closest('a[href^="http"]');
-      if (!link) return;
-      const url = new URL(link.href);
-      if (url.hostname === window.location.hostname) return;
-      track("outbound_click", {
-        event_category: TRACK_CATEGORIES.engagement,
-        event_label: url.hostname,
-        link_url: link.href,
-      });
-    });
   })();
 </script>
