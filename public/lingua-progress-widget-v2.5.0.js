@@ -484,7 +484,7 @@
       '.llw-bar{margin-top:8px;height:8px;border-radius:999px;background: rgba(127,127,127,.14);overflow:hidden;}',
       '.llw-bar > i{display:block;height:100%;width:0%;background: linear-gradient(90deg, var(--llw-accent), rgba(255,255,255,.35));border-radius:999px;transition: width 320ms ease;}',
       '.llw-panel{border:1px solid var(--llw-border);border-radius: calc(var(--llw-radius) - 6px);padding: 12px;background: var(--llw-surface);backdrop-filter: blur(10px);} ',
-      '.llw-panel h4{margin:0;font-size:14px;letter-spacing:-.01em;}',
+      '.llw-panel h3{margin:0;font-size:14px;letter-spacing:-.01em;}',
       '.llw-panel p{margin:6px 0 0;color:var(--llw-muted);font-size:13px;line-height:1.38;}',
       '.llw-grid{margin-top:12px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;}',
       '.llw-split .llw-grid{grid-template-columns:1fr;}',
@@ -950,7 +950,11 @@
     topbar.appendChild(statProgress);
     overlay.appendChild(topbar);
 
-    var nodesWrap = createEl('div', { class: 'llw-nodes' });
+    var nodesWrap = createEl('div', {
+      class: 'llw-nodes',
+      role: 'tablist',
+      'aria-label': isEn ? 'Levels' : 'Poziomy'
+    });
 
     stage.appendChild(stageBg);
     stage.appendChild(canvas);
@@ -1078,7 +1082,7 @@
     var panel = createEl('div', { class: 'llw-panel' });
     panel.setAttribute('aria-live', 'polite');
 
-    var panelTitle = createEl('h4');
+    var panelTitle = createEl('h3');
     var panelDesc = createEl('p');
     var grid = createEl('div', { class: 'llw-grid' });
 
@@ -1761,6 +1765,7 @@ function setTrack(trackId) {
         var b = createEl('button', {
           class: 'llw-node',
           type: 'button',
+          role: 'tab',
           text: levels[i].id
         });
         b.style.left = pt.x + 'px';

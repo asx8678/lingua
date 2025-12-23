@@ -23,6 +23,7 @@ export function buildCSPHeader(nonce: string): string {
     "img-src 'self' data: https:",
     "font-src 'self'",
     "connect-src 'self' https://www.google-analytics.com",
+    "frame-src 'self' https://www.google.com https://maps.google.com",
     "frame-ancestors 'none'",
   ].join("; ");
 }
