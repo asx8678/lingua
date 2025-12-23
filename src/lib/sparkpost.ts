@@ -1,7 +1,7 @@
-// Mailjet Email Service
-// Docs: https://dev.mailjet.com/email/guides/send-api-v31/
+// SparkPost Email Service (EU)
+// Docs: https://developers.sparkpost.com/api/transmissions/
 
-export type MailjetPayload = {
+export type SparkPostPayload = {
   to: string;
   toName?: string;
   from: string;
@@ -12,62 +12,63 @@ export type MailjetPayload = {
   replyTo?: string;
 };
 
-export type MailjetResult = {
+export type SparkPostResult = {
   success: boolean;
   messageId?: string;
   error?: string;
 };
 
 /**
- * Send email using Mailjet API v3.1
+ * Send email using SparkPost EU API
  */
-export async function sendMailjet(
-  payload: MailjetPayload,
-  apiKey: string,
-  secretKey: string
-): Promise<MailjetResult> {
-  const messages = [
-    {
-      From: {
-        Email: payload.from,
-        Name: payload.fromName || undefined,
-      },
-      To: [
-        {
-          Email: payload.to,
-          Name: payload.toName || undefined,
+export async function sendSparkPost(
+  payload: SparkPostPayload,
+  apiKey: string
+): Promise<SparkPostResult> {
+  const transmission = {
+    recipients: [
+      {
+        address: {
+          email: payload.to,
+          name: payload.toName || undefined,
         },
-      ],
-      Subject: payload.subject,
-      TextPart: payload.text,
-      HTMLPart: payload.html || undefined,
-      ReplyTo: payload.replyTo ? { Email: payload.replyTo } : undefined,
+      },
+    ],
+    content: {
+      from: {
+        email: payload.from,
+        name: payload.fromName || undefined,
+      },
+      subject: payload.subject,
+      text: payload.text,
+      html: payload.html || undefined,
+      reply_to: payload.replyTo || undefined,
     },
-  ];
+  };
 
   try {
-    const response = await fetch("https://api.mailjet.com/v3.1/send", {
+    const response = await fetch("https://api.eu.sparkpost.com/api/v1/transmissions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Basic " + btoa(`${apiKey}:${secretKey}`),
+        Authorization: apiKey,
       },
-      body: JSON.stringify({ Messages: messages }),
+      body: JSON.stringify(transmission),
     });
 
-    const data = await response.json() as {
-      Messages?: Array<{ Status: string; To?: Array<{ MessageID: number }> }>;
-      ErrorMessage?: string;
+    const data = (await response.json()) as {
+      results?: { id?: string; total_accepted_recipients?: number };
+      errors?: Array<{ message: string; code?: string }>;
     };
 
-    if (response.ok && data.Messages?.[0]?.Status === "success") {
+    if (response.ok && data.results?.total_accepted_recipients) {
       return {
         success: true,
-        messageId: String(data.Messages[0].To?.[0]?.MessageID || ""),
+        messageId: data.results.id || "",
       };
     }
 
-    const errorMessage = data.ErrorMessage || `HTTP ${response.status}`;
+    const errorMessage = data.errors?.[0]?.message || `HTTP ${response.status}`;
     return { success: false, error: errorMessage };
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error";
@@ -76,9 +77,9 @@ export async function sendMailjet(
 }
 
 /**
- * Format contact form data and send via Mailjet
+ * Format contact form data and send via SparkPost
  */
-export async function sendContactEmailMailjet(
+export async function sendContactEmailSparkPost(
   data: {
     name: string;
     email: string;
@@ -90,9 +91,8 @@ export async function sendContactEmailMailjet(
     fromEmail: string;
     brandName: string;
     apiKey: string;
-    secretKey: string;
   }
-): Promise<MailjetResult> {
+): Promise<SparkPostResult> {
   const subject = `Zapytanie z formularza — ${config.brandName}`;
 
   const text = [
@@ -124,7 +124,7 @@ export async function sendContactEmailMailjet(
     <div style="background: #f9f9f9; padding: 16px; border-radius: 8px; white-space: pre-wrap;">${escapeHtml(data.message)}</div>
   `.trim();
 
-  return sendMailjet(
+  return sendSparkPost(
     {
       to: config.toEmail,
       from: config.fromEmail,
@@ -134,15 +134,14 @@ export async function sendContactEmailMailjet(
       html,
       replyTo: data.email,
     },
-    config.apiKey,
-    config.secretKey
+    config.apiKey
   );
 }
 
 /**
- * Format signup form data and send via Mailjet
+ * Format signup form data and send via SparkPost
  */
-export async function sendSignupEmailMailjet(
+export async function sendSignupEmailSparkPost(
   data: {
     name: string;
     email: string;
@@ -157,9 +156,8 @@ export async function sendSignupEmailMailjet(
     fromEmail: string;
     brandName: string;
     apiKey: string;
-    secretKey: string;
   }
-): Promise<MailjetResult> {
+): Promise<SparkPostResult> {
   const subject = `Zapis na zajęcia 2025/2026 — ${config.brandName}`;
 
   const modeLabels: Record<string, string> = {
@@ -212,7 +210,7 @@ export async function sendSignupEmailMailjet(
     <div style="background: #f9f9f9; padding: 16px; border-radius: 8px; white-space: pre-wrap;">${escapeHtml(data.message || "-")}</div>
   `.trim();
 
-  return sendMailjet(
+  return sendSparkPost(
     {
       to: config.toEmail,
       from: config.fromEmail,
@@ -222,8 +220,7 @@ export async function sendSignupEmailMailjet(
       html,
       replyTo: data.email,
     },
-    config.apiKey,
-    config.secretKey
+    config.apiKey
   );
 }
 

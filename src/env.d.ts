@@ -42,8 +42,8 @@ interface ImportMetaEnv {
 
   // Email provider
   readonly PUBLIC_EMAIL_PROVIDER_NAME?: string;
-  readonly RESEND_API_KEY?: string;
-  readonly RESEND_FROM_EMAIL?: string;
+  readonly SPARKPOST_API_KEY?: string;
+  readonly SPARKPOST_FROM_EMAIL?: string;
 
   // Build info
   readonly BUILD_TIME?: string;
@@ -58,7 +58,8 @@ interface ImportMeta {
  */
 interface CloudflareEnv {
   RATE_LIMIT_KV?: KVNamespace;
-  RESEND_API_KEY?: string;
+  SPARKPOST_API_KEY?: string;
+  SPARKPOST_FROM_EMAIL?: string;
   SESSION?: KVNamespace;
 }
 

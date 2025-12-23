@@ -15,7 +15,7 @@ export const VALIDATION_LIMITS = {
   name: { min: 2, max: 100 },
   email: { max: 254 }, // RFC 5321 limit
   phone: { min: 7, max: 20 },
-  message: { min: 20, max: 5000 },
+  message: { min: 5, max: 5000 },
   level: { min: 2, max: 200 },
   availability: { max: 500 },
 } as const;

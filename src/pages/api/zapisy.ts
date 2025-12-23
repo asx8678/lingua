@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { BRAND_NAME, CONTACT_EMAIL } from "../../config/site";
-import { sendSignupEmailMailjet } from "../../lib/mailjet";
+import { sendSignupEmailSparkPost } from "../../lib/sparkpost";
 import { checkRateLimit, getClientIp } from "../../lib/rate-limit";
 import { validateSignupForm, RATE_LIMIT_CONFIG } from "../../lib/validation";
 import { HONEYPOT_FIELD } from "../../lib/constants";
@@ -68,27 +68,26 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
   const data = validation.data;
 
-  // Get Mailjet credentials
-  const mailjetApiKey = runtime?.env?.MAILJET_API_KEY ?? import.meta.env.MAILJET_API_KEY;
-  const mailjetSecretKey = runtime?.env?.MAILJET_SECRET_KEY ?? import.meta.env.MAILJET_SECRET_KEY;
+  // Get SparkPost credentials
+  const sparkpostApiKey = runtime?.env?.SPARKPOST_API_KEY ?? import.meta.env.SPARKPOST_API_KEY;
 
-  if (!mailjetApiKey || !mailjetSecretKey) {
-    console.error("Mailjet credentials not configured");
+  if (!sparkpostApiKey) {
+    console.error("SparkPost API key not configured");
     return new Response(
       JSON.stringify({ success: false, error: "Formularz jest tymczasowo niedostępny." }),
       { status: 503, headers: { "Content-Type": "application/json" } }
     );
   }
 
-  // Send email via Mailjet
-  const fromEmail = runtime?.env?.MAILJET_FROM_EMAIL ?? import.meta.env.MAILJET_FROM_EMAIL ?? CONTACT_EMAIL;
+  // Send email via SparkPost
+  const fromEmail =
+    runtime?.env?.SPARKPOST_FROM_EMAIL ?? import.meta.env.SPARKPOST_FROM_EMAIL ?? CONTACT_EMAIL;
 
-  const emailResult = await sendSignupEmailMailjet(data, {
+  const emailResult = await sendSignupEmailSparkPost(data, {
     toEmail: CONTACT_EMAIL,
     fromEmail,
     brandName: BRAND_NAME,
-    apiKey: mailjetApiKey,
-    secretKey: mailjetSecretKey,
+    apiKey: sparkpostApiKey,
   });
 
   if (!emailResult.success) {

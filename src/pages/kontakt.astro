@@ -143,6 +143,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             class="mt-6 space-y-4"
             aria-label="Formularz kontaktowy"
             data-contact-form
+            novalidate
           >
             <!-- Honeypot field for spam prevention - hidden from users -->
             <div class="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
@@ -206,7 +207,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
                 id="message"
                 name="message"
                 required
-                minlength="20"
+                minlength="5"
                 aria-describedby="message-error"
                 class="mt-1 min-h-[120px] w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
                 placeholder="Np. poziom, cel, preferowane dni/godziny…"></textarea>
@@ -264,8 +265,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             role="status"
             tabindex="-1"
           >
-            <strong>Dziękujemy!</strong> Twoja wiadomość została wysłana. Odezwiemy się w ciągu 1–2 dni
-            roboczych.
+            <strong>Dziękujemy!</strong> Twoja wiadomość została wysłana. Odezwiemy się najszybciej jak to możliwe.
           </div>
         </div>
       </div>
@@ -284,7 +284,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     const fields = [
       { id: "name", min: 2, message: "Podaj imię i nazwisko (min. 2 znaki)." },
       { id: "email", type: "email", message: "Podaj poprawny adres e-mail." },
-      { id: "message", min: 20, message: "Wiadomość powinna mieć co najmniej 20 znaków." },
+      { id: "message", min: 5, message: "Wiadomość powinna mieć co najmniej 5 znaków." },
       { id: "consent", type: "checkbox", message: "Wymagana jest zgoda na kontakt." },
     ];
 
