@@ -2,7 +2,14 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "./CTASection.astro";
 import FaqSection from "./FaqSection.astro";
-import { BRAND_NAME, generateBreadcrumbSchema } from "../config/site";
+import {
+  BRAND_NAME,
+  CTA_PRIMARY_HREF,
+  CTA_PRIMARY_LABEL,
+  CTA_SECONDARY_HREF,
+  CTA_SECONDARY_LABEL,
+  generateBreadcrumbSchema,
+} from "../config/site";
 import type { LandingPageData } from "../data/landing-pages";
 
 interface Props {
@@ -48,8 +55,8 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             {data.intro}
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
-            <a class="btn btn-primary" href="/kontakt">Skontaktuj się</a>
-            <a class="btn btn-secondary" href="/cennik">Zobacz cennik</a>
+            <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
+            <a class="btn btn-secondary" href={CTA_SECONDARY_HREF}>{CTA_SECONDARY_LABEL}</a>
           </div>
         </div>
 
@@ -142,7 +149,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             {data.locationCard.features.map((feature) => <li>{feature}</li>)}
           </ul>
           <div class="mt-6">
-            <a class="btn btn-primary" href="/kontakt">Skontaktuj się z nami</a>
+            <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
           </div>
         </div>
       </div>

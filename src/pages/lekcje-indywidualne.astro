@@ -1,7 +1,12 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
-import { BRAND_NAME, generateBreadcrumbSchema } from "../config/site";
+import {
+  BRAND_NAME,
+  CTA_PRIMARY_HREF,
+  CTA_PRIMARY_LABEL,
+  generateBreadcrumbSchema,
+} from "../config/site";
 
 const title = `Lekcje indywidualne w Legionowie i online | ${BRAND_NAME}`;
 const description =
@@ -68,7 +73,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             prowadzą do regularnych postępów — stacjonarnie lub online.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
-            <a class="btn btn-primary" href="/kontakt">Skontaktuj się</a>
+            <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
             <a class="btn btn-secondary" href="/cennik">Zobacz cennik</a>
           </div>
         </div>
@@ -123,10 +128,6 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 
   <CTASection
     title="Chcesz zacząć indywidualnie?"
-    description="Skontaktuj się i umów diagnozę poziomu — zaproponujemy plan oraz najlepszy format zajęć."
-    primaryLabel="Skontaktuj się"
-    primaryHref="/kontakt"
-    secondaryLabel="Zobacz cennik"
-    secondaryHref="/cennik"
+    description="Umów bezpłatną konsultację i diagnozę poziomu — zaproponujemy plan oraz najlepszy format zajęć."
   />
 </MainLayout>

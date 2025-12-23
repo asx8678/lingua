@@ -1,7 +1,7 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
-import { BRAND_NAME, generateBreadcrumbSchema } from "../config/site";
+import { BRAND_NAME, CTA_PRIMARY_HREF, CTA_PRIMARY_LABEL, generateBreadcrumbSchema } from "../config/site";
 
 const title = `Cennik – kursy angielskiego w Legionowie | ${BRAND_NAME}`;
 const description =
@@ -94,7 +94,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             Pozostałe języki: wycena indywidualna — zależna od lektora i formy zajęć.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
-            <a class="btn btn-primary" href="/kontakt">Skontaktuj się</a>
+            <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
             <a class="btn btn-secondary" href="/cennik-lingua.pdf" download>
               <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path
@@ -120,7 +120,9 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             ))}
           </ol>
           <div class="mt-8">
-            <a class="btn btn-primary w-full sm:w-auto" href="/kontakt">Skontaktuj się</a>
+            <a class="btn btn-primary w-full sm:w-auto" href={CTA_PRIMARY_HREF}>
+              {CTA_PRIMARY_LABEL}
+            </a>
           </div>
         </div>
       </div>

@@ -2,11 +2,18 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
 import FaqSection from "../components/FaqSection.astro";
-import { BRAND_NAME, generateBreadcrumbSchema } from "../config/site";
+import {
+  BRAND_NAME,
+  CTA_PRIMARY_HREF,
+  CTA_PRIMARY_LABEL,
+  CTA_SECONDARY_HREF,
+  CTA_SECONDARY_LABEL,
+  generateBreadcrumbSchema,
+} from "../config/site";
 
 const title = `Angielski online – lekcje z lektorem | ${BRAND_NAME}`;
 const description =
-  "Skuteczny angielski online. Zajęcia 1:1 i grupowe, nacisk na mówienie. Skontaktuj się z nami.";
+  "Skuteczny angielski online. Zajęcia 1:1 i grupowe, nacisk na mówienie. Umów bezpłatną konsultację.";
 
 const benefits = [
   {
@@ -115,7 +122,7 @@ const faqs = [
   {
     question: "Jak szybko mogę zacząć?",
     answer:
-      "Zazwyczaj wystarczy krótka konsultacja i dobór terminu. Skontaktuj się, a podamy dostępne okna.",
+      "Zazwyczaj wystarczy krótka konsultacja i dobór terminu. Umów się, a podamy dostępne okna.",
   },
 ];
 
@@ -157,8 +164,13 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             mówienia.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
-            <a class="btn btn-primary" href="/kontakt">Skontaktuj się</a>
-            <a class="btn btn-secondary" href="/cennik">Sprawdź cennik</a>
+            <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
+            <a class="btn btn-secondary" href={CTA_SECONDARY_HREF}>{CTA_SECONDARY_LABEL}</a>
+          </div>
+          <div class="mt-4">
+            <a class="text-sm font-bold text-primary no-underline hover:underline" href="/cennik">
+              Sprawdź cennik →
+            </a>
           </div>
           <p class="mt-4 text-sm text-slate-500">
             Mieszkasz w Legionowie? Sprawdź nasze
@@ -244,7 +256,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
         </div>
       </div>
       <div class="mt-8">
-        <a class="btn btn-primary" href="/kontakt">Skonsultuj swój cel</a>
+        <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
       </div>
     </div>
   </section>

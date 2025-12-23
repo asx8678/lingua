@@ -5,7 +5,13 @@ import TeacherCard from "../components/TeacherCard.astro";
 import { teachers } from "../data/teachers";
 import { taughtLanguages } from "../data/subjects";
 import testimonials from "../data/testimonials.json";
-import { BRAND_NAME, CTA_PRIMARY_HREF } from "../config/site";
+import {
+  BRAND_NAME,
+  CTA_PRIMARY_HREF,
+  CTA_PRIMARY_LABEL,
+  CTA_SECONDARY_HREF,
+  CTA_SECONDARY_LABEL,
+} from "../config/site";
 
 const languagesList = new Intl.ListFormat("pl", {
   style: "long",
@@ -52,7 +58,7 @@ const steps = [
 const highlights = [
   "Zajęcia stacjonarne w Legionowie",
   "Lekcje online dopasowane do grafiku",
-  "Poziomy od A1 do C1",
+  "Poziomy od A1 do C2",
 ];
 
 const subjectChips = ["Angielski", "Inne języki", "Matematyka"];
@@ -103,8 +109,13 @@ const proofPoints = [
           </p>
 
           <div class="mt-8 flex flex-wrap gap-4">
-            <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>Skontaktuj się</a>
-            <a class="btn btn-secondary" href="/oferta">Zobacz ofertę</a>
+            <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
+            <a class="btn btn-secondary" href={CTA_SECONDARY_HREF}>{CTA_SECONDARY_LABEL}</a>
+          </div>
+          <div class="mt-4">
+            <a class="text-sm font-bold text-primary no-underline hover:underline" href="/oferta">
+              Zobacz ofertę →
+            </a>
           </div>
 
           <div class="mt-10 grid gap-4 text-sm text-slate-600 sm:grid-cols-2">
@@ -230,7 +241,7 @@ const proofPoints = [
       </div>
 
       <div class="mt-12 text-center">
-        <a class="btn btn-primary" href="/kontakt">Porozmawiaj o planie nauki</a>
+        <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
       </div>
     </div>
   </section>

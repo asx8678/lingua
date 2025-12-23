@@ -1,6 +1,11 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import { BRAND_NAME, generateBreadcrumbSchema } from "../config/site";
+import {
+  BRAND_NAME,
+  CTA_PRIMARY_HREF,
+  CTA_PRIMARY_LABEL,
+  generateBreadcrumbSchema,
+} from "../config/site";
 
 const title = `404 – nie znaleziono strony | ${BRAND_NAME}`;
 const description = "Strona nie istnieje lub została przeniesiona. Wróć na stronę główną.";
@@ -37,7 +42,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
             <a class="btn btn-primary" href="/">Wróć na stronę główną</a>
-            <a class="btn btn-secondary" href="/kontakt">Skontaktuj się</a>
+            <a class="btn btn-secondary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
           </div>
         </div>
 

@@ -2,7 +2,12 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
 import FaqSection from "../components/FaqSection.astro";
-import { BRAND_NAME, generateBreadcrumbSchema } from "../config/site";
+import {
+  BRAND_NAME,
+  CTA_PRIMARY_HREF,
+  CTA_PRIMARY_LABEL,
+  generateBreadcrumbSchema,
+} from "../config/site";
 
 const title = `Angielski stacjonarnie w Legionowie – lekcje z lektorem | ${BRAND_NAME}`;
 const description =
@@ -73,7 +78,7 @@ const faqs = [
   {
     question: "Jakie poziomy są dostępne?",
     answer:
-      "Prowadzimy zajęcia na wszystkich poziomach: od A1 (początkujący) do C1 (zaawansowany).",
+      "Prowadzimy zajęcia na wszystkich poziomach: od A1 (początkujący) do C2 (biegły).",
   },
   {
     question: "Czy są dostępne zajęcia dla dzieci?",
@@ -129,7 +134,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             zaawansowania.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
-            <a class="btn btn-primary" href="/kontakt">Skontaktuj się</a>
+            <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
             <a class="btn btn-secondary" href="/cennik">Zobacz cennik</a>
           </div>
           <p class="mt-4 text-sm text-slate-500">
@@ -232,7 +237,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             <li><strong>Podsumowanie</strong> — zadanie domowe i plan na kolejne zajęcia</li>
           </ol>
           <div class="mt-6">
-            <a class="btn btn-secondary" href="/kontakt">Skontaktuj się</a>
+            <a class="btn btn-secondary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
           </div>
         </div>
       </div>
@@ -248,7 +253,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
           dostępnym parkingiem. Dokładny adres i wskazówki dojazdu przekażemy przy zapisie.
         </p>
         <div class="mt-6">
-          <a class="btn btn-primary" href="/kontakt">Skontaktuj się z nami</a>
+          <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
         </div>
       </div>
     </div>

@@ -62,16 +62,16 @@ export const ALTERNATE_DOMAINS = {
 
 export const DEFAULT_TITLE = `${BRAND_NAME} — języki obce i matematyka w Legionowie`;
 export const DEFAULT_DESCRIPTION =
-  "Szkoła języków obcych i matematyki w Legionowie. Zajęcia stacjonarne i online dla wszystkich poziomów. Skontaktuj się i umów diagnozę poziomu.";
+  "Szkoła języków obcych i matematyki w Legionowie. Zajęcia stacjonarne i online dla wszystkich poziomów. Umów bezpłatną konsultację i diagnozę poziomu.";
 
 export const PRIMARY_CTA = {
-  label: "Skontaktuj się",
+  label: "Bezpłatna konsultacja / Lekcja próbna",
   href: "/kontakt",
 };
 
 export const SECONDARY_CTA = {
-  label: "Zapisz się",
-  href: "/zapisy-2025-2026",
+  label: "Sprawdź poziom",
+  href: "/test-poziomu-angielskiego",
 };
 
 export const CTA_PRIMARY_LABEL = PRIMARY_CTA.label;

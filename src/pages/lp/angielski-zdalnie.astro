@@ -2,11 +2,17 @@
 import MainLayout from "../../layouts/MainLayout.astro";
 import CTASection from "../../components/CTASection.astro";
 import FaqSection from "../../components/FaqSection.astro";
-import { BRAND_NAME } from "../../config/site";
+import {
+  BRAND_NAME,
+  CTA_PRIMARY_HREF,
+  CTA_PRIMARY_LABEL,
+  CTA_SECONDARY_HREF,
+  CTA_SECONDARY_LABEL,
+} from "../../config/site";
 
 const title = `Angielski zdalnie – lekcje online z lektorem | ${BRAND_NAME}`;
 const description =
-  "Lekcje angielskiego zdalnie przez internet. Zajęcia 1:1 i grupowe z doświadczonym lektorem. Elastyczne godziny, bez dojazdów. Skontaktuj się i umów diagnozę poziomu online.";
+  "Lekcje angielskiego zdalnie przez internet. Zajęcia 1:1 i grupowe z doświadczonym lektorem. Elastyczne godziny, bez dojazdów. Umów bezpłatną konsultację i diagnozę poziomu online.";
 
 const benefits = [
   {
@@ -30,8 +36,8 @@ const benefits = [
 const howItWorks = [
   {
     step: "1",
-    title: "Skontaktuj się",
-    text: "Napisz do nas i ustal termin bezpłatnej konsultacji oraz diagnozy poziomu online.",
+    title: "Bezpłatna konsultacja",
+    text: "Ustalamy termin konsultacji oraz krótkiej diagnozy poziomu online.",
   },
   {
     step: "2",
@@ -105,8 +111,13 @@ const faqs = [
             Elastyczne godziny, ten sam poziom nauczania, zero dojazdów.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
-            <a class="btn btn-primary" href="/kontakt">Skontaktuj się</a>
-            <a class="btn btn-secondary" href="/cennik">Zobacz cennik</a>
+            <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
+            <a class="btn btn-secondary" href={CTA_SECONDARY_HREF}>{CTA_SECONDARY_LABEL}</a>
+          </div>
+          <div class="mt-4">
+            <a class="text-sm font-bold text-primary no-underline hover:underline" href="/cennik">
+              Zobacz cennik →
+            </a>
           </div>
           <p class="mt-4 text-sm text-slate-500">
             Mieszkasz w Legionowie? Sprawdź nasze
@@ -205,7 +216,7 @@ const faqs = [
             <li>Wsparcie techniczne na starcie</li>
           </ul>
           <div class="mt-6">
-            <a class="btn btn-primary" href="/kontakt">Rozpocznij naukę online</a>
+            <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
           </div>
         </div>
       </div>
@@ -217,11 +228,11 @@ const faqs = [
       <div class="card p-8 text-center">
         <h2 class="text-2xl font-extrabold">Bezpłatna konsultacja i diagnoza poziomu</h2>
         <p class="mx-auto mt-4 max-w-2xl text-slate-600">
-          Nie jesteś pewien, czy nauka online jest dla Ciebie? Skontaktuj się, a podczas konsultacji
-          sprawdzimy poziom, poznamy Twoje cele i ustalimy najlepszy plan nauki.
+          Nie jesteś pewien, czy nauka online jest dla Ciebie? Podczas konsultacji sprawdzimy
+          poziom, poznamy Twoje cele i ustalimy najlepszy plan nauki.
         </p>
         <div class="mt-6">
-          <a class="btn btn-primary" href="/kontakt">Skontaktuj się</a>
+          <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
         </div>
       </div>
     </div>

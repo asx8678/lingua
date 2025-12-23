@@ -49,7 +49,7 @@ export const angielskiLegionowo: LandingPageData = {
     },
     {
       title: "Wszystkie poziomy",
-      text: "Od początkującego (A1) do zaawansowanego (C1). Każdy znajdzie odpowiedni kurs.",
+      text: "Od początkującego (A1) do biegłego (C2). Każdy znajdzie odpowiedni kurs.",
     },
   ],
   offers: [
@@ -83,7 +83,7 @@ export const angielskiLegionowo: LandingPageData = {
     {
       question: "Jakie poziomy są dostępne?",
       answer:
-        "Prowadzimy zajęcia na wszystkich poziomach: A1 (początkujący), A2, B1, B2 oraz C1 (zaawansowany).",
+        "Prowadzimy zajęcia na wszystkich poziomach: A1 (początkujący), A2, B1, B2, C1 i C2 (biegły).",
     },
     {
       question: "Czy prowadzicie kursy dla firm w Legionowie?",

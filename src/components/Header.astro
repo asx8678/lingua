@@ -52,6 +52,16 @@ const linkClass = (href: string) =>
       <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
     </div>
 
+    <div class="flex items-center lg:hidden">
+      <a
+        class="btn btn-primary max-w-[9.5rem] px-3 py-2 text-[11px] leading-tight text-center whitespace-normal"
+        href={CTA_PRIMARY_HREF}
+        aria-label={CTA_PRIMARY_LABEL}
+      >
+        {CTA_PRIMARY_LABEL}
+      </a>
+    </div>
+
     <details class="relative lg:hidden" id="mobile-menu">
       <summary
         class="list-none cursor-pointer select-none rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-900 shadow-sm transition hover:bg-slate-100"

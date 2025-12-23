@@ -2,11 +2,11 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
 import { subjects } from "../data/subjects";
-import { BRAND_NAME, generateBreadcrumbSchema } from "../config/site";
+import { BRAND_NAME, CTA_PRIMARY_HREF, CTA_PRIMARY_LABEL, generateBreadcrumbSchema } from "../config/site";
 
 const title = `Oferta – kursy językowe i matematyka | ${BRAND_NAME}`;
 const description =
-  "Wybierz formę nauki: angielski stacjonarnie, angielski online oraz inne języki i matematyka. Skontaktuj się z nami.";
+  "Wybierz formę nauki: angielski stacjonarnie, angielski online oraz inne języki i matematyka. Umów bezpłatną konsultację.";
 
 const otherSubjects = subjects.filter((subject) => subject !== "Angielski");
 
@@ -32,7 +32,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
           dopasujemy do Twojego poziomu i celu.
         </p>
         <div class="mt-8 flex flex-wrap items-center gap-4">
-          <a class="btn btn-primary" href="/kontakt">Skontaktuj się</a>
+          <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
           <a class="text-sm font-bold text-primary no-underline hover:underline" href="/cennik"
             >Zobacz cennik →</a
           >
@@ -92,8 +92,8 @@ const breadcrumbSchema = generateBreadcrumbSchema([
           data-track="everyday"
           data-start-level="A2"
           data-accent="#0052CC"
-          data-cta-href="/kontakt"
-          data-cta-text="Skontaktuj się"
+          data-cta-href={CTA_PRIMARY_HREF}
+          data-cta-text={CTA_PRIMARY_LABEL}
         ></div>
       </div>
     </div>

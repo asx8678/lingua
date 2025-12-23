@@ -1,7 +1,13 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
-import { BRAND_NAME, SITE_URL, generateBreadcrumbSchema } from "../config/site";
+import {
+  BRAND_NAME,
+  CTA_PRIMARY_HREF,
+  CTA_PRIMARY_LABEL,
+  SITE_URL,
+  generateBreadcrumbSchema,
+} from "../config/site";
 import testimonials from "../data/testimonials.json";
 
 const title = `Opinie kursantów | ${BRAND_NAME}`;
@@ -59,7 +65,7 @@ const reviewSchema = {
             Poniżej znajdziesz wybrane opinie osób, które uczą się z nami stacjonarnie lub online.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
-            <a class="btn btn-primary" href="/kontakt">Skontaktuj się</a>
+            <a class="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a>
             <a class="btn btn-secondary" href="/cennik">Sprawdź cennik</a>
           </div>
         </div>
@@ -119,9 +125,5 @@ const reviewSchema = {
   <CTASection
     title="Chcesz sprawdzić, czy to dla Ciebie?"
     description="Napisz, jaki masz poziom i cel — zaproponujemy najlepszy format i cenę."
-    primaryLabel="Skontaktuj się"
-    primaryHref="/kontakt"
-    secondaryLabel="Zobacz cennik"
-    secondaryHref="/cennik"
   />
 </MainLayout>
