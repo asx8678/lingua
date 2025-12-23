@@ -71,6 +71,9 @@ export async function checkRateLimit(
 
 // In-memory fallback for development
 const memoryStore = new Map<string, RateLimitEntry>();
+const MAX_IN_MEMORY_SIZE = 5000;
+const CLEANUP_INTERVAL_MS = 60000; // 1 minute
+let lastCleanup = Date.now();
 
 function checkRateLimitInMemory(ip: string, now: number, config: RateLimitConfig): RateLimitResult {
   const stored = memoryStore.get(ip);
@@ -88,10 +91,22 @@ function checkRateLimitInMemory(ip: string, now: number, config: RateLimitConfig
     };
   }
 
+  // Update entry and move to end (LRU behavior)
+  memoryStore.delete(ip);
   memoryStore.set(ip, entry);
 
-  // Cleanup old entries periodically
-  if (memoryStore.size > 1000) {
+  // Enforce hard limit to prevent memory leaks
+  if (memoryStore.size > MAX_IN_MEMORY_SIZE) {
+    // Delete the oldest entry (first key)
+    const oldestKey = memoryStore.keys().next().value;
+    if (oldestKey) {
+      memoryStore.delete(oldestKey);
+    }
+  }
+
+  // Cleanup expired entries periodically
+  if (now - lastCleanup > CLEANUP_INTERVAL_MS) {
+    lastCleanup = now;
     for (const [key, value] of memoryStore.entries()) {
       if (now >= value.resetAt) {
         memoryStore.delete(key);
