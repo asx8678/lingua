@@ -97,8 +97,8 @@ const resolvedPrimaryHref = BOOKING_URL || "/kontakt#formularz";
 const primaryIsExternal = Boolean(BOOKING_URL && isExternalUrl(BOOKING_URL));
 
 export const PRIMARY_CTA = {
-  label: "Umów bezpłatną diagnozę i plan nauki (15 min)",
-  shortLabel: "Umów diagnozę",
+  label: "Skontaktuj się — dobierzemy plan",
+  shortLabel: "Skontaktuj się — dobierzemy plan",
   href: resolvedPrimaryHref,
   target: primaryIsExternal ? "_blank" : undefined,
   rel: primaryIsExternal ? "noopener noreferrer" : undefined,
