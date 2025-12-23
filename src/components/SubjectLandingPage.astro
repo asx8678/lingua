@@ -9,6 +9,7 @@ import {
   CTA_SECONDARY_HREF,
   CTA_SECONDARY_LABEL,
   generateBreadcrumbSchema,
+  SITE_URL,
 } from "../config/site";
 import type { SubjectPageData } from "../data/subject-pages";
 
@@ -37,13 +38,25 @@ const breadcrumbSchema = generateBreadcrumbSchema([
   { name: "Oferta", url: "/oferta" },
   { name: data.kicker },
 ]);
+
+const courseJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Course",
+  name: data.h1,
+  description: data.description,
+  provider: {
+    "@type": "Organization",
+    name: BRAND_NAME,
+    url: SITE_URL,
+  },
+};
 ---
 
 <MainLayout
   title={fullTitle}
   description={data.description}
   canonical={`/${data.slug}`}
-  structuredData={[faqJsonLd, breadcrumbSchema]}
+  structuredData={[faqJsonLd, breadcrumbSchema, courseJsonLd]}
 >
   <section class="hero-bg">
     <div class="container-site py-16 sm:py-20">

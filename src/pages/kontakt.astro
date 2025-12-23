@@ -26,6 +26,9 @@ const mapQuery = `Lingua Szkoła języka Angielskiego, ${addressLine}`;
 const mapHref = hasAddress
   ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`
   : "";
+const mapEmbedSrc = hasAddress
+  ? `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`
+  : "";
 
 const breadcrumbSchema = generateBreadcrumbSchema([
   { name: "Strona główna", url: "/" },
@@ -306,6 +309,70 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       </div>
     </div>
   </section>
+
+  {
+    hasAddress && (
+      <section class="section section-muted">
+        <div class="container-site">
+          <div class="grid gap-8 lg:grid-cols-2 lg:items-center">
+            <div class="card overflow-hidden p-0">
+              <iframe
+                title={`Mapa dojazdu — ${BRAND_NAME}`}
+                src={mapEmbedSrc}
+                loading="lazy"
+                class="h-80 w-full border-0"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+
+            <div>
+              <span class="kicker">Lokalizacja</span>
+              <h2 class="mt-4">Znajdziesz nas w centrum Legionowa</h2>
+              <p class="mt-4 text-sm text-slate-600">
+                Spotkajmy się w naszej placówce lub umów konsultację online. Wszystkie dane kontaktowe
+                masz pod ręką poniżej.
+              </p>
+              <ul class="mt-6 space-y-2 text-sm text-slate-600">
+                {hasAddress && (
+                  <li>
+                    <span class="font-bold text-slate-900">Adres:</span> {addressLine}
+                  </li>
+                )}
+                {hasHours && (
+                  <li>
+                    <span class="font-bold text-slate-900">Godziny:</span> {BUSINESS.openingHours}
+                  </li>
+                )}
+                {hasPhone && (
+                  <li>
+                    <span class="font-bold text-slate-900">Telefon:</span>{" "}
+                    <a class="font-bold text-primary no-underline hover:underline" href={`tel:${CONTACT_PHONE}`}>
+                      {CONTACT_PHONE}
+                    </a>
+                  </li>
+                )}
+                {hasEmail && (
+                  <li>
+                    <span class="font-bold text-slate-900">E-mail:</span>{" "}
+                    <a class="font-bold text-primary no-underline hover:underline" href={`mailto:${CONTACT_EMAIL}`}>
+                      {CONTACT_EMAIL}
+                    </a>
+                  </li>
+                )}
+              </ul>
+              {mapHref && (
+                <div class="mt-6">
+                  <a class="btn btn-secondary" href={mapHref} target="_blank" rel="noopener noreferrer">
+                    Otwórz w Google Maps
+                  </a>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   <script is:inline>
     const form = document.querySelector("[data-contact-form]");
