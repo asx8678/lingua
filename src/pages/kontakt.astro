@@ -36,6 +36,13 @@ const breadcrumbSchema = generateBreadcrumbSchema([
   { name: "Strona główna", url: "/" },
   { name: "Kontakt" },
 ]);
+
+// Tailwind class constants
+const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+const btnPrimary = `${btnBase} bg-primary text-white shadow-md hover:bg-primary-700 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:shadow-md`;
+const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-700 shadow-sm hover:border-primary/30 hover:text-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0`;
+const card = "rounded-2xl border border-slate-200/80 bg-white shadow-sm transition-shadow hover:shadow-md";
+const kicker = "inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary";
 ---
 
 <MainLayout
@@ -44,11 +51,11 @@ const breadcrumbSchema = generateBreadcrumbSchema([
   canonical="/kontakt"
   structuredData={[breadcrumbSchema]}
 >
-  <section class="hero-bg">
-    <div class="container-site py-16 sm:py-20">
+  <section class="bg-hero-gradient">
+    <div class="mx-auto w-full max-w-7xl px-6 py-16 sm:py-20">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
         <div>
-          <span class="kicker">Kontakt</span>
+          <span class={kicker}>Kontakt</span>
           <h1 class="mt-6">Porozmawiajmy o Twoim planie</h1>
           <p class="mt-6 max-w-2xl text-lg">
             Napisz kilka słów o swoim poziomie i celu. Zaproponujemy plan nauki i terminy —
@@ -59,7 +66,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
           </p>
 
           <div class="mt-10 grid gap-4 sm:grid-cols-3">
-            <div class="card p-5 text-center sm:text-left">
+            <div class={`${card} p-5 text-center sm:text-left`}>
               <div class="text-xs font-bold uppercase tracking-widest text-slate-500">E-mail</div>
               <div class="mt-3 text-sm font-bold text-primary break-all">
                 {
@@ -75,7 +82,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
               <p class="mt-2 text-sm text-slate-600">Odpowiadamy szybko.</p>
             </div>
 
-            <div class="card p-5 text-center sm:text-left">
+            <div class={`${card} p-5 text-center sm:text-left`}>
               <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Telefon</div>
               <div class="mt-3 text-sm font-bold text-primary whitespace-nowrap">
                 {
@@ -92,7 +99,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             </div>
             {
               (hasAddress || hasHours) && (
-                <div class="card p-5 text-center sm:text-left">
+                <div class={`${card} p-5 text-center sm:text-left`}>
                   <div class="text-xs font-bold uppercase tracking-widest text-slate-500">
                     Lokalizacja
                   </div>
@@ -138,7 +145,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
           </p>
         </div>
 
-        <div class="card p-6 sm:p-8" id="formularz">
+        <div class={`${card} p-6 sm:p-8`} id="formularz">
           <h2 class="text-xl font-extrabold text-slate-900">Formularz kontaktowy</h2>
           <p class="mt-2 text-sm text-slate-500">Pola oznaczone * są wymagane.</p>
 
@@ -151,10 +158,10 @@ const breadcrumbSchema = generateBreadcrumbSchema([
                 </p>
               </div>
               <div class="flex flex-wrap gap-2" role="group" aria-label="Szybkie dopasowanie">
-                <button class="btn btn-secondary px-4 py-2 text-xs" type="button" id="quick-fit-on">
+                <button class={`${btnSecondary} px-4 py-2 text-xs`} type="button" id="quick-fit-on">
                   Szybkie dopasowanie
                 </button>
-                <button class="btn btn-primary px-4 py-2 text-xs" type="button" id="quick-fit-off">
+                <button class={`${btnPrimary} px-4 py-2 text-xs`} type="button" id="quick-fit-off">
                   Tylko formularz
                 </button>
               </div>
@@ -292,7 +299,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 
               <div class="mt-6">
                 <button
-                  class="btn btn-secondary w-full sm:w-auto"
+                  class={`${btnSecondary} w-full sm:w-auto`}
                   type="button"
                   id="form-step-next"
                   disabled
@@ -411,7 +418,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
               </div>
               <p id="consent-error" class="text-xs text-rose-600" aria-live="polite"></p>
 
-              <button class="btn btn-primary w-full" type="submit" id="submit-btn">
+              <button class={`${btnPrimary} w-full`} type="submit" id="submit-btn">
                 <span id="submit-text">Wyślij wiadomość</span>
                 <span id="submit-loading" class="hidden items-center gap-2">
                   <svg
@@ -446,10 +453,10 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 
   {
     hasAddress && (
-      <section class="section section-muted">
-        <div class="container-site">
+      <section class="py-16 lg:py-24 bg-slate-50">
+        <div class="mx-auto w-full max-w-7xl px-6">
           <div class="grid gap-8 lg:grid-cols-2 lg:items-center">
-            <div class="card overflow-hidden p-0">
+            <div class={`${card} overflow-hidden p-0`}>
               <iframe
                 title={`Mapa dojazdu — ${BRAND_NAME}`}
                 src={mapEmbedSrc}
@@ -460,7 +467,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             </div>
 
             <div>
-              <span class="kicker">Lokalizacja</span>
+              <span class={kicker}>Lokalizacja</span>
               <h2 class="mt-4">Znajdziesz nas w centrum Legionowa</h2>
               <p class="mt-4 text-sm text-slate-600">
                 Spotkajmy się w naszej placówce lub umów konsultację online. Wszystkie dane kontaktowe
@@ -496,7 +503,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
               </ul>
               {mapHref && (
                 <div class="mt-6">
-                  <a class="btn btn-secondary" href={mapHref} target="_blank" rel="noopener noreferrer">
+                  <a class={btnSecondary} href={mapHref} target="_blank" rel="noopener noreferrer">
                     Otwórz w Google Maps
                   </a>
                 </div>
@@ -654,15 +661,28 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       }
     };
 
+    const primaryClasses = ["bg-primary", "text-white", "shadow-md", "hover:bg-primary-700"];
+    const secondaryClasses = ["border", "border-slate-200", "bg-white", "text-slate-700", "hover:border-primary/30", "hover:text-primary"];
+
     const toggleQuickFitButtons = (enabled) => {
       if (quickFitOnBtn) {
-        quickFitOnBtn.classList.toggle("btn-primary", enabled);
-        quickFitOnBtn.classList.toggle("btn-secondary", !enabled);
+        if (enabled) {
+          secondaryClasses.forEach(c => quickFitOnBtn.classList.remove(c));
+          primaryClasses.forEach(c => quickFitOnBtn.classList.add(c));
+        } else {
+          primaryClasses.forEach(c => quickFitOnBtn.classList.remove(c));
+          secondaryClasses.forEach(c => quickFitOnBtn.classList.add(c));
+        }
         quickFitOnBtn.setAttribute("aria-pressed", String(enabled));
       }
       if (quickFitOffBtn) {
-        quickFitOffBtn.classList.toggle("btn-primary", !enabled);
-        quickFitOffBtn.classList.toggle("btn-secondary", enabled);
+        if (!enabled) {
+          secondaryClasses.forEach(c => quickFitOffBtn.classList.remove(c));
+          primaryClasses.forEach(c => quickFitOffBtn.classList.add(c));
+        } else {
+          primaryClasses.forEach(c => quickFitOffBtn.classList.remove(c));
+          secondaryClasses.forEach(c => quickFitOffBtn.classList.add(c));
+        }
         quickFitOffBtn.setAttribute("aria-pressed", String(!enabled));
       }
     };
