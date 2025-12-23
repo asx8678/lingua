@@ -51,8 +51,8 @@ const breadcrumbSchema = generateBreadcrumbSchema([
               aria-hidden="true"
               style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;"
             >
-              <label for="company">Firma</label>
-              <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
+              <label for="website">Strona</label>
+              <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
             </div>
 
             <div
@@ -105,6 +105,18 @@ const breadcrumbSchema = generateBreadcrumbSchema([
                 placeholder="Np. +48 123 456 789"
               />
               <p id="phone-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
+            </div>
+
+            <div>
+              <label for="company" class="text-sm font-bold text-slate-900"
+                >Firma (opcjonalnie)</label
+              >
+              <input
+                id="company"
+                name="company"
+                autocomplete="organization"
+                class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+              />
             </div>
 
             <div>
@@ -207,15 +219,6 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             </button>
           </form>
 
-          <div
-            id="signup-success"
-            class="mt-6 hidden rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800"
-            role="status"
-            tabindex="-1"
-          >
-            <strong>Dziękujemy za zgłoszenie!</strong> Odezwiemy się w ciągu 1–2 dni roboczych z propozycją
-            terminu i planu nauki.
-          </div>
         </div>
       </div>
     </div>
@@ -224,8 +227,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
   <script is:inline>
     const form = document.querySelector("[data-signup-form]");
     const alertEl = document.getElementById("form-alert");
-    const successEl = document.getElementById("signup-success");
-    const honeypotEl = document.getElementById("company");
+    const honeypotEl = document.getElementById("website");
     const submitBtn = document.getElementById("submit-btn");
     const submitText = document.getElementById("submit-text");
     const submitLoading = document.getElementById("submit-loading");
@@ -255,6 +257,22 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       const errorEl = getErrorEl(field.id);
       if (errorEl) errorEl.textContent = "";
       field.removeAttribute("aria-invalid");
+    };
+
+    const applyFieldErrors = (fieldErrors) => {
+      if (!fieldErrors) return;
+      let firstInvalid = null;
+
+      Object.entries(fieldErrors).forEach(([id, message]) => {
+        const field = document.getElementById(id);
+        if (!field) return;
+        setError(field, message);
+        if (!firstInvalid) firstInvalid = field;
+      });
+
+      if (firstInvalid) {
+        firstInvalid.focus();
+      }
     };
 
     const validate = () => {
@@ -315,12 +333,23 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       }
     };
 
+    const createSuccessEl = () => {
+      const wrapper = document.createElement("div");
+      wrapper.id = "signup-success";
+      wrapper.className =
+        "mt-6 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800";
+      wrapper.setAttribute("role", "status");
+      wrapper.tabIndex = -1;
+      wrapper.innerHTML =
+        "<strong>Dziękujemy za zgłoszenie!</strong> Odezwiemy się w ciągu 1–2 dni roboczych z propozycją terminu i planu nauki.";
+      form?.insertAdjacentElement("afterend", wrapper);
+      return wrapper;
+    };
+
     const showSuccess = () => {
       if (form) form.classList.add("hidden");
-      if (successEl) {
-        successEl.classList.remove("hidden");
-        successEl.focus();
-      }
+      const successEl = document.getElementById("signup-success") || createSuccessEl();
+      successEl.focus();
     };
 
     form?.addEventListener("input", (event) => {
@@ -378,6 +407,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
         const data = await response.json();
 
         if (!response.ok || !data.success) {
+          applyFieldErrors(data.fieldErrors);
           showAlert(data.error || "Wystąpił błąd. Spróbuj ponownie.");
           return;
         }

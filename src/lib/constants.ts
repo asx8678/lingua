@@ -13,7 +13,7 @@ export const STORAGE_KEYS = {
 export const THROTTLE_MS = 60 * 1000; // 60 seconds
 
 // Form honeypot field name
-export const HONEYPOT_FIELD = "company";
+export const HONEYPOT_FIELD = "website";
 
 // Response time text (used in multiple places)
 export const RESPONSE_TIME_TEXT = "1–2 dni roboczych";

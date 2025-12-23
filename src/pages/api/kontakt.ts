@@ -63,10 +63,17 @@ export const POST: APIRoute = async ({ request, locals }) => {
   // Validate form data
   const validation = validateContactForm(formData);
   if (!validation.valid) {
-    return new Response(JSON.stringify({ success: false, error: validation.error }), {
-      status: 400,
-      headers: { "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({
+        success: false,
+        error: validation.error,
+        fieldErrors: validation.fieldErrors,
+      }),
+      {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 
   const { name, email, phone, message } = validation.data;

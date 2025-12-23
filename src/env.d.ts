@@ -83,6 +83,7 @@ interface ApiSuccessResponse {
 interface ApiErrorResponse {
   success: false;
   error: string;
+  fieldErrors?: Record<string, string>;
 }
 
 type ApiResponse = ApiSuccessResponse | ApiErrorResponse;

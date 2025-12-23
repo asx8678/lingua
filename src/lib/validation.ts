@@ -85,7 +85,13 @@ export function isValidMode(mode: string): mode is SignupMode {
 }
 
 // Generic validation result type
-export type ValidationResult<T> = { valid: true; data: T } | { valid: false; error: string };
+export type ValidationError = {
+  valid: false;
+  error: string;
+  fieldErrors?: Record<string, string>;
+};
+
+export type ValidationResult<T> = { valid: true; data: T } | ValidationError;
 
 // Contact form data type
 export type ContactFormData = {
@@ -115,25 +121,49 @@ export function validateContactForm(formData: FormData): ValidationResult<Contac
 
   if (!isValidName(name)) {
     if (name.length < VALIDATION_LIMITS.name.min) {
-      return { valid: false, error: ERROR_MESSAGES.nameRequired };
+      return {
+        valid: false,
+        error: ERROR_MESSAGES.nameRequired,
+        fieldErrors: { name: ERROR_MESSAGES.nameRequired },
+      };
     }
-    return { valid: false, error: ERROR_MESSAGES.nameTooLong };
+    return {
+      valid: false,
+      error: ERROR_MESSAGES.nameTooLong,
+      fieldErrors: { name: ERROR_MESSAGES.nameTooLong },
+    };
   }
 
   if (!isValidEmail(email)) {
-    return { valid: false, error: ERROR_MESSAGES.emailInvalid };
+    return {
+      valid: false,
+      error: ERROR_MESSAGES.emailInvalid,
+      fieldErrors: { email: ERROR_MESSAGES.emailInvalid },
+    };
   }
 
   if (!isValidPhone(phone)) {
-    return { valid: false, error: ERROR_MESSAGES.phoneInvalid };
+    return {
+      valid: false,
+      error: ERROR_MESSAGES.phoneInvalid,
+      fieldErrors: { phone: ERROR_MESSAGES.phoneInvalid },
+    };
   }
 
   if (message.length < VALIDATION_LIMITS.message.min) {
-    return { valid: false, error: ERROR_MESSAGES.messageRequired };
+    return {
+      valid: false,
+      error: ERROR_MESSAGES.messageRequired,
+      fieldErrors: { message: ERROR_MESSAGES.messageRequired },
+    };
   }
 
   if (message.length > VALIDATION_LIMITS.message.max) {
-    return { valid: false, error: ERROR_MESSAGES.messageTooLong };
+    return {
+      valid: false,
+      error: ERROR_MESSAGES.messageTooLong,
+      fieldErrors: { message: ERROR_MESSAGES.messageTooLong },
+    };
   }
 
   return { valid: true, data: { name, email, phone, message } };
@@ -152,33 +182,65 @@ export function validateSignupForm(formData: FormData): ValidationResult<SignupF
 
   if (!isValidName(name)) {
     if (name.length < VALIDATION_LIMITS.name.min) {
-      return { valid: false, error: ERROR_MESSAGES.nameRequired };
+      return {
+        valid: false,
+        error: ERROR_MESSAGES.nameRequired,
+        fieldErrors: { name: ERROR_MESSAGES.nameRequired },
+      };
     }
-    return { valid: false, error: ERROR_MESSAGES.nameTooLong };
+    return {
+      valid: false,
+      error: ERROR_MESSAGES.nameTooLong,
+      fieldErrors: { name: ERROR_MESSAGES.nameTooLong },
+    };
   }
 
   if (!isValidEmail(email)) {
-    return { valid: false, error: ERROR_MESSAGES.emailInvalid };
+    return {
+      valid: false,
+      error: ERROR_MESSAGES.emailInvalid,
+      fieldErrors: { email: ERROR_MESSAGES.emailInvalid },
+    };
   }
 
   if (!isValidPhone(phone)) {
-    return { valid: false, error: ERROR_MESSAGES.phoneInvalid };
+    return {
+      valid: false,
+      error: ERROR_MESSAGES.phoneInvalid,
+      fieldErrors: { phone: ERROR_MESSAGES.phoneInvalid },
+    };
   }
 
   if (!isValidMode(mode)) {
-    return { valid: false, error: ERROR_MESSAGES.modeRequired };
+    return {
+      valid: false,
+      error: ERROR_MESSAGES.modeRequired,
+      fieldErrors: { mode: ERROR_MESSAGES.modeRequired },
+    };
   }
 
   if (level.length < VALIDATION_LIMITS.level.min) {
-    return { valid: false, error: ERROR_MESSAGES.levelRequired };
+    return {
+      valid: false,
+      error: ERROR_MESSAGES.levelRequired,
+      fieldErrors: { level: ERROR_MESSAGES.levelRequired },
+    };
   }
 
   if (message.length > VALIDATION_LIMITS.message.max) {
-    return { valid: false, error: ERROR_MESSAGES.messageTooLong };
+    return {
+      valid: false,
+      error: ERROR_MESSAGES.messageTooLong,
+      fieldErrors: { message: ERROR_MESSAGES.messageTooLong },
+    };
   }
 
   if (!consent) {
-    return { valid: false, error: ERROR_MESSAGES.consentRequired };
+    return {
+      valid: false,
+      error: ERROR_MESSAGES.consentRequired,
+      fieldErrors: { consent: ERROR_MESSAGES.consentRequired },
+    };
   }
 
   return { valid: true, data: { name, email, phone, mode, level, availability, message } };

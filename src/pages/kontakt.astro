@@ -12,13 +12,13 @@ import {
 
 const title = `Kontakt – szkoła angielskiego Legionowo | ${BRAND_NAME}`;
 const description =
-  "Skontaktuj się i umów konsultację oraz diagnozę poziomu w szkole Lingua Legionowo. Oferujemy kursy stacjonarne i online. Odpowiadamy szybko.";
+  "Umów bezpłatną konsultację oraz diagnozę poziomu w szkole Lingua Legionowo. Oferujemy kursy stacjonarne i online. Odpowiadamy szybko.";
 
 const hasEmail = !isTodo(CONTACT_EMAIL);
 const hasPhone = !isTodo(CONTACT_PHONE);
 const formAction = hasEmail ? "/api/kontakt" : "#";
-const emailFallback = "Skontaktuj się przez formularz.";
-const phoneFallback = "Skontaktuj się przez formularz.";
+const emailFallback = "Napisz przez formularz.";
+const phoneFallback = "Napisz przez formularz.";
 const addressLine = FULL_ADDRESS || BUSINESS.city;
 const hasAddress = Boolean(addressLine);
 const hasHours = Boolean(BUSINESS.openingHours);
@@ -44,7 +44,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
         <div>
           <span class="kicker">Kontakt</span>
-          <h1 class="mt-6">Skontaktuj się z nami — Lingua Legionowo</h1>
+          <h1 class="mt-6">Umów bezpłatną konsultację — Lingua Legionowo</h1>
           <p class="mt-6 max-w-2xl text-lg">
             Napisz kilka słów o swoim poziomie i celu. Zaproponujemy plan nauki i terminy —
             stacjonarnie w Legionowie lub online.
@@ -137,6 +137,37 @@ const breadcrumbSchema = generateBreadcrumbSchema([
           <h2 class="text-xl font-extrabold text-slate-900">Formularz kontaktowy</h2>
           <p class="mt-2 text-sm text-slate-500">Pola oznaczone * są wymagane.</p>
 
+          <div class="mt-4 grid gap-3 sm:grid-cols-3">
+            <div class="rounded-2xl border border-slate-200 bg-white p-4 text-sm">
+              <div class="text-xs font-bold uppercase tracking-widest text-slate-400">Telefon</div>
+              {
+                hasPhone ? (
+                  <a class="mt-2 inline-flex font-bold text-primary no-underline hover:underline" href={`tel:${CONTACT_PHONE}`}>
+                    {CONTACT_PHONE}
+                  </a>
+                ) : (
+                  <p class="mt-2 text-slate-500">Oddzwonimy po zgłoszeniu</p>
+                )
+              }
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-4 text-sm">
+              <div class="text-xs font-bold uppercase tracking-widest text-slate-400">E-mail</div>
+              {
+                hasEmail ? (
+                  <a class="mt-2 inline-flex font-bold text-primary no-underline hover:underline" href={`mailto:${CONTACT_EMAIL}`}>
+                    {CONTACT_EMAIL}
+                  </a>
+                ) : (
+                  <p class="mt-2 text-slate-500">Formularz kontaktowy</p>
+                )
+              }
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-4 text-sm">
+              <div class="text-xs font-bold uppercase tracking-widest text-slate-400">Godziny</div>
+              <p class="mt-2 font-bold text-slate-900">{BUSINESS.openingHours}</p>
+            </div>
+          </div>
+
           <form
             method="post"
             action={formAction}
@@ -147,8 +178,8 @@ const breadcrumbSchema = generateBreadcrumbSchema([
           >
             <!-- Honeypot field for spam prevention - hidden from users -->
             <div class="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
-              <label for="company">Firma</label>
-              <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
+              <label for="website">Strona</label>
+              <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
             </div>
 
             <div
@@ -199,6 +230,18 @@ const breadcrumbSchema = generateBreadcrumbSchema([
                 class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
               />
               <p id="phone-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
+            </div>
+
+            <div>
+              <label for="company" class="text-sm font-bold text-slate-900"
+                >Firma (opcjonalnie)</label
+              >
+              <input
+                id="company"
+                name="company"
+                autocomplete="organization"
+                class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
+              />
             </div>
 
             <div>
@@ -259,14 +302,6 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             </button>
           </form>
 
-          <div
-            id="contact-success"
-            class="mt-6 hidden rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800"
-            role="status"
-            tabindex="-1"
-          >
-            <strong>Dziękujemy!</strong> Twoja wiadomość została wysłana. Odezwiemy się najszybciej jak to możliwe.
-          </div>
         </div>
       </div>
     </div>
@@ -275,8 +310,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
   <script is:inline>
     const form = document.querySelector("[data-contact-form]");
     const alertEl = document.getElementById("form-alert");
-    const successEl = document.getElementById("contact-success");
-    const honeypotEl = document.getElementById("company");
+    const honeypotEl = document.getElementById("website");
     const submitBtn = document.getElementById("submit-btn");
     const submitText = document.getElementById("submit-text");
     const submitLoading = document.getElementById("submit-loading");
@@ -304,6 +338,22 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       const errorEl = getErrorEl(field.id);
       if (errorEl) errorEl.textContent = "";
       field.removeAttribute("aria-invalid");
+    };
+
+    const applyFieldErrors = (fieldErrors) => {
+      if (!fieldErrors) return;
+      let firstInvalid = null;
+
+      Object.entries(fieldErrors).forEach(([id, message]) => {
+        const field = document.getElementById(id);
+        if (!field) return;
+        setError(field, message);
+        if (!firstInvalid) firstInvalid = field;
+      });
+
+      if (firstInvalid) {
+        firstInvalid.focus();
+      }
     };
 
     const validate = () => {
@@ -362,12 +412,23 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       }
     };
 
+    const createSuccessEl = () => {
+      const wrapper = document.createElement("div");
+      wrapper.id = "contact-success";
+      wrapper.className =
+        "mt-6 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800";
+      wrapper.setAttribute("role", "status");
+      wrapper.tabIndex = -1;
+      wrapper.innerHTML =
+        "<strong>Dziękujemy!</strong> Twoja wiadomość została wysłana. Odezwiemy się najszybciej jak to możliwe.";
+      form?.insertAdjacentElement("afterend", wrapper);
+      return wrapper;
+    };
+
     const showSuccess = () => {
       if (form) form.classList.add("hidden");
-      if (successEl) {
-        successEl.classList.remove("hidden");
-        successEl.focus();
-      }
+      const successEl = document.getElementById("contact-success") || createSuccessEl();
+      successEl.focus();
     };
 
     form?.addEventListener("input", (event) => {
@@ -427,6 +488,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
         const data = await response.json();
 
         if (!response.ok || !data.success) {
+          applyFieldErrors(data.fieldErrors);
           showAlert(data.error || "Wystąpił błąd. Spróbuj ponownie.");
           return;
         }
