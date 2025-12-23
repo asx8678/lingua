@@ -59,5 +59,5 @@ module.exports = {
       },
     },
   ],
-  ignorePatterns: ["dist", ".astro", "node_modules", "*.min.js", ".wrangler"],
+  ignorePatterns: ["dist", ".astro", "node_modules", "*.min.js", ".wrangler", "public/lingua-progress-widget-v2.5.0.js"],
 };

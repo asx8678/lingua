@@ -242,7 +242,7 @@ const jsonLd = [orgJsonLd, websiteJsonLd, ...structuredData].filter(Boolean);
 
                 window.dataLayer = window.dataLayer || [];
                 function gtag() {
-                  dataLayer.push(arguments);
+                  window.dataLayer.push(arguments);
                 }
                 window.gtag = window.gtag || gtag;
                 window.gtag("js", new Date());

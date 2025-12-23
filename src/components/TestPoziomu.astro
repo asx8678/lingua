@@ -571,7 +571,7 @@ window.__LL_LOAD_BANK__ = async (rootEl) => {
     return "niska";
   }
 
-function confidenceExplain(sd, total){
+function confidenceExplain(sd){
   // Tekst dla osób nietechnicznych
   if (sd > 0.55) return "zrób 60–80 pytań, żeby wynik był pewniejszy";
   if (sd > 0.45) return "zrób 40–60 pytań, żeby wynik był pewniejszy";
@@ -1170,7 +1170,7 @@ if (advancedStats){
 
         kpiCorrectWrong.textContent = `Poprawne: ${comp.correct} • Błędne: ${comp.wrong}`;
         kpiMeta.textContent = `Zakres: ${formatRange(state.config.minLevel)} • Pytania: ${state.config.total} • Tryb: ${modeLabel(state.config.mode)}`;
-            kpiConfidence.textContent = `${confidenceLabel(comp.sd)} — ${confidenceExplain(comp.sd, comp.total)}`;
+            kpiConfidence.textContent = `${confidenceLabel(comp.sd)} — ${confidenceExplain(comp.sd)}`;
 
     renderNextStepCallout(comp);
     renderBreakdown(comp.stats);
@@ -1183,8 +1183,8 @@ if (advancedStats){
     tryHarderBtn.disabled = !nextLevel(comp.strictLevel);
     tryEasierBtn.disabled = !prevLevel(comp.strictLevel);
 
-    if (typeof gtag === "function"){
-      gtag("event", "placement_test_complete", { level: comp.strictLevel, score_percent: comp.pct, correct: comp.correct, total: comp.total });
+    if (typeof window.gtag === "function"){
+      window.gtag("event", "placement_test_complete", { level: comp.strictLevel, score_percent: comp.pct, correct: comp.correct, total: comp.total });
     }
   }
 
@@ -1241,8 +1241,8 @@ if (advancedStats){
     showStep("quiz");
     renderQuestion();
 
-    if (typeof gtag === "function"){
-      gtag("event", "placement_test_start", { range: formatRange(state.config.minLevel), total_questions: state.config.total, mode: state.config.mode });
+    if (typeof window.gtag === "function"){
+      window.gtag("event", "placement_test_start", { range: formatRange(state.config.minLevel), total_questions: state.config.total, mode: state.config.mode });
     }
   }
 
@@ -1358,10 +1358,10 @@ if (advancedStats){
 
       leadStatus.textContent = "Gotowe. Wynik został wysłany (sprawdź też Oferty/Spam).";
 
-      if (typeof gtag === "function"){
-        gtag("event", "placement_test_email_submit", { level: payload.level_strict, score_percent: payload.percent, range: payload.range });
+      if (typeof window.gtag === "function"){
+        window.gtag("event", "placement_test_email_submit", { level: payload.level_strict, score_percent: payload.percent, range: payload.range });
       }
-    } catch(err){
+    } catch(_err){
       leadStatus.classList.add("is-error");
       leadStatus.textContent = "Nie udało się wysłać. Spróbuj ponownie albo skontaktuj się przez formularz na /kontakt.";
     }
@@ -1393,10 +1393,12 @@ if (advancedStats){
       } else {
         window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url), "_blank", "noopener,noreferrer");
       }
-      if (typeof gtag === "function"){
-        gtag("event", "placement_test_share", { level: (state.computed || {}).strictLevel || "" });
+      if (typeof window.gtag === "function"){
+        window.gtag("event", "placement_test_share", { level: (state.computed || {}).strictLevel || "" });
       }
-    } catch(e){}
+    } catch(_e){
+      // ignore
+    }
   });
 
   if (copyBtn) copyBtn.addEventListener("click", async () => {
@@ -1405,7 +1407,7 @@ if (advancedStats){
       await navigator.clipboard.writeText(url);
       copyBtn.textContent = "Skopiowano";
       setTimeout(() => copyBtn.textContent = "Kopiuj link", 1400);
-    } catch(e){
+    } catch(_e){
       prompt("Skopiuj link:", url);
     }
   });
