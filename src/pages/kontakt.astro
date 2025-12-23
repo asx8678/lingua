@@ -9,6 +9,7 @@ import {
   isTodo,
   generateBreadcrumbSchema,
 } from "../config/site";
+import { taughtLanguages } from "../data/subjects";
 
 const title = `Kontakt – szkoła językowa i matematyka w Legionowie | ${BRAND_NAME}`;
 const description =
@@ -29,6 +30,7 @@ const mapHref = hasAddress
 const mapEmbedSrc = hasAddress
   ? `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`
   : "";
+const otherLanguages = taughtLanguages.filter((language) => language !== "Angielski");
 
 const breadcrumbSchema = generateBreadcrumbSchema([
   { name: "Strona główna", url: "/" },
@@ -140,34 +142,22 @@ const breadcrumbSchema = generateBreadcrumbSchema([
           <h2 class="text-xl font-extrabold text-slate-900">Formularz kontaktowy</h2>
           <p class="mt-2 text-sm text-slate-500">Pola oznaczone * są wymagane.</p>
 
-          <div class="mt-4 grid gap-3 sm:grid-cols-3">
-            <div class="rounded-2xl border border-slate-200 bg-white p-4 text-sm">
-              <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Telefon</div>
-              {
-                hasPhone ? (
-                  <a class="mt-2 inline-flex font-bold text-primary no-underline hover:underline" href={`tel:${CONTACT_PHONE}`}>
-                    {CONTACT_PHONE}
-                  </a>
-                ) : (
-                  <p class="mt-2 text-slate-500">Oddzwonimy po zgłoszeniu</p>
-                )
-              }
-            </div>
-            <div class="rounded-2xl border border-slate-200 bg-white p-4 text-sm">
-              <div class="text-xs font-bold uppercase tracking-widest text-slate-500">E-mail</div>
-              {
-                hasEmail ? (
-                  <a class="mt-2 inline-flex font-bold text-primary no-underline hover:underline" href={`mailto:${CONTACT_EMAIL}`}>
-                    {CONTACT_EMAIL}
-                  </a>
-                ) : (
-                  <p class="mt-2 text-slate-500">Formularz kontaktowy</p>
-                )
-              }
-            </div>
-            <div class="rounded-2xl border border-slate-200 bg-white p-4 text-sm">
-              <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Godziny</div>
-              <p class="mt-2 font-bold text-slate-900">{BUSINESS.openingHours}</p>
+          <div class="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p class="text-sm font-bold text-slate-900">Szybkie dopasowanie (opcjonalne)</p>
+                <p class="mt-1 text-sm text-slate-600">
+                  3 krótkie pytania — wybierz, jeśli chcesz szybciej dobrać język i plan nauki.
+                </p>
+              </div>
+              <div class="flex flex-wrap gap-2" role="group" aria-label="Szybkie dopasowanie">
+                <button class="btn btn-secondary px-4 py-2 text-xs" type="button" id="quick-fit-on">
+                  Szybkie dopasowanie
+                </button>
+                <button class="btn btn-primary px-4 py-2 text-xs" type="button" id="quick-fit-off">
+                  Tylko formularz
+                </button>
+              </div>
             </div>
           </div>
 
@@ -199,7 +189,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
               <p class="text-xs font-bold uppercase tracking-widest text-slate-500">Krok 1</p>
               <h3 class="mt-2 text-lg font-extrabold text-slate-900">Szybkie dopasowanie</h3>
               <p class="mt-2 text-sm text-slate-600">
-                Zaznacz 3 krótkie informacje — przygotujemy odpowiednią propozycję.
+                Zaznacz kilka informacji — przygotujemy odpowiednią propozycję.
               </p>
 
               <fieldset class="mt-4">
@@ -227,8 +217,31 @@ const breadcrumbSchema = generateBreadcrumbSchema([
                 <p id="topic-error" class="mt-2 text-xs text-rose-600" aria-live="polite"></p>
               </fieldset>
 
+              <fieldset class="mt-4 hidden" data-other-language>
+                <legend class="text-sm font-bold text-slate-900">Wybierz język *</legend>
+                {
+                  otherLanguages.length > 0 ? (
+                    <div class="mt-2 flex flex-wrap gap-2">
+                      {otherLanguages.map((language) => (
+                        <label class="cursor-pointer">
+                          <input class="sr-only peer" type="radio" name="language" value={language} />
+                          <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
+                            {language}
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  ) : (
+                    <p class="mt-2 text-xs text-slate-500">
+                      Aktualnie nie mamy innych języków w ofercie.
+                    </p>
+                  )
+                }
+                <p id="language-error" class="mt-2 text-xs text-rose-600" aria-live="polite"></p>
+              </fieldset>
+
               <fieldset class="mt-4">
-                <legend class="text-sm font-bold text-slate-900">Kto się uczy? *</legend>
+                <legend class="text-sm font-bold text-slate-900">Dla kogo są zajęcia? *</legend>
                 <div class="mt-2 flex flex-wrap gap-2">
                   <label class="cursor-pointer">
                     <input class="sr-only peer" type="radio" name="audience" value="Dziecko" required />
@@ -290,12 +303,12 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             </div>
 
             <div class="space-y-4" data-step="2">
-              <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm">
+              <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm" data-summary>
                 <div class="text-xs font-bold uppercase tracking-widest text-slate-500">
                   Podsumowanie
                 </div>
                 <p id="form-summary" class="mt-2 text-slate-600">
-                  Uzupełnij wybory w kroku 1, aby zobaczyć podsumowanie.
+                  Uzupełnij wybory w szybkim dopasowaniu, aby zobaczyć podsumowanie.
                 </p>
               </div>
 
@@ -502,13 +515,20 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     const submitBtn = document.getElementById("submit-btn");
     const submitText = document.getElementById("submit-text");
     const submitLoading = document.getElementById("submit-loading");
+    const step1El = document.querySelector('[data-step="1"]');
     const step2El = document.querySelector('[data-step="2"]');
     const stepNextBtn = document.getElementById("form-step-next");
+    const quickFitOnBtn = document.getElementById("quick-fit-on");
+    const quickFitOffBtn = document.getElementById("quick-fit-off");
+    const summaryCard = document.querySelector("[data-summary]");
     const summaryEl = document.getElementById("form-summary");
     const summaryInput = document.getElementById("summary");
+    const otherLanguageFieldset = document.querySelector("[data-other-language]");
+    const languageInputs = form?.querySelectorAll('input[name="language"]') ?? [];
     const messageField = document.getElementById("message");
     const availabilityField = document.getElementById("availability");
     let messageTouched = false;
+    let quickFitEnabled = false;
 
     const fields = [
       { id: "name", min: 2, message: "Podaj imię (min. 2 znaki)." },
@@ -518,10 +538,10 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     ];
     const groupFields = [
       { name: "topic", message: "Wybierz temat zajęć." },
-      { name: "audience", message: "Wybierz, kto się uczy." },
+      { name: "audience", message: "Wybierz, dla kogo są zajęcia." },
       { name: "mode", message: "Wybierz preferowany tryb zajęć." },
     ];
-    const groupFieldNames = new Set(groupFields.map((group) => group.name));
+    const groupFieldNames = new Set([...groupFields.map((group) => group.name), "language"]);
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     const throttleMs = 60 * 1000;
@@ -575,15 +595,36 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       }
     };
 
+    const updateOtherLanguageVisibility = () => {
+      const isOtherLanguage = quickFitEnabled && getSelectedValue("topic") === "Inny język";
+      if (otherLanguageFieldset) {
+        otherLanguageFieldset.classList.toggle("hidden", !isOtherLanguage);
+        otherLanguageFieldset.setAttribute("aria-hidden", String(!isOtherLanguage));
+      }
+      languageInputs.forEach((input) => {
+        input.disabled = !isOtherLanguage;
+        if (!isOtherLanguage) input.checked = false;
+      });
+      if (!isOtherLanguage) {
+        clearGroupError("language");
+      }
+    };
+
     const buildSummary = () => {
+      if (!quickFitEnabled) return "";
       const topic = getSelectedValue("topic");
+      const language = getSelectedValue("language");
       const audience = getSelectedValue("audience");
       const mode = getSelectedValue("mode");
       const availability = availabilityField?.value?.trim();
       const summaryLines = [];
 
-      if (topic) summaryLines.push(`Czego dotyczy: ${topic}`);
-      if (audience) summaryLines.push(`Kto się uczy: ${audience}`);
+      if (topic) {
+        const topicLabel =
+          topic === "Inny język" && language ? `Inny język — ${language}` : topic;
+        summaryLines.push(`Czego dotyczy: ${topicLabel}`);
+      }
+      if (audience) summaryLines.push(`Dla kogo są zajęcia: ${audience}`);
       if (mode) summaryLines.push(`Tryb zajęć: ${mode}`);
       if (availability) summaryLines.push(`Preferowane godziny: ${availability}`);
 
@@ -591,19 +632,75 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     };
 
     const updateSummary = () => {
+      updateOtherLanguageVisibility();
       const summary = buildSummary();
       if (summaryEl) {
         summaryEl.textContent =
-          summary || "Uzupełnij wybory w kroku 1, aby zobaczyć podsumowanie.";
+          summary || "Uzupełnij wybory w szybkim dopasowaniu, aby zobaczyć podsumowanie.";
       }
       if (summaryInput) summaryInput.value = summary;
       if (messageField && !messageTouched) {
         messageField.value = summary ? `${summary}\n\n` : "";
       }
       if (stepNextBtn) {
-        const canAdvance = groupFields.every((group) => Boolean(getSelectedValue(group.name)));
+        const isOtherLanguage = getSelectedValue("topic") === "Inny język";
+        const hasLanguage =
+          !isOtherLanguage || Boolean(getSelectedValue("language")) || languageInputs.length === 0;
+        const canAdvance =
+          quickFitEnabled &&
+          groupFields.every((group) => Boolean(getSelectedValue(group.name))) &&
+          hasLanguage;
         stepNextBtn.disabled = !canAdvance;
       }
+    };
+
+    const toggleQuickFitButtons = (enabled) => {
+      if (quickFitOnBtn) {
+        quickFitOnBtn.classList.toggle("btn-primary", enabled);
+        quickFitOnBtn.classList.toggle("btn-secondary", !enabled);
+        quickFitOnBtn.setAttribute("aria-pressed", String(enabled));
+      }
+      if (quickFitOffBtn) {
+        quickFitOffBtn.classList.toggle("btn-primary", !enabled);
+        quickFitOffBtn.classList.toggle("btn-secondary", enabled);
+        quickFitOffBtn.setAttribute("aria-pressed", String(!enabled));
+      }
+    };
+
+    const setQuickFit = (enabled) => {
+      quickFitEnabled = enabled;
+      toggleQuickFitButtons(enabled);
+
+      if (step1El) {
+        step1El.classList.toggle("hidden", !enabled);
+        step1El.setAttribute("aria-hidden", String(!enabled));
+        step1El.querySelectorAll("input").forEach((input) => {
+          input.disabled = !enabled;
+          if (!enabled) input.checked = false;
+        });
+      }
+
+      if (summaryCard) {
+        summaryCard.classList.toggle("hidden", !enabled);
+        summaryCard.setAttribute("aria-hidden", String(!enabled));
+      }
+
+      if (step2El) {
+        if (enabled) {
+          step2El.classList.add("hidden");
+          step2El.setAttribute("aria-hidden", "true");
+        } else {
+          step2El.classList.remove("hidden");
+          step2El.setAttribute("aria-hidden", "false");
+        }
+      }
+
+      if (!enabled) {
+        groupFields.forEach((group) => clearGroupError(group.name));
+        clearGroupError("language");
+      }
+
+      updateSummary();
     };
 
     const revealStep2 = () => {
@@ -615,17 +712,37 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 
     const validate = () => {
       let firstInvalid = null;
-      groupFields.forEach((group) => {
-        clearGroupError(group.name);
-        const hasValue = Boolean(getSelectedValue(group.name));
-        if (!hasValue) {
-          setGroupError(group.name, group.message);
-          if (!firstInvalid) {
-            const firstField = form?.querySelector(`input[name="${group.name}"]`);
-            if (firstField) firstInvalid = firstField;
+      if (quickFitEnabled) {
+        groupFields.forEach((group) => {
+          clearGroupError(group.name);
+          const hasValue = Boolean(getSelectedValue(group.name));
+          if (!hasValue) {
+            setGroupError(group.name, group.message);
+            if (!firstInvalid) {
+              const firstField = form?.querySelector(`input[name="${group.name}"]`);
+              if (firstField) firstInvalid = firstField;
+            }
           }
+        });
+
+        const isOtherLanguage = getSelectedValue("topic") === "Inny język";
+        const hasLanguageOptions = languageInputs.length > 0;
+        if (isOtherLanguage && hasLanguageOptions) {
+          clearGroupError("language");
+          if (!getSelectedValue("language")) {
+            setGroupError("language", "Wybierz język.");
+            if (!firstInvalid) {
+              const firstField = form?.querySelector('input[name="language"]');
+              if (firstField) firstInvalid = firstField;
+            }
+          }
+        } else {
+          clearGroupError("language");
         }
-      });
+      } else {
+        groupFields.forEach((group) => clearGroupError(group.name));
+        clearGroupError("language");
+      }
 
       fields.forEach((rule) => {
         const field = document.getElementById(rule.id);
@@ -700,11 +817,15 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       successEl.focus();
     };
 
-    if (step2El) {
-      step2El.classList.add("hidden");
-      step2El.setAttribute("aria-hidden", "true");
-    }
-    updateSummary();
+    setQuickFit(false);
+
+    quickFitOnBtn?.addEventListener("click", () => {
+      setQuickFit(true);
+    });
+
+    quickFitOffBtn?.addEventListener("click", () => {
+      setQuickFit(false);
+    });
 
     stepNextBtn?.addEventListener("click", () => {
       revealStep2();
