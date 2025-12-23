@@ -12,10 +12,6 @@ export { ANALYTICS_ID, ANALYTICS_ENABLED, EMAIL_PROVIDER_NAME, BOOKING_URL, NEXT
 
 export { PRIMARY_CTA, SECONDARY_CTA, SECONDARY_CTA_LANGUAGE, SECONDARY_CTA_MATH, getSecondaryCta, CTA_PRIMARY_LABEL, CTA_PRIMARY_LABEL_SHORT, CTA_PRIMARY_HREF, CTA_PRIMARY_TARGET, CTA_PRIMARY_REL, CTA_SECONDARY_LABEL, CTA_SECONDARY_HREF, type CtaVariant } from "./cta";
 
-// Legacy exports (deprecated - use isEmpty from utils instead)
-/** @deprecated Use optional chaining instead */
-export const isTodo = (value: string | undefined | null) => !value;
-
 // Teacher specialties mapping
 export const TEACHER_SPECIALTIES: Record<string, string[]> = {
   "Kasia": ["Business English", "Egzaminy Cambridge"],

@@ -10,7 +10,6 @@ import {
   CTA_PRIMARY_TARGET,
   CTA_PRIMARY_REL,
   CONTACT_PHONE,
-  isTodo,
 } from "../config/site";
 
 interface Props {
@@ -18,7 +17,7 @@ interface Props {
   showPhone?: boolean;
 }
 
-const hasPhone = !isTodo(CONTACT_PHONE);
+const hasPhone = !!CONTACT_PHONE;
 const { phoneHref = hasPhone ? `tel:${CONTACT_PHONE}` : "", showPhone = hasPhone } = Astro.props;
 
 // Tailwind class constants

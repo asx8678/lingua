@@ -6,7 +6,6 @@ import {
   CONTACT_EMAIL,
   CONTACT_PHONE,
   FULL_ADDRESS,
-  isTodo,
   generateBreadcrumbSchema,
 } from "../config/site";
 import { taughtLanguages } from "../data/subjects";
@@ -15,8 +14,8 @@ const title = `Kontakt – szkoła językowa i matematyka w Legionowie | ${BRAND
 const description =
   "Napisz do nas — pomożemy dobrać plan nauki w szkole Lingua Legionowo. Zajęcia stacjonarne w Legionowie i online. Odpowiadamy szybko.";
 
-const hasEmail = !isTodo(CONTACT_EMAIL);
-const hasPhone = !isTodo(CONTACT_PHONE);
+const hasEmail = !!CONTACT_EMAIL;
+const hasPhone = !!CONTACT_PHONE;
 const formAction = hasEmail ? "/api/kontakt" : "#";
 const emailFallback = "Napisz przez formularz.";
 const phoneFallback = "Napisz przez formularz.";

@@ -15,7 +15,6 @@ import {
   CONTACT_PHONE,
   BUSINESS,
   ANALYTICS_ENABLED,
-  isTodo,
 } from "../config/site";
 
 interface Props {
@@ -66,8 +65,8 @@ const orgJsonLd = {
   legalName: BUSINESS.legalEntityName || undefined,
   alternateName: ["Lingua Legionowo", "Angielski Legionowo"],
   url: SITE_URL,
-  email: isTodo(CONTACT_EMAIL) ? undefined : CONTACT_EMAIL,
-  telephone: isTodo(CONTACT_PHONE) ? undefined : CONTACT_PHONE,
+  email: CONTACT_EMAIL || undefined,
+  telephone: CONTACT_PHONE || undefined,
   address: hasAddress ? addressData : undefined,
   geo: hasGeo
     ? {
