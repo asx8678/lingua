@@ -2,14 +2,21 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
 import TrustSection from "../components/TrustSection.astro";
-import { subjects } from "../data/subjects";
+import {
+  matematyka,
+  hiszpanski,
+  niemiecki,
+  francuski,
+  rosyjski,
+  szwedzki,
+} from "../data/subject-pages";
 import { BRAND_NAME, CTA_PRIMARY_HREF, CTA_PRIMARY_LABEL, generateBreadcrumbSchema } from "../config/site";
 
 const title = `Oferta – kursy językowe i matematyka | ${BRAND_NAME}`;
 const description =
   "Wybierz formę nauki: angielski stacjonarnie, angielski online oraz inne języki i matematyka. Umów bezpłatną konsultację.";
 
-const otherSubjects = subjects.filter((subject) => subject !== "Angielski");
+const otherOffers = [matematyka, hiszpanski, niemiecki, francuski, rosyjski, szwedzki];
 
 const breadcrumbSchema = generateBreadcrumbSchema([
   { name: "Strona główna", url: "/" },
@@ -102,15 +109,27 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 
   <section class="section section-muted">
     <div class="container-site">
-      <h2>Inne języki i matematyka</h2>
+      <span class="kicker">Pozostałe kursy</span>
+      <h2 class="mt-4">Inne języki i matematyka</h2>
       <p class="mt-4 max-w-3xl">
-        Prowadzimy także zajęcia z innych języków oraz matematyki. Program i terminy dopasowujemy do
-        grupy i poziomu.
+        Sprawdź szczegóły pozostałych kursów i korepetycji. Każdy program dopasowujemy do poziomu,
+        celu i dostępności.
       </p>
-      <div class="mt-6 flex flex-wrap gap-2">
-        {otherSubjects.map((subject) => <span class="chip text-sm">{subject}</span>)}
+      <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {otherOffers.map((offer) => (
+          <a class="card-interactive group no-underline" href={`/${offer.slug}`}>
+            <h3 class="text-lg font-extrabold text-slate-900">{offer.kicker}</h3>
+            <p class="mt-3 text-sm text-slate-600">{offer.description}</p>
+            <span class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary transition-all group-hover:gap-3">
+              Poznaj szczegóły
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </span>
+          </a>
+        ))}
       </div>
-      <div class="mt-6">
+      <div class="mt-8">
         <a class="btn btn-secondary" href="/kontakt">Zapytaj o dostępność</a>
       </div>
     </div>
