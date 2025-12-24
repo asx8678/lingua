@@ -1,10 +1,8 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
-import TeacherCard from "../components/TeacherCard.astro";
 import TestimonialCard from "../components/TestimonialCard.astro";
 import TrustSection from "../components/TrustSection.astro";
-import { teachers } from "../data/teachers";
 import { taughtLanguages } from "../data/subjects";
 import testimonials from "../data/testimonials.json";
 import {
@@ -24,8 +22,6 @@ const title = `Lingua Legionowo — szkoła językowa i matematyka w Legionowie 
 const description =
   `Szkoła języków obcych i matematyki w Legionowie. Uczymy ${languagesList} i prowadzimy zajęcia ` +
   "stacjonarne oraz online. Umów bezpłatną diagnozę i plan nauki.";
-
-const previewTeachers = teachers.slice(0, 4);
 
 const offerCards = [
   {
@@ -248,32 +244,6 @@ const localBusinessSchema = {
         {homeTestimonials.map((item) => (
           <TestimonialCard testimonial={item} />
         ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="py-10 lg:py-14">
-    <div class="mx-auto w-full max-w-7xl px-6">
-      <div class="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
-        <div>
-          <span class="kicker">Nasi lektorzy</span>
-          <h2 class="mt-2">Poznaj zespół, który prowadzi zajęcia</h2>
-          <p class="mt-2 max-w-3xl text-slate-600">
-            Doświadczeni lektorzy języków obcych i matematyki prowadzą zajęcia dopasowane do Twojego
-            poziomu i celu.
-          </p>
-        </div>
-        <div class="shrink-0">
-          <a class="btn btn-secondary" href="/nasi-lektorzy">Zobacz wszystkich</a>
-        </div>
-      </div>
-
-      <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {
-          previewTeachers.map((teacher, index) => (
-            <TeacherCard teacher={teacher} loading={index === 0 ? "eager" : "lazy"} />
-          ))
-        }
       </div>
     </div>
   </section>
