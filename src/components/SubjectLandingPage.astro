@@ -69,8 +69,8 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
   canonical={`/${data.slug}`}
   structuredData={[faqJsonLd, breadcrumbSchema, courseJsonLd]}
 >
-  <section class="bg-hero-gradient">
-    <div class="mx-auto w-full max-w-7xl px-6 py-16 sm:py-20">
+  <section class="hero-bg section-hero">
+    <div class="container-site">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
         <div>
           <span class={kicker}>{data.kicker}</span>
@@ -105,8 +105,8 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
     </div>
   </section>
 
-  <section class="py-16 lg:py-24">
-    <div class="mx-auto w-full max-w-7xl px-6">
+  <section class="section">
+    <div class="container-site">
       <h2>{data.audienceTitle}</h2>
       <p class="mt-4 max-w-3xl">{data.audienceIntro}</p>
       <div class="mt-8 grid gap-6 md:grid-cols-3">
@@ -120,8 +120,8 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
     </div>
   </section>
 
-  <section class="py-16 lg:py-24 bg-slate-50/60">
-    <div class="mx-auto w-full max-w-7xl px-6">
+  <section class="section section-muted">
+    <div class="container-site">
       <h2>{data.goalsTitle}</h2>
       <p class="mt-4 max-w-3xl">{data.goalsIntro}</p>
       <div class="mt-8 grid gap-6 md:grid-cols-2">
@@ -145,8 +145,8 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
     </div>
   </section>
 
-  <section class="py-16 lg:py-24">
-    <div class="mx-auto w-full max-w-7xl px-6">
+  <section class="section">
+    <div class="container-site">
       <h2>{data.formatTitle}</h2>
       <p class="mt-4 max-w-3xl">{data.formatIntro}</p>
       <div class="mt-8 grid gap-6 md:grid-cols-3">
@@ -179,8 +179,8 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
     </div>
   </section>
 
-  <section class="py-16 lg:py-24 bg-slate-50/60">
-    <div class="mx-auto w-full max-w-7xl px-6">
+  <section class="section section-muted">
+    <div class="container-site">
       <div class="grid gap-8 lg:grid-cols-2 lg:items-start">
         <div>
           <h2>{data.lessonPlanTitle}</h2>

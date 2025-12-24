@@ -15,6 +15,10 @@
     @apply bg-slate-50/60;
   }
 
+  .section-hero {
+    @apply py-10 sm:py-14;
+  }
+
   .hero-bg {
     @apply bg-hero-gradient;
   }
@@ -25,6 +29,10 @@
 
   .card {
     @apply rounded-xl border border-slate-200/80 bg-white transition-all duration-200 hover:shadow-soft hover:border-slate-200;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full border border-slate-200/80 bg-white px-3 py-1 text-xs font-medium text-slate-600;
   }
 
   .btn {
@@ -41,6 +49,10 @@
 
   .btn-ghost {
     @apply text-slate-600 hover:bg-slate-100 hover:text-slate-900;
+  }
+
+  .link-primary {
+    @apply font-semibold text-primary no-underline hover:underline;
   }
 }
 
