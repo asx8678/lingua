@@ -10,7 +10,15 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   const response = await next();
 
-  // Only apply CSP to HTML responses
+  // Apply global security headers to ALL responses
+  response.headers.set("X-Content-Type-Options", "nosniff");
+  response.headers.set("X-Frame-Options", "DENY");
+  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  response.headers.set("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+  response.headers.set("X-DNS-Prefetch-Control", "off");
+  response.headers.set("X-Permitted-Cross-Domain-Policies", "none");
+
+  // Only apply CSP and HTML-specific processing to HTML responses
   const contentType = response.headers.get("Content-Type") ?? "";
   if (contentType.includes("text/html")) {
     // Inject nonce into inline scripts and styles
@@ -29,22 +37,13 @@ export const onRequest = defineMiddleware(async (context, next) => {
       headers: response.headers,
     });
 
-    // Security headers
-    newResponse.headers.set("X-Content-Type-Options", "nosniff");
-    newResponse.headers.set("X-Frame-Options", "DENY");
-    newResponse.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+    // Add additional HTML-specific headers
     newResponse.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
-    newResponse.headers.set("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
     newResponse.headers.set("Cross-Origin-Opener-Policy", "same-origin");
     newResponse.headers.set("Content-Security-Policy", buildCSPHeader(nonce));
 
     return newResponse;
   }
-
-  // For non-HTML responses, just add security headers
-  response.headers.set("X-Content-Type-Options", "nosniff");
-  response.headers.set("X-Frame-Options", "DENY");
-  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
 
   return response;
 });
