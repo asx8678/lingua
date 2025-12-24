@@ -21,16 +21,16 @@ const stars = Array.from({ length: 5 }, (_, index) => index + 1);
 const ratingLabel = `Ocena ${testimonial.rating} na 5 gwiazdek`;
 
 // Tailwind class constants
-const card = "rounded-2xl border border-slate-200/80 bg-white shadow-sm transition-shadow hover:shadow-md";
+const card = "rounded-2xl border border-slate-200/60 bg-white transition-all duration-300 hover:shadow-soft hover:border-slate-200";
 ---
 
 <article class={`${card} ${compact ? "p-5" : "p-6"}`}>
   <div class="flex items-start justify-between gap-4">
     <div>
-      <div class="text-xs font-bold uppercase tracking-widest text-slate-500">
+      <div class="text-sm font-semibold text-slate-900">
         {testimonial.name}
       </div>
-      <div class="mt-1 text-xs text-slate-500">{testimonial.context}</div>
+      <div class="mt-0.5 text-xs text-slate-500">{testimonial.context}</div>
     </div>
     {
       formattedDate && (
@@ -40,9 +40,9 @@ const card = "rounded-2xl border border-slate-200/80 bg-white shadow-sm transiti
       )
     }
   </div>
-  <p class="mt-3 text-sm text-slate-700">"{testimonial.text}"</p>
-  <div class="mt-4 flex items-center gap-2">
-    <div class="flex" role="img" aria-label={ratingLabel}>
+  <p class="mt-4 text-sm text-slate-600 leading-relaxed">"{testimonial.text}"</p>
+  <div class="mt-4 flex items-center gap-1.5">
+    <div class="flex gap-0.5" role="img" aria-label={ratingLabel}>
       {
         stars.map((star) => (
           <svg
@@ -56,6 +56,6 @@ const card = "rounded-2xl border border-slate-200/80 bg-white shadow-sm transiti
         ))
       }
     </div>
-    <span class="text-xs text-slate-500">{testimonial.rating}/5</span>
+    <span class="text-xs text-slate-400">{testimonial.rating}/5</span>
   </div>
 </article>

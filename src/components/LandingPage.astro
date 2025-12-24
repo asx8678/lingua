@@ -56,10 +56,10 @@ const courseJsonLd = {
 };
 
 // Tailwind class constants
-const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
-const btnPrimary = `${btnBase} bg-primary text-white shadow-md hover:bg-primary-700 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:shadow-md`;
-const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-700 shadow-sm hover:border-primary/30 hover:text-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0`;
-const card = "rounded-2xl border border-slate-200/80 bg-white p-0 shadow-sm transition-shadow hover:shadow-md";
+const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200";
+const btnPrimary = `${btnBase} bg-primary text-white shadow-sm hover:bg-primary-600 hover:shadow-md active:scale-[0.98]`;
+const btnSecondary = `${btnBase} border border-slate-200/80 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 hover:shadow-sm`;
+const card = "rounded-2xl border border-slate-200/60 bg-white transition-all duration-300 hover:shadow-soft hover:border-slate-200";
 ---
 
 <MainLayout
@@ -69,12 +69,12 @@ const card = "rounded-2xl border border-slate-200/80 bg-white p-0 shadow-sm tran
   structuredData={[faqJsonLd, breadcrumbSchema, courseJsonLd]}
 >
   <section class="bg-hero-gradient">
-    <div class="mx-auto w-full max-w-7xl px-6 py-16 sm:py-20">
+    <div class="mx-auto w-full max-w-7xl px-6 py-20 sm:py-28">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
         <div>
-          <span class="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary">{data.kicker}</span>
-          <h1 class="mt-6">{data.h1}</h1>
-          <p class="mt-6 max-w-2xl text-lg">
+          <span class="inline-block rounded-full bg-primary/8 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">{data.kicker}</span>
+          <h1 class="mt-5">{data.h1}</h1>
+          <p class="mt-6 max-w-2xl text-lg text-slate-600">
             {data.intro}
           </p>
           <div class="mt-8">
@@ -82,7 +82,7 @@ const card = "rounded-2xl border border-slate-200/80 bg-white p-0 shadow-sm tran
           </div>
         </div>
 
-        <div class="relative">
+        <div class="relative hidden lg:block">
           <img
             src="/images/hero.svg"
             alt={data.h1}
@@ -91,25 +91,25 @@ const card = "rounded-2xl border border-slate-200/80 bg-white p-0 shadow-sm tran
             fetchpriority="high"
             width="600"
             height="400"
-            class="w-full rounded-3xl border border-slate-200 shadow-sm"
+            class="w-full rounded-2xl border border-slate-200/60 shadow-soft"
           />
         </div>
       </div>
     </div>
   </section>
 
-  <section class="py-16 lg:py-24">
+  <section class="py-20 lg:py-28">
     <div class="mx-auto w-full max-w-7xl px-6">
       <h2>Dlaczego {BRAND_NAME}?</h2>
-      <p class="mt-4 max-w-3xl">
+      <p class="mt-4 max-w-3xl text-slate-600">
         Jesteśmy lokalną szkołą językową, która rozumie potrzeby mieszkańców Legionowa. Bez dojazdów
         do Warszawy — ucz się blisko domu.
       </p>
-      <div class="mt-8 grid gap-6 md:grid-cols-2">
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
         {
           data.benefits.map((item) => (
             <div class={`${card} p-6`}>
-              <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
+              <h3 class="text-base font-bold text-slate-900">{item.title}</h3>
               <p class="mt-2 text-sm text-slate-600">{item.text}</p>
             </div>
           ))
@@ -118,20 +118,21 @@ const card = "rounded-2xl border border-slate-200/80 bg-white p-0 shadow-sm tran
     </div>
   </section>
 
-  <section class="py-16 lg:py-24 bg-slate-50">
+  <section class="py-20 lg:py-28 bg-slate-50/70">
     <div class="mx-auto w-full max-w-7xl px-6">
       <h2>Nasza oferta</h2>
-      <p class="mt-4 max-w-3xl">
+      <p class="mt-4 max-w-3xl text-slate-600">
         Wybierz formę nauki dopasowaną do swoich potrzeb i możliwości czasowych.
       </p>
-      <div class="mt-8 grid gap-6 md:grid-cols-2">
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
         {
           data.offers.map((item) => (
-            <a class={`${card} p-6 no-underline transition hover:-translate-y-0.5`} href={item.href}>
-              <h3 class="text-lg font-extrabold text-slate-900">{item.title}</h3>
+            <a class={`${card} p-6 no-underline group`} href={item.href}>
+              <h3 class="text-base font-bold text-slate-900">{item.title}</h3>
               <p class="mt-2 text-sm text-slate-600">{item.text}</p>
-              <span class="mt-4 inline-flex text-sm font-bold text-primary">
-                Dowiedz się więcej →
+              <span class="mt-4 inline-flex text-sm font-semibold text-primary group-hover:gap-3 gap-2 transition-all duration-200">
+                Dowiedz się więcej
+                <span aria-hidden="true">→</span>
               </span>
             </a>
           ))
@@ -140,12 +141,12 @@ const card = "rounded-2xl border border-slate-200/80 bg-white p-0 shadow-sm tran
     </div>
   </section>
 
-  <section class="py-16 lg:py-24">
+  <section class="py-20 lg:py-28">
     <div class="mx-auto w-full max-w-7xl px-6">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
         <div>
           <h2>Dla kogo są nasze kursy?</h2>
-          <p class="mt-4">
+          <p class="mt-4 text-slate-600">
             Prowadzimy zajęcia dla różnych grup wiekowych i na różnych poziomach zaawansowania.
           </p>
           <ul class="mt-6 space-y-3">
@@ -153,11 +154,11 @@ const card = "rounded-2xl border border-slate-200/80 bg-white p-0 shadow-sm tran
               data.targetAudience.map((item) => (
                 <li class="flex items-start gap-3 text-sm text-slate-600">
                   <span
-                    class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary"
+                    class="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary/60"
                     aria-hidden="true"
                   />
                   <span>
-                    <strong>{item.label}</strong> — {item.description}
+                    <strong class="text-slate-900">{item.label}</strong> — {item.description}
                   </span>
                 </li>
               ))
@@ -165,12 +166,17 @@ const card = "rounded-2xl border border-slate-200/80 bg-white p-0 shadow-sm tran
           </ul>
         </div>
         <div class={`${card} p-6`}>
-          <h3 class="text-lg font-extrabold text-slate-900">{data.locationCard.title}</h3>
+          <h3 class="text-base font-bold text-slate-900">{data.locationCard.title}</h3>
           <p class="mt-4 text-sm text-slate-600">
             {data.locationCard.intro}
           </p>
-          <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
-            {data.locationCard.features.map((feature) => <li>{feature}</li>)}
+          <ul class="mt-4 space-y-2 text-sm text-slate-600">
+            {data.locationCard.features.map((feature) => (
+              <li class="flex items-start gap-2">
+                <span class="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary/60" aria-hidden="true" />
+                <span>{feature}</span>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
