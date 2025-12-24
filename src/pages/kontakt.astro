@@ -51,122 +51,66 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
   structuredData={[breadcrumbSchema]}
 >
   <section class="bg-hero-gradient">
-    <div class="mx-auto w-full max-w-7xl px-6 py-16 sm:py-24">
-      <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+    <div class="mx-auto w-full max-w-7xl px-6 py-10 sm:py-14">
+      <div class="grid gap-6 lg:grid-cols-2 lg:items-start">
         <div>
           <span class={kicker}>Kontakt</span>
-          <h1 class="mt-5">Skontaktuj się z nami</h1>
-          <p class="mt-4 max-w-2xl text-slate-600">
-            Napisz o swoim poziomie i celu — zaproponujemy plan nauki i terminy. Zajęcia prowadzimy stacjonarnie w Legionowie oraz online.
+          <h1 class="mt-3">Skontaktuj się z nami</h1>
+          <p class="mt-3 max-w-2xl text-slate-600">
+            Napisz o swoim poziomie i celu — zaproponujemy plan nauki i terminy.
           </p>
 
-          <div class="mt-10 grid gap-4 sm:grid-cols-3">
-            <div class={`${card} p-5 text-center sm:text-left`}>
-              <div class="text-xs font-bold uppercase tracking-widest text-slate-500">E-mail</div>
-              <div class="mt-3 text-sm font-bold text-primary break-all">
-                {
-                  hasEmail ? (
-                    <a class="no-underline hover:underline" href={`mailto:${CONTACT_EMAIL}`}>
-                      {CONTACT_EMAIL}
-                    </a>
-                  ) : (
-                    <span>{emailFallback}</span>
-                  )
-                }
+          <div class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+            {hasEmail && (
+              <div class="flex items-center gap-2">
+                <span class="text-slate-500">E-mail:</span>
+                <a class="font-semibold text-primary no-underline hover:underline" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
               </div>
-              <p class="mt-2 text-sm text-slate-600">Odpowiadamy szybko.</p>
-            </div>
-
-            <div class={`${card} p-5 text-center sm:text-left`}>
-              <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Telefon</div>
-              <div class="mt-3 text-sm font-bold text-primary whitespace-nowrap">
-                {
-                  hasPhone ? (
-                    <a class="no-underline hover:underline" href={`tel:${CONTACT_PHONE}`}>
-                      {CONTACT_PHONE}
-                    </a>
-                  ) : (
-                    <span>{phoneFallback}</span>
-                  )
-                }
+            )}
+            {hasPhone && (
+              <div class="flex items-center gap-2">
+                <span class="text-slate-500">Tel:</span>
+                <a class="font-semibold text-primary no-underline hover:underline" href={`tel:${CONTACT_PHONE}`}>{CONTACT_PHONE}</a>
               </div>
-              <p class="mt-2 text-sm text-slate-600">Oddzwonimy, jeśli nie odbierzemy.</p>
-            </div>
-            {
-              (hasAddress || hasHours) && (
-                <div class={`${card} p-5 text-center sm:text-left`}>
-                  <div class="text-xs font-bold uppercase tracking-widest text-slate-500">
-                    Lokalizacja
-                  </div>
-                  {hasAddress && (
-                    <div class="mt-3 text-sm font-bold text-slate-900">{addressLine}</div>
-                  )}
-                  {hasAddress && (
-                    <a
-                      class="mt-2 inline-flex text-sm font-bold text-primary no-underline hover:underline"
-                      href={mapHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Zobacz na mapie →
-                    </a>
-                  )}
-                  {hasHours && (
-                    <p class="mt-2 text-sm text-slate-600">
-                      {BUSINESS.openingHours}
-                    </p>
-                  )}
-                </div>
-              )
-            }
+            )}
           </div>
 
-          <p class="mt-6 text-sm text-slate-500">
-            Szkoła Lingua znajduje się w centrum Legionowa. Oferujemy także lekcje online dla osób
-            spoza Legionowa.
-          </p>
-          <p class="mt-2 text-sm text-slate-500">
-            Zobacz też
-            <a
-              class="font-bold text-primary no-underline hover:underline"
-              href="/angielski-stacjonarnie">zajęcia stacjonarne</a
-            >,
-            <a class="font-bold text-primary no-underline hover:underline" href="/angielski-online"
-              >lekcje online</a
-            >
-            i
-            <a class="font-bold text-primary no-underline hover:underline" href="/cennik">cennik</a
-            >.
+          {(hasAddress || hasHours) && (
+            <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-slate-600">
+              {hasAddress && <span>{addressLine}</span>}
+              {hasAddress && (
+                <a class="font-semibold text-primary no-underline hover:underline" href={mapHref} target="_blank" rel="noopener noreferrer">
+                  Mapa →
+                </a>
+              )}
+              {hasHours && <span class="text-slate-500">{BUSINESS.openingHours}</span>}
+            </div>
+          )}
+
+          <p class="mt-4 text-sm text-slate-500">
+            Zajęcia stacjonarne w Legionowie i online. Zobacz też
+            <a class="font-semibold text-primary no-underline hover:underline" href="/oferta">ofertę</a> i
+            <a class="font-semibold text-primary no-underline hover:underline" href="/cennik">cennik</a>.
           </p>
         </div>
 
-        <div class={`${card} p-6 sm:p-8`} id="formularz">
-          <h2 class="text-lg font-bold text-slate-900">Formularz kontaktowy</h2>
-          <p class="mt-2 text-sm text-slate-500">Pola oznaczone * są wymagane.</p>
-
-          <div class="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p class="text-sm font-bold text-slate-900">Szybkie dopasowanie (opcjonalne)</p>
-                <p class="mt-1 text-sm text-slate-600">
-                  3 krótkie pytania — wybierz, jeśli chcesz szybciej dobrać język i plan nauki.
-                </p>
-              </div>
-              <div class="flex flex-wrap gap-2" role="group" aria-label="Szybkie dopasowanie">
-                <button class={`${btnSecondary} px-4 py-2 text-xs`} type="button" id="quick-fit-on">
-                  Szybkie dopasowanie
-                </button>
-                <button class={`${btnPrimary} px-4 py-2 text-xs`} type="button" id="quick-fit-off">
-                  Tylko formularz
-                </button>
-              </div>
+        <div class={`${card} p-5`} id="formularz">
+          <div class="flex items-center justify-between gap-4">
+            <h2 class="text-base font-bold text-slate-900">Formularz kontaktowy</h2>
+            <div class="flex gap-1" role="group" aria-label="Szybkie dopasowanie">
+              <button class="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 transition hover:bg-slate-50" type="button" id="quick-fit-on">
+                + Dopasowanie
+              </button>
+              <button class="rounded-full bg-primary px-3 py-1 text-xs font-medium text-white" type="button" id="quick-fit-off">
+                Formularz
+              </button>
             </div>
           </div>
 
           <form
             method="post"
             action={formAction}
-            class="mt-6 space-y-4"
+            class="mt-4 space-y-3"
             aria-label="Formularz kontaktowy"
             data-contact-form
             data-track-form="contact"
@@ -187,253 +131,141 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
 
             <input id="summary" name="summary" type="hidden" />
 
-            <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5" data-step="1">
-              <p class="text-xs font-bold uppercase tracking-widest text-slate-500">Krok 1</p>
-              <h3 class="mt-2 text-base font-bold text-slate-900">Szybkie dopasowanie</h3>
-              <p class="mt-2 text-sm text-slate-600">
-                Zaznacz kilka informacji — przygotujemy odpowiednią propozycję.
-              </p>
+            <div class="rounded-xl border border-slate-200 bg-slate-50 p-4" data-step="1">
+              <p class="text-xs font-semibold text-slate-500">Szybkie dopasowanie — zaznacz i przejdź dalej</p>
 
-              <fieldset class="mt-4">
-                <legend class="text-sm font-bold text-slate-900">Czego dotyczy? *</legend>
-                <div class="mt-2 flex flex-wrap gap-2">
+              <fieldset class="mt-3">
+                <legend class="text-xs font-semibold text-slate-700">Czego dotyczy? *</legend>
+                <div class="mt-1.5 flex flex-wrap gap-1.5">
                   <label class="cursor-pointer">
                     <input class="sr-only peer" type="radio" name="topic" value="Angielski" required />
-                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
-                      Angielski
-                    </span>
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">Angielski</span>
                   </label>
                   <label class="cursor-pointer">
                     <input class="sr-only peer" type="radio" name="topic" value="Inny język" required />
-                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
-                      Inny język
-                    </span>
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">Inny język</span>
                   </label>
                   <label class="cursor-pointer">
                     <input class="sr-only peer" type="radio" name="topic" value="Matematyka" required />
-                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
-                      Matematyka
-                    </span>
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">Matematyka</span>
                   </label>
                 </div>
-                <p id="topic-error" class="mt-2 text-xs text-rose-600" aria-live="polite"></p>
+                <p id="topic-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
               </fieldset>
 
-              <fieldset class="mt-4 hidden" data-other-language>
-                <legend class="text-sm font-bold text-slate-900">Wybierz język *</legend>
-                {
-                  otherLanguages.length > 0 ? (
-                    <div class="mt-2 flex flex-wrap gap-2">
-                      {otherLanguages.map((language) => (
-                        <label class="cursor-pointer">
-                          <input class="sr-only peer" type="radio" name="language" value={language} />
-                          <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
-                            {language}
-                          </span>
-                        </label>
-                      ))}
-                    </div>
-                  ) : (
-                    <p class="mt-2 text-xs text-slate-500">
-                      Aktualnie nie mamy innych języków w ofercie.
-                    </p>
-                  )
-                }
-                <p id="language-error" class="mt-2 text-xs text-rose-600" aria-live="polite"></p>
+              <fieldset class="mt-3 hidden" data-other-language>
+                <legend class="text-xs font-semibold text-slate-700">Wybierz język *</legend>
+                {otherLanguages.length > 0 ? (
+                  <div class="mt-1.5 flex flex-wrap gap-1.5">
+                    {otherLanguages.map((language) => (
+                      <label class="cursor-pointer">
+                        <input class="sr-only peer" type="radio" name="language" value={language} />
+                        <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">{language}</span>
+                      </label>
+                    ))}
+                  </div>
+                ) : (
+                  <p class="mt-1 text-xs text-slate-500">Brak innych języków w ofercie.</p>
+                )}
+                <p id="language-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
               </fieldset>
 
-              <fieldset class="mt-4">
-                <legend class="text-sm font-bold text-slate-900">Dla kogo są zajęcia? *</legend>
-                <div class="mt-2 flex flex-wrap gap-2">
+              <fieldset class="mt-3">
+                <legend class="text-xs font-semibold text-slate-700">Dla kogo? *</legend>
+                <div class="mt-1.5 flex flex-wrap gap-1.5">
                   <label class="cursor-pointer">
                     <input class="sr-only peer" type="radio" name="audience" value="Dziecko" required />
-                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
-                      Dziecko
-                    </span>
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">Dziecko</span>
                   </label>
                   <label class="cursor-pointer">
                     <input class="sr-only peer" type="radio" name="audience" value="Nastolatek" required />
-                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
-                      Nastolatek
-                    </span>
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">Nastolatek</span>
                   </label>
                   <label class="cursor-pointer">
                     <input class="sr-only peer" type="radio" name="audience" value="Dorosły" required />
-                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
-                      Dorosły
-                    </span>
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">Dorosły</span>
                   </label>
                   <label class="cursor-pointer">
                     <input class="sr-only peer" type="radio" name="audience" value="Firma" required />
-                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
-                      Firma
-                    </span>
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">Firma</span>
                   </label>
                 </div>
-                <p id="audience-error" class="mt-2 text-xs text-rose-600" aria-live="polite"></p>
+                <p id="audience-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
               </fieldset>
 
-              <fieldset class="mt-4">
-                <legend class="text-sm font-bold text-slate-900">Tryb zajęć *</legend>
-                <div class="mt-2 flex flex-wrap gap-2">
+              <fieldset class="mt-3">
+                <legend class="text-xs font-semibold text-slate-700">Tryb zajęć *</legend>
+                <div class="mt-1.5 flex flex-wrap gap-1.5">
                   <label class="cursor-pointer">
                     <input class="sr-only peer" type="radio" name="mode" value="Stacjonarnie" required />
-                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
-                      Stacjonarnie
-                    </span>
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">Stacjonarnie</span>
                   </label>
                   <label class="cursor-pointer">
                     <input class="sr-only peer" type="radio" name="mode" value="Online" required />
-                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
-                      Online
-                    </span>
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">Online</span>
                   </label>
                 </div>
-                <p id="mode-error" class="mt-2 text-xs text-rose-600" aria-live="polite"></p>
+                <p id="mode-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
               </fieldset>
 
-              <div class="mt-6">
-                <button
-                  class={`${btnSecondary} w-full sm:w-auto`}
-                  type="button"
-                  id="form-step-next"
-                  disabled
-                >
-                  Przejdź do danych kontaktowych
-                </button>
-              </div>
+              <button class="mt-4 w-full rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-medium text-slate-600 transition hover:bg-slate-50 disabled:opacity-50" type="button" id="form-step-next" disabled>
+                Dalej →
+              </button>
             </div>
 
-            <div class="space-y-4" data-step="2">
-              <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm" data-summary>
-                <div class="text-xs font-bold uppercase tracking-widest text-slate-500">
-                  Podsumowanie
+            <div class="space-y-3" data-step="2">
+              <div class="hidden rounded-lg border border-slate-200 bg-slate-50 p-3 text-xs" data-summary>
+                <span class="font-semibold text-slate-500">Podsumowanie:</span>
+                <span id="form-summary" class="text-slate-600"></span>
+              </div>
+
+              <div class="grid gap-3 sm:grid-cols-2">
+                <div>
+                  <label for="name" class="text-xs font-semibold text-slate-700">Imię *</label>
+                  <input id="name" name="name" autocomplete="given-name" required minlength="2" aria-describedby="name-error" class="mt-1 w-full rounded-lg border-slate-300 bg-white text-sm focus:border-primary focus:ring-primary" />
+                  <p id="name-error" class="mt-0.5 text-xs text-rose-600" aria-live="polite"></p>
                 </div>
-                <p id="form-summary" class="mt-2 text-slate-600">
-                  Uzupełnij wybory w szybkim dopasowaniu, aby zobaczyć podsumowanie.
-                </p>
+                <div>
+                  <label for="email" class="text-xs font-semibold text-slate-700">E-mail *</label>
+                  <input id="email" name="email" type="email" autocomplete="email" required aria-describedby="email-error" class="mt-1 w-full rounded-lg border-slate-300 bg-white text-sm focus:border-primary focus:ring-primary" />
+                  <p id="email-error" class="mt-0.5 text-xs text-rose-600" aria-live="polite"></p>
+                </div>
               </div>
+
+              <div class="grid gap-3 sm:grid-cols-2">
+                <div>
+                  <label for="phone" class="text-xs font-semibold text-slate-700">Telefon</label>
+                  <input id="phone" name="phone" type="tel" autocomplete="tel" aria-describedby="phone-error" class="mt-1 w-full rounded-lg border-slate-300 bg-white text-sm focus:border-primary focus:ring-primary" />
+                  <p id="phone-error" class="mt-0.5 text-xs text-rose-600" aria-live="polite"></p>
+                </div>
+                <div>
+                  <label for="availability" class="text-xs font-semibold text-slate-700">Preferowane godziny</label>
+                  <input id="availability" name="availability" autocomplete="off" placeholder="Np. wt/czw po 17:00" class="mt-1 w-full rounded-lg border-slate-300 bg-white text-sm focus:border-primary focus:ring-primary" />
+                </div>
+              </div>
+
+              <input id="company" name="company" type="hidden" autocomplete="organization" />
 
               <div>
-                <label for="name" class="text-sm font-bold text-slate-900">Imię *</label>
-                <input
-                  id="name"
-                  name="name"
-                  autocomplete="given-name"
-                  required
-                  minlength="2"
-                  aria-describedby="name-error"
-                  class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
-                />
-                <p id="name-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
+                <label for="message" class="text-xs font-semibold text-slate-700">Wiadomość *</label>
+                <textarea id="message" name="message" required minlength="5" aria-describedby="message-error" rows="4" class="mt-1 w-full rounded-lg border-slate-300 bg-white text-sm focus:border-primary focus:ring-primary" placeholder="Poziom, cel, preferowane dni/godziny…"></textarea>
+                <p id="message-error" class="mt-0.5 text-xs text-rose-600" aria-live="polite"></p>
               </div>
 
-              <div>
-                <label for="email" class="text-sm font-bold text-slate-900">E-mail *</label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autocomplete="email"
-                  required
-                  aria-describedby="email-error"
-                  class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
-                />
-                <p id="email-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
-              </div>
-
-              <div>
-                <label for="phone" class="text-sm font-bold text-slate-900"
-                  >Telefon (opcjonalnie)</label
-                >
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  autocomplete="tel"
-                  aria-describedby="phone-error"
-                  class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
-                />
-                <p id="phone-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
-              </div>
-
-              <div>
-                <label for="company" class="text-sm font-bold text-slate-900"
-                  >Firma (opcjonalnie)</label
-                >
-                <input
-                  id="company"
-                  name="company"
-                  autocomplete="organization"
-                  class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
-                />
-              </div>
-
-              <div>
-                <label for="availability" class="text-sm font-bold text-slate-900">
-                  Preferowane godziny (opcjonalnie)
-                </label>
-                <input
-                  id="availability"
-                  name="availability"
-                  autocomplete="off"
-                  class="mt-1 w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
-                  placeholder="Np. wt/czw po 17:00, soboty rano"
-                />
-              </div>
-
-              <div>
-                <label for="message" class="text-sm font-bold text-slate-900">Wiadomość *</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  minlength="5"
-                  aria-describedby="message-error"
-                  class="mt-1 min-h-[140px] w-full rounded-xl border-slate-300 bg-white focus:border-primary focus:ring-primary"
-                  placeholder="Dopisz poziom, cel, preferowane dni/godziny…"></textarea>
-                <p id="message-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
-              </div>
-
-              <div class="flex items-start gap-3 text-sm text-slate-600">
-                <input
-                  id="consent"
-                  name="consent"
-                  type="checkbox"
-                  required
-                  aria-describedby="consent-error"
-                  class="mt-1 h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary"
-                />
+              <div class="flex items-start gap-2 text-xs text-slate-600">
+                <input id="consent" name="consent" type="checkbox" required aria-describedby="consent-error" class="mt-0.5 h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary" />
                 <label for="consent">
-                  Wyrażam zgodę na kontakt w sprawie kursu zgodnie z
-                  <a class="font-bold text-primary no-underline hover:underline" href="/privacy"
-                    >polityką prywatności</a
-                  >.
+                  Zgoda na kontakt zgodnie z <a class="font-semibold text-primary no-underline hover:underline" href="/privacy">polityką prywatności</a>.
                 </label>
               </div>
               <p id="consent-error" class="text-xs text-rose-600" aria-live="polite"></p>
 
-              <button class={`${btnPrimary} w-full`} type="submit" id="submit-btn">
+              <button class="w-full rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-white transition hover:bg-primary-600" type="submit" id="submit-btn">
                 <span id="submit-text">Wyślij wiadomość</span>
                 <span id="submit-loading" class="hidden items-center gap-2">
-                  <svg
-                    class="h-4 w-4 animate-spin"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    aria-hidden="true"
-                  >
-                    <circle
-                      class="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      stroke-width="4"></circle>
-                    <path
-                      class="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    ></path>
+                  <svg class="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
                   Wysyłanie...
                 </span>
@@ -448,58 +280,29 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
 
   {
     hasAddress && (
-      <section class="py-16 lg:py-24 bg-slate-50/60">
+      <section class="py-10 lg:py-14 bg-slate-50/60">
         <div class="mx-auto w-full max-w-7xl px-6">
-          <div class="grid gap-8 lg:grid-cols-2 lg:items-center">
+          <div class="grid gap-6 lg:grid-cols-2 lg:items-center">
             <div class={`${card} overflow-hidden p-0`}>
               <iframe
                 title={`Mapa dojazdu — ${BRAND_NAME}`}
                 src={mapEmbedSrc}
                 loading="lazy"
-                class="h-80 w-full border-0"
+                class="h-64 w-full border-0"
                 referrerpolicy="no-referrer-when-downgrade"
               ></iframe>
             </div>
 
             <div>
-              <span class={kicker}>Lokalizacja</span>
-              <h2 class="mt-4">Znajdziesz nas w centrum Legionowa</h2>
-              <p class="mt-4 text-sm text-slate-600">
-                Spotkajmy się w naszej placówce lub umów konsultację online. Wszystkie dane kontaktowe
-                masz pod ręką poniżej.
-              </p>
-              <ul class="mt-6 space-y-2 text-sm text-slate-600">
-                {hasAddress && (
-                  <li>
-                    <span class="font-bold text-slate-900">Adres:</span> {addressLine}
-                  </li>
-                )}
-                {hasHours && (
-                  <li>
-                    <span class="font-bold text-slate-900">Godziny:</span> {BUSINESS.openingHours}
-                  </li>
-                )}
-                {hasPhone && (
-                  <li>
-                    <span class="font-bold text-slate-900">Telefon:</span>{" "}
-                    <a class="font-bold text-primary no-underline hover:underline" href={`tel:${CONTACT_PHONE}`}>
-                      {CONTACT_PHONE}
-                    </a>
-                  </li>
-                )}
-                {hasEmail && (
-                  <li>
-                    <span class="font-bold text-slate-900">E-mail:</span>{" "}
-                    <a class="font-bold text-primary no-underline hover:underline" href={`mailto:${CONTACT_EMAIL}`}>
-                      {CONTACT_EMAIL}
-                    </a>
-                  </li>
-                )}
-              </ul>
+              <h2 class="text-lg font-bold">Znajdziesz nas w centrum Legionowa</h2>
+              <div class="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-600">
+                {hasAddress && <span><span class="font-semibold text-slate-900">Adres:</span> {addressLine}</span>}
+                {hasHours && <span><span class="font-semibold text-slate-900">Godziny:</span> {BUSINESS.openingHours}</span>}
+              </div>
               {mapHref && (
-                <div class="mt-6">
-                  <a class={btnSecondary} href={mapHref} target="_blank" rel="noopener noreferrer">
-                    Otwórz w Google Maps
+                <div class="mt-4">
+                  <a class="inline-flex items-center gap-1 text-sm font-semibold text-primary no-underline hover:underline" href={mapHref} target="_blank" rel="noopener noreferrer">
+                    Otwórz w Google Maps →
                   </a>
                 </div>
               )}
