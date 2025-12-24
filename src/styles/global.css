@@ -20,7 +20,7 @@
   }
 
   .kicker {
-    @apply text-sm font-semibold uppercase tracking-wider text-primary;
+    @apply text-base font-semibold uppercase tracking-wider text-primary;
   }
 
   .card {
