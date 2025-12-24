@@ -29,7 +29,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             stacjonarnie w Legionowie oraz online.
           </p>
           <ul class="mt-6 space-y-2 text-sm text-slate-600">
-            <li>Odezwiemy się z propozycją terminu w ciągu 1–2 dni roboczych.</li>
+            <li>Odezwiemy się z propozycją terminu najszybciej, jak to możliwe.</li>
             <li>Ustalimy poziom, cel i preferowany tryb zajęć.</li>
             <li>Dobierzemy plan i zaproponujemy pakiet spotkań.</li>
           </ul>
@@ -341,7 +341,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       wrapper.setAttribute("role", "status");
       wrapper.tabIndex = -1;
       wrapper.innerHTML =
-        "<strong>Dziękujemy za zgłoszenie!</strong> Odezwiemy się w ciągu 1–2 dni roboczych z propozycją terminu i planu nauki.";
+        "<strong>Dziękujemy za zgłoszenie!</strong> Odezwiemy się najszybciej, jak to możliwe, z propozycją terminu i planu nauki.";
       form?.insertAdjacentElement("afterend", wrapper);
       return wrapper;
     };

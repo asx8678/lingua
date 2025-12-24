@@ -16,7 +16,7 @@ export const THROTTLE_MS = 60 * 1000; // 60 seconds
 export const HONEYPOT_FIELD = "website";
 
 // Response time text (used in multiple places)
-export const RESPONSE_TIME_TEXT = "1–2 dni roboczych";
+export const RESPONSE_TIME_TEXT = "najszybciej, jak to możliwe";
 
 // API endpoints
 export const API_ENDPOINTS = {

@@ -176,7 +176,7 @@ export const matematyka: SubjectPageData = {
     title: "Chcesz uporządkować matematykę?",
     description:
       "Umów bezpłatną konsultację i diagnozę poziomu. Dobierzemy plan i format zajęć, który realnie pomaga.",
-    note: "Odpowiadamy szybko — zwykle w ciągu 1–2 dni roboczych.",
+    note: "Odpowiadamy najszybciej, jak to możliwe.",
   },
 };
 
@@ -322,7 +322,7 @@ export const hiszpanski: SubjectPageData = {
     title: "Chcesz zacząć mówić po hiszpańsku?",
     description:
       "Umów bezpłatną konsultację i diagnozę poziomu. Dobierzemy format i plan nauki dopasowany do Twojego celu.",
-    note: "Odpowiadamy szybko — zwykle w ciągu 1–2 dni roboczych.",
+    note: "Odpowiadamy najszybciej, jak to możliwe.",
   },
 };
 
@@ -468,7 +468,7 @@ export const niemiecki: SubjectPageData = {
     title: "Chcesz swobodnie mówić po niemiecku?",
     description:
       "Umów bezpłatną konsultację i diagnozę poziomu. Zaproponujemy plan nauki dopasowany do Twojego celu.",
-    note: "Odpowiadamy szybko — zwykle w ciągu 1–2 dni roboczych.",
+    note: "Odpowiadamy najszybciej, jak to możliwe.",
   },
 };
 
@@ -614,7 +614,7 @@ export const francuski: SubjectPageData = {
     title: "Chcesz mówić po francusku pewniej?",
     description:
       "Umów bezpłatną konsultację i diagnozę poziomu. Dobierzemy tempo i format zajęć do Twojego celu.",
-    note: "Odpowiadamy szybko — zwykle w ciągu 1–2 dni roboczych.",
+    note: "Odpowiadamy najszybciej, jak to możliwe.",
   },
 };
 
@@ -760,7 +760,7 @@ export const rosyjski: SubjectPageData = {
     title: "Chcesz zacząć rosyjski od podstaw?",
     description:
       "Umów bezpłatną konsultację i diagnozę poziomu. Pokażemy, jak wygląda plan nauki i co daje regularna praktyka.",
-    note: "Odpowiadamy szybko — zwykle w ciągu 1–2 dni roboczych.",
+    note: "Odpowiadamy najszybciej, jak to możliwe.",
   },
 };
 
@@ -906,7 +906,7 @@ export const szwedzki: SubjectPageData = {
     title: "Chcesz zacząć szwedzki pewnie i spokojnie?",
     description:
       "Umów bezpłatną konsultację i diagnozę poziomu. Dobierzemy plan nauki dopasowany do Twojego celu.",
-    note: "Odpowiadamy szybko — zwykle w ciągu 1–2 dni roboczych.",
+    note: "Odpowiadamy najszybciej, jak to możliwe.",
   },
 };
 

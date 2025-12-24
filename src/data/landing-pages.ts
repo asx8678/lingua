@@ -121,7 +121,7 @@ export const angielskiLegionowo: LandingPageData = {
     title: "Zacznij naukę angielskiego w Legionowie",
     description:
       "Umów bezpłatną konsultację i diagnozę poziomu i poznaj naszą szkołę. Znajdziesz nas w centrum Legionowa.",
-    note: "Odpowiadamy szybko — zwykle w ciągu 1–2 dni roboczych.",
+    note: "Odpowiadamy najszybciej, jak to możliwe.",
   },
 };
 
@@ -222,7 +222,7 @@ export const angielskiZdalnie: LandingPageData = {
     title: "Zacznij naukę angielskiego online",
     description:
       "Umów bezpłatną konsultację i diagnozę poziomu. Sprawdzimy, czy lekcje online są dla Ciebie.",
-    note: "Odpowiadamy szybko — zwykle w ciągu 1–2 dni roboczych.",
+    note: "Odpowiadamy najszybciej, jak to możliwe.",
   },
 };
 
