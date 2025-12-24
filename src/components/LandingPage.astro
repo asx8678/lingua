@@ -4,12 +4,6 @@ import CTASection from "./CTASection.astro";
 import FaqSection from "./FaqSection.astro";
 import {
   BRAND_NAME,
-  CTA_PRIMARY_HREF,
-  CTA_PRIMARY_LABEL,
-  CTA_PRIMARY_REL,
-  CTA_PRIMARY_TARGET,
-  getSecondaryCta,
-  type CtaVariant,
   generateBreadcrumbSchema,
   SITE_URL,
 } from "../config/site";
@@ -21,8 +15,6 @@ interface Props {
 
 const { data } = Astro.props;
 const fullTitle = `${data.title} | ${BRAND_NAME}`;
-const ctaVariant: CtaVariant = "english";
-const secondaryCta = getSecondaryCta(ctaVariant);
 
 const faqJsonLd = {
   "@context": "https://schema.org",
@@ -55,11 +47,6 @@ const courseJsonLd = {
   },
 };
 
-// Tailwind class constants
-const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium transition-colors duration-150";
-const btnPrimary = `${btnBase} bg-primary text-white hover:bg-primary-600`;
-const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-800`;
-const card = "rounded-xl border border-slate-200/80 bg-white transition-all duration-200 hover:shadow-soft hover:border-slate-200";
 ---
 
 <MainLayout
@@ -78,7 +65,7 @@ const card = "rounded-xl border border-slate-200/80 bg-white transition-all dura
             {data.intro}
           </p>
           <div class="mt-8">
-            <a class={btnPrimary} href="/cennik">Zobacz cennik</a>
+            <a class="btn btn-primary" href="/cennik">Zobacz cennik</a>
           </div>
         </div>
 
@@ -108,7 +95,7 @@ const card = "rounded-xl border border-slate-200/80 bg-white transition-all dura
       <div class="mt-10 grid gap-5 md:grid-cols-2">
         {
           data.benefits.map((item) => (
-            <div class={`${card} p-6`}>
+            <div class="card p-6">
               <h3 class="text-base font-bold text-slate-900">{item.title}</h3>
               <p class="mt-2 text-sm text-slate-600">{item.text}</p>
             </div>
@@ -127,7 +114,7 @@ const card = "rounded-xl border border-slate-200/80 bg-white transition-all dura
       <div class="mt-10 grid gap-5 md:grid-cols-2">
         {
           data.offers.map((item) => (
-            <a class={`${card} p-6 no-underline group`} href={item.href}>
+            <a class="card p-6 no-underline group" href={item.href}>
               <h3 class="text-base font-bold text-slate-900">{item.title}</h3>
               <p class="mt-2 text-sm text-slate-600">{item.text}</p>
               <span class="mt-4 inline-flex text-sm font-semibold text-primary group-hover:gap-3 gap-2 transition-all duration-200">
@@ -165,7 +152,7 @@ const card = "rounded-xl border border-slate-200/80 bg-white transition-all dura
             }
           </ul>
         </div>
-        <div class={`${card} p-6`}>
+        <div class="card p-6">
           <h3 class="text-base font-bold text-slate-900">{data.locationCard.title}</h3>
           <p class="mt-4 text-sm text-slate-600">
             {data.locationCard.intro}

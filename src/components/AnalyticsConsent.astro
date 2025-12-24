@@ -12,10 +12,6 @@ interface Props {
 const { analyticsId = ANALYTICS_ID } = Astro.props;
 const consentKey = STORAGE_KEYS.analyticsConsent;
 
-// Tailwind class constants
-const btnPrimary = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary bg-primary text-white shadow-md hover:bg-primary-700 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:shadow-md";
-const btnSecondary = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary border border-slate-200 bg-white text-slate-700 shadow-sm hover:border-primary/30 hover:text-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0";
-const btnGhost = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary bg-transparent text-slate-700 hover:bg-slate-100";
 ---
 
 <div
@@ -37,13 +33,13 @@ const btnGhost = "inline-flex items-center justify-center gap-2 rounded-full px-
       polityce prywatności.
     </p>
     <div class="mt-3 flex flex-wrap gap-3">
-      <button id="analytics-consent-accept" class={btnPrimary} type="button">
+      <button id="analytics-consent-accept" class="btn btn-primary py-3 font-bold shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0" type="button">
         Akceptuj
       </button>
-      <button id="analytics-consent-reject" class={btnSecondary} type="button">
+      <button id="analytics-consent-reject" class="btn btn-secondary py-3 font-bold shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0" type="button">
         Odrzuć
       </button>
-      <a class={btnGhost} href="/privacy">Polityka prywatności</a>
+      <a class="btn btn-ghost py-3 font-bold" href="/privacy">Polityka prywatności</a>
     </div>
   </div>
 </div>

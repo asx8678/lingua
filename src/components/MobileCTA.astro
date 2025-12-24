@@ -20,9 +20,6 @@ interface Props {
 const hasPhone = !!CONTACT_PHONE;
 const { phoneHref = hasPhone ? `tel:${CONTACT_PHONE}` : "", showPhone = hasPhone } = Astro.props;
 
-// Tailwind class constants
-const btnPrimary = "inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-150 bg-primary text-white hover:bg-primary-600";
-const btnSecondary = "inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-150 border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-800";
 ---
 
 <div
@@ -33,7 +30,7 @@ const btnSecondary = "inline-flex items-center justify-center gap-2 rounded-full
   <div class="mx-auto w-full max-w-7xl px-6 py-3">
     <div class={`grid gap-2 ${showPhone ? "grid-cols-2" : "grid-cols-1"}`}>
       <a
-        class={`${btnPrimary} w-full text-xs leading-snug sm:text-sm`}
+        class="btn btn-primary w-full text-xs leading-snug sm:text-sm"
         href={CTA_PRIMARY_HREF}
         target={CTA_PRIMARY_TARGET}
         rel={CTA_PRIMARY_REL}
@@ -46,7 +43,7 @@ const btnSecondary = "inline-flex items-center justify-center gap-2 rounded-full
       {
         showPhone && phoneHref && (
           <a
-            class={`${btnSecondary} w-full text-xs leading-snug sm:text-sm`}
+            class="btn btn-secondary w-full text-xs leading-snug sm:text-sm"
             href={phoneHref}
             aria-label="Zadzwoń do nas"
           >

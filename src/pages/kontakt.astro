@@ -17,8 +17,6 @@ const description =
 const hasEmail = !!CONTACT_EMAIL;
 const hasPhone = !!CONTACT_PHONE;
 const formAction = hasEmail ? "/api/kontakt" : "#";
-const emailFallback = "Napisz przez formularz.";
-const phoneFallback = "Napisz przez formularz.";
 const addressLine = FULL_ADDRESS || BUSINESS.city;
 const hasAddress = Boolean(addressLine);
 const hasHours = Boolean(BUSINESS.openingHours);
@@ -36,12 +34,6 @@ const breadcrumbSchema = generateBreadcrumbSchema([
   { name: "Kontakt" },
 ]);
 
-// Tailwind class constants
-const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium transition-colors duration-150";
-const btnPrimary = `${btnBase} bg-primary text-white hover:bg-primary-600`;
-const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-800`;
-const card = "rounded-xl border border-slate-200/80 bg-white transition-all duration-200 hover:shadow-soft hover:border-slate-200";
-const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
 ---
 
 <MainLayout
@@ -54,7 +46,7 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
     <div class="mx-auto w-full max-w-7xl px-6 py-10 sm:py-14">
       <div class="grid gap-6 lg:grid-cols-2 lg:items-start">
         <div>
-          <span class={kicker}>Kontakt</span>
+          <span class="kicker">Kontakt</span>
           <h1 class="mt-3">Skontaktuj się z nami</h1>
           <p class="mt-3 max-w-2xl text-slate-600">
             Napisz o swoim poziomie i celu — zaproponujemy plan nauki i terminy.
@@ -94,14 +86,14 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
           </p>
         </div>
 
-        <div class={`${card} p-5`} id="formularz">
+        <div class="card p-5" id="formularz">
           <div class="flex items-center justify-between gap-4">
             <h2 class="text-base font-bold text-slate-900">Formularz kontaktowy</h2>
             <div class="flex gap-1" role="group" aria-label="Szybkie dopasowanie">
-              <button class="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 transition hover:bg-slate-50" type="button" id="quick-fit-on">
+              <button class="rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-600 transition hover:bg-slate-50" type="button" id="quick-fit-on">
                 + Dopasowanie
               </button>
-              <button class="rounded-full bg-primary px-3 py-1 text-xs font-medium text-white" type="button" id="quick-fit-off">
+              <button class="rounded-full bg-primary px-3 py-2 text-xs font-medium text-white" type="button" id="quick-fit-off">
                 Formularz
               </button>
             </div>
@@ -283,7 +275,7 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
       <section class="py-10 lg:py-14 bg-slate-50/60">
         <div class="mx-auto w-full max-w-7xl px-6">
           <div class="grid gap-6 lg:grid-cols-2 lg:items-center">
-            <div class={`${card} overflow-hidden p-0`}>
+            <div class="card overflow-hidden p-0">
               <iframe
                 title={`Mapa dojazdu — ${BRAND_NAME}`}
                 src={mapEmbedSrc}

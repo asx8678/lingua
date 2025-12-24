@@ -20,11 +20,9 @@ const {
 
 const captionId = `${tableId}-caption`;
 
-// Tailwind class constants
-const card = "rounded-xl border border-slate-200/80 bg-white transition-all duration-200 hover:shadow-soft hover:border-slate-200";
 ---
 
-<section class={`${card} p-6`} aria-labelledby={captionId}>
+<section class="card p-6" aria-labelledby={captionId}>
   <h3 id={captionId} class="text-base font-bold text-slate-900">{title}</h3>
   {subtitle && <p class="mt-2 text-sm text-slate-600">{subtitle}</p>}
 

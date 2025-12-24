@@ -9,10 +9,10 @@ import { taughtLanguages } from "../data/subjects";
 import testimonials from "../data/testimonials.json";
 import {
   BRAND_NAME,
-  CTA_PRIMARY_HREF,
-  CTA_PRIMARY_LABEL,
-  CTA_PRIMARY_REL,
-  CTA_PRIMARY_TARGET,
+  BUSINESS,
+  SITE_URL,
+  CONTACT_EMAIL,
+  CONTACT_PHONE,
 } from "../config/site";
 
 const languagesList = new Intl.ListFormat("pl", {
@@ -92,9 +92,43 @@ const featuredTestimonials = testimonials.filter((item) => item.featuredHome).sl
 const homeTestimonials =
   featuredTestimonials.length > 0 ? featuredTestimonials : testimonials.slice(0, 2);
 
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  name: BRAND_NAME,
+  description: description,
+  url: SITE_URL,
+  email: CONTACT_EMAIL,
+  telephone: CONTACT_PHONE,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: BUSINESS.streetAddress,
+    addressLocality: BUSINESS.city,
+    postalCode: BUSINESS.postalCode,
+    addressCountry: "PL",
+  },
+  ...(BUSINESS.geo.latitude && BUSINESS.geo.longitude && {
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: BUSINESS.geo.latitude,
+      longitude: BUSINESS.geo.longitude,
+    },
+  }),
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "08:00",
+    closes: "21:00",
+  },
+  sameAs: [
+    BUSINESS.social.facebook,
+    BUSINESS.social.instagram,
+  ].filter(Boolean),
+};
+
 ---
 
-<MainLayout title={title} description={description} canonical="/">
+<MainLayout title={title} description={description} canonical="/" structuredData={[localBusinessSchema]}>
   <section class="bg-hero-gradient">
     <div class="mx-auto w-full max-w-7xl px-6 py-10 sm:py-14 lg:py-16">
       <div class="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">

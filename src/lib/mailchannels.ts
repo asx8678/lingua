@@ -67,7 +67,6 @@ export async function sendMailChannels(
   }
 
   try {
-    console.log("MailChannels request body:", JSON.stringify(body));
     const response = await fetch("https://api.mailchannels.net/tx/v1/send", {
       method: "POST",
       headers: {
@@ -75,7 +74,6 @@ export async function sendMailChannels(
       },
       body: JSON.stringify(body),
     });
-    console.log("MailChannels response status:", response.status);
 
     // MailChannels returns 202 on success
     if (response.status === 202 || response.ok) {
@@ -84,7 +82,6 @@ export async function sendMailChannels(
 
     // Try to get error details
     const errorText = await response.text();
-    console.log("MailChannels error response:", errorText);
     let errorMessage = `HTTP ${response.status}`;
 
     try {
