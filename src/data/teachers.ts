@@ -10,7 +10,7 @@ export const teachers: Teacher[] = [
   {
     name: "Kasia",
     role: "Metodyk i Lektorka",
-    languages: ["Angielski"],
+    languages: ["Angielski", "Polski dla obcokrajowców"],
     image: "/images/teachers/kasia.png",
   },
   {
@@ -48,11 +48,5 @@ export const teachers: Teacher[] = [
     role: "Nauczyciel",
     languages: ["Matematyka"],
     image: "/images/teachers/artur-v2.png",
-  },
-  {
-    name: "Ania",
-    role: "Lektorka",
-    languages: ["Polski dla obcokrajowców"],
-    image: "/images/teachers/placeholder.svg",
   },
 ];
