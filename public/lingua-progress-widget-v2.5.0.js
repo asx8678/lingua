@@ -2119,11 +2119,11 @@ if (state.auto && !state.userInteracted && !state.autoDone) {
       ctx.lineWidth = 4;
       ctx.stroke();
 
-      // Dashed hint of remaining path (future)
+      // Dashed hint of remaining path
       if (ctx.setLineDash && samples && samples.length && endIdx < sampleN) {
         ctx.save();
-        ctx.setLineDash([4, 10]);
-        ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.14)' : 'rgba(17,24,39,0.10)';
+        ctx.setLineDash([5, 9]);
+        ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.22)' : 'rgba(17,24,39,0.18)';
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.moveTo(rocketPos.x, rocketPos.y);
