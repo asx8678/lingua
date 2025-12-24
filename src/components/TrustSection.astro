@@ -29,17 +29,12 @@ const trustStats = [
   { label: "Języki", value: String(languageCount) },
 ];
 
-// Tailwind class constants
-const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-150";
-const btnPrimary = `${btnBase} bg-primary text-white hover:bg-primary-600`;
-const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-800`;
-const card = "rounded-xl border border-slate-200/80 bg-white transition-all duration-200 hover:shadow-soft hover:border-slate-200";
 ---
 
-<section class="py-10 lg:py-14 bg-slate-50/60">
-  <div class="mx-auto w-full max-w-7xl px-6">
+<section class="section section-muted">
+  <div class="container-site">
     <div class="grid gap-4 lg:grid-cols-3">
-      <div class={`${card} p-5 flex flex-col`}>
+      <div class="card p-5 flex flex-col">
         <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Opinie</div>
         <h3 class="mt-2 text-base font-bold text-slate-900">Opinie z Google</h3>
         <p class="mt-2 text-sm text-slate-600">
@@ -69,13 +64,13 @@ const card = "rounded-xl border border-slate-200/80 bg-white transition-all dura
         )}
 
         <div class="mt-auto pt-4">
-          <a class={`${btnSecondary} w-full text-xs`} href={reviewCtaHref} target={hasGoogleReviews ? "_blank" : undefined} rel={hasGoogleReviews ? "noopener noreferrer" : undefined}>
+          <a class="btn btn-secondary w-full text-xs" href={reviewCtaHref} target={hasGoogleReviews ? "_blank" : undefined} rel={hasGoogleReviews ? "noopener noreferrer" : undefined}>
             {reviewCtaLabel}
           </a>
         </div>
       </div>
 
-      <div class={`${card} p-5 flex flex-col`}>
+      <div class="card p-5 flex flex-col">
         <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Zespół</div>
         <h3 class="mt-2 text-base font-bold text-slate-900">Zespół i podejście</h3>
         <p class="mt-2 text-sm text-slate-600">
@@ -118,12 +113,12 @@ const card = "rounded-xl border border-slate-200/80 bg-white transition-all dura
         )}
 
         <div class="mt-auto pt-4 flex flex-wrap gap-2">
-          <a class={`${btnPrimary} text-xs`} href="/nasi-lektorzy">Poznaj lektorów</a>
-          <a class={`${btnSecondary} text-xs`} href="/o-nas">O nas</a>
+          <a class="btn btn-primary text-xs" href="/nasi-lektorzy">Poznaj lektorów</a>
+          <a class="btn btn-secondary text-xs" href="/o-nas">O nas</a>
         </div>
       </div>
 
-      <div class={`${card} p-5 flex flex-col`}>
+      <div class="card p-5 flex flex-col">
         <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Lokalizacja</div>
         <h3 class="mt-2 text-base font-bold text-slate-900">Szkoła i zajęcia</h3>
         <p class="mt-2 text-sm text-slate-600">
@@ -149,7 +144,7 @@ const card = "rounded-xl border border-slate-200/80 bg-white transition-all dura
         </div>
 
         <div class="mt-auto pt-4">
-          <a class={`${btnSecondary} w-full text-xs`} href="/kontakt">Umów wizytę w szkole</a>
+          <a class="btn btn-secondary w-full text-xs" href="/kontakt">Umów wizytę w szkole</a>
         </div>
       </div>
     </div>

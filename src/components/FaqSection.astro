@@ -25,17 +25,15 @@ const jsonLd = {
   })),
 };
 
-// Tailwind class constants
-const card = "rounded-xl border border-slate-200/80 bg-white transition-all duration-200 hover:border-slate-200";
 ---
 
-<section class="py-16 lg:py-24 bg-slate-50/60" id={id}>
-  <div class="mx-auto w-full max-w-7xl px-6">
+<section class="section section-muted" id={id}>
+  <div class="container-site">
     <h2>{title}</h2>
     <div class="mt-10 space-y-3" data-faq-container>
       {
         items.map((item) => (
-          <details class={`${card} p-5 sm:p-6`} data-faq-item>
+          <details class="card p-5 sm:p-6" data-faq-item>
             <summary
               class="cursor-pointer text-sm font-semibold text-slate-900 list-none flex items-center justify-between gap-4"
               aria-expanded="false"

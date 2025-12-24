@@ -14,12 +14,10 @@ const imageSrc =
 const imageAlt = `${teacher.name}, ${teacher.role} – ${teacher.languages.join(", ")}`;
 const specialties = teacher.specialties ?? TEACHER_SPECIALTIES[teacher.name] ?? [];
 
-// Tailwind class constants
-const card = "rounded-xl border border-slate-200/80 bg-white transition-all duration-200 hover:shadow-soft hover:border-slate-200";
-const chip = "inline-flex items-center rounded-full bg-slate-100/80 px-2 py-0.5 text-[10px] font-medium text-slate-500";
+const langChip = "inline-flex items-center rounded-full bg-slate-100/80 px-2 py-0.5 text-[10px] font-medium text-slate-500";
 ---
 
-<article class={`${card} group flex h-full flex-col overflow-hidden`}>
+<article class="card group flex h-full flex-col overflow-hidden">
   <div class="aspect-[4/3] w-full overflow-hidden bg-slate-50">
     <img
       src={imageSrc}
@@ -45,7 +43,7 @@ const chip = "inline-flex items-center rounded-full bg-slate-100/80 px-2 py-0.5 
       )
     }
     <div class="mt-auto pt-3 flex flex-wrap gap-1">
-      {teacher.languages.map((language) => <span class={chip}>{language}</span>)}
+      {teacher.languages.map((language) => <span class={langChip}>{language}</span>)}
     </div>
   </div>
 </article>

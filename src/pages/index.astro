@@ -92,15 +92,6 @@ const featuredTestimonials = testimonials.filter((item) => item.featuredHome).sl
 const homeTestimonials =
   featuredTestimonials.length > 0 ? featuredTestimonials : testimonials.slice(0, 2);
 
-// Tailwind class constants
-const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium transition-colors duration-200";
-const btnPrimary = `${btnBase} bg-primary text-white hover:bg-primary-600`;
-const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900`;
-const card = "rounded-xl border border-slate-200/80 bg-white transition-all duration-200 hover:border-slate-200 hover:shadow-soft";
-const cardInteractive = `${card} p-6`;
-const chip = "inline-flex items-center rounded-full border border-slate-200/80 bg-white px-3 py-1 text-xs font-medium text-slate-600";
-const statCard = "rounded-xl border border-slate-200/80 bg-white p-5";
-const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
 ---
 
 <MainLayout title={title} description={description} canonical="/">
@@ -108,7 +99,7 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
     <div class="mx-auto w-full max-w-7xl px-6 py-10 sm:py-14 lg:py-16">
       <div class="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
         <div>
-          <span class={kicker}>Szkoła języków obcych i matematyki</span>
+          <span class="kicker">Szkoła języków obcych i matematyki</span>
           <h1 class="mt-4">
             Języki obce i matematyka w Legionowie — plan nauki dopasowany do celu
           </h1>
@@ -119,17 +110,17 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
           </p>
 
           <div class="mt-6">
-            <a class={btnPrimary} href="/oferta" data-track="cta_secondary" data-track-label="Zobacz ofertę">
+            <a class="btn btn-primary" href="/oferta" data-track="cta_secondary" data-track-label="Zobacz ofertę">
               Zobacz ofertę
             </a>
           </div>
 
           <div class="mt-4 flex flex-wrap gap-1.5">
-            <a class={`${chip} no-underline hover:border-slate-300 hover:text-slate-900 transition-colors duration-150`} href="/oferta#dla-dzieci">Dla dzieci</a>
-            <a class={`${chip} no-underline hover:border-slate-300 hover:text-slate-900 transition-colors duration-150`} href="/oferta#dla-mlodziezy">Dla młodzieży</a>
-            <a class={`${chip} no-underline hover:border-slate-300 hover:text-slate-900 transition-colors duration-150`} href="/oferta#dla-doroslych">Dla dorosłych</a>
-            <a class={`${chip} no-underline hover:border-slate-300 hover:text-slate-900 transition-colors duration-150`} href="/oferta#dla-firm">Dla firm</a>
-            <a class={`${chip} no-underline hover:border-slate-300 hover:text-slate-900 transition-colors duration-150`} href="/oferta#matematyka">Matematyka</a>
+            <a class="chip no-underline hover:border-slate-300 hover:text-slate-900 transition-colors duration-150" href="/oferta#dla-dzieci">Dla dzieci</a>
+            <a class="chip no-underline hover:border-slate-300 hover:text-slate-900 transition-colors duration-150" href="/oferta#dla-mlodziezy">Dla młodzieży</a>
+            <a class="chip no-underline hover:border-slate-300 hover:text-slate-900 transition-colors duration-150" href="/oferta#dla-doroslych">Dla dorosłych</a>
+            <a class="chip no-underline hover:border-slate-300 hover:text-slate-900 transition-colors duration-150" href="/oferta#dla-firm">Dla firm</a>
+            <a class="chip no-underline hover:border-slate-300 hover:text-slate-900 transition-colors duration-150" href="/oferta#matematyka">Matematyka</a>
           </div>
 
           <ul class="mt-8 space-y-2 text-sm text-slate-600">
@@ -166,7 +157,7 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
     <div class="mx-auto w-full max-w-7xl px-6">
       <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <span class={kicker}>Czego uczymy</span>
+          <span class="kicker">Czego uczymy</span>
           <h2 class="mt-2">Języki obce i matematyka w jednym miejscu</h2>
           <p class="mt-2 max-w-2xl text-slate-600">
             Uczymy w małych grupach i indywidualnie, stacjonarnie w Legionowie lub online.
@@ -174,7 +165,7 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
         </div>
         <div class="flex items-center gap-3">
           <div class="flex flex-wrap gap-1.5">
-            {subjectChips.map((subject) => <span class={chip}>{subject}</span>)}
+            {subjectChips.map((subject) => <span class="chip">{subject}</span>)}
           </div>
           <a class="text-sm font-medium text-primary no-underline hover:underline whitespace-nowrap" href="/oferta">
             Zobacz ofertę →
@@ -189,7 +180,7 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
       <div class="grid gap-4 md:grid-cols-3">
         {
           proofPoints.map((item) => (
-            <div class={`${statCard} text-center`}>
+            <div class="card p-5 text-center">
               <div class="text-[10px] font-semibold uppercase tracking-wider text-primary">
                 {item.label}
               </div>
@@ -208,14 +199,14 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
     <div class="mx-auto w-full max-w-7xl px-6">
       <div class="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <span class={kicker}>Opinie</span>
+          <span class="kicker">Opinie</span>
           <h2 class="mt-2">Co mówią kursanci</h2>
           <p class="mt-2 max-w-3xl text-slate-600">
             Krótkie opinie osób, które uczą się z nami stacjonarnie lub online.
           </p>
         </div>
         <div class="shrink-0">
-          <a class={btnSecondary} href="/opinie">Zobacz wszystkie</a>
+          <a class="btn btn-secondary" href="/opinie">Zobacz wszystkie</a>
         </div>
       </div>
 
@@ -231,7 +222,7 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
     <div class="mx-auto w-full max-w-7xl px-6">
       <div class="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <span class={kicker}>Nasi lektorzy</span>
+          <span class="kicker">Nasi lektorzy</span>
           <h2 class="mt-2">Poznaj zespół, który prowadzi zajęcia</h2>
           <p class="mt-2 max-w-3xl text-slate-600">
             Doświadczeni lektorzy języków obcych i matematyki prowadzą zajęcia dopasowane do Twojego
@@ -239,7 +230,7 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
           </p>
         </div>
         <div class="shrink-0">
-          <a class={btnSecondary} href="/nasi-lektorzy">Zobacz wszystkich</a>
+          <a class="btn btn-secondary" href="/nasi-lektorzy">Zobacz wszystkich</a>
         </div>
       </div>
 
@@ -256,7 +247,7 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
   <section class="py-10 lg:py-14 bg-slate-50/60">
     <div class="mx-auto w-full max-w-7xl px-6">
       <div class="text-center">
-        <span class={kicker}>Proces</span>
+        <span class="kicker">Proces</span>
         <h2 class="mt-2">Jak pracujemy</h2>
         <p class="mx-auto mt-2 max-w-2xl text-slate-600">
           Niezależnie od wybranego trybu, otrzymujesz jasny plan nauki i wsparcie na każdym etapie.
@@ -266,7 +257,7 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
       <div class="mt-6 grid gap-4 lg:grid-cols-3">
         {
           steps.map((step, index) => (
-            <div class={`${card} p-5 text-center`}>
+            <div class="card p-5 text-center">
               <div class="mx-auto mb-4 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-semibold text-white">
                 {index + 1}
               </div>
@@ -283,14 +274,14 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
     <div class="mx-auto w-full max-w-7xl px-6">
       <div class="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <span class={kicker}>Oferta</span>
+          <span class="kicker">Oferta</span>
           <h2 class="mt-2">Wybierz formę nauki dopasowaną do Ciebie</h2>
           <p class="mt-2 max-w-2xl text-slate-600">
             Dwie główne ścieżki to zajęcia stacjonarne w Legionowie i lekcje online.
           </p>
         </div>
         <div class="shrink-0">
-          <a class={btnSecondary} href="/oferta">Zobacz pełną ofertę</a>
+          <a class="btn btn-secondary" href="/oferta">Zobacz pełną ofertę</a>
         </div>
       </div>
 
@@ -298,7 +289,7 @@ const kicker = "text-base font-semibold uppercase tracking-wider text-primary";
         {
           offerCards.map((offerCard) => (
             <a
-              class={`${cardInteractive} no-underline group ${offerCard.featured ? "ring-1 ring-primary/20" : ""}`}
+              class={`card p-6 no-underline group ${offerCard.featured ? "ring-1 ring-primary/20" : ""}`}
               href={offerCard.href}
             >
               {offerCard.featured && <span class="inline-block rounded-full px-2.5 py-0.5 text-[10px] font-semibold mb-3 bg-primary/10 text-primary">Polecane</span>}

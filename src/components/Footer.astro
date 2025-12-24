@@ -17,9 +17,7 @@ const contactFormHref = "/kontakt";
 const addressLine = FULL_ADDRESS || BUSINESS.city;
 const hasHours = Boolean(BUSINESS.openingHours);
 
-// Tailwind class constants
 const linkMuted = "text-slate-500 transition-colors duration-150 hover:text-slate-700";
-const chip = "inline-flex items-center rounded-full border border-slate-200/80 bg-white px-2 py-0.5 text-xs text-slate-500";
 
 const socialLinks = [
   {
@@ -88,7 +86,7 @@ const socialLinks = [
       <div>
         <h2 class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Uczymy</h2>
         <div class="mt-2 flex flex-wrap gap-1">
-          {subjects.map((subject) => <span class={chip}>{subject}</span>)}
+          {subjects.map((subject) => <span class="chip">{subject}</span>)}
         </div>
       </div>
 
