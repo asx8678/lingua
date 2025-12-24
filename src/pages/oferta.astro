@@ -56,12 +56,12 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ]);
 
 // Tailwind class constants
-const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all";
-const btnPrimary = `${btnBase} bg-primary text-white hover:bg-primary-600 active:scale-[0.98]`;
-const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-800`;
-const card = "rounded-2xl border border-slate-100 bg-white transition-all duration-300 hover:shadow-soft hover:border-slate-200";
+const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium transition-colors duration-150";
+const btnPrimary = `${btnBase} bg-primary text-white hover:bg-primary-600`;
+const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-800`;
+const card = "rounded-xl border border-slate-200/80 bg-white transition-all duration-200 hover:shadow-soft hover:border-slate-200";
 const cardInteractive = `${card} p-6 cursor-pointer`;
-const kicker = "text-xs font-medium uppercase tracking-widest text-primary/90";
+const kicker = "text-[11px] font-semibold uppercase tracking-wider text-primary";
 const notice = "rounded-xl border border-primary/10 bg-primary/5 p-4 text-primary";
 ---
 
@@ -101,7 +101,7 @@ const notice = "rounded-xl border border-primary/10 bg-primary/5 p-4 text-primar
       <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         {segments.map((segment) => (
           <div class={`${card} p-6 scroll-mt-28`} id={segment.id}>
-            <h3 class="text-lg font-extrabold text-slate-900">{segment.title}</h3>
+            <h3 class="text-base font-bold text-slate-900">{segment.title}</h3>
             <p class="mt-3 text-sm text-slate-600">{segment.text}</p>
           </div>
         ))}
@@ -116,7 +116,7 @@ const notice = "rounded-xl border border-primary/10 bg-primary/5 p-4 text-primar
           class={`${cardInteractive} group no-underline`}
           href="/angielski-stacjonarnie"
         >
-          <h2 class="text-xl font-extrabold text-slate-900">Angielski stacjonarnie</h2>
+          <h2 class="text-lg font-bold text-slate-900">Angielski stacjonarnie</h2>
           <p class="mt-3 text-slate-600">
             Zajęcia w naszej szkole w Legionowie. Bezpośredni kontakt z lektorem i pełna
             koncentracja.
@@ -129,7 +129,7 @@ const notice = "rounded-xl border border-primary/10 bg-primary/5 p-4 text-primar
           </span>
         </a>
         <a class={`${cardInteractive} group no-underline`} href="/angielski-online">
-          <h2 class="text-xl font-extrabold text-slate-900">Angielski online</h2>
+          <h2 class="text-lg font-bold text-slate-900">Angielski online</h2>
           <p class="mt-3 text-slate-600">
             Lekcje z lektorem na żywo. Elastyczne godziny i nacisk na mówienie w praktyce.
           </p>
@@ -167,7 +167,7 @@ const notice = "rounded-xl border border-primary/10 bg-primary/5 p-4 text-primar
     </div>
   </section>
 
-  <section class="py-16 lg:py-24 bg-slate-50">
+  <section class="py-16 lg:py-24 bg-slate-50/60">
     <div class="mx-auto w-full max-w-7xl px-6">
       <span class={kicker}>Pozostałe kursy</span>
       <h2 class="mt-4">Inne języki i matematyka</h2>
@@ -182,7 +182,7 @@ const notice = "rounded-xl border border-primary/10 bg-primary/5 p-4 text-primar
             href={`/${offer.slug}`}
             id={offer.slug === "matematyka" ? "matematyka" : undefined}
           >
-            <h3 class="text-lg font-extrabold text-slate-900">{offer.kicker}</h3>
+            <h3 class="text-base font-bold text-slate-900">{offer.kicker}</h3>
             <p class="mt-3 text-sm text-slate-600">{offer.description}</p>
             <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary transition-all duration-200 group-hover:gap-3">
               Poznaj szczegóły

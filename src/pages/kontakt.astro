@@ -37,11 +37,11 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ]);
 
 // Tailwind class constants
-const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200";
-const btnPrimary = `${btnBase} bg-primary text-white shadow-sm hover:bg-primary-600 hover:shadow-md active:scale-[0.98]`;
-const btnSecondary = `${btnBase} border border-slate-200/80 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 hover:shadow-sm`;
-const card = "rounded-2xl border border-slate-200/60 bg-white transition-all duration-300 hover:shadow-soft hover:border-slate-200";
-const kicker = "inline-block rounded-full bg-primary/8 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary";
+const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium transition-colors duration-150";
+const btnPrimary = `${btnBase} bg-primary text-white hover:bg-primary-600`;
+const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-800`;
+const card = "rounded-xl border border-slate-200/80 bg-white transition-all duration-200 hover:shadow-soft hover:border-slate-200";
+const kicker = "text-[11px] font-semibold uppercase tracking-wider text-primary";
 ---
 
 <MainLayout
@@ -51,7 +51,7 @@ const kicker = "inline-block rounded-full bg-primary/8 px-4 py-1.5 text-xs font-
   structuredData={[breadcrumbSchema]}
 >
   <section class="bg-hero-gradient">
-    <div class="mx-auto w-full max-w-7xl px-6 py-20 sm:py-28">
+    <div class="mx-auto w-full max-w-7xl px-6 py-16 sm:py-24">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
         <div>
           <span class={kicker}>Kontakt</span>
@@ -141,7 +141,7 @@ const kicker = "inline-block rounded-full bg-primary/8 px-4 py-1.5 text-xs font-
         </div>
 
         <div class={`${card} p-6 sm:p-8`} id="formularz">
-          <h2 class="text-xl font-extrabold text-slate-900">Formularz kontaktowy</h2>
+          <h2 class="text-lg font-bold text-slate-900">Formularz kontaktowy</h2>
           <p class="mt-2 text-sm text-slate-500">Pola oznaczone * są wymagane.</p>
 
           <div class="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-4">
@@ -189,7 +189,7 @@ const kicker = "inline-block rounded-full bg-primary/8 px-4 py-1.5 text-xs font-
 
             <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5" data-step="1">
               <p class="text-xs font-bold uppercase tracking-widest text-slate-500">Krok 1</p>
-              <h3 class="mt-2 text-lg font-extrabold text-slate-900">Szybkie dopasowanie</h3>
+              <h3 class="mt-2 text-base font-bold text-slate-900">Szybkie dopasowanie</h3>
               <p class="mt-2 text-sm text-slate-600">
                 Zaznacz kilka informacji — przygotujemy odpowiednią propozycję.
               </p>
@@ -448,7 +448,7 @@ const kicker = "inline-block rounded-full bg-primary/8 px-4 py-1.5 text-xs font-
 
   {
     hasAddress && (
-      <section class="py-16 lg:py-24 bg-slate-50">
+      <section class="py-16 lg:py-24 bg-slate-50/60">
         <div class="mx-auto w-full max-w-7xl px-6">
           <div class="grid gap-8 lg:grid-cols-2 lg:items-center">
             <div class={`${card} overflow-hidden p-0`}>

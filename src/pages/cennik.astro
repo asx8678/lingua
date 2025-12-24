@@ -126,12 +126,11 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ]);
 
 // Tailwind class constants
-const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all";
-const btnPrimary = `${btnBase} bg-primary text-white hover:bg-primary-600 active:scale-[0.98]`;
-const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-800`;
-const btnGhost = `${btnBase} bg-transparent text-slate-600 hover:bg-slate-100 hover:text-slate-900`;
-const card = "rounded-2xl border border-slate-100 bg-white transition-all duration-300 hover:shadow-soft hover:border-slate-200";
-const kicker = "text-xs font-medium uppercase tracking-widest text-primary/90";
+const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium transition-colors duration-150";
+const btnPrimary = `${btnBase} bg-primary text-white hover:bg-primary-600`;
+const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-800`;
+const card = "rounded-xl border border-slate-200/80 bg-white transition-all duration-200 hover:shadow-soft hover:border-slate-200";
+const kicker = "text-[11px] font-semibold uppercase tracking-wider text-primary";
 const notice = "rounded-xl border border-primary/10 bg-primary/5 p-4 text-primary";
 ---
 
@@ -142,7 +141,7 @@ const notice = "rounded-xl border border-primary/10 bg-primary/5 p-4 text-primar
   structuredData={[faqJsonLd, breadcrumbSchema]}
 >
   <section class="bg-hero-gradient">
-    <div class="mx-auto w-full max-w-7xl px-6 py-20 sm:py-28">
+    <div class="mx-auto w-full max-w-7xl px-6 py-16 sm:py-24">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
         <div>
           <span class={kicker}>Cennik</span>
@@ -163,7 +162,7 @@ const notice = "rounded-xl border border-primary/10 bg-primary/5 p-4 text-primar
                     <div class="text-xs font-bold uppercase tracking-widest text-slate-500">
                       {item.label}
                     </div>
-                    <div class="mt-2 text-lg font-extrabold text-slate-900">{item.value}</div>
+                    <div class="mt-2 text-lg font-bold text-slate-900">{item.value}</div>
                   </div>
                 ))}
               </div>
@@ -190,7 +189,7 @@ const notice = "rounded-xl border border-primary/10 bg-primary/5 p-4 text-primar
         </div>
 
         <div class={`${card} p-6 sm:p-8`}>
-          <h2 class="text-xl font-extrabold tracking-tight">Jak uzyskać dokładną wycenę</h2>
+          <h2 class="text-lg font-bold tracking-tight">Jak uzyskać dokładną wycenę</h2>
           <ol class="mt-6 space-y-4 text-sm text-slate-600">
             {steps.map((step, index) => (
               <li class="flex items-start gap-3">
@@ -206,7 +205,7 @@ const notice = "rounded-xl border border-primary/10 bg-primary/5 p-4 text-primar
     </div>
   </section>
 
-  <section class="py-20 lg:py-28">
+  <section class="py-16 lg:py-24">
     <div class="mx-auto w-full max-w-7xl px-6">
       <h2>Jasne ceny za lekcje i pakiety</h2>
       <p class="mt-4 max-w-3xl text-slate-600">
@@ -248,7 +247,7 @@ const notice = "rounded-xl border border-primary/10 bg-primary/5 p-4 text-primar
     </div>
   </section>
 
-  <section class="py-20 lg:py-28 bg-slate-50/70">
+  <section class="py-16 lg:py-24 bg-slate-50/60">
     <div class="mx-auto w-full max-w-7xl px-6">
       <div class={`${card} mx-auto max-w-xl p-8 text-center`}>
         <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/8">
@@ -257,7 +256,7 @@ const notice = "rounded-xl border border-primary/10 bg-primary/5 p-4 text-primar
             <path d="M14.25 5.25a5.23 5.23 0 00-1.279-3.434 9.768 9.768 0 016.963 6.963A5.23 5.23 0 0016.5 7.5h-1.875a.375.375 0 01-.375-.375V5.25z" />
           </svg>
         </div>
-        <h3 class="mt-4 text-xl font-extrabold">Pobierz pełny cennik PDF</h3>
+        <h3 class="mt-4 text-lg font-bold">Pobierz pełny cennik PDF</h3>
         <p class="mx-auto mt-3 text-sm text-slate-600">
           Wszystkie warianty, pakiety i kursy grupowe w jednym dokumencie.
         </p>
@@ -280,7 +279,7 @@ const notice = "rounded-xl border border-primary/10 bg-primary/5 p-4 text-primar
     </div>
   </section>
 
-  <section class="py-20 lg:py-28">
+  <section class="py-16 lg:py-24">
     <div class="mx-auto w-full max-w-7xl px-6">
       <h2>Jak działa wycena</h2>
       <div class="mt-10 grid gap-5 md:grid-cols-3">

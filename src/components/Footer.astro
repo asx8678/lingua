@@ -18,8 +18,8 @@ const addressLine = FULL_ADDRESS || BUSINESS.city;
 const hasHours = Boolean(BUSINESS.openingHours);
 
 // Tailwind class constants
-const linkMuted = "text-slate-500 transition-colors hover:text-primary";
-const chip = "inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-2.5 py-1 text-xs font-medium text-slate-500";
+const linkMuted = "text-slate-500 transition-colors duration-150 hover:text-slate-700";
+const chip = "inline-flex items-center rounded-full border border-slate-200/80 bg-white px-2 py-0.5 text-xs text-slate-500";
 
 const socialLinks = [
   {
@@ -35,14 +35,13 @@ const socialLinks = [
 ].filter((link) => link.url);
 ---
 
-<footer class="border-t border-slate-100 bg-slate-50/80">
-  <div class="mx-auto w-full max-w-7xl px-6 py-16">
-    <div class="grid gap-10 lg:grid-cols-4">
+<footer class="border-t border-slate-200/80 bg-slate-50/60">
+  <div class="mx-auto w-full max-w-7xl px-6 py-12">
+    <div class="grid gap-8 lg:grid-cols-4">
       <div>
         <Logo />
-        <p class="mt-4 text-sm text-slate-600 leading-relaxed">
-          Szkoła języków obcych i matematyki w Legionowie. Zajęcia stacjonarne i online dla
-          wszystkich poziomów.
+        <p class="mt-3 text-sm text-slate-500 leading-relaxed">
+          Szkoła języków obcych i matematyki w Legionowie. Zajęcia stacjonarne i online.
         </p>
         {
           socialLinks.length > 0 && (
@@ -66,8 +65,8 @@ const socialLinks = [
       </div>
 
       <nav aria-labelledby="footer-offer-heading">
-        <h2 id="footer-offer-heading" class="text-xs font-medium uppercase tracking-wider text-slate-400">Oferta</h2>
-        <ul class="mt-4 flex flex-col gap-2.5 text-sm">
+        <h2 id="footer-offer-heading" class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Oferta</h2>
+        <ul class="mt-3 flex flex-col gap-2 text-sm">
           <li>
             <a class={`${linkMuted} no-underline`} href="/angielski-stacjonarnie"
               >Angielski stacjonarnie</a>
@@ -81,15 +80,15 @@ const socialLinks = [
       </nav>
 
       <div>
-        <h2 class="text-xs font-medium uppercase tracking-wider text-slate-400">Uczymy</h2>
-        <div class="mt-4 flex flex-wrap gap-1.5 text-sm">
+        <h2 class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Uczymy</h2>
+        <div class="mt-3 flex flex-wrap gap-1 text-sm">
           {subjects.map((subject) => <span class={chip}>{subject}</span>)}
         </div>
       </div>
 
       <nav aria-labelledby="footer-info-heading">
-        <h2 id="footer-info-heading" class="text-xs font-medium uppercase tracking-wider text-slate-400">Informacje</h2>
-        <ul class="mt-4 flex flex-col gap-2.5 text-sm">
+        <h2 id="footer-info-heading" class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Informacje</h2>
+        <ul class="mt-3 flex flex-col gap-2 text-sm">
           <li><a class={`${linkMuted} no-underline`} href="/cennik">Cennik</a></li>
           <li><a class={`${linkMuted} no-underline`} href="/opinie">Opinie</a></li>
           <li><a class={`${linkMuted} no-underline`} href="/o-nas">O nas</a></li>
@@ -97,9 +96,9 @@ const socialLinks = [
           <li><a class={`${linkMuted} no-underline`} href="/kontakt">Kontakt</a></li>
         </ul>
 
-        <div class="mt-6 border-t border-slate-100 pt-6">
-          <h3 class="text-xs font-medium uppercase tracking-wider text-slate-400">Kontakt</h3>
-          <address class="mt-3 flex flex-col gap-2 text-sm not-italic">
+        <div class="mt-5 border-t border-slate-200/60 pt-5">
+          <h3 class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Kontakt</h3>
+          <address class="mt-2 flex flex-col gap-1.5 text-sm not-italic">
             {
               hasEmail ? (
                 <a class={`${linkMuted} no-underline`} href={`mailto:${CONTACT_EMAIL}`}>
@@ -129,9 +128,9 @@ const socialLinks = [
       </nav>
     </div>
 
-    <div class="mt-14 flex flex-col items-center justify-between gap-4 border-t border-slate-100 pt-8 text-sm text-slate-400 sm:flex-row">
-      <p>© {year} {BRAND_NAME}. Wszelkie prawa zastrzeżone.</p>
-      <a class="text-sm text-slate-400 no-underline transition-colors duration-200 hover:text-slate-600" href="/privacy">Polityka prywatności</a>
+    <div class="mt-10 flex flex-col items-center justify-between gap-3 border-t border-slate-200/60 pt-6 text-xs text-slate-400 sm:flex-row">
+      <p>© {year} {BRAND_NAME}</p>
+      <a class="text-slate-400 no-underline transition-colors duration-150 hover:text-slate-600" href="/privacy">Polityka prywatności</a>
     </div>
   </div>
 </footer>

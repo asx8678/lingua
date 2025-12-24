@@ -21,8 +21,8 @@ const hasPhone = !!CONTACT_PHONE;
 const { phoneHref = hasPhone ? `tel:${CONTACT_PHONE}` : "", showPhone = hasPhone } = Astro.props;
 
 // Tailwind class constants
-const btnPrimary = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary bg-primary text-white shadow-md hover:bg-primary-700 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:shadow-md";
-const btnSecondary = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary border border-slate-200 bg-white text-slate-700 shadow-sm hover:border-primary/30 hover:text-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0";
+const btnPrimary = "inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-150 bg-primary text-white hover:bg-primary-600";
+const btnSecondary = "inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-150 border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-800";
 ---
 
 <div

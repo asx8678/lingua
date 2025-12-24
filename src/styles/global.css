@@ -8,11 +8,11 @@
   }
 
   .section {
-    @apply py-20 lg:py-28;
+    @apply py-16 lg:py-24;
   }
 
   .section-muted {
-    @apply bg-slate-50/70;
+    @apply bg-slate-50/60;
   }
 
   .hero-bg {
@@ -20,27 +20,27 @@
   }
 
   .kicker {
-    @apply text-xs font-medium uppercase tracking-widest text-primary/90;
+    @apply text-[11px] font-semibold uppercase tracking-wider text-primary;
   }
 
   .card {
-    @apply rounded-2xl border border-slate-100 bg-white transition-all duration-300 hover:shadow-soft hover:border-slate-200;
+    @apply rounded-xl border border-slate-200/80 bg-white transition-all duration-200 hover:shadow-soft hover:border-slate-200;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium transition-colors duration-150;
   }
 
   .btn-primary {
-    @apply bg-primary text-white hover:bg-primary-600 active:scale-[0.98];
+    @apply bg-primary text-white hover:bg-primary-600;
   }
 
   .btn-secondary {
-    @apply border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-800;
+    @apply border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900;
   }
 
   .btn-ghost {
-    @apply bg-transparent text-slate-600 hover:bg-slate-100 hover:text-slate-900;
+    @apply text-slate-600 hover:bg-slate-100 hover:text-slate-900;
   }
 }
 
@@ -53,23 +53,23 @@
   }
 
   body {
-    @apply text-slate-700;
+    @apply text-slate-600;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply text-slate-900 font-extrabold tracking-tight;
+    @apply text-slate-900 font-bold tracking-tight;
   }
 
   h1 {
-    @apply text-3xl sm:text-4xl lg:text-5xl leading-[1.1];
+    @apply text-3xl sm:text-4xl lg:text-[2.75rem] leading-[1.15] font-bold;
   }
 
   h2 {
-    @apply text-2xl sm:text-3xl leading-tight;
+    @apply text-2xl sm:text-[1.75rem] leading-tight font-bold;
   }
 
   h3 {
-    @apply text-lg sm:text-xl leading-snug;
+    @apply text-lg leading-snug font-semibold;
   }
 
   p {

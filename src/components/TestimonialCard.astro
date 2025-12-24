@@ -21,32 +21,32 @@ const stars = Array.from({ length: 5 }, (_, index) => index + 1);
 const ratingLabel = `Ocena ${testimonial.rating} na 5 gwiazdek`;
 
 // Tailwind class constants
-const card = "rounded-2xl border border-slate-100 bg-white transition-all duration-300 hover:shadow-soft hover:border-slate-200";
+const card = "rounded-xl border border-slate-200/80 bg-white transition-all duration-200 hover:shadow-soft hover:border-slate-200";
 ---
 
-<article class={`${card} ${compact ? "p-5" : "p-6"}`}>
-  <div class="flex items-start justify-between gap-4">
+<article class={`${card} ${compact ? "p-4" : "p-5"}`}>
+  <div class="flex items-start justify-between gap-3">
     <div>
-      <div class="text-sm font-semibold text-slate-900">
+      <div class="text-sm font-medium text-slate-900">
         {testimonial.name}
       </div>
       <div class="mt-0.5 text-xs text-slate-500">{testimonial.context}</div>
     </div>
     {
       formattedDate && (
-        <time class="text-xs text-slate-400" datetime={testimonial.date}>
+        <time class="text-[11px] text-slate-400" datetime={testimonial.date}>
           {formattedDate}
         </time>
       )
     }
   </div>
-  <p class="mt-4 text-sm text-slate-600 leading-relaxed">"{testimonial.text}"</p>
-  <div class="mt-4 flex items-center gap-1.5">
+  <p class="mt-3 text-sm text-slate-600 leading-relaxed">"{testimonial.text}"</p>
+  <div class="mt-3 flex items-center gap-1">
     <div class="flex gap-0.5" role="img" aria-label={ratingLabel}>
       {
         stars.map((star) => (
           <svg
-            class={`h-4 w-4 ${star <= testimonial.rating ? "text-amber-400" : "text-slate-200"}`}
+            class={`h-3.5 w-3.5 ${star <= testimonial.rating ? "text-amber-400" : "text-slate-200"}`}
             viewBox="0 0 20 20"
             fill="currentColor"
             aria-hidden="true"
@@ -56,6 +56,6 @@ const card = "rounded-2xl border border-slate-100 bg-white transition-all durati
         ))
       }
     </div>
-    <span class="text-xs text-slate-400">{testimonial.rating}/5</span>
+    <span class="text-[11px] text-slate-400">{testimonial.rating}/5</span>
   </div>
 </article>

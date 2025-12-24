@@ -30,16 +30,16 @@ const trustStats = [
 ];
 
 // Tailwind class constants
-const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all";
-const btnPrimary = `${btnBase} bg-primary text-white hover:bg-primary-600 active:scale-[0.98]`;
-const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-800`;
-const card = "rounded-2xl border border-slate-100 bg-white transition-all duration-300 hover:shadow-soft hover:border-slate-200";
+const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-150";
+const btnPrimary = `${btnBase} bg-primary text-white hover:bg-primary-600`;
+const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-800`;
+const card = "rounded-xl border border-slate-200/80 bg-white transition-all duration-200 hover:shadow-soft hover:border-slate-200";
 ---
 
-<section class="py-20 lg:py-28 bg-slate-50/70">
+<section class="py-16 lg:py-24 bg-slate-50/60">
   <div class="mx-auto w-full max-w-7xl px-6">
     <div class="text-center max-w-2xl mx-auto">
-      <span class="text-xs font-medium uppercase tracking-widest text-primary/90">Zaufanie</span>
+      <span class="text-[11px] font-semibold uppercase tracking-wider text-primary">Zaufanie</span>
       <h2 class="mt-4">Dlaczego kursanci wybierają {BRAND_NAME}</h2>
       <p class="mt-4 text-slate-600">
         Łączymy lokalną szkołę z elastycznością zajęć online. Poniżej znajdziesz najważniejsze

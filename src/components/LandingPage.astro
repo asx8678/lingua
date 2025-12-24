@@ -56,10 +56,10 @@ const courseJsonLd = {
 };
 
 // Tailwind class constants
-const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200";
-const btnPrimary = `${btnBase} bg-primary text-white shadow-sm hover:bg-primary-600 hover:shadow-md active:scale-[0.98]`;
-const btnSecondary = `${btnBase} border border-slate-200/80 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 hover:shadow-sm`;
-const card = "rounded-2xl border border-slate-200/60 bg-white transition-all duration-300 hover:shadow-soft hover:border-slate-200";
+const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium transition-colors duration-150";
+const btnPrimary = `${btnBase} bg-primary text-white hover:bg-primary-600`;
+const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-800`;
+const card = "rounded-xl border border-slate-200/80 bg-white transition-all duration-200 hover:shadow-soft hover:border-slate-200";
 ---
 
 <MainLayout
@@ -69,10 +69,10 @@ const card = "rounded-2xl border border-slate-200/60 bg-white transition-all dur
   structuredData={[faqJsonLd, breadcrumbSchema, courseJsonLd]}
 >
   <section class="bg-hero-gradient">
-    <div class="mx-auto w-full max-w-7xl px-6 py-20 sm:py-28">
+    <div class="mx-auto w-full max-w-7xl px-6 py-16 sm:py-24">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
         <div>
-          <span class="inline-block rounded-full bg-primary/8 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">{data.kicker}</span>
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-primary">{data.kicker}</span>
           <h1 class="mt-5">{data.h1}</h1>
           <p class="mt-6 max-w-2xl text-lg text-slate-600">
             {data.intro}
@@ -98,7 +98,7 @@ const card = "rounded-2xl border border-slate-200/60 bg-white transition-all dur
     </div>
   </section>
 
-  <section class="py-20 lg:py-28">
+  <section class="py-16 lg:py-24">
     <div class="mx-auto w-full max-w-7xl px-6">
       <h2>Dlaczego {BRAND_NAME}?</h2>
       <p class="mt-4 max-w-3xl text-slate-600">
@@ -118,7 +118,7 @@ const card = "rounded-2xl border border-slate-200/60 bg-white transition-all dur
     </div>
   </section>
 
-  <section class="py-20 lg:py-28 bg-slate-50/70">
+  <section class="py-16 lg:py-24 bg-slate-50/60">
     <div class="mx-auto w-full max-w-7xl px-6">
       <h2>Nasza oferta</h2>
       <p class="mt-4 max-w-3xl text-slate-600">
@@ -141,7 +141,7 @@ const card = "rounded-2xl border border-slate-200/60 bg-white transition-all dur
     </div>
   </section>
 
-  <section class="py-20 lg:py-28">
+  <section class="py-16 lg:py-24">
     <div class="mx-auto w-full max-w-7xl px-6">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
         <div>

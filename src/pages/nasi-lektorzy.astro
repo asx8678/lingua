@@ -27,10 +27,10 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ]);
 
 // Tailwind class constants
-const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all";
-const btnPrimary = `${btnBase} bg-primary text-white hover:bg-primary-600 active:scale-[0.98]`;
-const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-800`;
-const kicker = "text-xs font-medium uppercase tracking-widest text-primary/90";
+const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium transition-colors duration-150";
+const btnPrimary = `${btnBase} bg-primary text-white hover:bg-primary-600`;
+const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-800`;
+const kicker = "text-[11px] font-semibold uppercase tracking-wider text-primary";
 ---
 
 <MainLayout
@@ -39,7 +39,7 @@ const kicker = "text-xs font-medium uppercase tracking-widest text-primary/90";
   canonical="/nasi-lektorzy"
   structuredData={[breadcrumbSchema]}
 >
-  <section class="py-16 lg:py-24 bg-slate-50/70">
+  <section class="py-16 lg:py-24 bg-slate-50/60">
     <div class="mx-auto w-full max-w-7xl px-6">
       <div class="max-w-3xl">
         <span class={kicker}>Nasi lektorzy</span>
