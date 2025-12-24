@@ -47,6 +47,6 @@ export const teachers: Teacher[] = [
     name: "Artur",
     role: "Nauczyciel",
     languages: ["Matematyka"],
-    image: "/images/teachers/artur.png",
+    image: "/images/teachers/artur-v2.png",
   },
 ];
