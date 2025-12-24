@@ -43,4 +43,10 @@ export const teachers: Teacher[] = [
     languages: ["Angielski", "Francuski"],
     image: "/images/teachers/placeholder.svg",
   },
+  {
+    name: "Artur",
+    role: "Nauczyciel",
+    languages: ["Matematyka"],
+    image: "/images/teachers/artur.png",
+  },
 ];
