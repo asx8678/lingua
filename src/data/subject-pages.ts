@@ -910,6 +910,153 @@ export const szwedzki: SubjectPageData = {
   },
 };
 
+export const polski: SubjectPageData = {
+  slug: "polski-dla-obcokrajowcow",
+  title: "Polski dla obcokrajowców w Legionowie – kursy języka polskiego",
+  description:
+    "Polski dla obcokrajowców w Legionowie i online. Lekcje 1:1 i w grupach, nauka od podstaw, konwersacje i przygotowanie do życia w Polsce.",
+  kicker: "Polski dla obcokrajowców",
+  h1: "Polski dla obcokrajowców – Legionowo",
+  intro: [
+    "Uczysz się polskiego, bo mieszkasz w Polsce, pracujesz z Polakami lub planujesz tu zostać na dłużej? Pomagamy opanować język w praktyczny sposób – od pierwszych zwrotów po swobodną komunikację.",
+    "Zajęcia prowadzimy stacjonarnie w Legionowie oraz online. Program dopasowujemy do Twojego poziomu, celu i tempa nauki. Pracujemy z osobami z różnych krajów i rozumiemy wyzwania, jakie stawia polski.",
+  ],
+  highlights: [
+    "Zajęcia stacjonarne w Legionowie i online",
+    "Nauka od podstaw lub kontynuacja",
+    "Format: 1:1 lub grupa 2–4 osoby",
+    "Lekcje 45 lub 60 min, 1–2 razy w tygodniu",
+  ],
+  pricingNote:
+    "Lekcja indywidualna 60 min: 130 zł, 45 min: 100 zł. Grupy od 55 zł/os. Szczegóły w cenniku.",
+  audienceTitle: "Dla kogo jest polski dla obcokrajowców?",
+  audienceIntro:
+    "Zajęcia dopasowujemy do poziomu i celu – niezależnie od kraju pochodzenia.",
+  audience: [
+    {
+      label: "Osoby mieszkające w Polsce",
+      description:
+        "Praktyczny polski do życia codziennego, urzędów i zakupów.",
+    },
+    {
+      label: "Pracownicy firm",
+      description:
+        "Język do pracy, komunikacja z kolegami i klientami po polsku.",
+    },
+    {
+      label: "Partnerzy Polaków",
+      description:
+        "Nauka polskiego, żeby lepiej rozumieć rodzinę i przyjaciół.",
+    },
+  ],
+  goalsTitle: "Cele i efekty nauki",
+  goalsIntro:
+    "Ustalamy konkretne cele, dzięki którym łatwiej śledzić postęp.",
+  goals: [
+    "Swobodna rozmowa w codziennych sytuacjach.",
+    "Rozumienie Polaków w pracy i w domu.",
+    "Załatwianie spraw w urzędach i sklepach.",
+    "Poprawa wymowy i płynności mówienia.",
+    "Rozumienie tekstów pisanych i mediów.",
+    "Przygotowanie do egzaminów z polskiego.",
+  ],
+  outcomes: [
+    "Większa pewność w rozmowach po polsku.",
+    "Lepsze rozumienie ze słuchu.",
+    "Praktyczne słownictwo do życia w Polsce.",
+    "Materiały do powtórek między zajęciami.",
+    "Feedback po każdej lekcji.",
+    "Stały postęp dzięki regularnym spotkaniom.",
+  ],
+  formatTitle: "Format zajęć i organizacja",
+  formatIntro:
+    "Zajęcia prowadzimy indywidualnie lub w małych grupach. Dobieramy częstotliwość i czas spotkań.",
+  formats: [
+    {
+      title: "Lekcje 1:1",
+      text: "Największa elastyczność i szybkie tempo nauki dopasowane do Ciebie.",
+    },
+    {
+      title: "Duet (2 osoby)",
+      text: "Nauka w parze – więcej motywacji i korzystna cena (85 zł/os.).",
+    },
+    {
+      title: "Grupa 3–4 osoby",
+      text: "Wspólna nauka i najlepsza cena (55–70 zł/os.).",
+    },
+  ],
+  organization: [
+    "Krótka rozmowa i określenie poziomu.",
+    "Ustalenie celu i planu nauki.",
+    "Regularne spotkania stacjonarne lub online.",
+    "Materiały i zadania do pracy własnej.",
+  ],
+  materialsIntro:
+    "Materiały dobieramy do poziomu – od podstawowych dialogów po teksty i ćwiczenia gramatyczne.",
+  materials: [
+    "Dialogi do codziennych sytuacji.",
+    "Ćwiczenia wymowy polskich głosek.",
+    "Słownictwo tematyczne (praca, zakupy, urzędy).",
+    "Zadania gramatyczne dopasowane do poziomu.",
+  ],
+  lessonPlanTitle: "Jak wyglądają zajęcia z polskiego?",
+  lessonPlanIntro:
+    "Każde spotkanie ma jasny cel i łączy praktykę mówienia z nauką gramatyki.",
+  lessonPlan: [
+    "Rozgrzewka – krótka rozmowa po polsku.",
+    "Nowe słownictwo i zwroty w kontekście.",
+    "Ćwiczenia wymowy trudnych głosek.",
+    "Dialogi i scenki sytuacyjne.",
+    "Podsumowanie i zadanie do domu.",
+  ],
+  feedbackIntro:
+    "Po zajęciach dostajesz wskazówki, co ćwiczyć i nad czym pracować.",
+  feedback: [
+    "Korekta błędów i wymowy.",
+    "Lista słówek do utrwalenia.",
+    "Ćwiczenia do samodzielnej pracy.",
+    "Informacja o postępach.",
+  ],
+  faqs: [
+    {
+      question: "Czy mogę zacząć od zera?",
+      answer:
+        "Tak. Zaczynamy od podstaw – alfabetu, wymowy i pierwszych zwrotów.",
+    },
+    {
+      question: "W jakim języku prowadzone są zajęcia?",
+      answer:
+        "Na początku pomagamy po angielsku lub w innym języku, ale stopniowo przechodzimy na polski.",
+    },
+    {
+      question: "Czy są zajęcia online?",
+      answer:
+        "Tak. Prowadzimy lekcje online z wykorzystaniem wspólnych materiałów.",
+    },
+    {
+      question: "Ile kosztują zajęcia indywidualne?",
+      answer:
+        "60 min: 130 zł, 45 min: 100 zł. W grupach cena od 55 zł/os.",
+    },
+    {
+      question: "Jak często odbywają się zajęcia?",
+      answer:
+        "Najczęściej 1–2 razy w tygodniu. Harmonogram ustalamy indywidualnie.",
+    },
+    {
+      question: "Czy pomagacie w przygotowaniu do egzaminu?",
+      answer:
+        "Tak. Przygotowujemy do egzaminów certyfikatowych z języka polskiego.",
+    },
+  ],
+  cta: {
+    title: "Chcesz mówić po polsku?",
+    description:
+      "Umów bezpłatną konsultację. Sprawdzimy Twój poziom i zaproponujemy plan nauki.",
+    note: "Odpowiadamy szybko – napisz lub zadzwoń.",
+  },
+};
+
 export const subjectPages: Record<string, SubjectPageData> = {
   matematyka,
   hiszpanski,
@@ -917,4 +1064,5 @@ export const subjectPages: Record<string, SubjectPageData> = {
   francuski,
   rosyjski,
   szwedzki,
+  "polski-dla-obcokrajowcow": polski,
 };
