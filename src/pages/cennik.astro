@@ -126,13 +126,13 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ]);
 
 // Tailwind class constants
-const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200";
-const btnPrimary = `${btnBase} bg-primary text-white shadow-sm hover:bg-primary-600 hover:shadow-md active:scale-[0.98]`;
-const btnSecondary = `${btnBase} border border-slate-200/80 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 hover:shadow-sm`;
+const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all";
+const btnPrimary = `${btnBase} bg-primary text-white hover:bg-primary-600 active:scale-[0.98]`;
+const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-800`;
 const btnGhost = `${btnBase} bg-transparent text-slate-600 hover:bg-slate-100 hover:text-slate-900`;
-const card = "rounded-2xl border border-slate-200/60 bg-white transition-all duration-300 hover:shadow-soft hover:border-slate-200";
-const kicker = "inline-block rounded-full bg-primary/8 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary";
-const notice = "rounded-xl border border-primary/15 bg-primary/5 p-4 text-primary";
+const card = "rounded-2xl border border-slate-100 bg-white transition-all duration-300 hover:shadow-soft hover:border-slate-200";
+const kicker = "text-xs font-medium uppercase tracking-widest text-primary/90";
+const notice = "rounded-xl border border-primary/10 bg-primary/5 p-4 text-primary";
 ---
 
 <MainLayout

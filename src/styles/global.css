@@ -2,6 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-7xl px-6;
+  }
+
+  .section {
+    @apply py-20 lg:py-28;
+  }
+
+  .section-muted {
+    @apply bg-slate-50/70;
+  }
+
+  .hero-bg {
+    @apply bg-hero-gradient;
+  }
+
+  .kicker {
+    @apply text-xs font-medium uppercase tracking-widest text-primary/90;
+  }
+
+  .card {
+    @apply rounded-2xl border border-slate-100 bg-white transition-all duration-300 hover:shadow-soft hover:border-slate-200;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-600 active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-800;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent text-slate-600 hover:bg-slate-100 hover:text-slate-900;
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;

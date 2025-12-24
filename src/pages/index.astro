@@ -93,14 +93,14 @@ const homeTestimonials =
   featuredTestimonials.length > 0 ? featuredTestimonials : testimonials.slice(0, 2);
 
 // Tailwind class constants
-const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200";
-const btnPrimary = `${btnBase} bg-primary text-white shadow-sm hover:bg-primary-600 hover:shadow-md active:scale-[0.98]`;
-const btnSecondary = `${btnBase} border border-slate-200/80 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 hover:shadow-sm`;
-const card = "rounded-2xl border border-slate-200/60 bg-white transition-all duration-300 hover:shadow-soft hover:border-slate-200";
+const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-sm font-medium transition-all duration-250";
+const btnPrimary = `${btnBase} bg-primary text-white hover:bg-primary-600 active:scale-[0.98]`;
+const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-800`;
+const card = "rounded-2xl border border-slate-100 bg-white transition-all duration-300 hover:border-slate-200 hover:shadow-soft";
 const cardInteractive = `${card} p-6 cursor-pointer`;
-const chip = "inline-flex items-center gap-1.5 rounded-full border border-slate-200/80 bg-white px-3 py-1.5 text-xs font-medium text-slate-600";
-const statCard = "rounded-2xl border border-slate-200/60 bg-white p-6";
-const kicker = "inline-block rounded-full bg-primary/8 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary";
+const chip = "inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-500";
+const statCard = "rounded-2xl border border-slate-100 bg-white p-6";
+const kicker = "text-xs font-medium uppercase tracking-widest text-primary/90";
 ---
 
 <MainLayout title={title} description={description} canonical="/">

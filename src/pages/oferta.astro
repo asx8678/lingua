@@ -56,13 +56,13 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ]);
 
 // Tailwind class constants
-const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
-const btnPrimary = `${btnBase} bg-primary text-white shadow-md hover:bg-primary-700 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:shadow-md`;
-const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-700 shadow-sm hover:border-primary/30 hover:text-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0`;
-const card = "rounded-2xl border border-slate-200/80 bg-white shadow-sm transition-shadow hover:shadow-md";
-const cardInteractive = `${card} p-6 cursor-pointer hover:-translate-y-0.5`;
-const kicker = "inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary";
-const notice = "rounded-xl border border-primary/20 bg-primary/5 p-4 text-primary";
+const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all";
+const btnPrimary = `${btnBase} bg-primary text-white hover:bg-primary-600 active:scale-[0.98]`;
+const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-800`;
+const card = "rounded-2xl border border-slate-100 bg-white transition-all duration-300 hover:shadow-soft hover:border-slate-200";
+const cardInteractive = `${card} p-6 cursor-pointer`;
+const kicker = "text-xs font-medium uppercase tracking-widest text-primary/90";
+const notice = "rounded-xl border border-primary/10 bg-primary/5 p-4 text-primary";
 ---
 
 <MainLayout
@@ -121,7 +121,7 @@ const notice = "rounded-xl border border-primary/20 bg-primary/5 p-4 text-primar
             Zajęcia w naszej szkole w Legionowie. Bezpośredni kontakt z lektorem i pełna
             koncentracja.
           </p>
-          <span class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary transition-all group-hover:gap-3">
+          <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary transition-all duration-200 group-hover:gap-3">
             Poznaj szczegóły
             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -133,7 +133,7 @@ const notice = "rounded-xl border border-primary/20 bg-primary/5 p-4 text-primar
           <p class="mt-3 text-slate-600">
             Lekcje z lektorem na żywo. Elastyczne godziny i nacisk na mówienie w praktyce.
           </p>
-          <span class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary transition-all group-hover:gap-3">
+          <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary transition-all duration-200 group-hover:gap-3">
             Poznaj szczegóły
             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -184,7 +184,7 @@ const notice = "rounded-xl border border-primary/20 bg-primary/5 p-4 text-primar
           >
             <h3 class="text-lg font-extrabold text-slate-900">{offer.kicker}</h3>
             <p class="mt-3 text-sm text-slate-600">{offer.description}</p>
-            <span class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary transition-all group-hover:gap-3">
+            <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary transition-all duration-200 group-hover:gap-3">
               Poznaj szczegóły
               <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />

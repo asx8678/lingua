@@ -24,11 +24,11 @@ const perMonthPerPerson = perSession * defaultLessonsPerWeek * 4;
 const perMonthTotal = perMonthPerPerson * defaultPersons;
 
 // Tailwind class constants
-const card = "rounded-2xl border border-slate-200/80 bg-white shadow-sm transition-shadow hover:shadow-md";
+const card = "rounded-2xl border border-slate-100 bg-white transition-all duration-300 hover:shadow-soft hover:border-slate-200";
 ---
 
 <div class={`${card} p-6`}>
-  <p class="text-xs font-bold uppercase tracking-widest text-slate-500">Kalkulator miesięczny</p>
+  <p class="text-xs font-medium uppercase tracking-widest text-slate-400">Kalkulator miesięczny</p>
   <h3 class="mt-2 text-xl font-extrabold text-slate-900">Sprawdź orientacyjny koszt</h3>
   <p class="mt-3 text-sm text-slate-600">
     Uproszczone wyliczenie na podstawie pakietów 10 spotkań. Przyjmujemy 4 tygodnie w miesiącu.
@@ -83,16 +83,16 @@ const card = "rounded-2xl border border-slate-200/80 bg-white shadow-sm transiti
     </div>
   </form>
 
-  <div class="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5" aria-live="polite">
+  <div class="mt-6 rounded-2xl border border-slate-100 bg-slate-50/70 p-5" aria-live="polite">
     <div class="grid gap-4 sm:grid-cols-3" role="status">
       <div>
-        <div class="text-xs font-bold uppercase tracking-widest text-slate-500">Cena / spotkanie</div>
+        <div class="text-xs font-medium uppercase tracking-widest text-slate-400">Cena / spotkanie</div>
         <div id="monthly-per-session" class="mt-2 text-3xl font-extrabold text-slate-900">
           {formatPLN(perSession)}
         </div>
       </div>
       <div>
-        <div class="text-xs font-bold uppercase tracking-widest text-slate-500">
+        <div class="text-xs font-medium uppercase tracking-widest text-slate-400">
           Miesięcznie / osoba
         </div>
         <div id="monthly-per-person" class="mt-2 text-3xl font-extrabold text-slate-900">
@@ -100,7 +100,7 @@ const card = "rounded-2xl border border-slate-200/80 bg-white shadow-sm transiti
         </div>
       </div>
       <div>
-        <div class="text-xs font-bold uppercase tracking-widest text-slate-500">
+        <div class="text-xs font-medium uppercase tracking-widest text-slate-400">
           Miesięcznie (grupa)
         </div>
         <div id="monthly-total" class="mt-2 text-3xl font-extrabold text-slate-900">

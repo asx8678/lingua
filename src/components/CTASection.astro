@@ -40,14 +40,14 @@ const resolvedSecondary =
       : null;
 
 // Tailwind class constants
-const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200";
-const btnPrimary = `${btnBase} bg-primary text-white shadow-sm hover:bg-primary-600 hover:shadow-md active:scale-[0.98]`;
-const btnSecondary = `${btnBase} border border-slate-200/80 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 hover:shadow-sm`;
+const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-sm font-medium transition-all";
+const btnPrimary = `${btnBase} bg-primary text-white hover:bg-primary-600 active:scale-[0.98]`;
+const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-800`;
 ---
 
 <section class="py-20 lg:py-28">
   <div class="mx-auto w-full max-w-7xl px-6">
-    <div class="rounded-3xl border border-slate-200/60 p-10 sm:p-14 text-center bg-gradient-to-br from-slate-50 to-white">
+    <div class="rounded-3xl border border-slate-100 bg-slate-50/50 p-10 sm:p-14 text-center">
       <h2 class="text-2xl sm:text-3xl">{title}</h2>
       <p class="mx-auto mt-5 max-w-2xl text-slate-600">{description}</p>
       {note && <p class="mt-4 text-sm text-slate-400">{note}</p>}

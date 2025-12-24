@@ -15,8 +15,8 @@ const imageAlt = `${teacher.name}, ${teacher.role} – ${teacher.languages.join(
 const specialties = teacher.specialties ?? TEACHER_SPECIALTIES[teacher.name] ?? [];
 
 // Tailwind class constants
-const card = "rounded-2xl border border-slate-200/60 bg-white transition-all duration-300 hover:shadow-soft hover:border-slate-200";
-const chip = "inline-flex items-center rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-medium text-slate-600";
+const card = "rounded-2xl border border-slate-100 bg-white transition-all duration-300 hover:shadow-soft hover:border-slate-200";
+const chip = "inline-flex items-center rounded-full bg-slate-50 px-2.5 py-1 text-[11px] font-medium text-slate-500";
 ---
 
 <article class={`${card} group flex h-full flex-col overflow-hidden`}>
@@ -28,7 +28,7 @@ const chip = "inline-flex items-center rounded-full bg-slate-100 px-2.5 py-1 tex
       width="320"
       height="240"
       decoding="async"
-      class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+      class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
     />
   </div>
   <div class="flex flex-1 flex-col p-5">

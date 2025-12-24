@@ -30,16 +30,16 @@ const trustStats = [
 ];
 
 // Tailwind class constants
-const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200";
-const btnPrimary = `${btnBase} bg-primary text-white shadow-sm hover:bg-primary-600 hover:shadow-md active:scale-[0.98]`;
-const btnSecondary = `${btnBase} border border-slate-200/80 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 hover:shadow-sm`;
-const card = "rounded-2xl border border-slate-200/60 bg-white transition-all duration-300 hover:shadow-soft hover:border-slate-200";
+const btnBase = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all";
+const btnPrimary = `${btnBase} bg-primary text-white hover:bg-primary-600 active:scale-[0.98]`;
+const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-800`;
+const card = "rounded-2xl border border-slate-100 bg-white transition-all duration-300 hover:shadow-soft hover:border-slate-200";
 ---
 
 <section class="py-20 lg:py-28 bg-slate-50/70">
   <div class="mx-auto w-full max-w-7xl px-6">
     <div class="text-center max-w-2xl mx-auto">
-      <span class="inline-block rounded-full bg-primary/8 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">Zaufanie</span>
+      <span class="text-xs font-medium uppercase tracking-widest text-primary/90">Zaufanie</span>
       <h2 class="mt-4">Dlaczego kursanci wybierają {BRAND_NAME}</h2>
       <p class="mt-4 text-slate-600">
         Łączymy lokalną szkołę z elastycznością zajęć online. Poniżej znajdziesz najważniejsze
@@ -49,20 +49,20 @@ const card = "rounded-2xl border border-slate-200/60 bg-white transition-all dur
 
     <div class="mt-10 grid gap-5 lg:grid-cols-3">
       <div class={`${card} p-6`}>
-        <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Opinie</div>
+        <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Opinie</div>
         <h3 class="mt-3 text-lg font-bold text-slate-900">Opinie z Google</h3>
         <p class="mt-3 text-sm text-slate-600">
           Sprawdź, co o nas mówią kursanci i rodzice. Opinie pomagają podjąć decyzję o starcie.
         </p>
 
         <div class="mt-5 grid gap-3 sm:grid-cols-2">
-          <div class="rounded-xl border border-slate-200/60 bg-slate-50/50 p-4 text-center">
-            <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Ocena</div>
+          <div class="rounded-xl border border-slate-100 bg-slate-50/50 p-4 text-center">
+            <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Ocena</div>
             <div class="mt-2 text-2xl font-bold text-slate-900">{ratingDisplay}</div>
             <div class="mt-1 text-xs text-slate-400">Google Reviews</div>
           </div>
-          <div class="rounded-xl border border-slate-200/60 bg-slate-50/50 p-4 text-center">
-            <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Liczba opinii</div>
+          <div class="rounded-xl border border-slate-100 bg-slate-50/50 p-4 text-center">
+            <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Liczba opinii</div>
             <div class="mt-2 text-2xl font-bold text-slate-900">{countDisplay}</div>
             <div class="mt-1 text-xs text-slate-400">Google Reviews</div>
           </div>
@@ -70,12 +70,12 @@ const card = "rounded-2xl border border-slate-200/60 bg-white transition-all dur
 
         {GOOGLE_REVIEW_HIGHLIGHTS.length > 0 && (
           <div class="mt-5">
-            <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+            <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">
               Opinie z Google
             </div>
             <div class="mt-3 grid gap-2">
               {GOOGLE_REVIEW_HIGHLIGHTS.map((item) => (
-                <div class="rounded-xl border border-slate-200/60 bg-slate-50/50 p-3 text-sm text-slate-600">
+                <div class="rounded-xl border border-slate-100 bg-slate-50/50 p-3 text-sm text-slate-600">
                   <p class="leading-relaxed">"{item.text}"</p>
                   {item.author && <p class="mt-2 text-xs font-medium text-slate-500">— {item.author}</p>}
                 </div>
@@ -92,7 +92,7 @@ const card = "rounded-2xl border border-slate-200/60 bg-white transition-all dur
       </div>
 
       <div class={`${card} p-6`}>
-        <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Poznaj lektorów</div>
+        <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Poznaj lektorów</div>
         <h3 class="mt-3 text-lg font-bold text-slate-900">Zespół i podejście</h3>
         <p class="mt-3 text-sm text-slate-600">
           Uczysz się z lektorami, którzy prowadzą zajęcia stacjonarne i online oraz dopasowują plan
@@ -101,8 +101,8 @@ const card = "rounded-2xl border border-slate-200/60 bg-white transition-all dur
 
         <div class="mt-5 grid gap-2 sm:grid-cols-3">
           {trustStats.map((item) => (
-            <div class="rounded-xl border border-slate-200/60 bg-slate-50/50 p-3 text-center">
-            <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+            <div class="rounded-xl border border-slate-100 bg-slate-50/50 p-3 text-center">
+            <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">
               {item.label}
             </div>
               <div class="mt-1 text-lg font-bold text-slate-900">{item.value}</div>
@@ -111,7 +111,7 @@ const card = "rounded-2xl border border-slate-200/60 bg-white transition-all dur
         </div>
 
         <div class="mt-5">
-          <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Podejście</div>
+          <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Podejście</div>
           <ul class="mt-3 space-y-2 text-sm text-slate-600">
             {TEACHING_APPROACH.map((item) => (
               <li class="flex items-start gap-2">
@@ -124,7 +124,7 @@ const card = "rounded-2xl border border-slate-200/60 bg-white transition-all dur
 
         {TEACHER_CREDENTIALS.length > 0 && (
           <div class="mt-5">
-            <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+            <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">
               Kwalifikacje
             </div>
             <ul class="mt-3 space-y-2 text-sm text-slate-600">
@@ -145,7 +145,7 @@ const card = "rounded-2xl border border-slate-200/60 bg-white transition-all dur
       </div>
 
       <div class={`${card} p-6`}>
-        <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Zdjęcia</div>
+        <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Zdjęcia</div>
         <h3 class="mt-3 text-lg font-bold text-slate-900">Szkoła i zajęcia</h3>
         <p class="mt-3 text-sm text-slate-600">
           Chcesz zobaczyć szkołę na miejscu? Umów konsultację — pokażemy sale i opowiemy o organizacji zajęć.
