@@ -17,7 +17,7 @@ const contactFormHref = "/kontakt";
 const addressLine = FULL_ADDRESS || BUSINESS.city;
 const hasHours = Boolean(BUSINESS.openingHours);
 
-const linkMuted = "text-slate-500 transition-colors duration-150 hover:text-slate-700";
+const linkMuted = "text-slate-500 transition-colors duration-150 hover:text-slate-700 py-2 -my-1 inline-block";
 
 const socialLinks = [
   {
@@ -49,10 +49,10 @@ const socialLinks = [
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="text-slate-400 transition hover:text-primary"
+                  class="flex items-center justify-center w-10 h-10 -m-2 text-slate-500 transition hover:text-primary"
                   aria-label={`${BRAND_NAME} na ${link.name}`}
                 >
-                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d={link.icon} />
                   </svg>
                 </a>
@@ -63,7 +63,7 @@ const socialLinks = [
       </div>
 
       <nav aria-labelledby="footer-offer-heading">
-        <h2 id="footer-offer-heading" class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Oferta</h2>
+        <h2 id="footer-offer-heading" class="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Oferta</h2>
         <ul class="mt-2 flex flex-col gap-1.5 text-xs">
           <li><a class={`${linkMuted} no-underline`} href="/angielski-stacjonarnie">Angielski stacjonarnie</a></li>
           <li><a class={`${linkMuted} no-underline`} href="/angielski-online">Angielski online</a></li>
@@ -73,7 +73,7 @@ const socialLinks = [
       </nav>
 
       <nav aria-labelledby="footer-info-heading">
-        <h2 id="footer-info-heading" class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Informacje</h2>
+        <h2 id="footer-info-heading" class="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Informacje</h2>
         <ul class="mt-2 flex flex-col gap-1.5 text-xs">
           <li><a class={`${linkMuted} no-underline`} href="/cennik">Cennik</a></li>
           <li><a class={`${linkMuted} no-underline`} href="/opinie">Opinie</a></li>
@@ -84,14 +84,14 @@ const socialLinks = [
       </nav>
 
       <div>
-        <h2 class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Uczymy</h2>
+        <h2 class="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Uczymy</h2>
         <div class="mt-2 flex flex-wrap gap-1">
           {subjects.map((subject) => <span class="chip">{subject}</span>)}
         </div>
       </div>
 
       <address class="not-italic">
-        <h2 class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Kontakt</h2>
+        <h2 class="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Kontakt</h2>
         <div class="mt-2 flex flex-col gap-1 text-xs">
           {
             hasEmail ? (
@@ -111,9 +111,9 @@ const socialLinks = [
       </address>
     </div>
 
-    <div class="mt-6 flex flex-col items-center justify-between gap-2 border-t border-slate-200/60 pt-4 text-[10px] text-slate-400 sm:flex-row">
+    <div class="mt-6 flex flex-col items-center justify-between gap-2 border-t border-slate-200/60 pt-4 text-[10px] text-slate-500 sm:flex-row">
       <p>© {year} {BRAND_NAME}</p>
-      <a class="text-slate-400 no-underline transition-colors duration-150 hover:text-slate-600" href="/privacy">Polityka prywatności</a>
+      <a class="text-slate-500 no-underline transition-colors duration-150 hover:text-slate-600 py-2 -my-1 inline-block" href="/privacy">Polityka prywatności</a>
     </div>
   </div>
 </footer>

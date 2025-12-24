@@ -125,6 +125,7 @@ const localBusinessSchema = {
 ---
 
 <MainLayout title={title} description={description} canonical="/" structuredData={[localBusinessSchema]}>
+  <link slot="head" rel="preload" href="/images/hero.webp" as="image" media="(min-width: 1024px)" type="image/webp" />
   <section class="bg-hero-gradient">
     <div class="mx-auto w-full max-w-7xl px-6 py-10 sm:py-14 lg:py-16">
       <div class="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
@@ -169,12 +170,12 @@ const localBusinessSchema = {
 
         <div class="hidden lg:block">
           <img
-            src="/images/hero.svg"
+            src="/images/hero.webp"
             alt="Szkoła języków obcych i matematyki Lingua Legionowo"
             loading="eager"
             width="600"
             height="400"
-            decoding="async"
+            decoding="sync"
             fetchpriority="high"
             class="w-full rounded-xl border border-slate-200/80 bg-white shadow-soft"
           />

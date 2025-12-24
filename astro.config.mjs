@@ -11,6 +11,9 @@ export default defineConfig({
   output: "server",
   trailingSlash: "never",
   adapter: cloudflare(),
+  build: {
+    inlineStylesheets: "always",
+  },
   integrations: [
     tailwind({ applyBaseStyles: false }),
     sitemap({

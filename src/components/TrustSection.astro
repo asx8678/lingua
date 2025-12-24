@@ -35,7 +35,7 @@ const trustStats = [
   <div class="container-site">
     <div class="grid gap-4 lg:grid-cols-3">
       <div class="card p-5 flex flex-col">
-        <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Opinie</div>
+        <div class="text-[10px] font-medium uppercase tracking-wider text-slate-500">Opinie</div>
         <h3 class="mt-2 text-base font-bold text-slate-900">Opinie z Google</h3>
         <p class="mt-2 text-sm text-slate-600">
           Sprawdź, co o nas mówią kursanci i rodzice.
@@ -43,11 +43,11 @@ const trustStats = [
 
         <div class="mt-4 grid gap-2 sm:grid-cols-2">
           <div class="rounded-lg border border-slate-100 bg-slate-50/50 p-3 text-center">
-            <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Ocena</div>
+            <div class="text-[10px] font-medium uppercase tracking-wider text-slate-500">Ocena</div>
             <div class="mt-1 text-xl font-bold text-slate-900">{ratingDisplay}</div>
           </div>
           <div class="rounded-lg border border-slate-100 bg-slate-50/50 p-3 text-center">
-            <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Opinii</div>
+            <div class="text-[10px] font-medium uppercase tracking-wider text-slate-500">Opinii</div>
             <div class="mt-1 text-xl font-bold text-slate-900">{countDisplay}</div>
           </div>
         </div>
@@ -57,7 +57,7 @@ const trustStats = [
             {GOOGLE_REVIEW_HIGHLIGHTS.slice(0, 2).map((item) => (
               <div class="rounded-lg border border-slate-100 bg-slate-50/50 p-2.5 text-sm text-slate-600">
                 <p class="leading-relaxed text-xs">"{item.text}"</p>
-                {item.author && <p class="mt-1 text-[10px] font-medium text-slate-400">— {item.author}</p>}
+                {item.author && <p class="mt-1 text-[10px] font-medium text-slate-500">— {item.author}</p>}
               </div>
             ))}
           </div>
@@ -71,7 +71,7 @@ const trustStats = [
       </div>
 
       <div class="card p-5 flex flex-col">
-        <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Zespół</div>
+        <div class="text-[10px] font-medium uppercase tracking-wider text-slate-500">Zespół</div>
         <h3 class="mt-2 text-base font-bold text-slate-900">Zespół i podejście</h3>
         <p class="mt-2 text-sm text-slate-600">
           Uczysz się z lektorami, którzy dopasowują plan do Twoich potrzeb.
@@ -80,14 +80,14 @@ const trustStats = [
         <div class="mt-4 grid gap-2 grid-cols-3">
           {trustStats.map((item) => (
             <div class="rounded-lg border border-slate-100 bg-slate-50/50 p-2 text-center">
-              <div class="text-[9px] font-medium uppercase tracking-wider text-slate-400">{item.label}</div>
+              <div class="text-[9px] font-medium uppercase tracking-wider text-slate-500">{item.label}</div>
               <div class="mt-0.5 text-base font-bold text-slate-900">{item.value}</div>
             </div>
           ))}
         </div>
 
         <div class="mt-4">
-          <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Podejście</div>
+          <div class="text-[10px] font-medium uppercase tracking-wider text-slate-500">Podejście</div>
           <ul class="mt-2 space-y-1.5 text-xs text-slate-600">
             {TEACHING_APPROACH.map((item) => (
               <li class="flex items-start gap-1.5">
@@ -100,7 +100,7 @@ const trustStats = [
 
         {TEACHER_CREDENTIALS.length > 0 && (
           <div class="mt-4">
-            <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Kwalifikacje</div>
+            <div class="text-[10px] font-medium uppercase tracking-wider text-slate-500">Kwalifikacje</div>
             <ul class="mt-2 space-y-1.5 text-xs text-slate-600">
               {TEACHER_CREDENTIALS.slice(0, 3).map((item) => (
                 <li class="flex items-start gap-1.5">
@@ -119,14 +119,14 @@ const trustStats = [
       </div>
 
       <div class="card p-5 flex flex-col">
-        <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Lokalizacja</div>
+        <div class="text-[10px] font-medium uppercase tracking-wider text-slate-500">Lokalizacja</div>
         <h3 class="mt-2 text-base font-bold text-slate-900">Szkoła i zajęcia</h3>
         <p class="mt-2 text-sm text-slate-600">
           Chcesz zobaczyć szkołę na miejscu? Umów konsultację — pokażemy sale i opowiemy o organizacji.
         </p>
 
         <div class="mt-4 rounded-lg border border-slate-100 bg-slate-50/50 p-3">
-          <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Co oferujemy</div>
+          <div class="text-[10px] font-medium uppercase tracking-wider text-slate-500">Co oferujemy</div>
           <ul class="mt-2 space-y-1.5 text-xs text-slate-600">
             <li class="flex items-start gap-1.5">
               <span class="mt-1 h-1 w-1 flex-shrink-0 rounded-full bg-primary/60" aria-hidden="true"></span>
