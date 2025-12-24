@@ -36,86 +36,67 @@ const btnSecondary = `${btnBase} border border-slate-200 bg-white text-slate-600
 const card = "rounded-xl border border-slate-200/80 bg-white transition-all duration-200 hover:shadow-soft hover:border-slate-200";
 ---
 
-<section class="py-16 lg:py-24 bg-slate-50/60">
+<section class="py-10 lg:py-14 bg-slate-50/60">
   <div class="mx-auto w-full max-w-7xl px-6">
-    <div class="text-center max-w-2xl mx-auto">
-      <span class="text-[11px] font-semibold uppercase tracking-wider text-primary">Zaufanie</span>
-      <h2 class="mt-4">Dlaczego kursanci wybierają {BRAND_NAME}</h2>
-      <p class="mt-4 text-slate-600">
-        Łączymy lokalną szkołę z elastycznością zajęć online. Poniżej znajdziesz najważniejsze
-        sygnały zaufania i praktyczne informacje o zespole.
-      </p>
-    </div>
-
-    <div class="mt-10 grid gap-5 lg:grid-cols-3">
-      <div class={`${card} p-6`}>
+    <div class="grid gap-4 lg:grid-cols-3">
+      <div class={`${card} p-5 flex flex-col`}>
         <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Opinie</div>
-        <h3 class="mt-3 text-lg font-bold text-slate-900">Opinie z Google</h3>
-        <p class="mt-3 text-sm text-slate-600">
-          Sprawdź, co o nas mówią kursanci i rodzice. Opinie pomagają podjąć decyzję o starcie.
+        <h3 class="mt-2 text-base font-bold text-slate-900">Opinie z Google</h3>
+        <p class="mt-2 text-sm text-slate-600">
+          Sprawdź, co o nas mówią kursanci i rodzice.
         </p>
 
-        <div class="mt-5 grid gap-3 sm:grid-cols-2">
-          <div class="rounded-xl border border-slate-100 bg-slate-50/50 p-4 text-center">
+        <div class="mt-4 grid gap-2 sm:grid-cols-2">
+          <div class="rounded-lg border border-slate-100 bg-slate-50/50 p-3 text-center">
             <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Ocena</div>
-            <div class="mt-2 text-2xl font-bold text-slate-900">{ratingDisplay}</div>
-            <div class="mt-1 text-xs text-slate-400">Google Reviews</div>
+            <div class="mt-1 text-xl font-bold text-slate-900">{ratingDisplay}</div>
           </div>
-          <div class="rounded-xl border border-slate-100 bg-slate-50/50 p-4 text-center">
-            <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Liczba opinii</div>
-            <div class="mt-2 text-2xl font-bold text-slate-900">{countDisplay}</div>
-            <div class="mt-1 text-xs text-slate-400">Google Reviews</div>
+          <div class="rounded-lg border border-slate-100 bg-slate-50/50 p-3 text-center">
+            <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Opinii</div>
+            <div class="mt-1 text-xl font-bold text-slate-900">{countDisplay}</div>
           </div>
         </div>
 
         {GOOGLE_REVIEW_HIGHLIGHTS.length > 0 && (
-          <div class="mt-5">
-            <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">
-              Opinie z Google
-            </div>
-            <div class="mt-3 grid gap-2">
-              {GOOGLE_REVIEW_HIGHLIGHTS.map((item) => (
-                <div class="rounded-xl border border-slate-100 bg-slate-50/50 p-3 text-sm text-slate-600">
-                  <p class="leading-relaxed">"{item.text}"</p>
-                  {item.author && <p class="mt-2 text-xs font-medium text-slate-500">— {item.author}</p>}
-                </div>
-              ))}
-            </div>
+          <div class="mt-4 space-y-2">
+            {GOOGLE_REVIEW_HIGHLIGHTS.slice(0, 2).map((item) => (
+              <div class="rounded-lg border border-slate-100 bg-slate-50/50 p-2.5 text-sm text-slate-600">
+                <p class="leading-relaxed text-xs">"{item.text}"</p>
+                {item.author && <p class="mt-1 text-[10px] font-medium text-slate-400">— {item.author}</p>}
+              </div>
+            ))}
           </div>
         )}
 
-        <div class="mt-6">
-          <a class={`${btnSecondary} w-full`} href={reviewCtaHref} target={hasGoogleReviews ? "_blank" : undefined} rel={hasGoogleReviews ? "noopener noreferrer" : undefined}>
+        <div class="mt-auto pt-4">
+          <a class={`${btnSecondary} w-full text-xs`} href={reviewCtaHref} target={hasGoogleReviews ? "_blank" : undefined} rel={hasGoogleReviews ? "noopener noreferrer" : undefined}>
             {reviewCtaLabel}
           </a>
         </div>
       </div>
 
-      <div class={`${card} p-6`}>
-        <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Poznaj lektorów</div>
-        <h3 class="mt-3 text-lg font-bold text-slate-900">Zespół i podejście</h3>
-        <p class="mt-3 text-sm text-slate-600">
-          Uczysz się z lektorami, którzy prowadzą zajęcia stacjonarne i online oraz dopasowują plan
-          do Twoich potrzeb.
+      <div class={`${card} p-5 flex flex-col`}>
+        <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Zespół</div>
+        <h3 class="mt-2 text-base font-bold text-slate-900">Zespół i podejście</h3>
+        <p class="mt-2 text-sm text-slate-600">
+          Uczysz się z lektorami, którzy dopasowują plan do Twoich potrzeb.
         </p>
 
-        <div class="mt-5 grid gap-2 sm:grid-cols-3">
+        <div class="mt-4 grid gap-2 grid-cols-3">
           {trustStats.map((item) => (
-            <div class="rounded-xl border border-slate-100 bg-slate-50/50 p-3 text-center">
-            <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">
-              {item.label}
-            </div>
-              <div class="mt-1 text-lg font-bold text-slate-900">{item.value}</div>
+            <div class="rounded-lg border border-slate-100 bg-slate-50/50 p-2 text-center">
+              <div class="text-[9px] font-medium uppercase tracking-wider text-slate-400">{item.label}</div>
+              <div class="mt-0.5 text-base font-bold text-slate-900">{item.value}</div>
             </div>
           ))}
         </div>
 
-        <div class="mt-5">
+        <div class="mt-4">
           <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Podejście</div>
-          <ul class="mt-3 space-y-2 text-sm text-slate-600">
+          <ul class="mt-2 space-y-1.5 text-xs text-slate-600">
             {TEACHING_APPROACH.map((item) => (
-              <li class="flex items-start gap-2">
-                <span class="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary/60" aria-hidden="true"></span>
+              <li class="flex items-start gap-1.5">
+                <span class="mt-1 h-1 w-1 flex-shrink-0 rounded-full bg-primary/60" aria-hidden="true"></span>
                 <span>{item}</span>
               </li>
             ))}
@@ -123,14 +104,12 @@ const card = "rounded-xl border border-slate-200/80 bg-white transition-all dura
         </div>
 
         {TEACHER_CREDENTIALS.length > 0 && (
-          <div class="mt-5">
-            <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">
-              Kwalifikacje
-            </div>
-            <ul class="mt-3 space-y-2 text-sm text-slate-600">
-              {TEACHER_CREDENTIALS.map((item) => (
-                <li class="flex items-start gap-2">
-                  <span class="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary/60" aria-hidden="true"></span>
+          <div class="mt-4">
+            <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Kwalifikacje</div>
+            <ul class="mt-2 space-y-1.5 text-xs text-slate-600">
+              {TEACHER_CREDENTIALS.slice(0, 3).map((item) => (
+                <li class="flex items-start gap-1.5">
+                  <span class="mt-1 h-1 w-1 flex-shrink-0 rounded-full bg-primary/60" aria-hidden="true"></span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -138,20 +117,39 @@ const card = "rounded-xl border border-slate-200/80 bg-white transition-all dura
           </div>
         )}
 
-        <div class="mt-6 flex flex-wrap gap-3">
-          <a class={btnPrimary} href="/nasi-lektorzy">Poznaj lektorów</a>
-          <a class={btnSecondary} href="/o-nas">O nas</a>
+        <div class="mt-auto pt-4 flex flex-wrap gap-2">
+          <a class={`${btnPrimary} text-xs`} href="/nasi-lektorzy">Poznaj lektorów</a>
+          <a class={`${btnSecondary} text-xs`} href="/o-nas">O nas</a>
         </div>
       </div>
 
-      <div class={`${card} p-6`}>
-        <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Zdjęcia</div>
-        <h3 class="mt-3 text-lg font-bold text-slate-900">Szkoła i zajęcia</h3>
-        <p class="mt-3 text-sm text-slate-600">
-          Chcesz zobaczyć szkołę na miejscu? Umów konsultację — pokażemy sale i opowiemy o organizacji zajęć.
+      <div class={`${card} p-5 flex flex-col`}>
+        <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Lokalizacja</div>
+        <h3 class="mt-2 text-base font-bold text-slate-900">Szkoła i zajęcia</h3>
+        <p class="mt-2 text-sm text-slate-600">
+          Chcesz zobaczyć szkołę na miejscu? Umów konsultację — pokażemy sale i opowiemy o organizacji.
         </p>
-        <div class="mt-6">
-          <a class={`${btnSecondary} w-full`} href="/kontakt">Umów wizytę w szkole</a>
+
+        <div class="mt-4 rounded-lg border border-slate-100 bg-slate-50/50 p-3">
+          <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">Co oferujemy</div>
+          <ul class="mt-2 space-y-1.5 text-xs text-slate-600">
+            <li class="flex items-start gap-1.5">
+              <span class="mt-1 h-1 w-1 flex-shrink-0 rounded-full bg-primary/60" aria-hidden="true"></span>
+              <span>Zajęcia stacjonarne w Legionowie</span>
+            </li>
+            <li class="flex items-start gap-1.5">
+              <span class="mt-1 h-1 w-1 flex-shrink-0 rounded-full bg-primary/60" aria-hidden="true"></span>
+              <span>Lekcje online z lektorem na żywo</span>
+            </li>
+            <li class="flex items-start gap-1.5">
+              <span class="mt-1 h-1 w-1 flex-shrink-0 rounded-full bg-primary/60" aria-hidden="true"></span>
+              <span>Małe grupy lub zajęcia indywidualne</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mt-auto pt-4">
+          <a class={`${btnSecondary} w-full text-xs`} href="/kontakt">Umów wizytę w szkole</a>
         </div>
       </div>
     </div>

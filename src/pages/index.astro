@@ -105,8 +105,8 @@ const kicker = "text-[11px] font-semibold uppercase tracking-wider text-primary"
 
 <MainLayout title={title} description={description} canonical="/">
   <section class="bg-hero-gradient">
-    <div class="mx-auto w-full max-w-7xl px-6 py-16 sm:py-24 lg:py-28">
-      <div class="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
+    <div class="mx-auto w-full max-w-7xl px-6 py-10 sm:py-14 lg:py-16">
+      <div class="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
         <div>
           <span class={kicker}>Szkoła języków obcych i matematyki</span>
           <h1 class="mt-4">
@@ -162,26 +162,29 @@ const kicker = "text-[11px] font-semibold uppercase tracking-wider text-primary"
     </div>
   </section>
 
-  <section class="py-16 lg:py-24 bg-slate-50/60">
+  <section class="py-8 lg:py-10 bg-slate-50/60">
     <div class="mx-auto w-full max-w-7xl px-6">
-      <span class={kicker}>Czego uczymy</span>
-      <h2 class="mt-3">Języki obce i matematyka w jednym miejscu</h2>
-      <p class="mt-3 max-w-3xl text-slate-600">
-        Uczymy w małych grupach i indywidualnie, stacjonarnie w Legionowie lub online.
-      </p>
-
-      <div class="mt-5 flex flex-wrap gap-1.5">
-        {subjectChips.map((subject) => <span class={chip}>{subject}</span>)}
-      </div>
-      <div class="mt-5">
-        <a class="text-sm font-medium text-primary no-underline hover:underline" href="/oferta">
-          Zobacz pełną ofertę →
-        </a>
+      <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+        <div>
+          <span class={kicker}>Czego uczymy</span>
+          <h2 class="mt-2">Języki obce i matematyka w jednym miejscu</h2>
+          <p class="mt-2 max-w-2xl text-slate-600">
+            Uczymy w małych grupach i indywidualnie, stacjonarnie w Legionowie lub online.
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="flex flex-wrap gap-1.5">
+            {subjectChips.map((subject) => <span class={chip}>{subject}</span>)}
+          </div>
+          <a class="text-sm font-medium text-primary no-underline hover:underline whitespace-nowrap" href="/oferta">
+            Zobacz ofertę →
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="py-12 lg:py-16">
+  <section class="py-8 lg:py-10">
     <div class="mx-auto w-full max-w-7xl px-6">
       <div class="grid gap-4 md:grid-cols-3">
         {
@@ -201,13 +204,13 @@ const kicker = "text-[11px] font-semibold uppercase tracking-wider text-primary"
 
   <TrustSection />
 
-  <section class="py-16 lg:py-24">
+  <section class="py-10 lg:py-14">
     <div class="mx-auto w-full max-w-7xl px-6">
-      <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+      <div class="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <span class={kicker}>Opinie</span>
-          <h2 class="mt-3">Co mówią kursanci</h2>
-          <p class="mt-3 max-w-3xl text-slate-600">
+          <h2 class="mt-2">Co mówią kursanci</h2>
+          <p class="mt-2 max-w-3xl text-slate-600">
             Krótkie opinie osób, które uczą się z nami stacjonarnie lub online.
           </p>
         </div>
@@ -216,7 +219,7 @@ const kicker = "text-[11px] font-semibold uppercase tracking-wider text-primary"
         </div>
       </div>
 
-      <div class="mt-8 grid gap-4 md:grid-cols-2">
+      <div class="mt-6 grid gap-4 md:grid-cols-2">
         {homeTestimonials.map((item) => (
           <TestimonialCard testimonial={item} />
         ))}
@@ -224,13 +227,13 @@ const kicker = "text-[11px] font-semibold uppercase tracking-wider text-primary"
     </div>
   </section>
 
-  <section class="py-16 lg:py-24">
+  <section class="py-10 lg:py-14">
     <div class="mx-auto w-full max-w-7xl px-6">
-      <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+      <div class="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <span class={kicker}>Nasi lektorzy</span>
-          <h2 class="mt-3">Poznaj zespół, który prowadzi zajęcia</h2>
-          <p class="mt-3 max-w-3xl text-slate-600">
+          <h2 class="mt-2">Poznaj zespół, który prowadzi zajęcia</h2>
+          <p class="mt-2 max-w-3xl text-slate-600">
             Doświadczeni lektorzy języków obcych i matematyki prowadzą zajęcia dopasowane do Twojego
             poziomu i celu.
           </p>
@@ -240,7 +243,7 @@ const kicker = "text-[11px] font-semibold uppercase tracking-wider text-primary"
         </div>
       </div>
 
-      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {
           previewTeachers.map((teacher, index) => (
             <TeacherCard teacher={teacher} loading={index === 0 ? "eager" : "lazy"} />
@@ -250,17 +253,17 @@ const kicker = "text-[11px] font-semibold uppercase tracking-wider text-primary"
     </div>
   </section>
 
-  <section class="py-16 lg:py-24 bg-slate-50/60">
+  <section class="py-10 lg:py-14 bg-slate-50/60">
     <div class="mx-auto w-full max-w-7xl px-6">
       <div class="text-center">
         <span class={kicker}>Proces</span>
-        <h2 class="mt-3">Jak pracujemy</h2>
-        <p class="mx-auto mt-3 max-w-2xl text-slate-600">
+        <h2 class="mt-2">Jak pracujemy</h2>
+        <p class="mx-auto mt-2 max-w-2xl text-slate-600">
           Niezależnie od wybranego trybu, otrzymujesz jasny plan nauki i wsparcie na każdym etapie.
         </p>
       </div>
 
-      <div class="mt-10 grid gap-4 lg:grid-cols-3">
+      <div class="mt-6 grid gap-4 lg:grid-cols-3">
         {
           steps.map((step, index) => (
             <div class={`${card} p-5 text-center`}>
@@ -276,13 +279,13 @@ const kicker = "text-[11px] font-semibold uppercase tracking-wider text-primary"
     </div>
   </section>
 
-  <section class="py-16 lg:py-24">
+  <section class="py-10 lg:py-14">
     <div class="mx-auto w-full max-w-7xl px-6">
-      <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+      <div class="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <span class={kicker}>Oferta</span>
-          <h2 class="mt-3">Wybierz formę nauki dopasowaną do Ciebie</h2>
-          <p class="mt-3 max-w-2xl text-slate-600">
+          <h2 class="mt-2">Wybierz formę nauki dopasowaną do Ciebie</h2>
+          <p class="mt-2 max-w-2xl text-slate-600">
             Dwie główne ścieżki to zajęcia stacjonarne w Legionowie i lekcje online.
           </p>
         </div>
@@ -291,7 +294,7 @@ const kicker = "text-[11px] font-semibold uppercase tracking-wider text-primary"
         </div>
       </div>
 
-      <div class="mt-8 grid gap-4 md:grid-cols-2">
+      <div class="mt-6 grid gap-4 md:grid-cols-2">
         {
           offerCards.map((offerCard) => (
             <a
