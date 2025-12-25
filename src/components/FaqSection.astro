@@ -8,9 +8,10 @@ interface Props {
   title?: string;
   items?: FaqItem[];
   id?: string;
+  disableSchema?: boolean;
 }
 
-const { title = "FAQ", items = [], id } = Astro.props;
+const { title = "FAQ", items = [], id, disableSchema = false } = Astro.props;
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -59,7 +60,7 @@ const jsonLd = {
       }
     </div>
   </div>
-  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  {!disableSchema && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 </section>
 
 <script is:inline>
