@@ -149,7 +149,16 @@ const { bankUrl = "/question-bank-1200.json" } = Astro.props;
     </div>
 
     <div class="ll-intro-cta">
-      <button class="ll-btn ll-btn--large" type="button" id="llStartBtn">Rozpocznij test</button>
+      <button class="ll-btn ll-btn--large" type="button" id="llStartBtn" aria-busy="false">
+        <span id="llStartBtnText">Rozpocznij test</span>
+        <span id="llStartBtnLoading" class="hidden items-center gap-2 justify-center">
+          <svg class="h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Ładowanie…
+        </span>
+      </button>
       <div id="llInitStatus" class="ll-callout" style="display:none;" aria-live="polite"></div>
     </div>
 
@@ -716,6 +725,8 @@ function modeLabel(mode){
   const poolInfo = root.querySelector("#llPoolInfo");
 
   const startBtn = root.querySelector("#llStartBtn");
+  const startBtnText = root.querySelector("#llStartBtnText");
+  const startBtnLoading = root.querySelector("#llStartBtnLoading");
   const prevBtn  = root.querySelector("#llPrevBtn");
   const nextBtn  = root.querySelector("#llNextBtn");
   const skipBtn  = root.querySelector("#llSkipBtn");
@@ -1248,14 +1259,42 @@ if (advancedStats){
   updatePoolInfo();
 
   async function startTest(){
-    const __oldStartText = startBtn ? startBtn.textContent : "";
-    if (startBtn){ startBtn.disabled = true; startBtn.textContent = "Ładowanie…"; }
+    if (startBtn){
+      startBtn.disabled = true;
+      startBtn.setAttribute("aria-busy", "true");
+      if (startBtnText) startBtnText.classList.add("hidden");
+      if (startBtnLoading) {
+        startBtnLoading.classList.remove("hidden");
+        startBtnLoading.classList.add("inline-flex");
+      }
+    }
     setIntroStatus("Ładowanie bazy pytań…", false);
+
     const ok = await ensureBankLoaded();
-    if (!ok){ if (startBtn){ startBtn.disabled = false; startBtn.textContent = __oldStartText || "Start testu"; } return; }
+
+    if (!ok){
+      if (startBtn){
+        startBtn.disabled = false;
+        startBtn.removeAttribute("aria-busy");
+        if (startBtnText) startBtnText.classList.remove("hidden");
+        if (startBtnLoading) {
+          startBtnLoading.classList.add("hidden");
+          startBtnLoading.classList.remove("inline-flex");
+        }
+      }
+      return;
+    }
 
     clearIntroStatus();
-    if (startBtn){ startBtn.disabled = false; startBtn.textContent = __oldStartText || "Start testu"; }
+    if (startBtn){
+       startBtn.disabled = false;
+       startBtn.removeAttribute("aria-busy");
+       if (startBtnText) startBtnText.classList.remove("hidden");
+       if (startBtnLoading) {
+         startBtnLoading.classList.add("hidden");
+         startBtnLoading.classList.remove("inline-flex");
+       }
+    }
 
     state.config.minLevel = rangeSelect.value;
     state.config.total = parseInt(countSelect.value, 10);
