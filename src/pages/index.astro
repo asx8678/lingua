@@ -13,10 +13,23 @@ import {
   CONTACT_PHONE,
 } from "../config/site";
 
+const languagesGenitive = taughtLanguages.map(lang => {
+  const genitiveMap: Record<string, string> = {
+    "Angielski": "angielskiego",
+    "Francuski": "francuskiego",
+    "Hiszpański": "hiszpańskiego",
+    "Niemiecki": "niemieckiego",
+    "Rosyjski": "rosyjskiego",
+    "Szwedzki": "szwedzkiego",
+    "Polski dla obcokrajowców": "polskiego dla obcokrajowców"
+  };
+  return genitiveMap[lang] || lang;
+});
+
 const languagesList = new Intl.ListFormat("pl", {
   style: "long",
   type: "conjunction",
-}).format(taughtLanguages);
+}).format(languagesGenitive);
 
 const title = `Lingua Legionowo — szkoła językowa i matematyka w Legionowie | ${BRAND_NAME}`;
 const description =
@@ -126,79 +139,97 @@ const localBusinessSchema = {
 
 <MainLayout title={title} description={description} canonical="/" structuredData={[localBusinessSchema]}>
   <link slot="head" rel="preload" href="/images/hero.webp" as="image" media="(min-width: 1024px)" type="image/webp" />
-  <section class="bg-hero-gradient">
-    <div class="mx-auto w-full max-w-7xl px-6 py-10 sm:py-14 lg:py-16">
-      <div class="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
-        <div>
-          <span class="kicker">Szkoła języków obcych i matematyki</span>
-          <h1 class="mt-4">
-            Języki obce i matematyka w Legionowie — plan nauki dopasowany do celu
+  <section class="hero-bg relative overflow-hidden">
+    <!-- Subtle background elements -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-gradient-to-br from-primary/10 to-primary/3 blur-3xl animate-float"></div>
+      <div class="absolute -bottom-32 -left-32 h-72 w-72 rounded-full bg-gradient-to-br from-blue-400/6 to-blue-200/4 blur-3xl animate-float" style="animation-delay: 2s;"></div>
+    </div>
+
+    <div class="relative mx-auto w-full max-w-7xl px-6 py-12 sm:py-16 lg:py-20">
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
+        <div class="space-y-6">
+          <div class="inline-flex items-center gap-2 rounded-full bg-white/80 backdrop-blur-sm border border-primary/20 px-3 py-1.5 shadow-sm">
+            <span class="h-2 w-2 rounded-full bg-primary"></span>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-primary">Szkoła języków obcych i matematyki</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.15]">
+            <span class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 bg-clip-text text-transparent">
+              Języki obce i matematyka w Legionowie
+            </span>
+            <span class="block mt-2 text-2xl sm:text-3xl lg:text-4xl bg-gradient-to-r from-primary to-primary-600 bg-clip-text text-transparent">
+              — plan nauki dopasowany do celu
+            </span>
           </h1>
-          <p class="mt-5 max-w-2xl text-lg text-slate-600 leading-relaxed">
+
+          <p class="max-w-2xl text-base text-slate-600 leading-relaxed">
             Uczymy {languagesList} i matematyki. Zaczynamy od krótkiej diagnozy, a potem układamy plan
             na 4–12 tygodni. Zajęcia stacjonarne w Legionowie i online dla dzieci, młodzieży, dorosłych
             i firm.
           </p>
 
-          <div class="mt-6">
-            <a class="btn btn-primary" href="/oferta" data-track="cta_secondary" data-track-label="Zobacz ofertę">
+          <div class="flex flex-wrap gap-3">
+            <a class="btn btn-primary text-sm px-8 py-2.5 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35" href="/oferta" data-track="cta_secondary" data-track-label="Zobacz ofertę">
               Zobacz ofertę
             </a>
           </div>
 
-          <div class="mt-4 flex flex-wrap gap-1.5">
-            <a class="chip no-underline hover:border-slate-300 hover:text-slate-900 transition-colors duration-150" href="/oferta#dla-dzieci">Dla dzieci</a>
-            <a class="chip no-underline hover:border-slate-300 hover:text-slate-900 transition-colors duration-150" href="/oferta#dla-mlodziezy">Dla młodzieży</a>
-            <a class="chip no-underline hover:border-slate-300 hover:text-slate-900 transition-colors duration-150" href="/oferta#dla-doroslych">Dla dorosłych</a>
-            <a class="chip no-underline hover:border-slate-300 hover:text-slate-900 transition-colors duration-150" href="/oferta#dla-firm">Dla firm</a>
-            <a class="chip no-underline hover:border-slate-300 hover:text-slate-900 transition-colors duration-150" href="/oferta#matematyka">Matematyka</a>
+          <div class="flex flex-wrap gap-2">
+            <a class="chip no-underline" href="/oferta#dla-dzieci">Dla dzieci</a>
+            <a class="chip no-underline" href="/oferta#dla-mlodziezy">Dla młodzieży</a>
+            <a class="chip no-underline" href="/oferta#dla-doroslych">Dla dorosłych</a>
+            <a class="chip no-underline" href="/oferta#dla-firm">Dla firm</a>
+            <a class="chip no-underline" href="/oferta#matematyka">Matematyka</a>
           </div>
 
-          <ul class="mt-8 space-y-2 text-sm text-slate-600">
-            {
-              highlights.map((item) => (
-                <li class="flex items-center gap-2.5">
-                  <svg class="h-4 w-4 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span>{item}</span>
-                </li>
-              ))
-            }
-          </ul>
+          <div class="rounded-xl bg-white/60 backdrop-blur-sm border border-slate-200/60 p-5 shadow-sm">
+            <ul class="list-disc space-y-2 pl-5 text-sm text-slate-600">
+              {
+                highlights.map((item) => (
+                  <li>{item}</li>
+                ))
+              }
+            </ul>
+          </div>
         </div>
 
-        <div class="hidden lg:block">
-          <img
-            src="/images/hero.webp"
-            alt="Szkoła języków obcych i matematyki Lingua Legionowo"
-            loading="eager"
-            width="1055"
-            height="718"
-            decoding="sync"
-            fetchpriority="high"
-            class="w-full rounded-xl border border-slate-200/80 bg-white shadow-soft"
-          />
+        <div class="hidden lg:block relative">
+          <div class="absolute -inset-4 bg-gradient-to-br from-primary/10 via-primary/6 to-primary/3 rounded-[2rem] blur-3xl"></div>
+          <div class="relative group">
+            <img
+              src="/images/hero.webp"
+              alt="Szkoła języków obcych i matematyki Lingua Legionowo"
+              loading="eager"
+              width="1055"
+              height="718"
+              decoding="sync"
+              fetchpriority="high"
+              class="relative w-full rounded-xl border border-white/40 bg-white/80 backdrop-blur-sm shadow-xl shadow-slate-200/50 group-hover:shadow-2xl group-hover:-translate-y-0.5 transition-all duration-500"
+            />
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="py-8 lg:py-10 bg-slate-50/60">
+  <section class="section-muted py-12 lg:py-16">
     <div class="mx-auto w-full max-w-7xl px-6">
-      <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-        <div>
+      <div class="reveal flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+        <div class="max-w-2xl">
           <span class="kicker">Czego uczymy</span>
-          <h2 class="mt-2">Języki obce i matematyka w jednym miejscu</h2>
-          <p class="mt-2 max-w-2xl text-slate-600">
+          <h2 class="mt-2 text-2xl sm:text-3xl">Języki obce i matematyka w jednym miejscu</h2>
+          <p class="mt-2 text-slate-600">
             Uczymy w małych grupach i indywidualnie, stacjonarnie w Legionowie lub online.
           </p>
         </div>
-        <div class="flex items-center gap-3">
-          <div class="flex flex-wrap gap-1.5">
-            {subjectChips.map((subject) => <span class="chip">{subject}</span>)}
+        <div class="flex flex-wrap items-center gap-2.5">
+          <div class="flex flex-wrap gap-2">
+            {subjectChips.map((subject) => (
+              <span class="chip">{subject}</span>
+            ))}
           </div>
-          <a class="text-sm font-medium text-primary no-underline hover:underline whitespace-nowrap" href="/oferta">
+          <a class="text-sm font-semibold text-primary no-underline hover:underline decoration-2 underline-offset-4 whitespace-nowrap transition-all" href="/oferta">
             Zobacz ofertę →
           </a>
         </div>
@@ -206,17 +237,17 @@ const localBusinessSchema = {
     </div>
   </section>
 
-  <section class="py-8 lg:py-10">
+  <section class="py-12 lg:py-16">
     <div class="mx-auto w-full max-w-7xl px-6">
-      <div class="grid gap-4 md:grid-cols-3">
+      <div class="grid gap-5 md:grid-cols-3">
         {
-          proofPoints.map((item) => (
-            <div class="card p-5 text-center">
-              <div class="text-[10px] font-semibold uppercase tracking-wider text-primary">
+          proofPoints.map((item, index) => (
+            <div class={`card p-5 text-center reveal reveal-delay-${(index + 1) * 100}`} style={`animation-delay: ${(index + 1) * 150}ms;`}>
+              <div class="text-[10px] font-bold uppercase tracking-widest text-primary/80">
                 {item.label}
               </div>
-              <div class="mt-2 text-xl font-bold text-slate-900">{item.value}</div>
-              <div class="mt-1.5 text-sm text-slate-500">{item.note}</div>
+              <div class="mt-2 stat-value">{item.value}</div>
+              <div class="mt-1.5 text-sm text-slate-500 leading-relaxed">{item.note}</div>
             </div>
           ))
         }
@@ -226,48 +257,50 @@ const localBusinessSchema = {
 
   <TrustSection />
 
-  <section class="py-10 lg:py-14">
+  <section class="py-12 lg:py-16">
     <div class="mx-auto w-full max-w-7xl px-6">
-      <div class="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
-        <div>
-          <span class="kicker">Opinie</span>
-          <h2 class="mt-2">Co mówią kursanci</h2>
-          <p class="mt-2 max-w-3xl text-slate-600">
+      <div class="reveal flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+        <div class="max-w-3xl animate-slide-in-left">
+          <span class="kicker animate-fadeIn">Opinie</span>
+          <h2 class="mt-2 text-2xl sm:text-3xl">Co mówią kursanci</h2>
+          <p class="mt-2 text-slate-600">
             Krótkie opinie osób, które uczą się z nami stacjonarnie lub online.
           </p>
         </div>
-        <div class="shrink-0">
+        <div class="shrink-0 animate-slide-in-right">
           <a class="btn btn-secondary" href="/opinie">Zobacz wszystkie</a>
         </div>
       </div>
 
-      <div class="mt-6 grid gap-4 md:grid-cols-2">
-        {homeTestimonials.map((item) => (
-          <TestimonialCard testimonial={item} />
+      <div class="mt-8 grid gap-5 md:grid-cols-2">
+        {homeTestimonials.map((item, index) => (
+          <div class={`reveal reveal-delay-${(index + 1) * 100}`} style={`animation-delay: ${(index + 1) * 150}ms;`}>
+            <TestimonialCard testimonial={item} />
+          </div>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="py-10 lg:py-14 bg-slate-50/60">
+  <section class="section-muted py-12 lg:py-16">
     <div class="mx-auto w-full max-w-7xl px-6">
-      <div class="text-center">
+      <div class="reveal text-center max-w-2xl mx-auto animate-fadeIn">
         <span class="kicker">Proces</span>
-        <h2 class="mt-2">Jak pracujemy</h2>
-        <p class="mx-auto mt-2 max-w-2xl text-slate-600">
+        <h2 class="mt-2 text-2xl sm:text-3xl">Jak pracujemy</h2>
+        <p class="mt-2 text-slate-600">
           Niezależnie od wybranego trybu, otrzymujesz jasny plan nauki i wsparcie na każdym etapie.
         </p>
       </div>
 
-      <div class="mt-6 grid gap-4 lg:grid-cols-3">
+      <div class="mt-10 grid gap-5 lg:grid-cols-3">
         {
           steps.map((step, index) => (
-            <div class="card p-5 text-center">
-              <div class="mx-auto mb-4 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-semibold text-white">
+            <div class={`card p-5 text-center reveal reveal-delay-${(index + 1) * 100}`} style={`animation-delay: ${(index + 1) * 150}ms;`}>
+              <div class="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary-600 text-lg font-bold text-white shadow-md">
                 {index + 1}
               </div>
-              <h3 class="text-base font-semibold text-slate-900">{step.title}</h3>
-              <p class="mt-2 text-sm text-slate-600">{step.text}</p>
+              <h3 class="text-base font-bold text-slate-900">{step.title}</h3>
+              <p class="mt-2 text-sm text-slate-600 leading-relaxed">{step.text}</p>
             </div>
           ))
         }
@@ -275,53 +308,63 @@ const localBusinessSchema = {
     </div>
   </section>
 
-  <section class="py-8 lg:py-10">
+  <section class="py-12 lg:py-16">
     <div class="mx-auto w-full max-w-7xl px-6">
-      <div class="flex items-center justify-between gap-6 rounded-2xl border border-primary/20 bg-gradient-to-r from-primary/5 to-primary/10 p-6 lg:p-8">
-        <div class="flex items-center gap-4">
-          <span class="text-3xl" aria-hidden="true">🎁</span>
-          <div>
-            <p class="text-lg font-bold text-slate-900">Za polecenie nowego ucznia szkoły –</p>
-            <p class="text-xl font-bold text-primary">2 lekcje w prezencie!</p>
+      <div class="reveal relative overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/10 via-primary/[0.05] to-transparent p-6 lg:p-8">
+        <div class="relative flex flex-col items-center justify-between gap-6 lg:flex-row">
+          <div class="flex items-center gap-5">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/25 to-primary/10 text-3xl">
+              🎁
+            </div>
+            <div>
+              <p class="text-base font-semibold text-slate-900">Za polecenie nowego ucznia szkoły –</p>
+              <p class="text-xl font-bold bg-gradient-to-r from-primary to-primary-600 bg-clip-text text-transparent">2 lekcje w prezencie!</p>
+            </div>
           </div>
+          <a href="/cennik#polecenie" class="btn btn-primary shrink-0 text-sm px-7 py-2.5 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35">Dowiedz się więcej</a>
         </div>
-        <a href="/cennik#polecenie" class="btn btn-primary shrink-0 hidden sm:inline-flex">Dowiedz się więcej</a>
       </div>
     </div>
   </section>
 
-  <section class="py-10 lg:py-14">
+  <section class="py-12 lg:py-16">
     <div class="mx-auto w-full max-w-7xl px-6">
-      <div class="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
-        <div>
-          <span class="kicker">Oferta</span>
-          <h2 class="mt-2">Wybierz formę nauki dopasowaną do Ciebie</h2>
-          <p class="mt-2 max-w-2xl text-slate-600">
+      <div class="reveal flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+        <div class="max-w-2xl animate-slide-in-left">
+          <span class="kicker animate-fadeIn">Oferta</span>
+          <h2 class="mt-2 text-2xl sm:text-3xl">Wybierz formę nauki dopasowaną do Ciebie</h2>
+          <p class="mt-2 text-slate-600">
             Dwie główne ścieżki to zajęcia stacjonarne w Legionowie i lekcje online.
           </p>
         </div>
-        <div class="shrink-0">
+        <div class="shrink-0 animate-slide-in-right">
           <a class="btn btn-secondary" href="/oferta">Zobacz pełną ofertę</a>
         </div>
       </div>
 
-      <div class="mt-6 grid gap-4 md:grid-cols-2">
+      <div class="mt-8 grid gap-5 md:grid-cols-2">
         {
-          offerCards.map((offerCard) => (
-            <a
-              class={`card p-6 no-underline group ${offerCard.featured ? "ring-1 ring-primary/20" : ""}`}
-              href={offerCard.href}
-            >
-              {offerCard.featured && <span class="inline-block rounded-full px-2.5 py-0.5 text-[10px] font-semibold mb-3 bg-primary/10 text-primary">Polecane</span>}
-              <h3 class="text-base font-semibold text-slate-900">{offerCard.title}</h3>
-              <p class="mt-2 text-sm text-slate-600">{offerCard.text}</p>
-              <span class="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary group-hover:gap-2.5 transition-all duration-200">
-                Poznaj szczegóły
-                <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </span>
-            </a>
+          offerCards.map((offerCard, index) => (
+            <div class={`reveal reveal-delay-${(index + 1) * 100}`} style={`animation-delay: ${(index + 1) * 150}ms;`}>
+              <a
+                class={`card p-6 no-underline group relative overflow-hidden ${offerCard.featured ? "ring-2 ring-primary/40 shadow-xl shadow-primary/10" : ""}`}
+                href={offerCard.href}
+              >
+                {offerCard.featured && (
+                  <span class="badge badge-primary absolute top-3 right-3 shadow-md">Polecane</span>
+                )}
+                <div class="relative z-10">
+                  <h3 class="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors duration-200">{offerCard.title}</h3>
+                  <p class="mt-2 text-slate-600 leading-relaxed">{offerCard.text}</p>
+                  <span class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary group-hover:gap-3 transition-all duration-200">
+                    Poznaj szczegóły
+                    <svg class="h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            </div>
           ))
         }
       </div>
@@ -334,4 +377,37 @@ const localBusinessSchema = {
     note="Odpowiadamy najszybciej, jak to możliwe."
     secondaryLabel={null}
   />
+
+  <script is:inline>
+    // Scroll reveal animation
+    document.addEventListener('DOMContentLoaded', () => {
+      const reveals = document.querySelectorAll('.reveal');
+      
+      const revealOnScroll = () => {
+        const windowHeight = window.innerHeight;
+        const elementVisible = 100;
+        
+        reveals.forEach((reveal) => {
+          const elementTop = reveal.getBoundingClientRect().top;
+          
+          if (elementTop < windowHeight - elementVisible) {
+            reveal.classList.add('active');
+          }
+        });
+      };
+      
+      // Initial check
+      revealOnScroll();
+      
+      // Add scroll event listener
+      window.addEventListener('scroll', revealOnScroll);
+      
+      // Add resize event listener for better performance
+      let resizeTimeout;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(revealOnScroll, 100);
+      });
+    });
+  </script>
 </MainLayout>

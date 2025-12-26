@@ -33,23 +33,23 @@ const socialLinks = [
 ].filter((link) => link.url);
 ---
 
-<footer class="border-t border-slate-200/80 bg-slate-50/60">
-  <div class="mx-auto w-full max-w-7xl px-6 py-8">
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+<footer class="border-t border-slate-200/60 bg-gradient-to-b from-slate-50/90 to-slate-100/70 backdrop-blur-sm">
+  <div class="mx-auto w-full max-w-7xl px-6 py-12">
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
       <div class="sm:col-span-2 lg:col-span-1">
         <Logo />
-        <p class="mt-2 text-xs text-slate-500 leading-relaxed max-w-[200px]">
+        <p class="mt-4 text-sm text-slate-600 leading-relaxed max-w-[240px]">
           Szkoła języków obcych i matematyki w Legionowie.
         </p>
         {
           socialLinks.length > 0 && (
-            <div class="mt-3 flex gap-2">
+            <div class="mt-5 flex gap-2.5">
               {socialLinks.map((link) => (
                 <a
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="flex items-center justify-center w-10 h-10 -m-2 text-slate-500 transition hover:text-primary"
+                  class="flex items-center justify-center h-11 w-11 -m-2 rounded-xl text-slate-500 transition-all duration-200 hover:bg-primary/10 hover:text-primary hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-0.5"
                   aria-label={`${BRAND_NAME} na ${link.name}`}
                 >
                   <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -63,57 +63,57 @@ const socialLinks = [
       </div>
 
       <nav aria-labelledby="footer-offer-heading">
-        <h2 id="footer-offer-heading" class="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Oferta</h2>
-        <ul class="mt-2 flex flex-col gap-1.5 text-xs">
-          <li><a class={`${linkMuted} no-underline`} href="/angielski-stacjonarnie">Angielski stacjonarnie</a></li>
-          <li><a class={`${linkMuted} no-underline`} href="/angielski-online">Angielski online</a></li>
-          <li><a class={`${linkMuted} no-underline`} href="/lekcje-indywidualne">Lekcje indywidualne</a></li>
-          <li><a class={`${linkMuted} no-underline`} href="/kursy-grupowe">Kursy grupowe</a></li>
+        <h2 id="footer-offer-heading" class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Oferta</h2>
+        <ul class="mt-4 flex flex-col gap-2.5 text-sm">
+          <li><a class={`${linkMuted} no-underline hover:text-primary transition-colors duration-200`} href="/angielski-stacjonarnie">Angielski stacjonarnie</a></li>
+          <li><a class={`${linkMuted} no-underline hover:text-primary transition-colors duration-200`} href="/angielski-online">Angielski online</a></li>
+          <li><a class={`${linkMuted} no-underline hover:text-primary transition-colors duration-200`} href="/lekcje-indywidualne">Lekcje indywidualne</a></li>
+          <li><a class={`${linkMuted} no-underline hover:text-primary transition-colors duration-200`} href="/kursy-grupowe">Kursy grupowe</a></li>
         </ul>
       </nav>
 
       <nav aria-labelledby="footer-info-heading">
-        <h2 id="footer-info-heading" class="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Informacje</h2>
-        <ul class="mt-2 flex flex-col gap-1.5 text-xs">
-          <li><a class={`${linkMuted} no-underline`} href="/cennik">Cennik</a></li>
-          <li><a class={`${linkMuted} no-underline`} href="/opinie">Opinie</a></li>
-          <li><a class={`${linkMuted} no-underline`} href="/o-nas">O nas</a></li>
-          <li><a class={`${linkMuted} no-underline`} href="/blog">Blog</a></li>
-          <li><a class={`${linkMuted} no-underline`} href="/kontakt">Kontakt</a></li>
+        <h2 id="footer-info-heading" class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Informacje</h2>
+        <ul class="mt-4 flex flex-col gap-2.5 text-sm">
+          <li><a class={`${linkMuted} no-underline hover:text-primary transition-colors duration-200`} href="/cennik">Cennik</a></li>
+          <li><a class={`${linkMuted} no-underline hover:text-primary transition-colors duration-200`} href="/opinie">Opinie</a></li>
+          <li><a class={`${linkMuted} no-underline hover:text-primary transition-colors duration-200`} href="/o-nas">O nas</a></li>
+          <li><a class={`${linkMuted} no-underline hover:text-primary transition-colors duration-200`} href="/blog">Blog</a></li>
+          <li><a class={`${linkMuted} no-underline hover:text-primary transition-colors duration-200`} href="/kontakt">Kontakt</a></li>
         </ul>
       </nav>
 
       <div>
-        <h2 class="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Uczymy</h2>
-        <div class="mt-2 flex flex-wrap gap-1">
-          {subjects.map((subject) => <span class="chip">{subject}</span>)}
+        <h2 class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Uczymy</h2>
+        <div class="mt-4 flex flex-wrap gap-2">
+          {subjects.map((subject) => <span class="chip text-xs">{subject}</span>)}
         </div>
       </div>
 
       <address class="not-italic">
-        <h2 class="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Kontakt</h2>
-        <div class="mt-2 flex flex-col gap-1 text-xs">
+        <h2 class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Kontakt</h2>
+        <div class="mt-4 flex flex-col gap-2.5 text-sm">
           {
             hasEmail ? (
-              <a class={`${linkMuted} no-underline`} href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+              <a class={`${linkMuted} no-underline hover:text-primary transition-colors duration-200`} href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
             ) : (
-              <a class={`${linkMuted} no-underline`} href={contactFormHref}>Formularz kontaktowy</a>
+              <a class={`${linkMuted} no-underline hover:text-primary transition-colors duration-200`} href={contactFormHref}>Formularz kontaktowy</a>
             )
           }
           {
             hasPhone && (
-              <a class={`${linkMuted} no-underline`} href={`tel:${CONTACT_PHONE}`}>{CONTACT_PHONE}</a>
+              <a class={`${linkMuted} no-underline hover:text-primary transition-colors duration-200`} href={`tel:${CONTACT_PHONE}`}>{CONTACT_PHONE}</a>
             )
           }
-          {addressLine && <span class="text-slate-500">{addressLine}</span>}
-          {hasHours && <span class="text-slate-500">{BUSINESS.openingHours}</span>}
+          {addressLine && <span class="text-slate-600">{addressLine}</span>}
+          {hasHours && <span class="text-slate-600">{BUSINESS.openingHours}</span>}
         </div>
       </address>
     </div>
 
-    <div class="mt-6 flex flex-col items-center justify-between gap-2 border-t border-slate-200/60 pt-4 text-[10px] text-slate-500 sm:flex-row">
-      <p>© {year} {BRAND_NAME}</p>
-      <a class="text-slate-500 no-underline transition-colors duration-150 hover:text-slate-600 py-2 -my-1 inline-block" href="/privacy">Polityka prywatności</a>
+    <div class="mt-10 flex flex-col items-center justify-between gap-3 border-t border-slate-200/60 pt-6 text-xs text-slate-500 sm:flex-row">
+      <p class="font-semibold">© {year} {BRAND_NAME}</p>
+      <a class="text-slate-500 no-underline transition-colors duration-200 hover:text-primary py-2 -my-1 inline-block font-semibold" href="/privacy">Polityka prywatności</a>
     </div>
   </div>
 </footer>

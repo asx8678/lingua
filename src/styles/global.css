@@ -12,7 +12,7 @@
   }
 
   .section-muted {
-    @apply bg-slate-50/60;
+    @apply bg-gradient-to-b from-slate-50/80 to-slate-100/60;
   }
 
   .section-hero {
@@ -20,39 +20,77 @@
   }
 
   .hero-bg {
-    @apply bg-hero-gradient;
+    @apply bg-gradient-to-br from-slate-50 via-blue-50/30 to-white;
   }
 
   .kicker {
-    @apply text-base font-semibold uppercase tracking-wider text-primary;
+    @apply text-sm font-bold uppercase tracking-widest text-primary/90;
   }
 
   .card {
-    @apply rounded-xl border border-slate-200/80 bg-white transition-all duration-200 hover:shadow-soft hover:border-slate-200;
+    @apply relative overflow-hidden rounded-2xl border border-white/20 bg-white/60 backdrop-blur-xl transition-all duration-300 hover:shadow-soft-xl hover:-translate-y-1 hover:border-primary/30;
+  }
+
+  .card::before {
+    @apply absolute inset-0 bg-gradient-to-br from-white/40 via-white/20 to-transparent opacity-0 transition-opacity duration-300;
+    content: "";
+  }
+
+  .card::after {
+    @apply absolute -inset-1 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 blur-xl transition-opacity duration-300;
+    content: "";
+  }
+
+  .card:hover::before {
+    @apply opacity-100;
+  }
+
+  .card:hover::after {
+    @apply opacity-100;
   }
 
   .chip {
-    @apply inline-flex items-center rounded-full border border-slate-200/80 bg-white px-3 py-1 text-xs font-medium text-slate-600;
+    @apply inline-flex items-center rounded-full border border-slate-200/60 bg-white/60 backdrop-blur-sm px-3 py-1.5 text-xs font-semibold text-slate-600 shadow-sm transition-all duration-200 hover:border-primary/30 hover:bg-primary/10 hover:text-primary hover:shadow-md hover:-translate-y-0.5;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium transition-colors duration-150;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold transition-all duration-200;
   }
 
   .btn-primary {
-    @apply bg-primary text-white hover:bg-primary-600;
+    @apply bg-gradient-to-br from-primary to-primary-600 text-white shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35 hover:-translate-y-0.5 active:translate-y-0 active:scale-95;
   }
 
   .btn-secondary {
-    @apply border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900;
+    @apply border border-slate-200/80 bg-white/60 backdrop-blur-sm text-slate-700 shadow-sm hover:border-primary/30 hover:bg-primary/5 hover:text-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:scale-95;
   }
 
   .btn-ghost {
-    @apply text-slate-600 hover:bg-slate-100 hover:text-slate-900;
+    @apply text-slate-600 hover:bg-slate-100/80 hover:text-slate-900;
   }
 
   .link-primary {
-    @apply font-semibold text-primary no-underline hover:underline;
+    @apply font-semibold text-primary no-underline hover:underline decoration-primary/50 underline-offset-2;
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider;
+  }
+
+  .badge-primary {
+    @apply bg-primary/10 text-primary;
+  }
+
+  .badge-muted {
+    @apply bg-slate-100 text-slate-600;
+  }
+
+  .feature-icon {
+    @apply flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 text-primary shadow-sm;
+  }
+
+  .stat-value {
+    @apply bg-gradient-to-br from-slate-900 to-slate-700 bg-clip-text text-3xl font-bold text-transparent;
   }
 }
 
@@ -73,15 +111,15 @@
   }
 
   h1 {
-    @apply text-3xl sm:text-4xl lg:text-[2.75rem] leading-[1.15] font-bold;
+    @apply text-3xl sm:text-4xl lg:text-5xl leading-[1.15] font-bold;
   }
 
   h2 {
-    @apply text-2xl sm:text-[1.75rem] leading-tight font-bold;
+    @apply text-2xl sm:text-3xl leading-tight font-bold;
   }
 
   h3 {
-    @apply text-lg leading-snug font-semibold;
+    @apply text-lg leading-snug font-bold;
   }
 
   p {
@@ -112,5 +150,92 @@
 
   :focus-visible {
     @apply outline-none ring-2 ring-primary ring-offset-2;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-50;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/40 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/60;
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    @apply bg-primary/80;
+  }
+
+  /* Animated gradient backgrounds */
+  .animated-gradient {
+    background-size: 400% 400%;
+    animation: gradient-shift 8s ease infinite;
+  }
+
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Staggered animation delays */
+  .stagger-1 {
+    animation-delay: 100ms;
+  }
+
+  .stagger-2 {
+    animation-delay: 200ms;
+  }
+
+  .stagger-3 {
+    animation-delay: 300ms;
+  }
+
+  .stagger-4 {
+    animation-delay: 400ms;
+  }
+
+  .stagger-5 {
+    animation-delay: 500ms;
+  }
+}
+
+/* Scroll reveal animations */
+@layer utilities {
+  .reveal {
+    @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+  }
+
+  .reveal.active {
+    @apply opacity-100 translate-y-0;
+  }
+
+  .reveal-delay-100 {
+    @apply transition-delay-100;
+  }
+
+  .reveal-delay-200 {
+    @apply transition-delay-200;
+  }
+
+  .reveal-delay-300 {
+    @apply transition-delay-300;
+  }
+
+  .reveal-delay-400 {
+    @apply transition-delay-400;
   }
 }
