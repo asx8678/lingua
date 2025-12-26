@@ -197,7 +197,7 @@ const { bankUrl = "/question-bank-1200.json" } = Astro.props;
     </div>
 
     <div class="ll-quiz-body">
-      <p class="ll-q" id="llQuestionText"></p>
+      <p class="ll-q" id="llQuestionText" tabindex="-1"></p>
       <form id="llOptions" class="ll-options" aria-labelledby="llQuestionText"></form>
       <div id="llFeedback" class="ll-feedback" role="status" aria-live="polite" hidden></div>
     </div>
@@ -218,7 +218,7 @@ const { bankUrl = "/question-bank-1200.json" } = Astro.props;
 
   <!-- RESULT -->
   <section class="ll-card" data-step="result" hidden>
-    <h2>Twój wynik</h2>
+    <h2 id="llResultHeader" tabindex="-1">Twój wynik</h2>
 
     <div class="ll-badge" aria-label="Wynik testu">
       <strong id="llResultLevel">B2</strong>
@@ -748,6 +748,7 @@ function modeLabel(mode){
   const resLevel = root.querySelector("#llResultLevel");
   const resScore = root.querySelector("#llResultScore");
   const resDesc  = root.querySelector("#llResultDesc");
+  const resultHeader = root.querySelector("#llResultHeader");
 
   const kpiCorrectWrong = root.querySelector("#llKpiCorrectWrong");
   const kpiMeta = root.querySelector("#llKpiMeta");
@@ -900,6 +901,7 @@ function modeLabel(mode){
     updateCounters();
 
     qText.textContent = q.text;
+    qText.focus();
 
     optionsForm.innerHTML = "";
     clearFeedback();
@@ -1339,6 +1341,7 @@ if (advancedStats){
     computeResult();
     showStep("result");
     renderResult();
+    resultHeader?.focus();
   });
 
   skipBtn.addEventListener("click", () => {
