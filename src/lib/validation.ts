@@ -59,7 +59,7 @@ export const ERROR_MESSAGES = {
 
 // Validation helper functions
 export function isValidEmail(email: string): boolean {
-  return EMAIL_REGEX.test(email) && email.length <= VALIDATION_LIMITS.email.max;
+  return email.length <= VALIDATION_LIMITS.email.max && EMAIL_REGEX.test(email);
 }
 
 export function isValidPhone(phone: string): boolean {
