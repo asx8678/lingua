@@ -362,16 +362,32 @@ const { bankUrl = "/question-bank-1200.json" } = Astro.props;
 
 
 <script is:inline define:vars={{ CTA_PRIMARY_HREF, CTA_PRIMARY_LABEL_SHORT }}>
-window.__LL_LOAD_BANK__ = async (rootEl) => {
-  const QUESTION_BANK_URL = (rootEl && rootEl.dataset && rootEl.dataset.questionBankUrl) ? rootEl.dataset.questionBankUrl : "";
-  if (!QUESTION_BANK_URL){ throw new Error("Brak URL do banku pytań. Ustaw atrybut data-question-bank-url na głównym elemencie testu."); }
-  // Use default fetch cache (respects server headers) to allow caching of large question bank
-  const res = await fetch(QUESTION_BANK_URL);
-  if (!res.ok) throw new Error('HTTP ' + res.status);
-  const data = await res.json();
-  if (!Array.isArray(data)) throw new Error('Bank pytań nie jest tablicą');
-  return data;
-};
+window.__LL_LOAD_BANK__ = (function() {
+  const cache = new Map();
+  return async (rootEl) => {
+    const QUESTION_BANK_URL = (rootEl && rootEl.dataset && rootEl.dataset.questionBankUrl) ? rootEl.dataset.questionBankUrl : "";
+    if (!QUESTION_BANK_URL){ throw new Error("Brak URL do banku pytań. Ustaw atrybut data-question-bank-url na głównym elemencie testu."); }
+
+    if (cache.has(QUESTION_BANK_URL)) return cache.get(QUESTION_BANK_URL);
+
+    // Use default fetch cache (respects server headers) to allow caching of large question bank
+    const promise = (async () => {
+      try {
+        const res = await fetch(QUESTION_BANK_URL);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        if (!Array.isArray(data)) throw new Error('Bank pytań nie jest tablicą');
+        return data;
+      } catch (e) {
+        cache.delete(QUESTION_BANK_URL); // Allow retry on failure
+        throw e;
+      }
+    })();
+
+    cache.set(QUESTION_BANK_URL, promise);
+    return promise;
+  };
+})();
 (function(){
   const __ll_init__ = () => {
   // =========================
@@ -1260,6 +1276,11 @@ if (advancedStats){
   }
 
   updatePoolInfo();
+
+  // PREFETCH OPTIMIZATION: Start fetching immediately in background
+  window.__LL_LOAD_BANK__(root).catch(err => {
+     console.warn("Prefetch failed (will retry on start):", err);
+  });
 
   async function startTest(){
     if (startBtn){
