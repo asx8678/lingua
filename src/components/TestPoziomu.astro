@@ -109,7 +109,7 @@ const { bankUrl = "/question-bank-1200.json" } = Astro.props;
     <div class="ll-intro-settings">
       <div class="ll-intro-option">
         <div class="ll-option-header">
-          <span class="ll-intro-label">Zakres poziomów</span>
+          <label for="llRangeSelect" class="ll-intro-label">Zakres poziomów</label>
           <span class="ll-option-hint">Nie wiesz? Zostaw A1–C2</span>
         </div>
         <select id="llRangeSelect">
@@ -124,7 +124,7 @@ const { bankUrl = "/question-bank-1200.json" } = Astro.props;
 
       <div class="ll-intro-option">
         <div class="ll-option-header">
-          <span class="ll-intro-label">Liczba pytań</span>
+          <label for="llCountSelect" class="ll-intro-label">Liczba pytań</label>
           <span class="ll-option-hint">Więcej = dokładniej</span>
         </div>
         <select id="llCountSelect">
@@ -137,7 +137,7 @@ const { bankUrl = "/question-bank-1200.json" } = Astro.props;
 
       <div class="ll-intro-option">
         <div class="ll-option-header">
-          <span class="ll-intro-label">Tryb testu</span>
+          <label for="llOrderSelect" class="ll-intro-label">Tryb testu</label>
           <span class="ll-option-hint">Adaptacyjny = najlepszy</span>
         </div>
         <select id="llOrderSelect">
