@@ -365,7 +365,8 @@ const { bankUrl = "/question-bank-1200.json" } = Astro.props;
 window.__LL_LOAD_BANK__ = async (rootEl) => {
   const QUESTION_BANK_URL = (rootEl && rootEl.dataset && rootEl.dataset.questionBankUrl) ? rootEl.dataset.questionBankUrl : "";
   if (!QUESTION_BANK_URL){ throw new Error("Brak URL do banku pytań. Ustaw atrybut data-question-bank-url na głównym elemencie testu."); }
-  const res = await fetch(QUESTION_BANK_URL, { cache: 'no-store' });
+  // Use default fetch cache (respects server headers) to allow caching of large question bank
+  const res = await fetch(QUESTION_BANK_URL);
   if (!res.ok) throw new Error('HTTP ' + res.status);
   const data = await res.json();
   if (!Array.isArray(data)) throw new Error('Bank pytań nie jest tablicą');
