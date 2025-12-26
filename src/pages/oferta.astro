@@ -28,29 +28,6 @@ const description =
 const otherOffers = [matematyka, polski, hiszpanski, niemiecki, francuski, rosyjski, szwedzki];
 const enrollmentMessage = getEnrollmentMessage();
 
-const segments = [
-  {
-    id: "dla-dzieci",
-    title: "Dla dzieci",
-    text: "Spokojne tempo, budowanie podstaw i wsparcie w szkolnych tematach.",
-  },
-  {
-    id: "dla-mlodziezy",
-    title: "Dla młodzieży",
-    text: "Przygotowanie do egzaminów, regularny rytm i praktyka mówienia.",
-  },
-  {
-    id: "dla-doroslych",
-    title: "Dla dorosłych",
-    text: "Komunikacja w pracy i podróży, elastyczne godziny i szybki postęp.",
-  },
-  {
-    id: "dla-firm",
-    title: "Dla firm",
-    text: "Język biznesowy i zajęcia dla zespołów z jasno określonym celem.",
-  },
-];
-
 const breadcrumbSchema = generateBreadcrumbSchema([
   { name: "Strona główna", url: "/" },
   { name: "Oferta" },
@@ -69,10 +46,10 @@ const notice = "rounded-xl border border-primary/10 bg-primary/5 p-4 text-primar
     <div class="container-site">
       <div class="max-w-3xl">
         <span class="kicker">Oferta</span>
-        <h1 class="mt-6">Wybierz formę nauki dopasowaną do Ciebie</h1>
+        <h1 class="mt-6">Zajęcia dopasowane do wieku i celu</h1>
         <p class="mt-6 text-lg">
-          Uczymy stacjonarnie w Legionowie i online. Poniżej wybierzesz główny kierunek, a resztę
-          dopasujemy do Twojego poziomu i celu.
+          Zaczynamy od krótkiej diagnozy, a następnie dobieramy format i tempo pracy. Wybierz grupę,
+          a zaproponujemy najlepszy plan.
         </p>
         <div class="mt-8">
           <a class="btn btn-primary" href="/cennik">Zobacz cennik</a>
@@ -80,25 +57,6 @@ const notice = "rounded-xl border border-primary/10 bg-primary/5 p-4 text-primar
         <div class={`mt-6 ${notice} text-sm`}>
           {enrollmentMessage}
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container-site">
-      <span class="kicker">Dla kogo</span>
-      <h2 class="mt-4">Zajęcia dopasowane do wieku i celu</h2>
-      <p class="mt-4 max-w-3xl text-slate-600">
-        Zaczynamy od krótkiej diagnozy, a następnie dobieramy format i tempo pracy. Wybierz grupę,
-        a zaproponujemy najlepszy plan.
-      </p>
-      <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {segments.map((segment) => (
-          <div class="card p-6 scroll-mt-28" id={segment.id}>
-            <h3 class="text-base font-bold text-slate-900">{segment.title}</h3>
-            <p class="mt-3 text-sm text-slate-600">{segment.text}</p>
-          </div>
-        ))}
       </div>
     </div>
   </section>
