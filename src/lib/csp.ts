@@ -16,16 +16,27 @@ export function generateNonce(): string {
  * Build CSP header value with nonce support
  */
 export function buildCSPHeader(nonce: string): string {
-  return [
+  const isProd = import.meta.env.PROD;
+
+  const policy = [
     "default-src 'self'",
+    "base-uri 'self'",
     `script-src 'self' 'nonce-${nonce}' https://www.googletagmanager.com https://www.google-analytics.com`,
     `style-src 'self' 'unsafe-inline'`,
     "img-src 'self' data: https:",
     "font-src 'self'",
+    "object-src 'none'",
+    "form-action 'self'",
     "connect-src 'self' https://www.google-analytics.com",
     "frame-src 'self' https://www.google.com https://maps.google.com",
     "frame-ancestors 'none'",
-  ].join("; ");
+  ];
+
+  if (isProd) {
+    policy.push("upgrade-insecure-requests");
+  }
+
+  return policy.join("; ");
 }
 
 /**
