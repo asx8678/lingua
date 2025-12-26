@@ -28,25 +28,7 @@
   }
 
   .card {
-    @apply relative overflow-hidden rounded-2xl border border-white/20 bg-white/60 backdrop-blur-xl transition-all duration-300 hover:shadow-soft-xl hover:-translate-y-1 hover:border-primary/30;
-  }
-
-  .card::before {
-    @apply absolute inset-0 bg-gradient-to-br from-white/40 via-white/20 to-transparent opacity-0 transition-opacity duration-300;
-    content: "";
-  }
-
-  .card::after {
-    @apply absolute -inset-1 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 blur-xl transition-opacity duration-300;
-    content: "";
-  }
-
-  .card:hover::before {
-    @apply opacity-100;
-  }
-
-  .card:hover::after {
-    @apply opacity-100;
+    @apply relative rounded-2xl border border-slate-200/80 bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-primary/30;
   }
 
   .chip {

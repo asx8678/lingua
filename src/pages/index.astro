@@ -342,18 +342,20 @@ const localBusinessSchema = {
         </div>
       </div>
 
-      <div class="mt-8 grid gap-5 md:grid-cols-2">
+      <div class="mt-8 grid gap-5 md:grid-cols-2 items-start">
         {
           offerCards.map((offerCard, index) => (
             <div class={`reveal reveal-delay-${(index + 1) * 100}`} style={`animation-delay: ${(index + 1) * 150}ms;`}>
               <a
-                class={`card p-6 no-underline group relative overflow-hidden ${offerCard.featured ? "ring-2 ring-primary/40 shadow-xl shadow-primary/10" : ""}`}
+                class={`card p-6 no-underline group relative overflow-hidden block ${offerCard.featured ? "bg-gradient-to-br from-primary/[0.08] to-transparent shadow-lg shadow-primary/10" : ""}`}
                 href={offerCard.href}
               >
-                {offerCard.featured && (
-                  <span class="badge badge-primary absolute top-3 right-3 shadow-md">Polecane</span>
-                )}
                 <div class="relative z-10">
+                  {offerCard.featured && (
+                    <div class="flex items-center gap-2 mb-2">
+                      <span class="text-xs font-bold uppercase tracking-wider text-primary">✓ Polecane</span>
+                    </div>
+                  )}
                   <h3 class="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors duration-200">{offerCard.title}</h3>
                   <p class="mt-2 text-slate-600 leading-relaxed">{offerCard.text}</p>
                   <span class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary group-hover:gap-3 transition-all duration-200">
