@@ -381,35 +381,31 @@ const localBusinessSchema = {
   />
 
   <script is:inline>
-    // Scroll reveal animation
+    // Scroll reveal animation using IntersectionObserver
     document.addEventListener('DOMContentLoaded', () => {
       const reveals = document.querySelectorAll('.reveal');
-      
-      const revealOnScroll = () => {
-        const windowHeight = window.innerHeight;
-        const elementVisible = 100;
-        
-        reveals.forEach((reveal) => {
-          const elementTop = reveal.getBoundingClientRect().top;
-          
-          if (elementTop < windowHeight - elementVisible) {
-            reveal.classList.add('active');
-          }
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          root: null,
+          threshold: 0.1,
+          rootMargin: "0px 0px -50px 0px" // Trigger when element is slightly up from bottom
         });
-      };
-      
-      // Initial check
-      revealOnScroll();
-      
-      // Add scroll event listener
-      window.addEventListener('scroll', revealOnScroll);
-      
-      // Add resize event listener for better performance
-      let resizeTimeout;
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(revealOnScroll, 100);
-      });
+
+        reveals.forEach((reveal) => {
+          observer.observe(reveal);
+        });
+      } else {
+        // Fallback for older browsers
+        reveals.forEach((reveal) => reveal.classList.add('active'));
+      }
     });
   </script>
 </MainLayout>
