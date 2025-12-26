@@ -131,15 +131,15 @@ const breadcrumbSchema = generateBreadcrumbSchema([
                 <div class="mt-1.5 flex flex-wrap gap-1.5">
                   <label class="cursor-pointer">
                     <input class="sr-only peer" type="radio" name="topic" value="Angielski" required />
-                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">Angielski</span>
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2">Angielski</span>
                   </label>
                   <label class="cursor-pointer">
                     <input class="sr-only peer" type="radio" name="topic" value="Inny język" required />
-                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">Inny język</span>
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2">Inny język</span>
                   </label>
                   <label class="cursor-pointer">
                     <input class="sr-only peer" type="radio" name="topic" value="Matematyka" required />
-                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">Matematyka</span>
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2">Matematyka</span>
                   </label>
                 </div>
                 <p id="topic-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
@@ -152,7 +152,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
                     {otherLanguages.map((language) => (
                       <label class="cursor-pointer">
                         <input class="sr-only peer" type="radio" name="language" value={language} />
-                        <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">{language}</span>
+                        <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2">{language}</span>
                       </label>
                     ))}
                   </div>
@@ -167,19 +167,19 @@ const breadcrumbSchema = generateBreadcrumbSchema([
                 <div class="mt-1.5 flex flex-wrap gap-1.5">
                   <label class="cursor-pointer">
                     <input class="sr-only peer" type="radio" name="audience" value="Dziecko" required />
-                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">Dziecko</span>
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2">Dziecko</span>
                   </label>
                   <label class="cursor-pointer">
                     <input class="sr-only peer" type="radio" name="audience" value="Nastolatek" required />
-                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">Nastolatek</span>
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2">Nastolatek</span>
                   </label>
                   <label class="cursor-pointer">
                     <input class="sr-only peer" type="radio" name="audience" value="Dorosły" required />
-                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">Dorosły</span>
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2">Dorosły</span>
                   </label>
                   <label class="cursor-pointer">
                     <input class="sr-only peer" type="radio" name="audience" value="Firma" required />
-                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">Firma</span>
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2">Firma</span>
                   </label>
                 </div>
                 <p id="audience-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
@@ -190,11 +190,11 @@ const breadcrumbSchema = generateBreadcrumbSchema([
                 <div class="mt-1.5 flex flex-wrap gap-1.5">
                   <label class="cursor-pointer">
                     <input class="sr-only peer" type="radio" name="mode" value="Stacjonarnie" required />
-                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">Stacjonarnie</span>
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2">Stacjonarnie</span>
                   </label>
                   <label class="cursor-pointer">
                     <input class="sr-only peer" type="radio" name="mode" value="Online" required />
-                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">Online</span>
+                    <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2">Online</span>
                   </label>
                 </div>
                 <p id="mode-error" class="mt-1 text-xs text-rose-600" aria-live="polite"></p>
