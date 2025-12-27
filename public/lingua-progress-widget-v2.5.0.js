@@ -2123,7 +2123,7 @@ if (state.auto && !state.userInteracted && !state.autoDone) {
       if (ctx.setLineDash && samples && samples.length && endIdx < sampleN) {
         ctx.save();
         ctx.setLineDash([5, 9]);
-        ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.22)' : 'rgba(17,24,39,0.18)';
+        ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.30)' : 'rgba(17,24,39,0.25)';
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.moveTo(rocketPos.x, rocketPos.y);
