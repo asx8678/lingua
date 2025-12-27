@@ -1,7 +1,11 @@
 import { teachers } from "./teachers";
 
-export const taughtLanguages = Array.from(
+const allSubjects = Array.from(
   new Set(teachers.flatMap((teacher) => teacher.languages))
-).sort((a, b) => a.localeCompare(b, "pl"));
+);
 
-export const subjects = [...taughtLanguages, "Matematyka"];
+export const taughtLanguages = allSubjects
+  .filter((subject) => subject !== "Matematyka")
+  .sort((a, b) => a.localeCompare(b, "pl"));
+
+export const subjects = taughtLanguages;
