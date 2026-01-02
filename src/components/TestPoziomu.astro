@@ -328,7 +328,16 @@ const { bankUrl = "/question-bank-1200.json" } = Astro.props;
 
       <div class="ll-spacer"></div>
 
-        <button class="ll-btn" type="submit">Wyślij wynik</button>
+        <button class="ll-btn" type="submit" id="llLeadSubmitBtn">
+          <span id="llLeadSubmitText">Wyślij wynik</span>
+          <span id="llLeadSubmitLoading" class="hidden items-center gap-2 justify-center">
+            <svg class="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Wysyłanie…
+          </span>
+        </button>
         <p class="ll-status" id="llLeadStatus" role="status" aria-live="polite"></p>
       </form>
     </div>
@@ -779,6 +788,9 @@ function modeLabel(mode){
 
   const leadForm = root.querySelector("#llLeadForm");
   const leadStatus = root.querySelector("#llLeadStatus");
+  const leadSubmitBtn = root.querySelector("#llLeadSubmitBtn");
+  const leadSubmitText = root.querySelector("#llLeadSubmitText");
+  const leadSubmitLoading = root.querySelector("#llLeadSubmitLoading");
   const leadSection = root.querySelector("[data-lead-section]");
   const shareBtn = root.querySelector("#llShareBtn");
 
@@ -1442,6 +1454,15 @@ if (advancedStats){
       return;
     }
 
+    if (leadSubmitBtn){
+      leadSubmitBtn.disabled = true;
+      if (leadSubmitText) leadSubmitText.classList.add("hidden");
+      if (leadSubmitLoading) {
+        leadSubmitLoading.classList.remove("hidden");
+        leadSubmitLoading.classList.add("inline-flex");
+      }
+    }
+
     try{
       leadStatus.textContent = "Wysyłanie…";
       const res = await fetch(LEAD_WEBHOOK_URL, {
@@ -1452,6 +1473,15 @@ if (advancedStats){
       if (!res.ok) throw new Error("HTTP " + res.status);
 
       leadStatus.textContent = "Gotowe. Wynik został wysłany (sprawdź też folder Spam).";
+      if (leadSubmitBtn) leadSubmitBtn.disabled = true;
+      if (leadSubmitText) {
+        leadSubmitText.textContent = "Wysłano";
+        leadSubmitText.classList.remove("hidden");
+      }
+      if (leadSubmitLoading) {
+        leadSubmitLoading.classList.add("hidden");
+        leadSubmitLoading.classList.remove("inline-flex");
+      }
 
       if (typeof window.gtag === "function"){
         window.gtag("event", "placement_test_email_submit", { level: payload.level_strict, score_percent: payload.percent, range: payload.range });
@@ -1459,6 +1489,15 @@ if (advancedStats){
     } catch(_err){
       leadStatus.classList.add("is-error");
       leadStatus.textContent = "Nie udało się wysłać. Spróbuj ponownie albo skontaktuj się przez formularz na /kontakt.";
+
+      if (leadSubmitBtn){
+        leadSubmitBtn.disabled = false;
+        if (leadSubmitText) leadSubmitText.classList.remove("hidden");
+        if (leadSubmitLoading) {
+          leadSubmitLoading.classList.add("hidden");
+          leadSubmitLoading.classList.remove("inline-flex");
+        }
+      }
     }
   });
 
