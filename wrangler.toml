@@ -23,7 +23,7 @@ enabled = true
 
 # KV namespace for rate limiting
 [[kv_namespaces]]
-binding = "RATE_LIMIT_KV"
+binding = "lingua_RATE_LIMIT_KV"
 id = "8d068af825d340d1b594c584cf73aa40"
 preview_id = "92ffa8df30f24803be3e4df1f469d571"
 

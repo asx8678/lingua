@@ -62,7 +62,7 @@ interface ImportMeta {
  * Cloudflare Workers runtime types
  */
 interface CloudflareEnv {
-  RATE_LIMIT_KV?: KVNamespace;
+  lingua_RATE_LIMIT_KV?: KVNamespace;
   SPARKPOST_API_KEY?: string;
   SPARKPOST_FROM_EMAIL?: string;
   SESSION?: KVNamespace;

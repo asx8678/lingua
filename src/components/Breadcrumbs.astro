@@ -1,0 +1,49 @@
+---
+/**
+ * Breadcrumbs Component
+ * Visual breadcrumb navigation that matches the existing BreadcrumbList schema
+ */
+
+interface BreadcrumbItem {
+  name: string;
+  url?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+  class?: string;
+}
+
+const { items, class: className } = Astro.props;
+---
+
+<nav aria-label="Ścieżka nawigacji" class:list={["text-sm", className]}>
+  <ol class="flex flex-wrap items-center gap-1.5" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {items.map((item, index) => (
+      <li
+        class="flex items-center gap-1.5"
+        itemprop="itemListElement"
+        itemscope
+        itemtype="https://schema.org/ListItem"
+      >
+        {index > 0 && (
+          <svg class="h-3.5 w-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        )}
+        {item.url ? (
+          <a
+            href={item.url}
+            class="text-slate-500 no-underline transition-colors hover:text-primary"
+            itemprop="item"
+          >
+            <span itemprop="name">{item.name}</span>
+          </a>
+        ) : (
+          <span class="font-medium text-slate-900" itemprop="name">{item.name}</span>
+        )}
+        <meta itemprop="position" content={String(index + 1)} />
+      </li>
+    ))}
+  </ol>
+</nav>

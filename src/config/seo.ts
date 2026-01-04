@@ -44,3 +44,23 @@ export function generateFaqSchema(faqs: Array<{ question: string; answer: string
     })),
   };
 }
+
+export function generateCourseSchema(course: {
+  name: string;
+  description: string;
+  provider?: string;
+  url?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: course.name,
+    description: course.description,
+    provider: {
+      "@type": "EducationalOrganization",
+      name: course.provider || BRAND_NAME,
+      url: SITE_URL,
+    },
+    ...(course.url && { url: new URL(course.url, SITE_URL).toString() }),
+  };
+}

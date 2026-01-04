@@ -31,7 +31,7 @@ const languagesList = new Intl.ListFormat("pl", {
   type: "conjunction",
 }).format(languagesGenitive);
 
-const title = `Lingua Legionowo — szkoła językowa i matematyka w Legionowie | ${BRAND_NAME}`;
+const title = `${BRAND_NAME} — szkoła językowa i matematyka w Legionowie`;
 const description =
   `Szkoła języków obcych i matematyki w Legionowie. Uczymy ${languagesList} i prowadzimy zajęcia ` +
   "stacjonarne oraz online. Umów bezpłatną diagnozę i plan nauki.";
@@ -123,6 +123,13 @@ const localBusinessSchema = {
       longitude: BUSINESS.geo.longitude,
     },
   }),
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: reviewAverage,
+    reviewCount: reviewCount,
+    bestRating: 5,
+    worstRating: 1,
+  },
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
     dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],

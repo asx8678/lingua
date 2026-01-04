@@ -19,7 +19,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
   // Rate limiting with KV (falls back to in-memory in dev)
   const runtime = locals.runtime as CloudflareRuntime | undefined;
-  const kv = runtime?.env?.RATE_LIMIT_KV;
+  const kv = runtime?.env?.lingua_RATE_LIMIT_KV;
   const rateLimitResult = await checkRateLimit(kv, ip, RATE_LIMIT_CONFIG);
 
   if (!rateLimitResult.allowed) {

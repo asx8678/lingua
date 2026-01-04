@@ -102,7 +102,7 @@ const socialLinks = [
           }
           {
             hasPhone && (
-              <a class={`${linkMuted} no-underline hover:text-primary transition-colors duration-200`} href={`tel:${CONTACT_PHONE}`}>{CONTACT_PHONE}</a>
+              <a class={`${linkMuted} no-underline hover:text-primary transition-colors duration-200`} href={`tel:${CONTACT_PHONE.replace(/\s/g, '')}`}>{CONTACT_PHONE}</a>
             )
           }
           {addressLine && <span class="text-slate-600">{addressLine}</span>}

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lingualegionowo.pl/sitemap.xml
+Sitemap: https://lingualegionowo.pl/sitemap-index.xml

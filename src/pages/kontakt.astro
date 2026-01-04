@@ -62,7 +62,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
             {hasPhone && (
               <div class="flex items-center gap-2">
                 <span class="text-slate-500">Tel:</span>
-                <a class="font-semibold text-primary no-underline hover:underline" href={`tel:${CONTACT_PHONE}`}>{CONTACT_PHONE}</a>
+                <a class="font-semibold text-primary no-underline hover:underline" href={`tel:${CONTACT_PHONE.replace(/\s/g, '')}`}>{CONTACT_PHONE}</a>
               </div>
             )}
           </div>

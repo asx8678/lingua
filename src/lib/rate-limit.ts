@@ -1,5 +1,5 @@
 // Rate limiting using Cloudflare KV
-// Requires RATE_LIMIT_KV binding in wrangler.toml
+// Requires lingua_RATE_LIMIT_KV binding in wrangler.toml
 
 export type RateLimitConfig = {
   windowMs: number; // Time window in milliseconds
