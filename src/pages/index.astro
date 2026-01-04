@@ -3,6 +3,7 @@ import MainLayout from "../layouts/MainLayout.astro";
 import CTASection from "../components/CTASection.astro";
 import TestimonialCard from "../components/TestimonialCard.astro";
 import TrustSection from "../components/TrustSection.astro";
+import FaqSection from "../components/FaqSection.astro";
 import { taughtLanguages } from "../data/subjects";
 import testimonials from "../data/testimonials.json";
 import {
@@ -31,10 +32,9 @@ const languagesList = new Intl.ListFormat("pl", {
   type: "conjunction",
 }).format(languagesGenitive);
 
-const title = `${BRAND_NAME} — szkoła językowa i matematyka w Legionowie`;
+const title = `Szkoła językowa Legionowo | ${BRAND_NAME} – języki i matematyka`;
 const description =
-  `Szkoła języków obcych i matematyki w Legionowie. Uczymy ${languagesList} i prowadzimy zajęcia ` +
-  "stacjonarne oraz online. Umów bezpłatną diagnozę i plan nauki.";
+  "Szkoła językowa w Legionowie – angielski, niemiecki, francuski i 4 inne języki + matematyka. Zajęcia stacjonarne i online. Umów bezpłatną konsultację!";
 
 const offerCards = [
   {
@@ -100,6 +100,33 @@ const proofPoints = [
 const featuredTestimonials = testimonials.filter((item) => item.featuredHome).slice(0, 2);
 const homeTestimonials =
   featuredTestimonials.length > 0 ? featuredTestimonials : testimonials.slice(0, 2);
+
+const homeFaqs = [
+  {
+    question: "Ile kosztuje kurs językowy w Lingua Legionowo?",
+    answer: "Ceny zależą od formatu zajęć. Lekcje indywidualne od 100-130 zł za 45-60 min, zajęcia w mini-grupach od 55-85 zł za osobę. Szczegółowy cennik znajdziesz na stronie Cennik.",
+  },
+  {
+    question: "Czy oferujecie zajęcia online?",
+    answer: "Tak, prowadzimy lekcje online z lektorem na żywo. Zajęcia odbywają się przez platformę wideo z wykorzystaniem wspólnych materiałów i tablicy interaktywnej.",
+  },
+  {
+    question: "Od jakiego wieku przyjmujecie dzieci?",
+    answer: "Przyjmujemy dzieci od około 6-7 lat (klasa 1). Dla młodszych dzieci polecamy zajęcia w mini-grupach, które pomagają w oswojeniu się z językiem.",
+  },
+  {
+    question: "Jak wygląda pierwsza lekcja?",
+    answer: "Zaczynamy od bezpłatnej konsultacji i diagnozy poziomu. Poznajemy Twoje cele, sprawdzamy umiejętności i proponujemy plan nauki dopasowany do potrzeb.",
+  },
+  {
+    question: "Czy przygotowujecie do egzaminów Cambridge i matury?",
+    answer: "Tak, przygotowujemy do egzaminów Cambridge (FCE, CAE, CPE), egzaminu ósmoklasisty oraz matury na poziomie podstawowym i rozszerzonym.",
+  },
+  {
+    question: "Ile osób jest w grupie?",
+    answer: "Mini-grupy liczą 2-4 osoby, co zapewnia dużo czasu na mówienie i indywidualną uwagę lektora. Oferujemy też zajęcia w duetach (2 osoby) i lekcje indywidualne.",
+  },
+];
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
@@ -380,6 +407,12 @@ const localBusinessSchema = {
       </div>
     </div>
   </section>
+
+  <FaqSection
+    title="Często zadawane pytania"
+    items={homeFaqs}
+    id="faq"
+  />
 
   <CTASection
     title="Gotowy na naukę języków obcych lub matematyki w Legionowie?"

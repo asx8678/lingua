@@ -17,11 +17,22 @@ Zamiast tłumaczyć słowo po słowie, warto uczyć się całych zwrotów i goto
 
 ### Typowe przykłady dosłownych tłumaczeń
 
-<!-- TODO: Dodać 5-7 przykładów błędnych tłumaczeń z polskiego na angielski -->
+| Błędne (kalka z polskiego) | Poprawne |
+|---------------------------|----------|
+| "I have 30 years" | "I'm 30 years old" |
+| "I must go on the meeting" | "I have to go to the meeting" |
+| "I'm agree" | "I agree" |
+| "It depends from" | "It depends on" |
+| "I'm interesting in" | "I'm interested in" |
+| "I feel myself good" | "I feel good" |
+| "He explained me" | "He explained to me" |
 
 ### Jak unikać tego błędu
 
-<!-- TODO: Opisać techniki nauki idiomów i kolokacji -->
+- **Ucz się zwrotów, nie pojedynczych słów** — zamiast zapamiętywać "depend", zapisz "depend on something"
+- **Słuchaj native speakerów** — podcasty, filmy i seriale pomagają oswoić naturalne konstrukcje
+- **Prowadź notatnik kolokacji** — zapisuj wyrażenia z przyimkami i przykładami zdań
+- **Sprawdzaj w słowniku** — dobry słownik (np. Cambridge) pokazuje typowe połączenia wyrazów
 
 ## Zbyt długie zdania
 
@@ -29,11 +40,14 @@ Krótsze wypowiedzi są zwykle bardziej naturalne. Lepiej mówić prosto i jasno
 
 ### Dlaczego Polacy budują zbyt długie zdania
 
-<!-- TODO: Wyjaśnić różnice strukturalne między polskim a angielskim -->
+W polskim często łączymy wiele myśli w jedno rozbudowane zdanie. Angielski preferuje krótsze, bardziej bezpośrednie konstrukcje. Zdanie typu "Chciałbym powiedzieć, że moim zdaniem ta sytuacja, o której rozmawialiśmy wczoraj, wymaga przemyślenia" brzmi naturalnie po polsku, ale w angielskim będzie zbyt ciężkie.
 
 ### Techniki skracania wypowiedzi
 
-<!-- TODO: Praktyczne wskazówki dotyczące upraszczania zdań -->
+- **Jedna myśl = jedno zdanie** — dziel złożone wypowiedzi na prostsze części
+- **Unikaj wstępów** — zamiast "I would like to say that..." po prostu powiedz to, co chcesz
+- **Stosuj proste łączniki** — "and", "but", "so" zamiast rozbudowanych konstrukcji
+- **Ćwicz parafrazę** — spróbuj powiedzieć to samo w maksymalnie 10 słowach
 
 ## Brak łączników w wypowiedzi
 
@@ -41,11 +55,21 @@ Słowa typu "actually", "however" czy "for example" pomagają brzmieć bardziej 
 
 ### Lista najważniejszych łączników
 
-<!-- TODO: Tabela z łącznikami i przykładami użycia -->
+| Funkcja | Łączniki |
+|---------|----------|
+| Dodawanie informacji | also, moreover, besides, in addition |
+| Kontrast | however, but, although, on the other hand |
+| Przykłady | for example, for instance, such as |
+| Przyczyna/skutek | so, therefore, because, as a result |
+| Podsumowanie | in conclusion, to sum up, overall |
+| Czas | first, then, after that, finally |
 
 ### Jak ćwiczyć używanie łączników
 
-<!-- TODO: Ćwiczenia praktyczne -->
+- **Zacznij od 3–4 podstawowych** — "actually", "however", "for example", "so"
+- **Wplataj je świadomie** — na początku może wydawać się sztuczne, ale szybko stanie się nawykiem
+- **Słuchaj i notuj** — zwracaj uwagę, jak native speakerzy łączą myśli
+- **Nagrywaj się** — posłuchaj swojej wypowiedzi i dodaj brakujące łączniki
 
 ## Błędy w wymowie końcówek
 
@@ -53,15 +77,30 @@ Końcówki czasowników i liczby mnogiej są często „zjadane". Warto ćwiczy�
 
 ### Końcówki -ed w czasownikach regularnych
 
-<!-- TODO: Reguły wymowy /t/, /d/, /ɪd/ -->
+Wymowa końcówki -ed zależy od ostatniego dźwięku czasownika:
+
+| Dźwięk końcowy | Wymowa -ed | Przykłady |
+|----------------|------------|-----------|
+| /t/, /d/ | /ɪd/ | wanted, needed, started |
+| bezdźwięczny (p, k, s, f, ʃ, tʃ) | /t/ | stopped, looked, finished |
+| dźwięczny (b, g, v, z, m, n, l) | /d/ | played, called, listened |
 
 ### Końcówki -s/-es
 
-<!-- TODO: Wymowa końcówek liczby mnogiej i trzeciej osoby -->
+| Dźwięk końcowy | Wymowa | Przykłady |
+|----------------|--------|-----------|
+| /s/, /z/, /ʃ/, /tʃ/, /dʒ/ | /ɪz/ | watches, changes, buses |
+| bezdźwięczny | /s/ | stops, looks, laughs |
+| dźwięczny | /z/ | plays, runs, sees |
 
 ### Ćwiczenia wymowy końcówek
 
-<!-- TODO: Lista zdań do ćwiczenia -->
+Przeczytaj na głos, zwracając uwagę na końcówki:
+
+1. "She **works** in an office and **likes** her job."
+2. "He **played** tennis yesterday and **watched** a movie."
+3. "The company **produces** cars and **exports** them to Europe."
+4. "They **needed** more time, so they **waited** until Monday."
 
 ## Unikanie mówienia
 
@@ -69,15 +108,28 @@ Największy błąd to brak praktyki. Nawet 10 minut rozmowy dziennie daje zauwa�
 
 ### Dlaczego unikamy mówienia
 
-<!-- TODO: Psychologiczne bariery - strach przed błędami, perfekcjonizm -->
+- **Strach przed błędami** — boimy się, że ktoś nas oceni lub wyśmieje
+- **Perfekcjonizm** — chcemy mówić idealnie albo wcale
+- **Brak okazji** — nie mamy z kim rozmawiać po angielsku
+- **Porównywanie się z innymi** — widzimy, jak inni mówią płynnie i tracimy motywację
 
 ### Jak przełamać barierę mówienia
 
-<!-- TODO: Praktyczne techniki: shadowing, samonagrywanie, rozmowy z native speakerami -->
+- **Shadowing** — powtarzaj za nagraniem, naśladując intonację i tempo
+- **Nagrywaj się** — mów do telefonu przez 2 minuty na dowolny temat, potem odsłuchaj
+- **Rozmowy z native speakerami** — platformy typu iTalki czy Cambly oferują niedrogie konwersacje
+- **Mów do siebie** — opisuj co robisz, komentuj codzienne czynności po angielsku
 
 ### Plan regularnej praktyki mówienia
 
-<!-- TODO: Tygodniowy plan ćwiczeń mówienia -->
+| Dzień | Aktywność | Czas |
+|-------|-----------|------|
+| Pn | Shadowing z podcastem | 10 min |
+| Wt | Nagrywanie się + odsłuchanie | 5 min |
+| Śr | Rozmowa z lektorem online | 30–60 min |
+| Czw | Opis dnia po angielsku (na głos) | 5 min |
+| Pt | Powtórka słownictwa z tygodnia | 10 min |
+| Sob–Nd | Film/serial w oryginale + powtarzanie dialogów | 15 min |
 
 <div class="cta-panel">
   <h3>Chcesz poprawić płynność mówienia?</h3>

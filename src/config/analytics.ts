@@ -34,7 +34,7 @@ export const GOOGLE_REVIEWS = {
   count: parseNumericEnv(import.meta.env.PUBLIC_GOOGLE_REVIEWS_COUNT),
 };
 
-export const YEARS_IN_OPERATION = import.meta.env.PUBLIC_YEARS_IN_OPERATION ?? "";
+export const YEARS_IN_OPERATION = import.meta.env.PUBLIC_YEARS_IN_OPERATION ?? "10";
 
 // Storage keys for consent management
 export const STORAGE_KEYS = {

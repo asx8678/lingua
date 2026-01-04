@@ -11,14 +11,15 @@ const teacherCount = teachers.length;
 const languageCount = new Set(teachers.flatMap((teacher) => teacher.languages)).size;
 
 const hasGoogleReviews = Boolean(GOOGLE_REVIEWS.url);
+const hasGoogleStats = typeof GOOGLE_REVIEWS.rating === "number" && typeof GOOGLE_REVIEWS.count === "number";
 const ratingDisplay =
   typeof GOOGLE_REVIEWS.rating === "number"
     ? `${GOOGLE_REVIEWS.rating.toFixed(1).replace(".", ",")}/5`
-    : "—";
+    : null;
 const countDisplay =
   typeof GOOGLE_REVIEWS.count === "number"
     ? new Intl.NumberFormat("pl-PL").format(GOOGLE_REVIEWS.count)
-    : "—";
+    : null;
 
 const reviewCtaHref = GOOGLE_REVIEWS.url || "/opinie";
 const reviewCtaLabel = hasGoogleReviews ? "Zobacz opinie w Google" : "Zobacz opinie kursantów";
@@ -41,16 +42,18 @@ const trustStats = [
           Sprawdź, co o nas mówią kursanci i rodzice.
         </p>
 
-        <div class="mt-4 grid gap-2 sm:grid-cols-2">
-          <div class="rounded-lg border border-slate-100 bg-slate-50/50 p-3 text-center">
-            <div class="text-[10px] font-medium uppercase tracking-wider text-slate-500">Ocena</div>
-            <div class="mt-1 text-xl font-bold text-slate-900">{ratingDisplay}</div>
+        {hasGoogleStats && (
+          <div class="mt-4 grid gap-2 sm:grid-cols-2">
+            <div class="rounded-lg border border-slate-100 bg-slate-50/50 p-3 text-center">
+              <div class="text-[10px] font-medium uppercase tracking-wider text-slate-500">Ocena</div>
+              <div class="mt-1 text-xl font-bold text-slate-900">{ratingDisplay}</div>
+            </div>
+            <div class="rounded-lg border border-slate-100 bg-slate-50/50 p-3 text-center">
+              <div class="text-[10px] font-medium uppercase tracking-wider text-slate-500">Opinii</div>
+              <div class="mt-1 text-xl font-bold text-slate-900">{countDisplay}</div>
+            </div>
           </div>
-          <div class="rounded-lg border border-slate-100 bg-slate-50/50 p-3 text-center">
-            <div class="text-[10px] font-medium uppercase tracking-wider text-slate-500">Opinii</div>
-            <div class="mt-1 text-xl font-bold text-slate-900">{countDisplay}</div>
-          </div>
-        </div>
+        )}
 
         {GOOGLE_REVIEW_HIGHLIGHTS.length > 0 && (
           <div class="mt-4 space-y-2">

@@ -5,9 +5,9 @@
 
 import { SITE_URL, BRAND_NAME } from "./site";
 
-export const DEFAULT_TITLE = `${BRAND_NAME} — języki obce i matematyka w Legionowie`;
+export const DEFAULT_TITLE = `Szkoła językowa Legionowo | ${BRAND_NAME}`;
 export const DEFAULT_DESCRIPTION =
-  "Szkoła języków obcych i matematyki w Legionowie. Zajęcia stacjonarne i online dla wszystkich poziomów. Umów bezpłatną diagnozę i plan nauki.";
+  "Szkoła językowa w Legionowie – angielski, niemiecki, francuski i inne języki + matematyka. Zajęcia stacjonarne i online. Umów bezpłatną konsultację!";
 
 export const OG_IMAGE = "/images/og-lingua.png";
 export const OG_IMAGE_ALT = "Lingua Legionowo - Szkoła języków obcych i matematyki";
